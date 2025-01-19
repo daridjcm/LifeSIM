@@ -1,16 +1,18 @@
-import './css/index.css';
-import './css/output.css';
-import {HeroUIProvider} from '@heroui/react';
+import './css/index.css'
+import './css/output.css'
+import { BrowserRouter, Routes, Route } from "react-router"
+
+import Login from './pages/Login.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 function App() {
-  return (
-    <HeroUIProvider>
-      <>
-        <div id="app">
-          <h1 className='text-2xl'>Hello World</h1>
-        </div>
-      </>
-    </HeroUIProvider>
+  return(
+    <BrowserRouter>
+        <Routes>
+          <Route index element={<SignUp />} />
+          <Route path='login' element={<Login />} />
+        </Routes>
+      </BrowserRouter >
   )
 }
 
