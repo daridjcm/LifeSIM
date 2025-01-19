@@ -1,5 +1,4 @@
 import './css/index.css'
-import './css/output.css'
 import { BrowserRouter, Routes, Route } from "react-router"
 
 import Login from './pages/Login.jsx'
