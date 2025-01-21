@@ -10,7 +10,7 @@ import {
 // note: if the gender is females, the color Avatar is warning.
 export default function Nav() {
   return (
-    <Navbar>
+    <Navbar isBlurred='true' isBordered='true' className='bg-zinc-50' maxWidth="full">
       <NavbarBrand>
         <p className="font-bold text-2xl text-inherit">LifeSIM</p>
       </NavbarBrand>
@@ -28,7 +28,7 @@ export default function Nav() {
           className="transition-transform"
           color="secondary"
           name="Jason Hughes"
-          size="sm"
+          size="md"
           src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
         />
       </NavbarContent>
