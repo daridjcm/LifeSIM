@@ -3,16 +3,19 @@ import { Form, Input, Button } from "@heroui/react";
 import PropTypes from 'prop-types'
 import { Have, NotHave } from '../components/HaveOrNot'
 
-export default function CompForm({title, name1, name2, label1, label2, placeholder1, placeholder2, askAccount}) {
+export default function CompForm({title, name1, name2, name3, label1, label2, label3, placeholder1, placeholder2, placeholder3, askAccount}) {
   
   CompForm.propTypes = {
     title: PropTypes.string.isRequired,
-    label1: PropTypes.string.isRequired,
     name1: PropTypes.string.isRequired,
+    label1: PropTypes.string.isRequired,
     placeholder1: PropTypes.string.isRequired,
-    label2: PropTypes.string.isRequired,
-    name2: PropTypes.string.isRequired,
-    placeholder2: PropTypes.string.isRequired,
+    name2: PropTypes.string,
+    label2: PropTypes.string,
+    placeholder2: PropTypes.string,
+    name3: PropTypes.string.isRequired,
+    label3: PropTypes.string.isRequired,
+    placeholder3: PropTypes.string.isRequired,
     askAccount: PropTypes.string.isRequired,
   };
 
@@ -35,33 +38,41 @@ export default function CompForm({title, name1, name2, label1, label2, placehold
       </div>
       <Input
         isRequired
-        errorMessage="Please enter a valid"
+        errorMessage="Please a enter a valid name"
         label={label1}
         labelPlacement="outside"
         name={name1}
         placeholder={placeholder1}
         type="text"
       />
-
+      
+      {askAccount !== "true" && (
+        <Input
+          isRequired
+          errorMessage="Please a enter a valid email"
+          label={label2}
+          labelPlacement="outside"
+          name={name2}
+          placeholder={placeholder2}
+          type="email"
+        />
+      )}
       <Input
         isRequired
-        errorMessage="Please a enter a valid"
-        label={label2}
+        errorMessage="The maxim length to password is it 10"
+        label={label3}
         labelPlacement="outside"
-        name={name2}
-        placeholder={placeholder2}
-        type="email"
+        name={name3}
+        placeholder={placeholder3}
+        type="password"
+        pattern="\w{10}"
+        maxLength={10}      
       />
       <div className="flex gap-2">
         <Button color="success" variant="flat" type="submit">
-          Submit
+          {askAccount != "true" ? "Register" : "Enter"}
         </Button>
       </div>
-      {action && (
-        <div className="text-small text-default-500">
-          Action: <code>{action}</code>
-        </div>
-      )}
       {askAccount !== "true" ? <Have /> : <NotHave />}
     </Form>
   </div>

@@ -6,11 +6,11 @@ export default function Login() {
       <CompForm
         title="Welcome to"
         name1="username"
-        name2="email"
         label1="Username"
-        label2="Email"
         placeholder1="Enter your username"
-        placeholder2="Enter your email"
+        name3="password"
+        label3="Password"
+        placeholder3="**********"
         askAccount="true"
       />
     </>
