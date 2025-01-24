@@ -6,11 +6,14 @@ export default function SignUp() {
       <CompForm
         title="Create your life"
         name1="username"
-        name2="email"
         label1="Username"
-        label2="Email"
         placeholder1="Create your username"
+        name2="email"
+        label2="Email"
         placeholder2="Enter your email"
+        name3="password"
+        label3="Password"
+        placeholder3="Create your password"
         askAccount="false"
       />
     </>
