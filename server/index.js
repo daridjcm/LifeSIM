@@ -7,22 +7,22 @@ app.use(bodyParser.json());
 
 const users = [];
 const userIndex = users.findIndex((user) => user.id === id);
-const { id, name } = req.body;
 
 app.delete("/deleteUser", (req, res) => {
-  userIndex === -1 ? res.status(404).send("User not found") 
-  : res.send({ users: users.splice(userIndex, 1) && users });
+	const { id } = req.body;
+	userIndex === -1 ? res.status(404).send("User not found")
+	: res.send({ users: users.splice(userIndex, 1) && users });
 })
 
-app.update("/updateUser", (req, res) => {
-  userIndex === -1 ? res.status(404).send("User not found") 
-  : res.send({ users: users[userIndex].name = name && users });
+app.put("/updateUser", (req, res) => {
+	const { name } = req.body;
+	userIndex === -1 ? res.status(404).send("User not found")
+	: res.send({ users: users[userIndex].name = name && users });
 });
 
 app.post("/addUser", (req, res) => {
 	const user = req.body;
 	users.push(user);
-
 	res.send({ users: users });
 });
 
