@@ -1,40 +1,45 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
 
 const users = [];
-const userIndex = users.findIndex((user) => user.id === id);
 
+// Ruta para eliminar un usuario
 app.delete("/deleteUser", (req, res) => {
 	const { id } = req.body;
-	userIndex === -1 ? res.status(404).send("User not found")
-	: res.send({ users: users.splice(userIndex, 1) && users });
-})
+	const userIndex = users.findIndex((user) => user.id === id);
 
+	if (userIndex === -1) return res.status(404).send({ error: "User not found" });
+
+	users.splice(userIndex, 1);
+	res.send({ users });
+});
+
+// Ruta para actualizar un usuario
 app.put("/updateUser", (req, res) => {
-	const { name } = req.body;
-	userIndex === -1 ? res.status(404).send("User not found")
-	: res.send({ users: users[userIndex].name = name && users });
+	const { id, name } = req.body;
+	const userIndex = users.findIndex((user) => user.id === id);
+
+	if (userIndex === -1) return res.status(404).send({ error: "User not found" });
+
+	users[userIndex] = { id, name };
+	res.send({ users });
 });
 
+// Ruta para agregar un usuario
 app.post("/addUser", (req, res) => {
-	const user = req.body;
-	users.push(user);
-	res.send({ users: users });
+	users.push(req.body);
+	res.send({ users });
 });
 
-app.get("/getUsers", (req, res) => {
-	res.send({ users: users });
-});
+// Ruta para obtener todos los usuarios
+app.get("/getUsers", (req, res) => res.send({ users }));
 
-// una ruta de tipo GET para obtener cosas
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
+// Ruta raíz
+app.get("/", (req, res) => res.send("Hello World!"));
 
-app.listen(port, () => {
-	console.log(`Example app listening on port http://localhost:${port}`);
-});
+app.listen(port, () => console.log(`App running at http://localhost:${port}`));
