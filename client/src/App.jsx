@@ -1,19 +1,19 @@
-import './css/index.css'
-import { BrowserRouter, Routes, Route } from "react-router"
-import Game from './pages/Game.jsx'
-import Login from './pages/Login.jsx'
-import SignUp from './pages/SignUp.jsx'
+import "./css/index.css";
+import { BrowserRouter, Routes, Route } from "react-router";
+import Game from "./pages/Game.jsx";
+import Login from "./pages/Login.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 function App() {
-  return(
+  return (
     <BrowserRouter>
-        <Routes>
-          <Route index element={<Game />} />
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<SignUp />} />
-        </Routes>
-      </BrowserRouter >
-  )
+      <Routes>
+        <Route index element={<Game />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

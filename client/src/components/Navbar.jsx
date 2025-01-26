@@ -10,7 +10,12 @@ import {
 // note: if the gender is females, the color Avatar is warning.
 export default function Nav() {
   return (
-    <Navbar isBlurred='true' isBordered='true' className='bg-zinc-50' maxWidth="full">
+    <Navbar
+      isBlurred="true"
+      isBordered="true"
+      className="bg-zinc-50"
+      maxWidth="full"
+    >
       <NavbarBrand>
         <p className="font-bold text-2xl text-inherit">LifeSIM</p>
       </NavbarBrand>
