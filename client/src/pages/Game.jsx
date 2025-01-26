@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar"
-import CardList from "../components/CardList"
+import Navbar from "../components/Navbar";
+import CardList from "../components/CardList";
 
 export default function Game() {
   return (
@@ -7,5 +7,5 @@ export default function Game() {
       <Navbar />
       <CardList />
     </>
-  )
+  );
 }

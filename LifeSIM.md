@@ -1,4 +1,5 @@
 # _Life SIM_ 🌟
+
 An interactive life simulation web game where users manage their daily routine and key decisions through an intuitive system. There is no avatar for the player, but actions and decisions are reflected in game statistics and results. The game includes:
 
 - **Work:** 💼 Earn money to cover your needs and achieve your goals.
@@ -10,17 +11,21 @@ An interactive life simulation web game where users manage their daily routine a
 The focus is on resource management and making decisions that affect your progress, with avatars visible only for social interactions.
 
 # Technologies 🛠️
+
 ### **Library**
+
 - PostCSS, Eslint and Autoprefixer.
 - Tailwind CSS.
 - Heroicons.
 - HeroUI Components.
 
 ### **Frameworks:**
+
 - React.
 - Vite.
 
 # How to use 🚀
+
 ```bash
 # Clone project
   git clone https://github.com/Daridjcm/LifeSIM.git
