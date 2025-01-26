@@ -1,8 +1,19 @@
-# React + Vite
+# Getting Started
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```bash
+git clone https://github.com/Daridjcm/LifeSIM.git
+```
 
-Currently, two official plugins are available:
+## Run Client
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+cd ./client
+npm run dev
+```
+
+## Run Server
+
+```bash
+cd ./server
+npm run start # Click or type in URL http://localhost:3000
+```
