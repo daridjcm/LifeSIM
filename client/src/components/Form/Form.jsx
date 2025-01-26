@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
-import { Have, NotHave } from "../components/HaveOrNot";
+import { Have, NotHave } from "./HaveOrNot";
 
 export default function CompForm({
   title,
