@@ -6,8 +6,9 @@ import {
   Link,
   Avatar,
 } from "@heroui/react";
+import Clock from "./Clock";
 
-// note: if the gender is females, the color Avatar is warning.
+// note: if the gender is females, the color Username and more buttons will (purple), if males, it will be (blue).
 export default function Nav() {
   return (
     <Navbar
@@ -27,15 +28,7 @@ export default function Nav() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent as="div" justify="end">
-        <Avatar
-          isBordered
-          as="button"
-          className="transition-transform"
-          color="secondary"
-          name="Jason Hughes"
-          size="md"
-          src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        />
+        <Clock />
       </NavbarContent>
     </Navbar>
   );
