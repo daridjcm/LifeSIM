@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
 import { Have, NotHave } from "./HaveOrNot";
+import { SelectItem, Select } from "@heroui/react";
 
 export default function CompForm({
   title,
@@ -29,6 +30,8 @@ export default function CompForm({
     placeholder3: PropTypes.string.isRequired,
     askAccount: PropTypes.string.isRequired,
   };
+
+  const genders = [{ value: "male", label: "Male" }, { value: "female", label: "Female" }];
 
   const [action, setAction] = React.useState(null);
   return (
@@ -61,15 +64,32 @@ export default function CompForm({
         />
 
         {askAccount !== "true" && (
-          <Input
-            isRequired
-            errorMessage="Please a enter a valid email"
-            label={label2}
-            labelPlacement="outside"
-            name={name2}
-            placeholder={placeholder2}
-            type="email"
-          />
+          <>
+            <Input
+              isRequired
+              errorMessage="Please a enter a valid email"
+              label={label2}
+              labelPlacement="outside"
+              name={name2}
+              placeholder={placeholder2}
+              type="email"
+            />
+            <Select
+              isRequired
+              errorMessage="Please a select a option"
+              label="Gender"
+              labelPlacement="outside"
+              className="max-w-xs"
+              items={genders}
+              placeholder="Select your gender">
+              {(item) => (
+                <SelectItem
+                  key={item.value}
+                  value={item.value}
+                > {item.label}</SelectItem>
+              )}
+            </Select>
+          </>
         )}
         <Input
           isRequired
