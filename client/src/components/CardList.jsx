@@ -39,7 +39,7 @@ export default function CardList() {
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
         {list.map((item, index) => (
-          <Card key={index} shadow="sm" className="m-auto max-w-[90%]">
+          <Card key={index} shadow="sm" className="m-auto max-w-[90%]" isPressable onPress={() => handleActions(item)}>
             <CardBody className="overflow-visible p-0">
               <Image
                 alt={item.title}
