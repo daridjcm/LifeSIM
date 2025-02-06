@@ -26,10 +26,10 @@ export default function ContentWork() {
           <p className="text-xl font-bold">Status Tasks</p>
           <hr />
           <div className="flex flex-col gap-2 mt-4">
-            <Checkbox id="task1" defaultSelected color="success" size="md">
+            <Checkbox id="task1" color="success" size="md">
               Make inform in computer 💻
             </Checkbox>
-            <Checkbox id="task2" defaultSelected color="success" size="md">
+            <Checkbox id="task2" color="success" size="md">
               Assistance the customers 💁
             </Checkbox>
           </div>
