@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Card, CardHeader, CardBody, Image, CardFooter, Button, ScrollShadow } from "@heroui/react";
-import ContentWork from "./ContentModal/Work";
+import ContentWork from "./ContentModal/Work/Work";
 
 export default function ModalAction({ item, onClose }) {
   useEffect(() => {
@@ -33,13 +33,13 @@ export default function ModalAction({ item, onClose }) {
           </CardHeader>
           <CardBody className="py-2">
           <ScrollShadow hideScrollBar className="max-h-[70vh] min-h-full">
-          {
+            {
               item.title === "Work" ? <ContentWork /> : null
             }
             </ScrollShadow>
           </CardBody>
           <CardFooter className="flex justify-end">
-            <Button color="danger" variant="flat" size="sm" onPress={onClose}>
+            <Button color="danger" variant="flat" size="sm" isPressible onPress={onClose}>
               Cerrar
             </Button>
           </CardFooter>

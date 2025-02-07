@@ -1,6 +1,7 @@
-import { Button, Checkbox } from "@heroui/react";
+import { Checkbox } from "@heroui/react";
 import { BanknotesIcon } from "@heroicons/react/24/solid";
-import PorcentageTasks from "../PorcentageTasks";
+import PorcentageTasks from "../../PorcentageTasks";
+import PhoneCorporative from "./PhoneCorporative";
 
 export default function ContentWork() {
   return (
@@ -23,7 +24,7 @@ export default function ContentWork() {
           </ul>
         </section>
         <section className="bg-slate-100 rounded p-4">
-          <p className="text-xl font-bold">Status Tasks</p>
+          <p className="text-xl font-bold">Tasks Today</p>
           <hr />
           <div className="flex flex-col gap-2 mt-4">
             <Checkbox id="task1" color="success" size="md">
@@ -32,27 +33,20 @@ export default function ContentWork() {
             <Checkbox id="task2" color="success" size="md">
               Assistance the customers 💁
             </Checkbox>
+            <Checkbox id="task3" color="success" size="md">
+              Messange to Analia 📝
+            </Checkbox>
           </div>
         </section>
         <section className="bg-slate-100 rounded p-4">
           <p className="text-xl font-bold">Phone Corporative</p>
           <hr />
-          <div className="flex flex-col gap-3 mt-4">
-            <Button color="primary" variant="ghost" size="md" onPress={() => { }}>
-              Call Boss 📞 
-            </Button>
-            <Button color="primary" variant="ghost" size="md" onPress={() => { }}>
-              Call Customers (n) ☎ 
-            </Button>
-            <Button color="primary" variant="ghost" size="md" onPress={() => { }}>
-              Type to Analia
-            </Button>
-          </div>
+            <PhoneCorporative />
         </section>
       </div>
         <section className="bg-slate-100 rounded p-4 w-full mt-5">
           <p className="text-xl font-bold">Tasks assigned by your Boss</p>
-          <ul className="list-decimal list-inside">
+          <ul id="tasksList" className="list-decimal list-inside hidden">
             <li>
               Check list of clients and call them <PorcentageTasks value={15} />
             </li>
