@@ -25,4 +25,11 @@ app.all("/users", (req, res) => {
   res.send({ users });
 });
 
+// Ruta raiz
+app.get("/", (req, res) => {
+  // Obtiene los datos de los clientes y los usuarios
+  res.send({ users, customers });
+  console.log('Server running...');
+});
+
 app.listen(port, () => console.log(`App running at http://localhost:${port}`));
