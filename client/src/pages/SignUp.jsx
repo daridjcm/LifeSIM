@@ -1,9 +1,9 @@
-import CompForm from "../components/Form";
+import FormComp from "../components/Form";
 
 export default function SignUp() {
   return (
     <>
-      <CompForm
+      <FormComp
         title="Create your life"
         name1="username"
         label1="Username"

@@ -1,9 +1,9 @@
-import CompForm from "../components/Form";
+import FormComp from "../components/Form";
 
 export default function Login() {
   return (
     <>
-      <CompForm
+      <FormComp
         title="Welcome to"
         name1="username"
         label1="Username"

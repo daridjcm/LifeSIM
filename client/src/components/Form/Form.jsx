@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Have, NotHave } from "./HaveOrNot";
 import { SelectItem, Select } from "@heroui/react";
 
-export default function CompForm({
+export default function FormComp({
   title,
   name1,
   name2,
