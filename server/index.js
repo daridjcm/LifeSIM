@@ -7,41 +7,22 @@ const port = 3000;
 app.use(bodyParser.json());
 
 const users = [];
+const customers = [];
 
-// Ruta para eliminar un usuario
-app.delete("/deleteUser", (req, res) => {
-  const { id } = req.body;
-  const userIndex = users.findIndex((user) => user.id === id);
-
-  if (userIndex === -1)
-    return res.status(404).send({ error: "User not found" });
-
-  users.splice(userIndex, 1);
-  res.send({ users });
+// Ruta para agregar, editar y eliminar clientes
+app.all("/customers", (req, res) => {
+  const { name, phone, status, date} = req.body;
+  const client = { name, phone, status, date };
+  customers.push(client);
+  res.send({ customers });
 });
 
-// Ruta para actualizar un usuario
-app.put("/updateUser", (req, res) => {
-  const { id, name } = req.body;
-  const userIndex = users.findIndex((user) => user.id === id);
-
-  if (userIndex === -1)
-    return res.status(404).send({ error: "User not found" });
-
-  users[userIndex] = { id, name };
+// Ruta para agregar, editar y eliminar usuarios
+app.all("/users", (req, res) => {
+  const { username, email, password } = req.body;
+  const user = { username, email, password };
+  users.push(user);
   res.send({ users });
 });
-
-// Ruta para agregar un usuario
-app.post("/addUser", (req, res) => {
-  users.push(req.body);
-  res.send({ users });
-});
-
-// Ruta para obtener todos los usuarios
-app.get("/getUsers", (req, res) => res.send({ users }));
-
-// Ruta raíz
-app.get("/", (req, res) => res.send("Hello World!"));
 
 app.listen(port, () => console.log(`App running at http://localhost:${port}`));
