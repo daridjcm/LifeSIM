@@ -1,23 +1,26 @@
 import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
-import { Have, NotHave } from "./HaveOrNot";
+import { Have, HaveNull, NotHave } from "./HaveOrNot";
 import { SelectItem, Select } from "@heroui/react";
 
 export default function FormComp({
   title,
   name1,
   name2,
-  name3,
+  items3,
+  name4,
   label1,
   label2,
   label3,
+  label4,
   placeholder1,
   placeholder2,
   placeholder3,
+  placeholder4,
   askAccount,
 }) {
-  CompForm.propTypes = {
+  FormComp.propTypes = {
     title: PropTypes.string.isRequired,
     name1: PropTypes.string.isRequired,
     label1: PropTypes.string.isRequired,
@@ -25,13 +28,14 @@ export default function FormComp({
     name2: PropTypes.string,
     label2: PropTypes.string,
     placeholder2: PropTypes.string,
-    name3: PropTypes.string.isRequired,
-    label3: PropTypes.string.isRequired,
-    placeholder3: PropTypes.string.isRequired,
+    label3: PropTypes.string,
+    items3: PropTypes.array,
+    placeholder3: PropTypes.string,
+    name4: PropTypes.string.isRequired,
+    label4: PropTypes.string.isRequired,
+    placeholder4: PropTypes.string.isRequired,
     askAccount: PropTypes.string.isRequired,
   };
-
-  const genders = [{ value: "male", label: "Male" }, { value: "female", label: "Female" }];
 
   const [action, setAction] = React.useState(null);
   return (
@@ -63,11 +67,11 @@ export default function FormComp({
           type="text"
         />
 
-        {askAccount !== "true" && (
+        {askAccount != true ? (
           <>
             <Input
               isRequired
-              errorMessage="Please a enter a valid email"
+              errorMessage="Please enter a valid email"
               label={label2}
               labelPlacement="outside"
               name={name2}
@@ -76,38 +80,43 @@ export default function FormComp({
             />
             <Select
               isRequired
-              errorMessage="Please a select a option"
-              label="Gender"
+              errorMessage="Please select an option"
+              label={label3}
               labelPlacement="outside"
               className="max-w-xs"
-              items={genders}
-              placeholder="Select your gender">
-              {(item) => (
-                <SelectItem
-                  key={item.value}
-                  value={item.value}
-                > {item.label}</SelectItem>
-              )}
-            </Select>
+              items={items3}
+              placeholder={placeholder3}
+            >
+            {items3.map((item) => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </Select>
+          </>
+        ) : (
+          <>
+            <Input
+              isRequired
+              errorMessage="The maximum length for the password is 10 characters"
+              label={label4}
+              labelPlacement="outside"
+              name={name4}
+              placeholder={placeholder4}
+              type="password"
+              pattern="\w{10}"
+              maxLength={10}
+            />
           </>
         )}
-        <Input
-          isRequired
-          errorMessage="The maxim length to password is it 10"
-          label={label3}
-          labelPlacement="outside"
-          name={name3}
-          placeholder={placeholder3}
-          type="password"
-          pattern="\w{10}"
-          maxLength={10}
-        />
+
         <div className="flex gap-2">
           <Button color="success" variant="flat" type="submit">
-            {askAccount != "true" ? "Register" : "Enter"}
+            {askAccount == true ? "Enter" :
+            askAccount != true ? "Register" : "Submit"}
           </Button>
         </div>
-        {askAccount !== "true" ? <Have /> : <NotHave />}
+        {askAccount != true ? <Have /> : askAccount == true ? <NotHave /> : <HaveNull />}
       </Form>
     </div>
   );

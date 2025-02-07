@@ -11,9 +11,9 @@ export default function PhoneCorporative() {
   const CallBoss = () => {
     isCallingBoss ? 'Calling...' : 'Call Boss 📞'
     setIsCallingBoss(true);
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 2000);
+    // setTimeout(() => {
+    //   window.location.href = '/';
+    // }, 2000);
   };
 
   const AddNewCustomer = () => {
