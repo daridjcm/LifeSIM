@@ -8,10 +8,10 @@ export default function Login() {
         name1="username"
         label1="Username"
         placeholder1="Enter your username"
-        name3="password"
-        label3="Password"
-        placeholder3="**********"
-        askAccount="true"
+        name4="password"
+        label4="Password"
+        placeholder4="**********"
+        askAccount={true}
       />
     </>
   );

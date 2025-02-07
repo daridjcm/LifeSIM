@@ -1,5 +1,5 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@heroui/react";
-import {FormComp} from "../components/Form/Form";
+import FormComp from "../components/Form";
 
 const status = {
   label: ["Make call", "Call rejected", "Call accepted", "Call completed", "No call"],
@@ -38,7 +38,7 @@ export const customers = [
   },
 ];
 
-export const customersCount = rows.length;
+export const customersCount = customers.length;
 
 const columns = [
   {
@@ -91,15 +91,16 @@ export default function TableCustomers() {
     </div>
     <FormComp
         title="Add a new customer"
-        name1="name"
-        label1="Name"
-        placeholder1="Enter your name"
+        name1="fullname"
+        label1="Full Name"
+        placeholder1="Enter full name of customer"
         name2="phone"
         label2="Phone"
-        placeholder2="Enter your phone"
-        name3="status"
-        label3="Status"
-        placeholder3="Select your status"
+        placeholder2="Enter phone number of customer"
+        label3="Call Status"
+        items3={[{ value: 1, label: "Make call" }, { value: 2, label: "Call rejected" }, { value: 3, label: "Call accepted" }, { value: 4, label: "Call completed" }, { value: 5, label: "No call" }]}
+        placeholder3="Select your call status"
+        askAccount={null}
       />
     </>
   );

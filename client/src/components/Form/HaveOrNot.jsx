@@ -19,3 +19,14 @@ export function NotHave() {
     </a>
   );
 }
+
+export function HaveNull() {
+  return (
+    <a
+      className="text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500"
+      href="/boss"
+    >
+      Do you need help?
+    </a>
+  );
+}
