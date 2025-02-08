@@ -1,9 +1,9 @@
-import FormComp from "../components/Form";
+import CompForm from "../components/Form";
 
 export default function SignUp() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <FormComp
+    <>
+      <CompForm
         title="Create your life"
         name1="username"
         label1="Username"
@@ -11,15 +11,11 @@ export default function SignUp() {
         name2="email"
         label2="Email"
         placeholder2="Enter your email"
-        name3="gender"
-        label3="Gender"
-        items3={[{ value: "male", label: "Male" }, { value: "female", label: "Female" }]}
-        placeholder3="Select your gender"
-        name4="password"
-        label4="Password"
-        placeholder4="Create your password"
-        askAccount={false}
+        name3="password"
+        label3="Password"
+        placeholder3="Create your password"
+        askAccount="false"
       />
-    </div>
+    </>
   );
 }
