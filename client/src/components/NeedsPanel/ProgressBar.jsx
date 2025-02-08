@@ -3,12 +3,16 @@ import { CircularProgress } from "@heroui/react";
 
 const ProgressBar = ({ value, need }) => {
   const color =
-    need === "Hungry"
+    need === "Hunger"
       ? "danger"
       : need === "Health"
       ? "success"
       : need === "Energy"
       ? "warning"
+      : need === "Hygiene"
+      ? "primary"
+      : need === "Bladder"
+      ? "secondary"
       : "default";
 
   return (
@@ -16,9 +20,10 @@ const ProgressBar = ({ value, need }) => {
       value={value}
       max={100}
       color={color}
-      showValueLabel={true}
       size="lg"
       className="m-auto"
+      showValueLabel={true}
+      aria-labelledby={`${need}-progress`}
     />
   );
 };
