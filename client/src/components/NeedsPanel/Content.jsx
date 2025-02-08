@@ -3,10 +3,11 @@ import getIconColor from "../../utils/IconColor";
 import ProgressBar from "./ProgressBar";
 
 const needs = [
-  { name: "Hungry", value: 100 },
+  { name: "Hunger", value: 100 },
   { name: "Health", value: 100 },
   { name: "Energy", value: 100 },
   { name: "Hygiene", value: 100 },
+  { name: "Bladder", value: 100 },
 ];
 
 const Content = () => (
