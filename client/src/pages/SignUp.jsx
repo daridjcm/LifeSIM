@@ -2,7 +2,7 @@ import FormComp from "../components/Form";
 
 export default function SignUp() {
   return (
-    <>
+    <div className="flex justify-center items-center h-screen">
       <FormComp
         title="Create your life"
         name1="username"
@@ -20,6 +20,6 @@ export default function SignUp() {
         placeholder4="Create your password"
         askAccount={false}
       />
-    </>
+    </div>
   );
 }

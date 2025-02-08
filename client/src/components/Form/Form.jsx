@@ -1,8 +1,8 @@
 import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
-import { Have, HaveNull, NotHave } from "./HaveOrNot";
 import { SelectItem, Select } from "@heroui/react";
+import { Have, NotHave, HaveCustomers } from "./HaveOrNot";
 
 export default function FormComp({
   title,
@@ -37,47 +37,58 @@ export default function FormComp({
     askAccount: PropTypes.string.isRequired,
   };
 
+  FormComp.defaultProps = {
+    items3: [],
+  };
+
   const [action, setAction] = React.useState(null);
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Form
-        className="w-full m-auto max-w-xs flex flex-col gap-4"
-        validationBehavior="native"
-        onReset={() => setAction("reset")}
-        onSubmit={(e) => {
-          e.preventDefault();
-          let data = Object.fromEntries(new FormData(e.currentTarget));
+    <Form
+      className="w-full m-auto max-w-xs flex flex-col gap-4"
+      validationBehavior="native"
+      onReset={() => setAction("reset")}
+      onSubmit={(e) => {
+        e.preventDefault();
+        let data = Object.fromEntries(new FormData(e.currentTarget));
 
-          setAction(`submit ${JSON.stringify(data)}`);
-        }}
-      >
-        <div className="bg-green-200 w-full max-w-xs p-2 text-center rounded-md">
-          <h1 className="text-xl">
-            {title}{" "}
-            <span className="text-green-600 font-bold text-2xl">LifeSIM</span>
-          </h1>
-        </div>
-        <Input
-          isRequired
-          errorMessage="Please a enter a valid name"
-          label={label1}
-          labelPlacement="outside"
-          name={name1}
-          placeholder={placeholder1}
-          type="text"
-        />
+        setAction(`submit ${JSON.stringify(data)}`);
+      }}
+    >
+      <div className="bg-green-200 w-full max-w-xs p-2 text-center rounded-md">
+        <h1 className="text-xl">
+          {title}{" "}
+          <span className="text-green-600 font-bold text-2xl">LifeSIM</span>
+        </h1>
+      </div>
+      <Input
+        isRequired
+        errorMessage={
+          `Please enter a valid ${name1}`
+        }
+        label={label1}
+        labelPlacement="outside"
+        name={name1}
+        placeholder={placeholder1}
+        type="text"
+      />
 
-        {askAccount != true ? (
+      <Input
+        isRequired
+        errorMessage={
+          `Please enter a valid ${name2}`
+        }
+        label={label2}
+        labelPlacement="outside"
+        name={name2}
+        placeholder={placeholder2}
+        type={name2 == "email" ? "email" :
+          name2 == "phone" ? "number" : "text"}
+      />
+
+      {
+        // This conditional is used to display in SignUp and NewCustomer pages
+        askAccount == false || askAccount === 'customers' ? (
           <>
-            <Input
-              isRequired
-              errorMessage="Please enter a valid email"
-              label={label2}
-              labelPlacement="outside"
-              name={name2}
-              placeholder={placeholder2}
-              type="email"
-            />
             <Select
               isRequired
               errorMessage="Please select an option"
@@ -86,38 +97,52 @@ export default function FormComp({
               className="max-w-xs"
               items={items3}
               placeholder={placeholder3}
+              aria-label="Select an option"
             >
-            {items3.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
-                {item.label}
-              </SelectItem>
-            ))}
-          </Select>
+              {Array.isArray(items3) && items3.length > 0
+                ? items3.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))
+                : null}
+            </Select>
           </>
-        ) : (
-          <>
-            <Input
-              isRequired
-              errorMessage="The maximum length for the password is 10 characters"
-              label={label4}
-              labelPlacement="outside"
-              name={name4}
-              placeholder={placeholder4}
-              type="password"
-              pattern="\w{10}"
-              maxLength={10}
-            />
-          </>
-        )}
-
-        <div className="flex gap-2">
-          <Button color="success" variant="flat" type="submit">
-            {askAccount == true ? "Enter" :
-            askAccount != true ? "Register" : "Submit"}
-          </Button>
-        </div>
-        {askAccount != true ? <Have /> : askAccount == true ? <NotHave /> : <HaveNull />}
-      </Form>
-    </div>
+        ) : (null)
+      }
+      {
+        // This conditional is used to display in Login and SignUp pages
+        askAccount == false || askAccount == true ? (
+          <Input
+            isRequired
+            errorMessage="The maximum length for the password is 10 characters"
+            label={label4}
+            labelPlacement="outside"
+            name={name4}
+            placeholder={placeholder4}
+            type="password"
+            pattern="\w{10}"
+            maxLength={10}
+          />
+        ) : null
+      }
+      <div className="flex gap-2">
+        <Button color="success" variant="flat" type="submit">
+          {
+            askAccount == true ? "Enter" :
+              askAccount == false ? "Register" :
+                askAccount == 'customers' ? "Add Customer" : "Submit"
+          }
+        </Button>
+      </div>
+      {askAccount == true ? (
+        <NotHave />
+      ) : askAccount == false ? (
+        <Have />
+      ) : askAccount == 'customers' ? (
+        <HaveCustomers />
+      ) : null
+      }
+    </Form>
   );
 }

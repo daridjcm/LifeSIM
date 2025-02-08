@@ -1,5 +1,4 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@heroui/react";
-import FormComp from "../components/Form";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@heroui/react";
 
 const status = {
   label: ["Make call", "Call rejected", "Call accepted", "Call completed", "No call"],
@@ -39,6 +38,9 @@ export const customers = [
 ];
 
 export const customersCount = customers.length;
+function RouterNewCustomer() {
+  return window.location.href = '/customers/new';
+}
 
 const columns = [
   {
@@ -78,6 +80,9 @@ export default function TableCustomers() {
         ))}
       </TableBody>
     </Table>
+      <Button className="mt-4" color="primary" variant="ghost" size="md" onPress={RouterNewCustomer}>
+        Add a new customer
+      </Button>
     <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">
       <p>Note about Call Status</p>
       <p className="text-sm text-zinc-900">
@@ -89,19 +94,6 @@ export default function TableCustomers() {
         </ul>
       </p>
     </div>
-    <FormComp
-        title="Add a new customer"
-        name1="fullname"
-        label1="Full Name"
-        placeholder1="Enter full name of customer"
-        name2="phone"
-        label2="Phone"
-        placeholder2="Enter phone number of customer"
-        label3="Call Status"
-        items3={[{ value: 1, label: "Make call" }, { value: 2, label: "Call rejected" }, { value: 3, label: "Call accepted" }, { value: 4, label: "Call completed" }, { value: 5, label: "No call" }]}
-        placeholder3="Select your call status"
-        askAccount={null}
-      />
     </>
   );
 }
