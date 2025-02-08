@@ -5,9 +5,9 @@ import ModalAction from "./ModalAction";
 import { list } from "../utils/List";
 
 export default function CardList() {
-  
+
   const [selectedItem, setSelectedItem] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function handleActions(item) {
     setSelectedItem(item);
@@ -39,7 +39,7 @@ export default function CardList() {
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
         {list.map((item, index) => (
-          <Card key={index} shadow="sm" className="m-auto max-w-[90%]">
+          <Card key={index} shadow="sm" className="m-auto max-w-[90%]" aria-label={item.title}>
             <CardBody className="overflow-visible p-0">
               <Image
                 alt={item.title}
@@ -60,9 +60,7 @@ export default function CardList() {
                 className={[getColor(item), "w-[60%] text-sm"]}
               >
                 {item.title}
-                <span>
                   <ArrowLeftEndOnRectangleIcon className="size-5 text-zinc-100 opacity-60" />
-                </span>
               </Button>
             </CardFooter>
           </Card>
