@@ -37,7 +37,7 @@ export default function ModalComponent({ title, desc1, children, isOpen, onOpenC
               <hr />
               <p className="text-sm mt-4 text-default-500">{desc1}</p>
             </ModalHeader>
-            <ModalBody>{children}</ModalBody>
+            <ModalBody className="text-wrap">{children}</ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
                 Close

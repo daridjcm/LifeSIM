@@ -1,47 +1,57 @@
-import { useState, useEffect } from "react";
-import { Button, Modal } from "@heroui/react";
+import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 import ModalComponent from "../Modal";
 import TableCustomers, { customersCount } from "../../../utils/TableCustomers";
+import CustomButton from './CustomButton';
+
 export default function PhoneCorporative() {
   const [customerCountHandler, setCustomerCount] = useState(customersCount);
-  const [isCallingBoss, setIsCallingBoss] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure(); // Destructure to use state management for modal
+  const [chatBoss, setChatBoss] = useState(false);
+  const [chatAnalia, setChatAnalia] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const CallBoss = () => {
-    isCallingBoss ? 'Calling...' : 'Call Boss 📞'
-    setIsCallingBoss(true);
-    // setTimeout(() => {
-    //   window.location.href = '/';
-    // }, 2000);
+  const ChatBoss = () => {
+    setChatBoss(true);
+    setTimeout(() => {
+      window.open('/boss', '_blank');
+      setChatBoss(false);
+    }, 2000);
   };
 
-  const AddNewCustomer = () => {
-    onOpen()
+  const TableCalls = () => {
+    onOpen();
   };
 
-  const TypeAnalia = () => {
-    
-
+  const ChatAnalia = () => {
+    setChatAnalia(true);
+    setTimeout(() => {
+      setChatAnalia(false);
+      window.open('/analia', '_blank');
+    }, 2000);
   };
 
   return (
     <div className="flex flex-col gap-3 mt-4">
-      <Button color="primary" variant="ghost" size="md" onPress={CallBoss} aria-label="Call Boss">
-        Call Boss 📞 
-      </Button>
-      <Button
-        color="primary"
-        variant="ghost"
-        size="md"
-        onPress={AddNewCustomer}
-        aria-label={`${customerCountHandler} customers`}
-      >
-        Add a new Customer ({customerCountHandler}) ☎
-      </Button>
-      <Button color="primary" variant="ghost" size="md" onPress={TypeAnalia} aria-label="Type to Analia">
-        Type to Analia 📝
-      </Button>
+      <CustomButton
+        label={chatBoss ? "Entering to chat with Boss..." : "Chat with the Boss 📱"}
+        onPress={() => {
+          document.getElementById('tasksList').classList.remove('hidden');
+          document.getElementById('chatBoss').classList.add('block');
+          ChatBoss();
+        }}
+        id="chatBoss"
+      />
+      <CustomButton
+        label={`Table of Calls ☎`}
+        onPress={TableCalls}
+        isLoading={false}
+        id="tableCalls"
+      />
+      <CustomButton
+        label={chatAnalia ? "Entering to chat Analia..." : "Chat with Analia 📱"}
+        onPress={ChatAnalia}
+        id="chatAnalia"
+      />
 
       <ModalComponent title="Table of Calls" desc="Here is a table, where you can add a new customer for the call." isOpen={isOpen} onOpenChange={onOpenChange}>
         <TableCustomers />

@@ -1,0 +1,16 @@
+{
+  "userPresetResponses": [
+    { "id": "1", "content": "Hey Analia, I have finished my tasks. I will close my shift for today." },
+    { "id": "2", "content": "I brought you a coffee!" },
+    { "id": "3", "content": "Did the boss ever notify you about something I talked to him about?" },
+    { "id": "4", "content": "I will be gone for a few hours, I have something urgent to do." }
+  ],
+  "responses": {
+    "analia": {
+      "1": "Excellent. I will mark that down.",
+      "2": "Aww, that's so sweet. Thank you for the gesture.",
+      "3": "Yes, he let me know. I immediately took note of it.",
+      "4": "Don't worry, I'll cover your shift."
+    }
+  }
+}

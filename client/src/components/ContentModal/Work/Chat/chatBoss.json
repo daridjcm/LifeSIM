@@ -1,0 +1,16 @@
+{
+  "userPresetResponses": [
+    { "id": "1", "content": "Today is a new day, what will you assign me today?" },
+    { "id": "2", "content": "You could give me the excel file with the customers? I need it to add them to the table." },
+    { "id": "3", "content": "I completed the tasks." },
+    { "id": "4", "content": "Boss, I can finish the job today?" }
+  ],
+  "responses": {
+    "boss": {
+      "1": "I has assigned the tasks to you. You can check when you leave the chat. Let me know when you have finished them.",
+      "2": "Oh, yes. I give you the excel file with the customers.",
+      "3": "Great work! I'll review it shortly",
+      "4": "Dont worry, i will notify with Analia about it."
+    }
+  }
+}
