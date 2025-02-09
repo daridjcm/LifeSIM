@@ -38,9 +38,6 @@ export const customers = [
 ];
 
 export const customersCount = customers.length;
-function RouterNewCustomer() {
-  return window.location.href = '/customers/new';
-}
 
 const columns = [
   {
@@ -80,7 +77,7 @@ export default function TableCustomers() {
         ))}
       </TableBody>
     </Table>
-      <Button className="mt-4" color="primary" variant="ghost" size="md" onPress={RouterNewCustomer}>
+      <Button className="mt-4" color="primary" variant="ghost" size="md" onPress={() => window.location.href = '/customers/new'}>
         Add a new customer
       </Button>
     <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">

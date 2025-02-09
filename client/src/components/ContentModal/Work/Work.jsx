@@ -2,8 +2,11 @@ import { Checkbox } from "@heroui/react";
 import { BanknotesIcon } from "@heroicons/react/24/solid";
 import PorcentageTasks from "../../PorcentageTasks";
 import PhoneCorporative from "./PhoneCorporative";
+import CustomButton from "./CustomButton";
 
 export default function ContentWork() {
+  const [submitSignature, setSubmitSignature] = useState(false);
+
   return (
     <>
       <div className="flex flex-col mb-8">
@@ -14,58 +17,70 @@ export default function ContentWork() {
           <span id="moneyPerDay" className="text-green-500">($0)</span>
         </p>
       </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        <section className="bg-slate-100 rounded p-4">
+
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
+        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
           <p className="text-xl font-bold">How start your job daily</p>
           <ul className="list-decimal list-inside">
-            <li>Call Boss to talk her about the tasks today 📞 </li>
-            <li>Make inform in computer 💻</li>
-            <li>Type you to Analia  when you has been completed the tasks to notify that you will close your work per today</li>
+            <li>Chat with the Boss to talk her about the tasks today 📞 </li>
+            <li>Add customers in the table of calls according to the excel file that has been given to you by the boss 💁</li>
+            <li>Signature for confirming that you have completed your tasks, this will generate a report for the boss and it will send to him.</li>
+            <li>Type you to Analia when you has been completed the tasks to notify that you will close your work per today</li>
           </ul>
-        </section>
-        <section className="bg-slate-100 rounded p-4">
+        </div>
+
+        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
           <p className="text-xl font-bold">Tasks Today</p>
           <hr />
           <div className="flex flex-col gap-2 mt-4">
-            <Checkbox id="task1" color="success" size="md">
-              Make inform in computer 💻
-            </Checkbox>
             <Checkbox id="task2" color="success" size="md">
-              Assistance the customers 💁
+              Type with the Boss 📞
             </Checkbox>
             <Checkbox id="task3" color="success" size="md">
-              Messange to Analia 📝
+              Check the file that the boss gave you today 📄
+            </Checkbox>
+            <Checkbox id="task4" color="success" size="md">
+              Add new customers according to the excel file and enter it in the table of calls 💁
+            </Checkbox>
+            <Checkbox id="task1" color="success" size="md">
+              Make inform in computer (signature) 💻
+            </Checkbox>
+            <Checkbox id="task5" color="success" size="md">
+              Please signature to confirm that you have completed your tasks before writing to Analia
+            </Checkbox>
+            <Checkbox id="task6" color="success" size="md">
+              Type to Analia when you have finished the tasks ✅
             </Checkbox>
           </div>
-        </section>
-        <section className="bg-slate-100 rounded p-4">
+        </div>
+
+        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
           <p className="text-xl font-bold">Phone Corporative</p>
           <hr />
-            <PhoneCorporative />
-        </section>
+          <PhoneCorporative />
+        </div>
       </div>
-        <section className="bg-slate-100 rounded p-4 w-full mt-5">
-          <p className="text-xl font-bold">Tasks assigned by your Boss</p>
-          <ul id="tasksList" className="list-decimal list-inside hidden">
-            <li>
-              Check list of clients and call them <PorcentageTasks value={15} />
-            </li>
-            <li>
-              Once you have spoken to them, confirm their attendance in the excel file or modal table <PorcentageTasks value={30} />
-            </li>
-            <li>
-              You make the inform in an Word file or modal. Save the changes and go away <PorcentageTasks value={15} />
-            </li>
-            <li>
-              Signature in here to confirm your job today <PorcentageTasks value={25} />
-              <br />
-              <input type="text" name="CheckSignature" id="checkSignature" className="border-2 mt-1 mb-3 ml-2 w-full px-2 py-1 rounded transition-all duration-200 hover:border-green-500 focus:border-green-500 border-slate-300 focus:outline-none focus:ring-1 focus:ring-green-500" placeholder="Type your username" />
-            </li>
-            <li>
-              Type Analia and go away <PorcentageTasks value={15} />
-            </li>
-          </ul>
-        </section>
+
+      <div className="w-full bg-slate-100 rounded p-4 mt-4">
+        <p className="text-xl font-bold">Tasks assigned by your Boss</p>
+        <ul id="tasksList" className="list-none list-inside hidden">
+          <li>
+            Check excel file with the customers and later, add them to the table of calls <PorcentageTasks value={40} />
+          </li>
+          Signature in here to confirm your job today. <PorcentageTasks value={35} />
+          <br />
+          <li>
+            <input type="text" name="CheckSignature" id="checkSignature" className="border-2 mt-1 mb-3 ml-2 w-full px-2 py-1 rounded transition-all duration-200 hover:border-green-500 focus:border-green-500 border-slate-300 focus:outline-none focus:ring-1 focus:ring-green-500" placeholder="Type your username" />
+          </li>
+          <li>
+            Notify Analia about the tasks you have finished <PorcentageTasks value={25} />
+          </li>
+        </ul>
+        <CustomButton label='Submit' onPress={() => { 
+          let valueSaved = document.getElementById('checkSignature').value;
+          valueSaved === user.username ? setSubmitSignature(true) : setSubmitSignature(false);
+        }} isLoading={false} loadingText={'Submitting signature to boss...'} id='submitSignature' />
+      </div>
     </>
   );
 }
