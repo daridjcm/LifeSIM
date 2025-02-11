@@ -1,20 +1,36 @@
+import React from "react";
 import FormComp from "../components/Form";
 
 export default function Login() {
+  const fields = [
+    {
+      name: "username",
+      label: "Username",
+      placeholder: "Enter your username",
+      type: "text",
+    },
+    {
+      name: "email",
+      label: "Email",
+      placeholder: "Enter your email",
+      type: "email",
+    },
+    {
+      name: "password",
+      label: "Password",
+      placeholder: "**********",
+      type: "password",
+    },
+  ];
+
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
-        title="Welcome again to "
-        name1="username"
-        label1="Username"
-        placeholder1="Enter your username"
-        name2="email"
-        label2="Email"
-        placeholder2="Enter your email"
-        name4="password"
-        label4="Password"
-        placeholder4="**********"
-        askAccount={true}
+        title="Welcome again to"
+        fields={fields}
+        statusForm="login"  // Indicating this is a login form
+        btnText="Enter"
+        isRequired={true}
       />
     </div>
   );

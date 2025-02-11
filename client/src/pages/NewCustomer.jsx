@@ -1,20 +1,43 @@
+import React from "react";
 import FormComp from "../components/Form";
 
 export default function NewCustomer() {
+  const fields = [
+    {
+      name: "fullname",
+      label: "Full Name",
+      placeholder: "Enter full name of customer",
+      type: "text",
+    },
+    {
+      name: "phone",
+      label: "Phone",
+      placeholder: "Enter phone number of customer",
+      type: "text",
+    },
+    {
+      name: "callStatus",
+      label: "Call Status",
+      placeholder: "Select call status",
+      type: "select",
+      options: [
+        { label: "Make call", value: 1 },
+        { label: "Call rejected", value: 2 },
+        { label: "Call accepted", value: 3 },
+        { label: "Call completed", value: 4 },
+        { label: "No call", value: 5 },
+      ],
+    },
+  ];
+
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
-        title="Enter the info the customer"
-        name1="fullname"
-        label1="Full Name"
-        placeholder1="Enter full name of customer"
-        name2="phone"
-        label2="Phone"
-        placeholder2="Enter phone number of customer"
-        label3="Call Status"
-        items3={[{ value: 1, label: "Make call" }, { value: 2, label: "Call rejected" }, { value: 3, label: "Call accepted" }, { value: 4, label: "Call completed" }, { value: 5, label: "No call" }]}
-        placeholder3="Select your call status"
-        askAccount={'customers'}
+        title="Enter customer info"
+        fields={fields}
+        statusForm="customers"  // Indicating this is for adding a customer
+        btnText="Add Customer"
+        isRequired={true}
       />
     </div>
   );

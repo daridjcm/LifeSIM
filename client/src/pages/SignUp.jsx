@@ -1,24 +1,46 @@
+import React from "react";
 import FormComp from "../components/Form";
 
 export default function SignUp() {
+  const fields = [
+    {
+      name: "username",
+      label: "Username",
+      placeholder: "Create your username",
+      type: "text",
+    },
+    {
+      name: "email",
+      label: "Email",
+      placeholder: "Enter your email",
+      type: "email",
+    },
+    {
+      name: "gender",
+      label: "Gender",
+      placeholder: "Select your gender",
+      type: "select",
+      options: [
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
+      ],
+    },
+    {
+      name: "password",
+      label: "Password",
+      placeholder: "Create your password",
+      type: "password",
+    },
+  ];
+
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
-        title="Create your life"
-        name1="username"
-        label1="Username"
-        placeholder1="Create your username"
-        name2="email"
-        label2="Email"
-        placeholder2="Enter your email"
-        name3="gender"
-        label3="Gender"
-        items3={[{ value: "male", label: "Male" }, { value: "female", label: "Female" }]}
-        placeholder3="Select your gender"
-        name4="password"
-        label4="Password"
-        placeholder4="Create your password"
-        askAccount={false}
+        title="Create your"
+        fields={fields}
+        statusForm="signup"  // Indicating this is a signup form
+        btnText="Register"
+        isRequired={true}
       />
     </div>
   );
