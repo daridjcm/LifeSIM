@@ -34,12 +34,16 @@ export default function ModalAction({ item, onClose }) {
               />
           </CardHeader>
           <CardBody className="py-2">
-          <ScrollShadow hideScrollBar className="max-h-[70vh] min-h-full">
             {
-              item.title === "Work" ? <ContentWork /> :
-              item.title === "Bank" ? <ContentBank /> : null
+              item.title == "Work" ? (
+                <ScrollShadow hideScrollBar className="max-h-[70vh] min-h-full">
+                  <ContentWork />
+                </ScrollShadow>
+              ) : (
+                item.title === "Bank" ? <ContentBank /> : 
+                item.title === "Grocery" ? <ContentGrocery /> : null
+              )
             }
-            </ScrollShadow>
           </CardBody>
           <CardFooter className="flex justify-end">
             <Button color="danger" variant="flat" size="sm" isPressible onPress={onClose}>
@@ -48,6 +52,6 @@ export default function ModalAction({ item, onClose }) {
           </CardFooter>
         </Card>
     </div>,
-    document.body // Asegura que el modal se renderice en el cuerpo del documento
+    document.body 
   );
 }
