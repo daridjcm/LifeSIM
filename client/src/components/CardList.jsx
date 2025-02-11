@@ -18,6 +18,8 @@ export default function CardList() {
     setIsModalOpen(false);
   }
 
+  // TODO: Reuse component to CardList activities user and Grocery modal.
+
   // Colorea el card según el título
   function getColor(item) {
     return item.title === "Work"

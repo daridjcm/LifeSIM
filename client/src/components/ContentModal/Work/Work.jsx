@@ -3,7 +3,7 @@ import { Checkbox } from "@heroui/react";
 import { BanknotesIcon } from "@heroicons/react/24/solid";
 import PorcentageTasks from "../../PorcentageTasks";
 import PhoneCorporative from "./PhoneCorporative";
-import CustomButton from "./CustomButton";
+import CustomButton from "../../CustomButton";
 
 export default function ContentWork() {
   const [submitSignature, setSubmitSignature] = useState(false);
