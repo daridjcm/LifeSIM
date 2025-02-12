@@ -34,17 +34,11 @@ export default function ModalAction({ item, onClose }) {
                 width={80}
               />
           </CardHeader>
-          <CardBody className="py-2">
-            {
-              item.title == "Work" ? (
-                <ScrollShadow hideScrollBar className="max-h-[70vh] min-h-full">
-                  <ContentWork />
-                </ScrollShadow>
-              ) : (
-                item.title === "Bank" ? <ContentBank /> : 
-                item.title === "Grocery" ? <ContentGrocery /> : null
-              )
-            }
+          <CardBody className={item.title == "Work" ? "py-2 max-h-[60vh] min-h-full" : "max-h-full"}>
+              {
+                item.title == "Work" ? <ScrollShadow hideScrollBar><ContentWork /></ScrollShadow> :
+                item.title == "Bank" ? <ContentBank /> : <ContentGrocery />
+              }
           </CardBody>
           <CardFooter className="flex justify-end">
             <Button color="danger" variant="flat" size="sm" isPressible onPress={onClose}>

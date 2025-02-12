@@ -1,4 +1,4 @@
-const list = [
+const activitiesUser = [
   { title: "Work", img: "/images/work3d.jpeg", desc: "Go to" },
   { title: "Bank", img: "/images/bank3d.jpeg", desc: "Go to" },
   { title: "Grocery", img: "/images/supermarket3d.jpeg", desc: "Go to" },
@@ -8,4 +8,4 @@ const list = [
   { title: "Phone", img: "/images/phone3d.jpeg", desc: "Go to" },
 ];
 
-export { list };
+export default { activitiesUser };

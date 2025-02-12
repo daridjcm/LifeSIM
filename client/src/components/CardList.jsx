@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Card, CardBody, CardFooter, Image, Button } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
-import { list } from "../utils/List";
 
-export default function CardList() {
-
+export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -18,9 +16,6 @@ export default function CardList() {
     setIsModalOpen(false);
   }
 
-  // TODO: Reuse component to CardList activities user and Grocery modal.
-
-  // Colorea el card según el título
   function getColor(item) {
     return item.title === "Work"
       ? "text-blue-800 bg-blue-400"
@@ -37,42 +32,54 @@ export default function CardList() {
                 : "text-zinc-300 bg-zinc-900";
   }
 
+  console.log(itemsToDisplay);
+
+  const displayItems = Array.isArray(itemsToDisplay) 
+    ? itemsToDisplay
+    : itemsToDisplay?.activitiesUser || [];
+
   return (
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
-        {list.map((item, index) => (
-          <Card key={index} shadow="sm" className="m-auto max-w-[90%]" aria-label={item.title}>
-            <CardBody className="overflow-visible p-0">
-              <Image
-                alt={item.title}
-                className="object-cover"
-                radius="md"
-                shadow="sm"
-                width={"100%"}
-                src={item.img}
-                isBlurred
-              />
-            </CardBody>
-            <CardFooter className="text-small justify-between">
-              <p className="text-default-500">{item.desc}</p>
-              <Button
-                size="sm"
-                isPressible
-                onPress={() => handleActions(item)}
-                className={[getColor(item), "w-[60%] text-sm"]}
-              >
-                {item.title}
-                  <ArrowLeftEndOnRectangleIcon className="size-5 text-zinc-100 opacity-60" />
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+        {displayItems.length === 0 ? (
+          <p>Not have products for display</p>
+        ) : (
+          displayItems.map((item, index) => (
+            <Card key={index} shadow="sm" className="m-auto max-w-[90%]" aria-label={item.title}>
+              <CardBody className="overflow-hidden p-0">
+                <Image
+                  alt={item.title}
+                  className="object-cover"
+                  radius="md"
+                  shadow="sm"
+                  width={"100%"}
+                  height={iconShow ? "100%" : "40%"}
+                  src={item.img}
+                  isBlurred
+                />
+              </CardBody>
+              <CardFooter className="text-small justify-between">
+                <p className="text-default-500">{item.desc}</p>
+                <Button
+                  size="sm"
+                  isPressible
+                  onPress={() => handleActions(item)}
+                  className={iconShow ? `${getColor(item)} w-[70%] text-sm` : `${getColor(item)} w-full`}
+                >
+                  {iconShow ? (
+                    <>
+                    {item.title}
+                    <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
+                    </>
+                  ) : `Buy ${item.title}`}
+                </Button>
+              </CardFooter>
+            </Card>
+          ))
+        )}
       </div>
 
-      {/* Renderiza el modal solo si está abierto */}
-      {isModalOpen && selectedItem && (
-        <ModalAction item={selectedItem} onClose={closeModal} />
-      )}
+      {isModalOpen && selectedItem && <ModalAction item={selectedItem} onClose={closeModal} />}
     </>
   );
 }
