@@ -1,12 +1,11 @@
 import { useState } from "react";
 import itemsGrocery from "./itemsGrocery.json";
 import activitiesUser from "../../../utils/List";
-import CardList from "../../CardList";
-import { Pagination } from "@heroui/react";
+import { Index } from "./ShoppingList";
 
-export const itemsArray = itemsGrocery.products;
 
 export default function ContentGrocery({ statusCard }) {
+  const itemsArray = itemsGrocery.products;
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -25,22 +24,11 @@ export default function ContentGrocery({ statusCard }) {
 
 
   return (
-    <>
-      <CardList
-        statusCard={"itemsGrocery"}
-        iconShow={false}
-        itemsToDisplay={currentItems} 
-      />
-
-      <Pagination
-        showControls
-        page={currentPage}
-        total={totalPages}
-        size="lg"
-        onChange={handlePageChange}
-        siblings={1}
-        boundaries={1}
-      />
-    </>
+    <Index
+      itemsToDisplay={currentItems}
+      page={currentPage}
+      total={totalPages}
+      onChange={handlePageChange}
+    />
   );
 }

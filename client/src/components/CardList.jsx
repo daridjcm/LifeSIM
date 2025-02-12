@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, CardBody, CardFooter, Image, Button } from "@heroui/react";
-import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
 
 export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
@@ -40,12 +40,12 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
 
   return (
     <>
-      <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
+      <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
         {displayItems.length === 0 ? (
           <p>Not have products for display</p>
         ) : (
           displayItems.map((item, index) => (
-            <Card key={index} shadow="sm" className="m-auto max-w-[90%]" aria-label={item.title}>
+            <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
               <CardBody className="overflow-hidden p-0">
                 <Image
                   alt={item.title}
@@ -71,7 +71,12 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
                     {item.title}
                     <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
                     </>
-                  ) : `Buy ${item.title}`}
+                  ) : (
+                    <>
+                    {`Buy ${item.title}`}
+                    <ShoppingCartIcon className="size-5 text-white" />
+                    </>
+                  )}
                 </Button>
               </CardFooter>
             </Card>

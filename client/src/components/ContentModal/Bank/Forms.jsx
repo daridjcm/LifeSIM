@@ -84,7 +84,6 @@ export function Loans() {
       type: "select",
       options: [
         { label: "Personal Loan", value: "personalloan" },
-        { label: "Auto Loan", value: "autoloan" }, // TODO: Delete this.
         { label: "Mortgage", value: "mortgage" },
       ],
     },
