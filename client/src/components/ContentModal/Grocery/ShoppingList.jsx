@@ -1,9 +1,8 @@
 import { Tabs, Tab, Pagination, Alert } from "@heroui/react";
 import CardList from "../../CardList";
 import { useState } from "react";
-
 import CustomButton from "../../CustomButton";
-
+ 
 export function Index({ itemsToDisplay, page, total, onChange }) {
   const [paymentStatus, setPaymentStatus] = useState("Make Payment");
   const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -60,6 +59,7 @@ export function Index({ itemsToDisplay, page, total, onChange }) {
 
       <Tab key="shoppinglist" title="Shopping List">
         <p className="text-2xl font-bold">Summary to Shopping List</p>
+        // TODO: Add content to this.
       </Tab>
 
       <Tab key="atm" title="ATM (Cashier)">
