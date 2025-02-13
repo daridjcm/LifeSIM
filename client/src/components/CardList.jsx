@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, Image, Button } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
 
-export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
+export default function CardList({ statusCard, iconShow, itemsToDisplay, selectedProducts, setSelectedProducts }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -11,6 +11,14 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
     setSelectedItem(item);
     setIsModalOpen(true);
   }
+
+  const handleProducts = (itemProduct) => {
+    setSelectedProducts((prev) =>
+      prev.includes(itemProduct.title)
+        ? prev.filter((i) => i !== itemProduct.title)
+        : [...prev, itemProduct.title]
+    );
+  };
 
   function closeModal() {
     setIsModalOpen(false);
@@ -32,9 +40,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
                 : "text-zinc-300 bg-zinc-900";
   }
 
-  console.log(itemsToDisplay);
-
-  const displayItems = Array.isArray(itemsToDisplay) 
+  const displayItems = Array.isArray(itemsToDisplay)
     ? itemsToDisplay
     : itemsToDisplay?.activitiesUser || [];
 
@@ -42,7 +48,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
         {displayItems.length === 0 ? (
-          <p>Not have products for display</p>
+          <p>No hay productos para mostrar</p>
         ) : (
           displayItems.map((item, index) => (
             <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
@@ -60,30 +66,33 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay }) {
               </CardBody>
               <CardFooter className="text-small justify-between">
                 <p className="text-default-500">{item.desc}</p>
-                <Button
-                  size="sm"
-                  isPressible
-                  onPress={() => handleActions(item)}
-                  className={iconShow ? `${getColor(item)} w-[70%] text-sm` : `${getColor(item)} w-full`}
-                >
-                  {iconShow ? (
-                    <>
-                    {item.title}
-                    <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
-                    </>
-                  ) : (
-                    <>
-                    {`Buy ${item.title}`}
-                    <ShoppingCartIcon className="size-5 text-white" />
-                    </>
-                  )}
-                </Button>
+                <div className={iconShow ? "flex gap-2" : "flex gap-2 w-full"}>
+                  <Button
+                    size="md"
+                    isPressible
+                    onPress={() => (iconShow ? handleActions(item) : handleProducts(item))}
+                    className={`${getColor(item)} w-full`}
+                  >
+                    {iconShow ? (
+                      <>
+                        {item.title}
+                        <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
+                      </>
+                    ) : (
+                      <>
+                        {selectedProducts.includes(item.title) ? `${item.title} added` : `Buy ${item.title}`}
+                        <ShoppingCartIcon className="size-5 text-white ml-1" />
+                      </>
+                    )}
+                  </Button>
+                </div>
               </CardFooter>
             </Card>
           ))
         )}
       </div>
 
+      {/* Modal */}
       {isModalOpen && selectedItem && <ModalAction item={selectedItem} onClose={closeModal} />}
     </>
   );

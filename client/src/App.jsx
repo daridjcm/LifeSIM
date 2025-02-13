@@ -9,7 +9,6 @@ import Chat from "./components/ContentModal/Work/Chat/Chat.jsx";
 
 
 function App() {
-  // TODO: Add page to routes that do not exist yet (404).
   return (
     <BrowserRouter>
       <Routes>
