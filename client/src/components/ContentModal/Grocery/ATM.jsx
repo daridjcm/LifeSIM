@@ -55,6 +55,7 @@ export default function AtmTab({ paymentStatus, setPaymentStatus, paymentProcess
           description={alertType === "success" ? "Payment has been made." : "Payment has been rejected."}
           isVisible={alertVisible}
           variant="faded"
+          className="mt-5"
           onClose={() => setAlertVisible(false)}
         />
       )}

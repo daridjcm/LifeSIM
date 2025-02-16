@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardBody, CardFooter, Chip, Button, } from "@heroui/react";
+import { Card, CardBody, CardFooter, Chip, Button, cn, Tooltip } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
 
@@ -25,25 +25,43 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
   }
 
   function getColor(item) {
-    return item.title === "Work"
-      ? "text-blue-800 bg-blue-400"
-      : item.title === "Bank"
-        ? "text-cyan-800 bg-cyan-400"
-        : item.title === "Grocery"
-          ? "text-green-800 bg-green-400"
-          : item.title === "Mall"
-            ? "text-gray-800 bg-gray-400"
-            : item.title === "Cafeteria"
-              ? "text-orange-800 bg-orange-400"
-              : item.title === "Home"
-                ? "text-red-800 bg-red-400"
-                : "text-zinc-300 bg-zinc-900";
+    switch (item.title) {
+      case "Work":
+      return "text-blue-800 bg-blue-400";
+      case "Bank":
+      return "text-cyan-800 bg-cyan-400";
+      case "Grocery":
+      return "text-green-800 bg-green-400";
+      case "Mall":
+      return "text-gray-800 bg-gray-400";
+      case "Cafeteria":
+      return "text-orange-800 bg-orange-400";
+      case "Home":
+      return "text-red-800 bg-red-400";
+      default:
+      return "text-zinc-300 bg-zinc-900";
+    }
   }
 
+  function getColor2(item) {
+    switch (item.category) {
+      case "Fast Food":
+        return { color: "primary", content: "Consumed quickly, less filling." };
+      case "Fruit":
+        return { color: "secondary", content: "Combines well with others, serves satiety." };
+      case "Vegetable":
+        return { color: "success", content: "Combines well with others, serves satiety" };
+      case "Drink":
+        return { color: "danger", content: "Excessive consumption shortens longevity." };
+      default:
+        return { color: "default", content: "Others." };
+    }
+  }
+  
   const displayItems = Array.isArray(itemsToDisplay)
     ? itemsToDisplay
     : itemsToDisplay?.activitiesUser || itemsToDisplay?.products;
-
+  
   return (
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
@@ -56,9 +74,13 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
                 <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover sm:w-40 sm:h-32 lg:w-full lg:h-42 m-auto"} />
                 {iconShow ? null : (
                   <div className="flex justify-end mx-4">
-                    <Chip color={item.category =='Fast Food' ? "primary" : item.category == 'Fruits' ? "secondary" : item.category == 'Vegetables' ? "success" : "danger" } variant="bordered">
-                      {item.category}
-                    </Chip>
+                    <Tooltip color={getColor2(item).color} content={getColor2(item).content} delay={1000}>
+                      <Chip
+                        className="cn base closeButton cursor-pointer"
+                        color={getColor2(item).color} variant="bordered">
+                        {item.category}
+                      </Chip>
+                    </Tooltip>
                   </div>
                 )}
               </CardBody>
@@ -89,7 +111,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
           ))
         )}
       </div>
-
+  
       {/* Modal */}
       {isModalOpen && selectedItem && <ModalAction item={selectedItem} onClose={closeModal} />}
     </>
