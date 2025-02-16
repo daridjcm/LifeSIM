@@ -1,6 +1,6 @@
 import { Checkbox, CheckboxGroup, cn, Avatar } from "@heroui/react";
 
-export default function ShoppingList({ selectedItems = [] }) {
+function ShoppingList({ selectedItems = [] }) {
   return (
     <>
       <p>Products selected to buy.</p>
@@ -28,6 +28,15 @@ export default function ShoppingList({ selectedItems = [] }) {
       ) : (
         <p className="text-gray-500">Not have products selected.</p>
       )}
+    </>
+  );
+}
+
+export default function ShoppingListTab({ selectedProducts }) {
+  return (
+    <>
+      <p className="text-2xl font-bold">Summary to Shopping List</p>
+      <ShoppingList selectedItems={selectedProducts} />
     </>
   );
 }

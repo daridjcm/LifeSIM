@@ -1,34 +1,47 @@
+import { Tabs, Tab } from "@heroui/react";
 import { useState } from "react";
-import itemsGrocery from "./itemsGrocery.json";
-import activitiesUser from "../../../utils/List";
-import { Index } from "./ATM";
+import ProductsTab from "./Products";
+import ShoppingListTab from "./Shopping";
+import AtmTab from "./ATM";
 
-
-export default function ContentGrocery({ statusCard }) {
-  const itemsArray = itemsGrocery.products;
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const displayedItems = statusCard === "activitiesUser" ? activitiesUser : itemsArray;
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = displayedItems.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handlePageChange = (newPage) => {
-    console.log("Page changed to:", newPage);
-    setCurrentPage(newPage);
-  };
-
-  const totalPages = Math.ceil(displayedItems.length / itemsPerPage);
-
+export function Index({ itemsToDisplay, page, total, onChange }) {
+  // State Management
+  const [paymentStatus, setPaymentStatus] = useState("Make Payment");
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertType, setAlertType] = useState("success"); // success or danger
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   return (
-    <Index
-      itemsToDisplay={currentItems}
-      page={currentPage}
-      total={totalPages}
-      onChange={handlePageChange}
-    />
+    <Tabs aria-label="Options" variant="underline">
+      
+      <Tab key="products" title="Products">
+        <ProductsTab
+          itemsToDisplay={itemsToDisplay}
+          page={page}
+          total={total}
+          onChange={onChange}
+          selectedProducts={selectedProducts}
+          setSelectedProducts={setSelectedProducts}
+        />
+      </Tab>
+      
+      <Tab key="shoppinglist" title="Shopping List">
+        <ShoppingListTab selectedProducts={selectedProducts} />
+      </Tab>
+
+      <Tab key="atm" title="ATM (Cashier)">
+        <AtmTab
+          paymentStatus={paymentStatus}
+          setPaymentStatus={setPaymentStatus}
+          paymentProcessing={paymentProcessing}
+          setPaymentProcessing={setPaymentProcessing}
+          alertVisible={alertVisible}
+          setAlertVisible={setAlertVisible}
+          alertType={alertType}
+          setAlertType={setAlertType}
+        />
+      </Tab>
+    </Tabs>
   );
 }
