@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, cn, Avatar } from "@heroui/react";
+import { Checkbox, CheckboxGroup, cn, Image } from "@heroui/react";
 
 function ShoppingList({ selectedItems = [] }) {
   return (
@@ -16,11 +16,19 @@ function ShoppingList({ selectedItems = [] }) {
           defaultValue={selectedItems}
           lineThrough
         >
-          {selectedItems.map((title) => (
-              <Checkbox key={title} value={title}>
+          {selectedItems.map((product) => (
+              <Checkbox key={product} value={product}>
                 <div className="flex flex-row gap-5 items-center">
-                <Avatar src={title.img} />
-                  <p>{title}</p>
+                  <Image 
+                    alt={product.title}
+                    src={product.img}
+                    width={32}
+                    height={32}
+                    shadow="md"
+                    radius="full"
+                    className="object-cover"
+                  />
+                  <p>{product}</p>
                 </div>
               </Checkbox>
           ))}

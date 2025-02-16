@@ -35,7 +35,7 @@ const products = [
     id: 5,
     title: "Whole Wheat Bread",
     price: 3.49,
-    img: "/images/products/.jpg",
+    img: "/images/products/wholewheatbread.jpg",
     inStock: true,
     category: "Bakery"
   },
@@ -43,7 +43,7 @@ const products = [
     id: 6,
     title: "Milk",
     price: 2.69,
-    img: "/images/products/.jpg",
+    img: "/images/products/milk.jpg",
     inStock: true,
     category: "Dairy"
   },
@@ -51,7 +51,7 @@ const products = [
     id: 7,
     title: "Cheddar Cheese",
     price: 4.99,
-    img: "/images/products/.jpg",
+    img: "/images/products/cheddarcheese.jpg",
     inStock: true,
     category: "Dairy"
   },
@@ -59,7 +59,7 @@ const products = [
     id: 8,
     title: "Olive Oil",
     price: 6.99,
-    img: "/images/products/.jpg",
+    img: "/images/products/oliveoil.jpg",
     inStock: true,
     category: "Condiments"
   },
@@ -67,7 +67,7 @@ const products = [
     id: 9,
     title: "Potato",
     price: 1.29,
-    img: "/images/products/.jpg",
+    img: "/images/products/potato.jpg",
     inStock: true,
     category: "Vegetables"
   },
@@ -75,7 +75,7 @@ const products = [
     id: 10,
     title: "Tomato",
     price: 2.19,
-    img: "/images/products/.jpg",
+    img: "/images/products/tomato.jpg",
     inStock: true,
     category: "Vegetables"
   },

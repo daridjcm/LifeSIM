@@ -54,7 +54,6 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
             <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
               <CardBody className="overflow-hidden p-0">
                 <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover sm:w-40 sm:h-32 lg:w-full lg:h-42 m-auto"} />
-
               </CardBody>
               <CardFooter className="text-small justify-between">
                 <p className="text-default-500 text-xl">{item.desc}</p>
