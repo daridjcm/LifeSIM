@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardBody, CardFooter, Image, Button, cn } from "@heroui/react";
+import { Card, CardBody, CardFooter, Chip, Button, } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
 
@@ -54,6 +54,13 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
             <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
               <CardBody className="overflow-hidden p-0">
                 <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover sm:w-40 sm:h-32 lg:w-full lg:h-42 m-auto"} />
+                {iconShow ? null : (
+                  <div className="flex justify-end mx-4">
+                    <Chip color={item.category =='Fast Food' ? "primary" : item.category == 'Fruits' ? "secondary" : item.category == 'Vegetables' ? "success" : "danger" } variant="bordered">
+                      {item.category}
+                    </Chip>
+                  </div>
+                )}
               </CardBody>
               <CardFooter className="text-small justify-between">
                 <p className="text-default-500 text-xl">{item.desc}</p>
@@ -71,7 +78,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
                       </>
                     ) : (
                       <>
-                        {selectedProducts.includes(item.title) ? `${item.title} added` : `Buy ${item.title}`}
+                        {selectedProducts.includes(item.title) ? `${item.title} added` : `Buy ${item.title} for ${item.price}`}
                         <ShoppingCartIcon className="size-5 text-white ml-1" />
                       </>
                     )}
