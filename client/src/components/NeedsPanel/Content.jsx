@@ -11,7 +11,7 @@ const needs = [
 ];
 
 const Content = () => (
-  <ul className="flex flex-wrap m-auto justify-center gap-2">
+  <ul className="flex flex-col m-auto justify-center gap-10">
     {needs.map(({ name, value }) => (
       <div className="flex flex-col items-center" key={name}>
         {getIconColor(name, value)}

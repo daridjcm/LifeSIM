@@ -65,7 +65,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
                 />
               </CardBody>
               <CardFooter className="text-small justify-between">
-                <p className="text-default-500">{item.desc}</p>
+                <p className="text-default-500 text-xl">{item.desc}</p>
                 <div className={iconShow ? "flex gap-2" : "flex gap-2 w-full"}>
                   <Button
                     size="md"
