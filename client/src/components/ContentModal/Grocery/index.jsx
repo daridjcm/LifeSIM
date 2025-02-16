@@ -1,11 +1,10 @@
 import { useState } from "react";
-import itemsGrocery from "./itemsGrocery.json";
 import activitiesUser from "../../../utils/List";
 import { Index } from "./Grocery";
-
+import products from "./itemsGrocery";
 
 export default function ContentGrocery({ statusCard }) {
-  const itemsArray = itemsGrocery.products;
+  const itemsArray = Object.values(products.products);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,8 +19,12 @@ export default function ContentGrocery({ statusCard }) {
     setCurrentPage(newPage);
   };
 
-  const totalPages = Math.ceil(displayedItems.length / itemsPerPage);
+  if (!Array.isArray(displayedItems)) {
+    console.error("Error: displayedItems is not an array", displayedItems);
+    return null; // Avoid breaking the app
+  }
 
+  const totalPages = Math.ceil(displayedItems.length / itemsPerPage);
 
   return (
     <Index

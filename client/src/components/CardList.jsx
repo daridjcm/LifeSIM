@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardBody, CardFooter, Image, Button } from "@heroui/react";
+import { Card, CardBody, CardFooter, Image, Button, cn } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
 
@@ -42,7 +42,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
 
   const displayItems = Array.isArray(itemsToDisplay)
     ? itemsToDisplay
-    : itemsToDisplay?.activitiesUser || [];
+    : itemsToDisplay?.activitiesUser || itemsToDisplay?.products;
 
   return (
     <>
@@ -53,16 +53,8 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
           displayItems.map((item, index) => (
             <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
               <CardBody className="overflow-hidden p-0">
-                <Image
-                  alt={item.title}
-                  className="object-cover"
-                  radius="md"
-                  shadow="sm"
-                  width={"100%"}
-                  height={iconShow ? "100%" : "40%"}
-                  src={item.img}
-                  isBlurred
-                />
+                <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover sm:w-40 sm:h-32 lg:w-full lg:h-42 m-auto"} />
+
               </CardBody>
               <CardFooter className="text-small justify-between">
                 <p className="text-default-500 text-xl">{item.desc}</p>
