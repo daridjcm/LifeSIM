@@ -13,7 +13,7 @@ export function Index({ itemsToDisplay, page, total, onChange }) {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   return (
-    <Tabs aria-label="Options" variant="underline">
+    <Tabs aria-label="Options" variant="underline" fullWidth>
       
       <Tab key="products" title="Products">
         <ProductsTab

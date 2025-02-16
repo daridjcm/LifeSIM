@@ -21,7 +21,7 @@ export default function ModalAction({ item, onClose }) {
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3">
-        <Card className="h-full w-full lg:h-fit lg:w-fit p-2" radius="md" shadow="md" >
+        <Card className="h-full w-full lg:h-fit md:w-full lg:w-[70%] p-2" radius="md" shadow="md" >
           <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
             <div>
               <p className="text-default-500">Inside the</p>
