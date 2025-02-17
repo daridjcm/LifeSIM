@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody, Image, CardFooter, Button, ScrollShadow } f
 // Content Modal
 import ContentWork from "./ContentModal/Work/Work";
 import ContentBank from "./ContentModal/Bank/Bank";
+import ContentGrocery from "./ContentModal/Grocery"
 
 export default function ModalAction({ item, onClose }) {
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function ModalAction({ item, onClose }) {
 
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3">
-        <Card className="h-fit sm:w-full md:w-10/12 lg:w-10/12 p-2" radius="md" shadow="md" >
+        <Card className="h-full w-full lg:h-fit md:w-full lg:w-[70%] p-2" radius="md" shadow="md" >
           <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
             <div>
               <p className="text-default-500">Inside the</p>
@@ -33,17 +34,11 @@ export default function ModalAction({ item, onClose }) {
                 width={80}
               />
           </CardHeader>
-          <CardBody className="py-2">
-            {
-              item.title == "Work" ? (
-                <ScrollShadow hideScrollBar className="max-h-[70vh] min-h-full">
-                  <ContentWork />
-                </ScrollShadow>
-              ) : (
-                item.title === "Bank" ? <ContentBank /> : 
-                item.title === "Grocery" ? <ContentGrocery /> : null
-              )
-            }
+          <CardBody className={item.title == "Work" ? "py-2 max-h-[60vh] min-h-full" : "max-h-full"}>
+              {
+                item.title == "Work" ? <ScrollShadow hideScrollBar><ContentWork /></ScrollShadow> :
+                item.title == "Bank" ? <ContentBank /> : <ContentGrocery />
+              }
           </CardBody>
           <CardFooter className="flex justify-end">
             <Button color="danger" variant="flat" size="sm" isPressible onPress={onClose}>

@@ -1,5 +1,14 @@
 import React from "react";
-import { Modal, ModalBody, ModalContent, ModalHeader, ModalFooter, Button, useDisclosure, ScrollShadow } from "@heroui/react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter, 
+  useDisclosure, 
+  ScrollShadow,
+  Button
+} from "@heroui/react";
 import { FaceSmileIcon } from "@heroicons/react/20/solid";
 import Content from "./Content";
 
@@ -8,7 +17,7 @@ const NeedsPanel = () => {
 
   return (
     <>
-      <div className="fixed bottom-0 right-0 p-3">
+      <div className="z-10 fixed bottom-0 right-0 p-3">
         <Button
           className="p-1 text-white"
           size="lg"
@@ -19,19 +28,19 @@ const NeedsPanel = () => {
           <FaceSmileIcon />
         </Button>
       </div>
-      <Modal backdrop="opaque" size="lg" isOpen={isOpen} onClose={onClose}>
-        <ModalContent>
-          <ModalHeader>Needs Panel</ModalHeader>
-          <ModalBody>
+      <Drawer isOpen={isOpen} size="xs" onOpenChange={onClose}>
+        <DrawerContent>
+          <DrawerHeader>Needs Panel</DrawerHeader>
+          <DrawerBody>
             <Content />
-          </ModalBody>
-          <ModalFooter>
+          </DrawerBody>
+          <DrawerFooter>
             <Button color="primary" onPress={onClose}>
               Close
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
       <ScrollShadow />
     </>
   );

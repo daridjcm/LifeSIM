@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Card, CardBody, CardFooter, Image, Button } from "@heroui/react";
-import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/solid";
+import { Card, CardBody, CardFooter, Chip, Button, cn, Tooltip } from "@heroui/react";
+import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction";
-import { list } from "../utils/List";
 
-export default function CardList() {
-
+export default function CardList({ statusCard, iconShow, itemsToDisplay, selectedProducts, setSelectedProducts }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,63 +12,108 @@ export default function CardList() {
     setIsModalOpen(true);
   }
 
+  const handleProducts = (itemProduct) => {
+    setSelectedProducts((prev) =>
+      prev.includes(itemProduct.title)
+        ? prev.filter((i) => i !== itemProduct.title)
+        : [...prev, itemProduct.title]
+    );
+  };
+
   function closeModal() {
     setIsModalOpen(false);
   }
 
-  // Colorea el card según el título
   function getColor(item) {
-    return item.title === "Work"
-      ? "text-blue-800 bg-blue-400"
-      : item.title === "Bank"
-        ? "text-cyan-800 bg-cyan-400"
-        : item.title === "Grocery"
-          ? "text-green-800 bg-green-400"
-          : item.title === "Mall"
-            ? "text-gray-800 bg-gray-400"
-            : item.title === "Cafeteria"
-              ? "text-orange-800 bg-orange-400"
-              : item.title === "Home"
-                ? "text-red-800 bg-red-400"
-                : "text-zinc-300 bg-zinc-900";
+    switch (item.title) {
+      case "Work":
+      return "text-blue-800 bg-blue-400";
+      case "Bank":
+      return "text-cyan-800 bg-cyan-400";
+      case "Grocery":
+      return "text-green-800 bg-green-400";
+      case "Mall":
+      return "text-gray-800 bg-gray-400";
+      case "Cafeteria":
+      return "text-orange-800 bg-orange-400";
+      case "Home":
+      return "text-red-800 bg-red-400";
+      default:
+      return "text-zinc-300 bg-zinc-900";
+    }
   }
 
+  function getColor2(item) {
+    switch (item.category) {
+      case "Fast Food":
+        return { color: "primary", content: "Consumed quickly, less filling." };
+      case "Fruit":
+        return { color: "secondary", content: "Combines well with others, serves satiety." };
+      case "Vegetable":
+        return { color: "success", content: "Combines well with others, serves satiety" };
+      case "Drink":
+        return { color: "danger", content: "Excessive consumption shortens longevity." };
+      default:
+        return { color: "default", content: "Others." };
+    }
+  }
+  
+  const displayItems = Array.isArray(itemsToDisplay)
+    ? itemsToDisplay
+    : itemsToDisplay?.activitiesUser || itemsToDisplay?.products;
+  
   return (
     <>
-      <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
-        {list.map((item, index) => (
-          <Card key={index} shadow="sm" className="m-auto max-w-[90%]" aria-label={item.title}>
-            <CardBody className="overflow-visible p-0">
-              <Image
-                alt={item.title}
-                className="object-cover"
-                radius="md"
-                shadow="sm"
-                width={"100%"}
-                src={item.img}
-                isBlurred
-              />
-            </CardBody>
-            <CardFooter className="text-small justify-between">
-              <p className="text-default-500">{item.desc}</p>
-              <Button
-                size="sm"
-                isPressible
-                onPress={() => handleActions(item)}
-                className={[getColor(item), "w-[60%] text-sm"]}
-              >
-                {item.title}
-                  <ArrowLeftEndOnRectangleIcon className="size-5 text-zinc-100 opacity-60" />
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+      <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+        {displayItems.length === 0 ? (
+          <p>No hay productos para mostrar</p>
+        ) : (
+          displayItems.map((item, index) => (
+            <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
+              <CardBody className="overflow-hidden p-0">
+                <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover max-w-fit sm:h-40 md:h-36 lg:max-h-fit m-auto"} />
+                {iconShow ? null : (
+                  <div className="flex justify-end mx-4">
+                    <Tooltip color={getColor2(item).color} content={getColor2(item).content} delay={1000}>
+                      <Chip
+                        className="cn base closeButton cursor-pointer"
+                        color={getColor2(item).color} variant="bordered">
+                        {item.category}
+                      </Chip>
+                    </Tooltip>
+                  </div>
+                )}
+              </CardBody>
+              <CardFooter className="text-small justify-between">
+                <p className="text-default-500 text-xl">{item.desc}</p>
+                <div className={iconShow ? "flex gap-2" : "flex gap-2 w-full"}>
+                  <Button
+                    size="md"
+                    isPressible
+                    onPress={() => (iconShow ? handleActions(item) : handleProducts(item))}
+                    className={`${getColor(item)} w-full`}
+                  >
+                    {iconShow ? (
+                      <>
+                        {item.title}
+                        <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
+                      </>
+                    ) : (
+                      <span className="flex items-center text-pretty">
+                        {selectedProducts.includes(item.title) ? `${item.title} added` : `Buy ${item.title} for ${item.price}`}
+                        <ShoppingCartIcon className="size-5 text-white ml-1" />
+                      </span>
+                    )}
+                  </Button>
+                </div>
+              </CardFooter>
+            </Card>
+          ))
+        )}
       </div>
-
-      {/* Renderiza el modal solo si está abierto */}
-      {isModalOpen && selectedItem && (
-        <ModalAction item={selectedItem} onClose={closeModal} />
-      )}
+  
+      {/* Modal */}
+      {isModalOpen && selectedItem && <ModalAction item={selectedItem} onClose={closeModal} />}
     </>
   );
 }
