@@ -1,6 +1,25 @@
 import { Checkbox, CheckboxGroup, cn, Image } from "@heroui/react";
+import CustomButton from "../../CustomButton";
 
-function ShoppingList({ selectedItems = [] }) {
+function ShoppingList({ selectedItems }) {
+  const handleSend = async () => {
+    console.log("Send to Back-End:", JSON.stringify({ selectedItems }));
+    try {
+      const res = await fetch("http://localhost:3000/grocery", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({selectedItems}),
+      });
+      const data = await res.json();
+      console.log("Response of server:", data);
+    }
+    catch (error) {
+      console.error("Error to send the datas:", error)
+    }
+  }
+  
   return (
     <>
       <p>Products selected to buy.</p>
@@ -13,11 +32,10 @@ function ShoppingList({ selectedItems = [] }) {
               "cursor-pointer rounded-lg gap-2 p-4 border-transparent border-black",
             )
           }}
-          defaultValue={selectedItems}
-          lineThrough
         >
+          {console.log(selectedItems)}
           {selectedItems.map((product) => (
-              <Checkbox key={product} value={product}>
+            <Checkbox key={product.title} value={product.title} lineThrough={true}>
                 <div className="flex flex-row gap-5 items-center">
                   <Image 
                     alt={product.title}
@@ -27,24 +45,33 @@ function ShoppingList({ selectedItems = [] }) {
                     shadow="md"
                     radius="full"
                     className="object-cover"
-                  />
-                  <p>{product}</p>
+                    />
+                  <p>{product.title}</p>
                 </div>
+                  <p className="m-2 font-bold">${product.price}</p>
               </Checkbox>
           ))}
+          <CustomButton 
+            label="Save changes"
+            onPress={handleSend}
+            isLoading={!handleSend}
+            loadingText="Saving changes..."
+            id="handleSend"	
+          />
         </CheckboxGroup>
       ) : (
         <p className="text-gray-500">Not have products selected.</p>
       )}
     </>
+
   );
 }
 
-export default function ShoppingListTab({ selectedProducts }) {
+export default function ShoppingListTab({ selectedProducts = [] }) {
   return (
     <>
       <p className="text-2xl font-bold">Summary to Shopping List</p>
-      <ShoppingList selectedItems={selectedProducts} />
+      <ShoppingList selectedItems={selectedProducts || []} />
     </>
   );
 }
