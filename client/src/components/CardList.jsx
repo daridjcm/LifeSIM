@@ -71,7 +71,7 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
           displayItems.map((item, index) => (
             <Card key={index} shadow="sm" className="m-auto max-w-[90%] min-w-[90%]" aria-label={item.title}>
               <CardBody className="overflow-hidden p-0">
-                <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover sm:w-40 sm:h-32 lg:w-full lg:h-42 m-auto"} />
+                <img src={item.img} alt={item.title} className={iconShow ? "w-full h-full" : "object-cover max-w-fit sm:h-40 md:h-36 lg:max-h-fit m-auto"} />
                 {iconShow ? null : (
                   <div className="flex justify-end mx-4">
                     <Tooltip color={getColor2(item).color} content={getColor2(item).content} delay={1000}>
@@ -99,10 +99,10 @@ export default function CardList({ statusCard, iconShow, itemsToDisplay, selecte
                         <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
                       </>
                     ) : (
-                      <>
+                      <span className="flex items-center text-pretty">
                         {selectedProducts.includes(item.title) ? `${item.title} added` : `Buy ${item.title} for ${item.price}`}
                         <ShoppingCartIcon className="size-5 text-white ml-1" />
-                      </>
+                      </span>
                     )}
                   </Button>
                 </div>
