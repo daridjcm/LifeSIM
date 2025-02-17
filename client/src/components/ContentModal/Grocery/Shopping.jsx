@@ -1,9 +1,13 @@
 import { Checkbox, CheckboxGroup, cn, Image } from "@heroui/react";
 import CustomButton from "../../CustomButton";
+import { useState } from "react";
 
 function ShoppingList({ selectedItems }) {
+  const [sendObject, setSendObj] = useState(false);
+
   const handleSend = async () => {
     console.log("Send to Back-End:", JSON.stringify({ selectedItems }));
+    setSendObj(true)
     try {
       const res = await fetch("http://localhost:3000/grocery", {
         method: "POST",
@@ -13,13 +17,17 @@ function ShoppingList({ selectedItems }) {
         body: JSON.stringify({selectedItems}),
       });
       const data = await res.json();
-      console.log("Response of server:", data);
+      setTimeout(() => {
+        console.log("Response of server:", data);
+        setSendObj(false)
+      }, 2000)
     }
     catch (error) {
+      setSendObj(false)
       console.error("Error to send the datas:", error)
     }
   }
-  
+
   return (
     <>
       <p>Products selected to buy.</p>
@@ -33,7 +41,6 @@ function ShoppingList({ selectedItems }) {
             )
           }}
         >
-          {console.log(selectedItems)}
           {selectedItems.map((product) => (
             <Checkbox key={product.title} value={product.title} lineThrough={true}>
                 <div className="flex flex-row gap-5 items-center">
@@ -52,9 +59,9 @@ function ShoppingList({ selectedItems }) {
               </Checkbox>
           ))}
           <CustomButton 
-            label="Save changes"
+            label={"Save changes"}
             onPress={handleSend}
-            isLoading={!handleSend}
+            isLoading={sendObject}
             loadingText="Saving changes..."
             id="handleSend"	
           />

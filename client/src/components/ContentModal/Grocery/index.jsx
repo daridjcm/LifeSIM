@@ -1,7 +1,7 @@
 import { useState } from "react";
 import activitiesUser from "../../../utils/List";
 import { Index } from "./Grocery";
-import products from "./itemsGrocery";
+import products from "../../../utils/Products";
 
 export default function ContentGrocery({ statusCard }) {
   const itemsArray = Object.values(products.products);
