@@ -1,60 +1,111 @@
 const express = require("express");
 const cors = require("cors");
+
 const app = express();
 const port = 3000;
 
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 
 let users = [];
-let customers = [];
 let groceryList = [];
+let updatedAt = new Date().toISOString();
+let invoiceNumber = 0; // Inicializar el número de factura
 
-// Ruta POST para guardar productos en la lista de compras
-app.post("/grocery", (req, res) => {
-  console.log("Cuerpo recibido:", req.body);
+app.post("/grocery/cart/add", (req, res) => {
+  const { selectedItems } = req.body;
 
-  const { selectedItems: receivedRes } = req.body;
-
-  if (!Array.isArray(receivedRes)) {
-    console.error("Error: selectedItems not is an array");
-    return res.status(400).json({ error: "The products received not is valid." });
+  if (!Array.isArray(selectedItems)) {
+    return res.status(400).json({ error: "The products received are not valid." });
   }
 
-  // Guardar los productos recibidos en groceryList
-  groceryList.push(...receivedRes);
+  groceryList.push(...selectedItems);
   console.log("Products saved:", groceryList);
 
   return res.json({
     message: "Products saved correctly.",
-    groceryList: groceryList,
+    groceryList,
+  });
+});
+
+app.put("/grocery/cart/update", (req, res) => {
+  const { selectedItems } = req.body;
+
+  if (!Array.isArray(selectedItems)) {
+    return res.status(400).json({
+      message: "Invalid request format. selectedItems should be an array.",
+    });
+  }
+
+  console.log("Received cart update:", selectedItems);
+  updatedAt = new Date().toISOString();
+
+  return res.json({
+    message: "Cart updated successfully",
+    updatedCart: selectedItems,
+    updatedAt,
+  });
+});
+
+app.post("/grocery", (req, res) => {
+  const { selectedItems } = req.body;
+
+  if (!Array.isArray(selectedItems)) {
+    return res.status(400).json({ error: "Invalid request format. selectedItems should be an array." });
+  }
+
+  groceryList = selectedItems.map(item => ({
+    ...item,
+    price: parseFloat(item.price).toFixed(2),
+  }));
+
+  console.log("Grocery list updated:", groceryList);
+  return res.json({
+    message: "Grocery list updated successfully",
+    groceryList,
   });
 });
 
 app.get("/grocery", (req, res) => {
-  res.send({ groceryList });
+  res.json({ groceryList });
 });
 
-// Ruta para agregar clientes
-app.post("/customers", (req, res) => {
-  const { name, phone, status, date } = req.body;
-  const client = { name, phone, status, date };
-  customers.push(client);
-  res.send({ customers });
+app.post("/invoice", (req, res) => {
+  const totalAmount = groceryList.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
+  invoiceNumber += 1;
+
+  const invoice = {
+    id: Date.now(),
+    date: new Date().toISOString(),
+    invoiceNumber,
+    items: groceryList,
+    totalAmount,
+  };
+
+  console.log("Invoice created:", invoice);
+
+  return res.json({
+    message: "Invoice created successfully",
+    invoice,
+  });
 });
 
-// Ruta para agregar usuarios
+
 app.post("/users", (req, res) => {
   const { username, email, password } = req.body;
   const user = { username, email, password };
+
   users.push(user);
-  res.send({ users });
+  console.log("User added:", user);
+
+  return res.send({ users });
 });
 
-// Ruta raíz
 app.get("/", (req, res) => {
-  res.send({ users, customers, groceryList });
+  res.json({ users, groceryList });
   console.log("Server running...");
 });
 
-app.listen(port, () => console.log(`App running at http://localhost:${port}`));
+app.listen(port, () => {
+  console.log(`App running at http://localhost:${port}`);
+});
