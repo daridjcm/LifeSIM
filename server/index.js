@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
 const port = 3000;
 
@@ -10,67 +9,37 @@ app.use(express.json());
 let users = [];
 let groceryList = [];
 let updatedAt = new Date().toISOString();
-let invoiceNumber = 0; // Inicializar el número de factura
+let invoiceNumber = 0;
+
+app.get("/grocery", (req, res) => res.json({ groceryList }));
 
 app.post("/grocery/cart/add", (req, res) => {
   const { selectedItems } = req.body;
-
+  
   if (!Array.isArray(selectedItems)) {
     return res.status(400).json({ error: "The products received are not valid." });
   }
-
+  
   groceryList.push(...selectedItems);
   console.log("Products saved:", groceryList);
-
-  return res.json({
-    message: "Products saved correctly.",
-    groceryList,
-  });
+  
+  res.json({ message: "Products saved correctly.", groceryList });
 });
 
 app.put("/grocery/cart/update", (req, res) => {
   const { selectedItems } = req.body;
-
+  
   if (!Array.isArray(selectedItems)) {
-    return res.status(400).json({
-      message: "Invalid request format. selectedItems should be an array.",
-    });
+    return res.status(400).json({ message: "Invalid request format. selectedItems should be an array." });
   }
-
+  
   console.log("Received cart update:", selectedItems);
   updatedAt = new Date().toISOString();
-
-  return res.json({
-    message: "Cart updated successfully",
-    updatedCart: selectedItems,
-    updatedAt,
-  });
+  
+  res.json({ message: "Cart updated successfully", updatedCart: selectedItems, updatedAt });
 });
 
-app.post("/grocery", (req, res) => {
-  const { selectedItems } = req.body;
-
-  if (!Array.isArray(selectedItems)) {
-    return res.status(400).json({ error: "Invalid request format. selectedItems should be an array." });
-  }
-
-  groceryList = selectedItems.map(item => ({
-    ...item,
-    price: parseFloat(item.price).toFixed(2),
-  }));
-
-  console.log("Grocery list updated:", groceryList);
-  return res.json({
-    message: "Grocery list updated successfully",
-    groceryList,
-  });
-});
-
-app.get("/grocery", (req, res) => {
-  res.json({ groceryList });
-});
-
-app.post("/invoice", (req, res) => {
+app.post("/grocery/invoice", (req, res) => {
   const totalAmount = groceryList.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
   invoiceNumber += 1;
 
@@ -83,12 +52,9 @@ app.post("/invoice", (req, res) => {
   };
 
   console.log("Invoice created:", invoice);
-
-  return res.json({
-    message: "Invoice created successfully",
-    invoice,
-  });
+  res.json({ message: "Invoice created successfully", invoice });
 });
+
 
 
 app.post("/users", (req, res) => {
@@ -98,7 +64,7 @@ app.post("/users", (req, res) => {
   users.push(user);
   console.log("User added:", user);
 
-  return res.send({ users });
+  res.send({ users });
 });
 
 app.get("/", (req, res) => {
@@ -106,6 +72,4 @@ app.get("/", (req, res) => {
   console.log("Server running...");
 });
 
-app.listen(port, () => {
-  console.log(`App running at http://localhost:${port}`);
-});
+app.listen(port, () => console.log(`App running at http://localhost:${port}`));
