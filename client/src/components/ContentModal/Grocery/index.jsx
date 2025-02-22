@@ -5,7 +5,7 @@ import products from "../../../utils/Products";
 
 export default function ContentGrocery({ statusCard }) {
   const itemsArray = Object.values(products.products);
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const displayedItems = statusCard === "activitiesUser" ? activitiesUser : itemsArray;

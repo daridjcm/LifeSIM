@@ -88,6 +88,7 @@ export default function FormComp({
               ? field.options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
+                  <p className="text-gray-500 text-opacity-80">{option.description}</p>
                 </SelectItem>
               ))
               : null}

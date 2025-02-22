@@ -14,7 +14,7 @@ export function Index({ itemsToDisplay, page, total, onChange }) {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   return (
-    <Tabs aria-label="Options" variant="underline" fullWidth>
+    <Tabs aria-label="Options" variant="underlined" color="primary" size="lg" fullWidth>
 
       <Tab key="products" title={
         <div className="flex items-center space-x-2">
