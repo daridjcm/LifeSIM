@@ -6,7 +6,7 @@ export default function ContentBank() {
   const [selected, setSelected] = React.useState("overview");
 
   return (
-    <Tabs aria-label="Options" selectedKey={selected} onSelectionChange={setSelected} placement="start" size="lg" color="primary" classNames={{tabList: "h-full p-3", panel: "ml-2"}}>
+    <Tabs aria-label="Options" selectedKey={selected} onSelectionChange={setSelected} size="lg" color="primary" fullWidth>
       <Tab key="overview" title="Overview">
         <Overview />
       </Tab>
