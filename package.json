@@ -9,5 +9,9 @@
   "license": "ISC",
   "devDependencies": {
     "prettier": "^3.4.2"
+  },
+  "dependencies": {
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4"
   }
 }

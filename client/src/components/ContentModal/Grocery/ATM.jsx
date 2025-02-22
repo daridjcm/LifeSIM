@@ -38,7 +38,7 @@ export default function AtmTab({
 
     setTimeout(async () => {
       try {
-        const res = await fetch("http://localhost:3000/invoice", {
+        const res = await fetch("http://localhost:3000/grocery/invoice", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
