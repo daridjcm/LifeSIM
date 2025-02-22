@@ -1,16 +1,22 @@
 import React from "react";
-import { Tabs, Tab, Card, CardBody } from "@heroui/react";
-import { Loans, Overview, PayDebt, Save } from "./Forms";
+import { Tabs, Tab } from "@heroui/react";
+import { Loans, Overview, PayDebt, Save, Withdraw, Invert } from "./Forms";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("overview");
 
   return (
-    <Tabs aria-label="Options" selectedKey={selected} onSelectionChange={setSelected}>
+    <Tabs aria-label="Options" selectedKey={selected} onSelectionChange={setSelected} size="lg" color="primary" fullWidth>
       <Tab key="overview" title="Overview">
         <Overview />
       </Tab>
-      <Tab key="save" title="Save">
+      <Tab key="withdraw" title="Withdraw">
+        <Withdraw />
+      </Tab>
+      <Tab key="invert" title="Invert">
+        <Invert />
+      </Tab>
+      <Tab key="save" title="Save" >
         <Save />
       </Tab>
       <Tab key="paydebt" title="Pay Debt">

@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, cn, Image, Input, Select, SelectItem } from "@heroui/react";
+import { Checkbox, CheckboxGroup, cn, Image, Input, ScrollShadow, Select, SelectItem } from "@heroui/react";
 import CustomButton from "../../CustomButton";
 import { useState } from "react";
 
@@ -47,34 +47,32 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       {selectedItems.length > 0 ? (
         <>
           <CheckboxGroup
-            classNames={{
-              base: cn(
-                "inline-flex w-full bg-slate-50 mt-4 mb-4",
-                "hover:bg-slate-100 items-start justify-start",
-                "cursor-pointer rounded-lg gap-2 p-4 border-transparent border-black"
-              ),
-            }}
+            orientation="vertical"
+            color="primary"
+            lineThrough
           >
+          <ScrollShadow className="xl:h-[300px] lg:h-[200px]" hideScrollBar size={70}>
+          <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3">
             {selectedItems.map((product) => (
-              <Checkbox key={product.title} value={product.title} lineThrough={true}>
-                <div className="flex flex-row gap-5 items-center">
+              <Checkbox key={product.title} value={product.title}>
                   <Image
                     alt={product.title}
                     src={product.img}
-                    width={32}
-                    height={32}
-                    shadow="md"
+                    width={52}
+                    height={50}
+                    shadow="sm"
                     radius="full"
                     className="object-cover"
-                  />
-                  <p>{product.title}</p>
-                  <p className="m-2 font-bold">${product.price}</p>
-                </div>
+                    />
+                  <p className="ml-2">{product.title}</p>
+                  <p className="ml-2 font-bold">${product.price}</p>
               </Checkbox>
             ))}
+            </div>
+          </ScrollShadow>
           </CheckboxGroup>
-          <div className="flex items-start sm:flex-col lg:flex-row">
-            <label className="mr-3" htmlFor="productSelect">Select product</label>
+          <div className="flex items-start justify-around sm:flex-col lg:flex-row mb-3 mt-5">
+            <label className="mr-2" htmlFor="productSelect">Select product</label>
             <Select
               id="productSelect"
               value={selectedProduct}
@@ -90,7 +88,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                 </SelectItem>
               ))}
             </Select>
-            <label className="ml-3" htmlFor="quantityInput">Quantity</label>
+            <label className="mr-2 ml-3" htmlFor="quantityInput">Quantity</label>
             <Input 
               id="quantityInput"
               variant="bordered"
