@@ -33,7 +33,7 @@ export default function NewCustomer() {
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
-        title="Enter customer info"
+        title="Add Customer in the table"
         fields={fields}
         statusForm="customers"  // Indicating this is for adding a customer
         btnText="Add Customer"

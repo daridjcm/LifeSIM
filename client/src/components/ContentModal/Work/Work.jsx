@@ -10,7 +10,7 @@ export default function ContentWork() {
 
   return (
     <>
-      <div className="flex flex-col mb-8">
+      <div className="flex flex-row justify-around mb-8">
         <p>Profession:</p>
         <p>Work Experience (years):</p>
         <p>Company:</p>

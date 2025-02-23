@@ -88,7 +88,7 @@ export default function CardList({
                   className={
                     iconShow
                       ? "w-full h-full"
-                      : "object-cover w-full max-w-fit sm:h-40 md:h-36 lg:max-h-fit m-auto"
+                      : "object-cover w-full max-w-fit sm:h-24 md:h-20 lg:max-h-fit m-auto"
                   }
                 />
                 {iconShow ? null : (

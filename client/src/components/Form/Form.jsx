@@ -111,7 +111,7 @@ export default function FormComp({
       ))}
 
       <ConditionalWrapper condition={statusForm !== ''}>
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-2 mb-4">
           <Button
             color={
               statusForm === "login" || statusForm === "signup"
