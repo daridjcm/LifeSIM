@@ -86,7 +86,7 @@ export default function FormComp({
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
+                <SelectItem key={option.value} value={option.value} textValue={option.label}>
                   {option.label}
                   <p className="text-gray-500 text-opacity-80">{option.description}</p>
                 </SelectItem>
@@ -111,7 +111,7 @@ export default function FormComp({
       ))}
 
       <ConditionalWrapper condition={statusForm !== ''}>
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-2 mb-4">
           <Button
             color={
               statusForm === "login" || statusForm === "signup"

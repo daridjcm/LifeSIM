@@ -1,0 +1,1 @@
+// User Datas with username, email, password and stats to roll game.
