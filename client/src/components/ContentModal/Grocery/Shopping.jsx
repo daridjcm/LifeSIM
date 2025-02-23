@@ -23,7 +23,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     console.log("Send to Back-End:", JSON.stringify({ selectedItems }));
     setSendObj(true);
     try {
-      const res = await fetch("http://localhost:3000/grocery/cart/add", {
+      const res = await fetch("http://localhost:3000/api/grocery/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

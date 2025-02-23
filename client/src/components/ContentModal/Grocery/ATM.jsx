@@ -15,14 +15,24 @@ export default function AtmTab({
 }) {
   const [totalAmount, setTotalAmount] = useState(0);
   const [invoice, setInvoice] = useState(null);
+  const [groceryList, setGroceryList] = useState([]);
 
   useEffect(() => {
     // Fetch groceryList from the server and calculate total amount
     const fetchGroceryList = async () => {
       try {
-        const res = await fetch("http://localhost:3000/grocery");
+        const res = await fetch("http://localhost:3000/api/grocery");
         const data = await res.json();
-        const total = data.groceryList.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
+        
+        if (data.groceryList.length === 0) {
+          setTotalAmount(0);
+          return;
+        }
+
+        setGroceryList(data.groceryList);
+        const total = data.groceryList
+          .reduce((total, item) => total + parseFloat(item.price), 0)
+          .toFixed(2);
         setTotalAmount(total);
       } catch (error) {
         console.error("Error fetching grocery list:", error);
@@ -33,31 +43,34 @@ export default function AtmTab({
   }, []);
 
   const handlePayment = async () => {
+    if (groceryList.length === 0) {
+      setPaymentStatus("Cart is empty!");
+      setAlertType("danger");
+      setAlertVisible(true);
+      return;
+    }
+
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
 
     setTimeout(async () => {
       try {
-        const res = await fetch("http://localhost:3000/grocery/invoice", {
+        const res = await fetch("http://localhost:3000/api/invoices", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         });
+
+        if (!res.ok) {
+          throw new Error("Failed to create invoice");
+        }
+
         const data = await res.json();
         setPaymentStatus("Payment Done ✅");
         setAlertType("success");
         setInvoice(data.invoice);
         console.log("Invoice created:", data.invoice);
-
-        // Incrementar invoiceNumber en localStorage
-        let invoiceNumber = localStorage.getItem('invoiceNumber');
-        if (!invoiceNumber) {
-          invoiceNumber = 1;
-        } else {
-          invoiceNumber = parseInt(invoiceNumber) + 1;
-        }
-        localStorage.setItem('invoiceNumber', invoiceNumber);
 
       } catch (error) {
         setPaymentStatus("Payment Failed");
