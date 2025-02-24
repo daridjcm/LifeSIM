@@ -72,6 +72,16 @@ export default function FormComp({
     let data = Object.fromEntries(new FormData(e.currentTarget));
     
     const url = statusForm === "login" ? "http://localhost:3000/api/login" : "http://localhost:3000/api/signup";
+
+    const handleNavigate = (url) => {
+      if (url.includes("/api/login")) {
+        navigate("/game");
+      } else if (url.includes("/api/signup")) {
+        navigate("/login");
+      } else {
+        return null;
+      }
+    }
     
     try {
       const response = await fetch(url, {
@@ -89,7 +99,7 @@ export default function FormComp({
         console.log(token);        
         localStorage.setItem("token", token);
         setTimeout(() => {
-          navigate("/game")
+          handleNavigate(url)
         }, 500)
       } else {
         alert(`Error: ${result.message || "Something went wrong"}`);
