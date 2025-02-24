@@ -1,5 +1,5 @@
 import { useState } from "react";
-import activitiesUser from "../../../utils/List";
+import activitiesUser from "../../../utils/ActivitiesUser";
 import { Index } from "./Grocery";
 import products from "../../../utils/Products";
 

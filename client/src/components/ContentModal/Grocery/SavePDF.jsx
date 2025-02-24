@@ -26,7 +26,7 @@ export default function handleDownload(invoice) {
   doc.text("Purchased products:", 20, 55);
 
   const rows = invoice.items.map(item => [
-    item.title,
+    item.name,
     item.quantity,
     `$${item.price}`,
     `$${item.basePrice}`

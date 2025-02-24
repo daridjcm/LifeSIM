@@ -31,7 +31,7 @@ export default function CardList({
   }
 
   function getColor(item) {
-    switch (item.title) {
+    switch (item.name) {
       case "Work":
         return "text-blue-800 bg-blue-400";
       case "Bank":
@@ -79,12 +79,12 @@ export default function CardList({
               key={index}
               shadow="sm"
               className="m-auto max-w-[90%] min-w-[90%]"
-              aria-label={item.title}
+              aria-label={item.name}
             >
               <CardBody className="overflow-hidden p-0">
                 <img
                   src={item.img}
-                  alt={item.title}
+                  alt={item.name}
                   className={
                     iconShow
                       ? "w-full h-full"
@@ -122,15 +122,15 @@ export default function CardList({
                   >
                     {iconShow ? (
                       <>
-                        {item.title}
+                        {item.name}
                         <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
                       </>
                     ) : (
                       <span className="flex items-center text-pretty">
                         {selectedProducts.includes(item) ? (
-                          `${item.title} added`
+                          `${item.name} added`
                         ) : (
-                          `Buy ${item.title} for ${item.price}`
+                          `Buy ${item.name} for ${item.price}`
                         )
                       }
                       <ShoppingCartIcon className="size-5 text-white ml-1" />

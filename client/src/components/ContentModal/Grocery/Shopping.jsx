@@ -4,11 +4,11 @@ import { useState } from "react";
 
 function ShoppingList({ selectedItems, setSelectedItems }) {
   const [sendObject, setSendObj] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(selectedItems[0]?.title || "");
+  const [selectedProduct, setSelectedProduct] = useState(selectedItems[0]?.name || "");
 
   const handleQuantityChange = (quantity) => {
     const updatedItems = selectedItems.map((product) =>
-      product.title === selectedProduct
+      product.name === selectedProduct
         ? { ...product, quantity, price: (product.basePrice * quantity).toFixed(2) }
         : product
     );
@@ -23,7 +23,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     console.log("Send to Back-End:", JSON.stringify({ selectedItems }));
     setSendObj(true);
     try {
-      const res = await fetch("http://localhost:3000/api/grocery/cart/add", {
+      const res = await fetch("http://localhost:3000/api/grocery/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,9 +54,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
           <ScrollShadow className="xl:h-[300px] lg:h-[200px]" hideScrollBar size={70}>
           <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3">
             {selectedItems.map((product) => (
-              <Checkbox key={product.title} value={product.title}>
+              <Checkbox key={product.name} value={product.name}>
                   <Image
-                    alt={product.title}
+                    alt={product.name}
                     src={product.img}
                     width={52}
                     height={50}
@@ -64,7 +64,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                     radius="full"
                     className="object-cover"
                     />
-                  <p className="ml-2">{product.title}</p>
+                  <p className="ml-2">{product.name}</p>
                   <p className="ml-2 font-bold">${product.price}</p>
               </Checkbox>
             ))}
@@ -83,8 +83,8 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               aria-label="Select product"
             >
               {selectedItems.map((product) => (
-                <SelectItem key={product.title} value={product.title}>
-                  {product.title}
+                <SelectItem key={product.name} value={product.name}>
+                  {product.name}
                 </SelectItem>
               ))}
             </Select>
@@ -93,7 +93,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               id="quantityInput"
               variant="bordered"
               type="number"
-              value={selectedItems.find((product) => product.title === selectedProduct)?.quantity || 1}
+              value={selectedItems.find((product) => product.name === selectedProduct)?.quantity || 1}
               onChange={(e) =>
                 handleQuantityChange(parseInt(e.target.value, 10))
               }
