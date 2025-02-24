@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const Grocery = require('./grocery');
 
-const Invoice = sequelize.define('Invoice', {
+const Invoices = sequelize.define('Invoices', {
   invoiceNumber: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -15,12 +14,7 @@ const Invoice = sequelize.define('Invoice', {
   }
 }, {
   timestamps: true,
-  tableName: 'invoices'
+  tableName: 'Invoices'
 });
 
-
-// Relation: An invoice it can have many products
-Invoice.hasMany(Grocery, { as: 'items' });
-Grocery.belongsTo(Invoice);
-
-module.exports = Invoice;
+module.exports = Invoices;
