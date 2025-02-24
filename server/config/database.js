@@ -23,4 +23,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { sequelize, connectDB };
+module.exports = { sequelize, connectDB, JWT_SECRET: process.env.JWT_SECRET || 'your_jwt_secret' };

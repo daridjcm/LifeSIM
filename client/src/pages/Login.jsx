@@ -26,6 +26,7 @@ export default function Login() {
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
+        action="/login"
         title="Welcome again to"
         fields={fields}
         statusForm="login"  // Indicating this is a login form

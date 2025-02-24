@@ -3,89 +3,96 @@ import CustomButton from "../../CustomButton";
 import { useEffect, useState } from "react";
 import handleDownload from "./SavePDF";
 
+const STORAGE_KEY = "atmInvoice";
+
+// Función para guardar la factura en localStorage
+const saveInvoiceToLocalStorage = (invoice) => {
+  const invoiceWithTimestamp = {
+    ...invoice,
+    timestamp: Date.now(),
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceWithTimestamp));
+};
+
+// Función para cargar la factura desde localStorage si está disponible y no ha expirado
+const loadInvoiceFromLocalStorage = () => {
+  const storedInvoice = localStorage.getItem(STORAGE_KEY);
+  if (!storedInvoice) return null;
+
+  const parsedInvoice = JSON.parse(storedInvoice);
+  const { timestamp } = parsedInvoice;
+
+  // Expiración de 24 horas
+  const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 día en milisegundos
+  if (Date.now() - timestamp > EXPIRATION_TIME) {
+    localStorage.removeItem(STORAGE_KEY); // Si ha expirado, eliminarlo
+    return null;
+  }
+
+  return parsedInvoice;
+};
+
 export default function AtmTab({
-  paymentStatus,
-  setPaymentStatus,
-  paymentProcessing,
-  setPaymentProcessing,
-  alertVisible,
-  setAlertVisible,
-  alertType,
-  setAlertType,
+  paymentStatus, setPaymentStatus, paymentProcessing, setPaymentProcessing,
+  alertVisible, setAlertVisible, alertType, setAlertType,
 }) {
   const [totalAmount, setTotalAmount] = useState(0);
-  const [invoice, setInvoice] = useState(null);
+  const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage()); // Cargar factura desde localStorage
   const [groceryList, setGroceryList] = useState([]);
 
   useEffect(() => {
-    // Fetch groceryList from the server and calculate total amount
     const fetchGroceryList = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/grocery");
         const data = await res.json();
-        
-        if (data.groceryList.length === 0) {
-          setTotalAmount(0);
-          return;
-        }
-
-        setGroceryList(data.groceryList);
-        const total = data.groceryList
-          .reduce((total, item) => total + parseFloat(item.price), 0)
-          .toFixed(2);
-        setTotalAmount(total);
+        setGroceryList(data.groceries);
+        setTotalAmount(data.groceries.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2));
       } catch (error) {
         console.error("Error fetching grocery list:", error);
       }
     };
-
     fetchGroceryList();
   }, []);
 
   const handlePayment = async () => {
-    if (groceryList.length === 0) {
-      setPaymentStatus("Cart is empty!");
-      setAlertType("danger");
-      setAlertVisible(true);
-      return;
-    }
-
+    if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
+    try {
+      const res = await fetch("http://localhost:3000/api/invoices", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          totalAmount,
+          groceryList,
+          items: groceryList.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      });
 
-    setTimeout(async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/invoices", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+      if (!res.ok) throw new Error("Failed to create invoice");
 
-        if (!res.ok) {
-          throw new Error("Failed to create invoice");
-        }
+      const invoiceData = await res.json();
+      const latestInvoice = invoiceData.invoice;
+      setInvoice(latestInvoice);      saveInvoiceToLocalStorage(latestInvoice);
 
-        const data = await res.json();
-        setPaymentStatus("Payment Done ✅");
-        setAlertType("success");
-        setInvoice(data.invoice);
-        console.log("Invoice created:", data.invoice);
+      setAlert("Payment Done ✅", "success");
+    } catch (error) {
+      setAlert("Payment Failed", "danger");
+      console.error("Error during payment:", error);
+    } finally {
+      setPaymentProcessing(false);
+    }
+  };
 
-      } catch (error) {
-        setPaymentStatus("Payment Failed");
-        setAlertType("danger");
-        console.error("Error during payment:", error);
-      } finally {
-        setPaymentProcessing(false);
-        setAlertVisible(true);
-
-        setTimeout(() => {
-          setAlertVisible(false);
-          setPaymentStatus("Make Payment");
-        }, 4500);
-      }
-    }, 3000);
+  const setAlert = (status, type) => {
+    setPaymentStatus(status);
+    setAlertType(type);
+    setAlertVisible(true);
+    setTimeout(() => setAlertVisible(false), 4500);
   };
 
   return (
@@ -99,22 +106,14 @@ export default function AtmTab({
           <li>Titular <span>Usuario</span></li>
         </ul>
         <div className="flex flex-col text-end text-slate-100 opacity-70">
-          <p>ID:</p>
-          12345abc
+          <p>ID:</p> 12345abc
         </div>
       </div>
 
       <div className="flex gap-3">
-        <CustomButton
-          label={paymentProcessing ? paymentStatus : paymentStatus}
-          onPress={handlePayment}
-        />
-
+        <CustomButton label={paymentProcessing ? paymentStatus : paymentStatus} onPress={handlePayment} />
         {invoice && (
-          <CustomButton
-            label={"Download Report"}
-            onPress={() => handleDownload(invoice)}
-          />
+          <CustomButton label="Download Report" onPress={() => handleDownload(invoice)} />
         )}
       </div>
 
