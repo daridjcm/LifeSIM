@@ -4,7 +4,7 @@ const cors = require('cors');
 const { connectDB } = require('./config/database');
 const userRoutes = require('./routes/user.routes');
 const groceryRoutes = require('./routes/grocery.routes');
-const invoiceRoutes = require('./routes/invoice.routes');
+const invoiceRoutes = require('./routes/invoices.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

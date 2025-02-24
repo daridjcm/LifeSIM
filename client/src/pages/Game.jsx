@@ -1,8 +1,9 @@
 import Navbar from "../components/Navbar";
 import CardList from "../components/CardList";
 import NeedsPanel from "../components/NeedsPanel";
-import activitiesUser from "../utils/ActivitiesUser";
+
 import { TimeProvider } from "../context/TimeContext";
+import { activitiesUser } from "../utils/data";
 
 export default function Game() {
   return (

@@ -65,13 +65,14 @@ export default function CardList({
   }
 
   const displayItems = Array.isArray(itemsToDisplay)
-    ? itemsToDisplay
-    : itemsToDisplay?.activitiesUser || itemsToDisplay?.products;
+  ? itemsToDisplay
+  : itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? [];
+
 
   return (
     <>
       <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
-        {displayItems.length === 0 ? (
+        {displayItems === 0 ? (
           <p>No hay productos para mostrar</p>
         ) : (
           displayItems.map((item, index) => (
