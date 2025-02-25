@@ -1,5 +1,5 @@
 import React from "react";
-import FormComp from "../components/Form";
+import FormComp from "../components/Form/FormComp";
 
 export default function SignUp() {
   const fields = [
@@ -36,6 +36,7 @@ export default function SignUp() {
   return (
     <div className="flex justify-center items-center h-screen">
       <FormComp
+        action="/signup"
         title="Create your"
         fields={fields}
         statusForm="signup"  // Indicating this is a signup form

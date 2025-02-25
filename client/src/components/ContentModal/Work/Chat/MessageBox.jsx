@@ -1,4 +1,3 @@
-// MessageBox.js
 import { UserCircleIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/outline"
 
 export function MessageBox({ sender, content, timestamp }) {

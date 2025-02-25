@@ -1,14 +1,18 @@
-import { useState } from "react";
-import activitiesUser from "../../../utils/List";
+import { useState, useEffect } from "react";
 import { Index } from "./Grocery";
-import products from "../../../utils/Products";
+import { activitiesUser, products } from "../../../utils/data"
 
 export default function ContentGrocery({ statusCard }) {
-  const itemsArray = Object.values(products.products);
+  const itemsArray = products;
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const displayedItems = statusCard === "activitiesUser" ? activitiesUser : itemsArray;
+
+  // Reset the current page when statusCard changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusCard]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -21,7 +25,7 @@ export default function ContentGrocery({ statusCard }) {
 
   if (!Array.isArray(displayedItems)) {
     console.error("Error: displayedItems is not an array", displayedItems);
-    return null; // Avoid breaking the app
+    return <p>No products available to display.</p>;
   }
 
   const totalPages = Math.ceil(displayedItems.length / itemsPerPage);

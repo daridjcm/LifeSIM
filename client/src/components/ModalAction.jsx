@@ -25,19 +25,19 @@ export default function ModalAction({ item, onClose }) {
         <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
           <div>
             <p className="text-default-500">Inside the</p>
-            <h4 id="itemTitle" className="font-bold text-large">{item.title}</h4>
+            <h4 id="itemTitle" className="font-bold text-large">{item.name}</h4>
           </div>
           <Image
-            alt={item.title}
+            alt={item.name}
             className="object-cover rounded-xl"
             src={item.img}
             width={80}
           />
         </CardHeader>
-        <CardBody className={item.title == "Work" ? "py-2 max-h-[60vh] min-h-full" : "max-h-full overflow-hidden"}>
+        <CardBody className={item.name == "Work" ? "py-2 max-h-[60vh] min-h-full" : "max-h-full overflow-hidden"}>
           {
-            item.title == "Work" ? <ContentWork /> :
-            item.title == "Bank" ? <ContentBank /> : <ContentGrocery />
+            item.name == "Work" ? <ContentWork /> :
+            item.name == "Bank" ? <ContentBank /> : <ContentGrocery />
 
           }
         </CardBody>

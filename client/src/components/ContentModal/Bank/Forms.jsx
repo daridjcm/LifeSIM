@@ -1,4 +1,4 @@
-import FormComp from "../../Form/";
+import FormComp from "../../Form/FormComp";
 
 export function Overview() {
   const fields = [

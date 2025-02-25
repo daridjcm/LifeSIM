@@ -3,11 +3,12 @@ import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
 import { SelectItem, Select } from "@heroui/react";
 import { Have, NotHave, HaveCustomers } from "./HaveOrNot";
+import { useNavigate } from "react-router";
 
-// Componente condicional reutilizable
 const ConditionalWrapper = ({ condition, children }) => {
   return condition ? children : null;
 };
+
 
 export default function FormComp({
   title,
@@ -34,11 +35,85 @@ export default function FormComp({
     btnText: PropTypes.string,
     isRequired: PropTypes.bool,
   };
+  
+  const getUserData = async (token) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/user', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      
+      const result = await response.json(); 
+      if (response.ok) {
+        console.log("User data:", result.user); 
+      } else {
+        console.error("Error fetching user data:", result.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserData(token); 
+    }
+  }, []);  
+  
+  const [action, setAction] = React.useState(`/${statusForm}`);
+  
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    let data = Object.fromEntries(new FormData(e.currentTarget));
+    
+    const url = statusForm === "login" ? "http://localhost:3000/api/login" : "http://localhost:3000/api/signup";
 
-  const [action, setAction] = React.useState(null);
+    const handleNavigate = (url) => {
+      if (url.includes("/api/login")) {
+        navigate("/game");
+      } else if (url.includes("/api/signup")) {
+        navigate("/login");
+      } else {
+        return null;
+      }
+    }
+    
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      
+      const result = await response.json(); 
+      if (response.ok) {
+        alert(`${statusForm === "login" ? "Login" : "Registration"} successful`);
+        const token = result.token;
+        console.log(token);        
+        localStorage.setItem("token", token);
+        setTimeout(() => {
+          handleNavigate(url)
+        }, 500)
+      } else {
+        alert(`Error: ${result.message || "Something went wrong"}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
+  };
+    
 
   return (
     <Form
+      action={action}
       className={
         title === "Welcome again to" || title === "Create your"
           ? "w-full m-auto max-w-xs flex flex-col gap-4"
@@ -46,11 +121,7 @@ export default function FormComp({
       }
       validationBehavior="native"
       onReset={() => setAction("reset")}
-      onSubmit={(e) => {
-        e.preventDefault();
-        let data = Object.fromEntries(new FormData(e.currentTarget));
-        setAction(`submit ${JSON.stringify(data)}`);
-      }}
+      onSubmit={handleSubmit}
     >
       <ConditionalWrapper
         condition={title === "Welcome again to" || title === "Create your"}
@@ -97,15 +168,17 @@ export default function FormComp({
           <Input
             key={index}
             isRequired={isRequired}
-            errorMessage={`Please enter a valid ${field.name}`}
+            errorMessage={field.type === "password"
+              ? "Password must be at least 8 characters."
+              : `Please enter a valid ${field.name}`}
             label={field.label}
             labelPlacement="outside"
             name={field.name}
             placeholder={field.placeholder}
             value={field.value}
             type={field.type}
-            pattern={field.type === "password" ? "\\w{10}" : undefined}
-            maxLength={field.type === "password" ? 10 : undefined}
+            pattern={field.type === "password" ? "^.{8,}$" : null}
+            maxLength={field.type === "password" ? 20 : null}
           />
         )
       ))}

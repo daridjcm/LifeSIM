@@ -1,4 +1,3 @@
-// CustomButton.jsx
 import React from 'react';
 import { Button } from '@heroui/react';
 
