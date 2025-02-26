@@ -1,10 +1,13 @@
-require('dotenv').config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const { connectDB } = require('./config/database');
-const userRoutes = require('./routes/user.routes');
-const invoiceRoutes = require('./routes/invoices.routes');
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import cors from "cors";
+import { connectDB } from "./config/database.js";
+import { sequelize } from "./models/index.js";
+import userRoutes from "./routes/user.routes.js";
+import invoiceRoutes from "./routes/invoices.routes.js";
+import groceryRoutes from "./routes/grocery.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,20 +16,26 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 // Middlewares
-app.use(express.json());
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api', userRoutes);
-app.use('/api', invoiceRoutes);
+app.use("/api", userRoutes);
+app.use("/api", groceryRoutes);
+app.use("/api", invoiceRoutes);
 
+app.get("/", (req, res) => res.send("API is running..."));
 
-// app.get('/api/user', verifyToken, (req, res) => {
-//   res.json({ message: 'Protected profile route', user: req.user });
-// });
+sequelize
+  .sync({ alter: true })
+  .then(() => {
+    console.log("Tables synchronized");
+  })
+  .catch((error) => {
+    console.error("Error synchronizing tables:", error);
+  });
 
-
-app.get('/', (req, res) => res.send('API is running...'));
-
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`),
+);

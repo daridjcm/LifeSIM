@@ -6,6 +6,6 @@ import tailwind from "tailwindcss";
 export default defineConfig({
   plugins: [react(), tailwind()],
   json: {
-    namedExports: true
-  }
+    namedExports: true,
+  },
 });

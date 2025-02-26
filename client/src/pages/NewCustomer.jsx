@@ -1,5 +1,6 @@
 import React from "react";
-import FormComp from "../components/Form/FormComp";
+import FormComp from "../components/Form/";
+
 export default function NewCustomer() {
   const fields = [
     {
@@ -34,7 +35,7 @@ export default function NewCustomer() {
       <FormComp
         title="Add Customer in the table"
         fields={fields}
-        statusForm="customers"  // Indicating this is for adding a customer
+        statusForm="customers" // Indicating this is for adding a customer
         btnText="Add Customer"
         isRequired={true}
       />

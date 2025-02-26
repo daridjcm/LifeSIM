@@ -29,7 +29,7 @@ export default function Login() {
         action="/login"
         title="Welcome again to"
         fields={fields}
-        statusForm="login"  // Indicating this is a login form
+        statusForm="login" // Indicating this is a login form
         btnText="Enter"
         isRequired={true}
       />

@@ -1,4 +1,4 @@
-import FormComp from "../../Form/FormComp";
+import FormComp from "../../Form/";
 
 export function Overview() {
   const fields = [
@@ -39,9 +39,9 @@ export function Withdraw() {
       name: "withdraw",
       label: "Withdraw Money",
       value: 0,
-      type: "number"
-    }
-  ]
+      type: "number",
+    },
+  ];
 
   return (
     <FormComp
@@ -51,7 +51,7 @@ export function Withdraw() {
       isRequired={false}
       btnText="Withdraw All"
     />
-  )
+  );
 }
 
 export function Invert() {
@@ -60,9 +60,9 @@ export function Invert() {
       name: "invertmoney",
       label: "Invert Money",
       placeholder: "Enter your quantity of money to invert",
-      type: "number"
-    }
-  ]
+      type: "number",
+    },
+  ];
 
   return (
     <FormComp
@@ -72,7 +72,7 @@ export function Invert() {
       isRequired={false}
       btnText="Invert Money"
     />
-  )
+  );
 }
 
 export function Save() {
@@ -83,17 +83,27 @@ export function Save() {
       placeholder: "Select account type",
       type: "select",
       options: [
-        { label: "Savings Account", value: "savingsaccount", description: "You to save money and meet long-term goals. You doesn't allow invert money." },
-        { label: "Current Account", value: "currentaccount", description: "You does allow invert money, purchase products and pay debt." },
+        {
+          label: "Savings Account",
+          value: "savingsaccount",
+          description:
+            "You to save money and meet long-term goals. You doesn't allow invert money.",
+        },
+        {
+          label: "Current Account",
+          value: "currentaccount",
+          description:
+            "You does allow invert money, purchase products and pay debt.",
+        },
       ],
     },
     {
       name: "amounttotransfer",
       label: "Amount",
       placeholder: "Enter amount",
-      type: "number"
-    }
-  ]
+      type: "number",
+    },
+  ];
 
   return (
     <>
@@ -110,7 +120,7 @@ export function Save() {
         <p className="text-amber-500">Current Account: </p>
       </div>
     </>
-  )
+  );
 }
 
 export function PayDebt() {
@@ -119,9 +129,9 @@ export function PayDebt() {
       name: "amounttopay",
       label: "Amount to Pay",
       placeholder: "Enter amount",
-      type: "number"
-    }
-  ]
+      type: "number",
+    },
+  ];
 
   return (
     <FormComp
@@ -131,7 +141,7 @@ export function PayDebt() {
       isRequired={false}
       btnText="Pay Debt"
     />
-  )
+  );
 }
 
 export function Loans() {
@@ -151,8 +161,8 @@ export function Loans() {
       label: "Loan Amount",
       placeholder: "Enter amount",
       type: "number",
-    }
-  ]
+    },
+  ];
   return (
     <FormComp
       title="Apply for a Loan"
@@ -161,6 +171,6 @@ export function Loans() {
       isRequired={false}
       btnText="Apply for Loan"
     />
-  )
+  );
 }
-export default { Overview, Save, PayDebt, Loans }
+export default { Overview, Save, PayDebt, Loans };

@@ -5,21 +5,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
     "start:client": "cd ./client && npm run dev",
-    "start:server": "cd ./server && npm run start",
+    "start:server": "cd ./server && nodemon server.js",
     "start": "concurrently \"npm run start:client\" \"npm run start:server\""
   },
   "author": "daridjcm",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "prettier": "^3.4.2",
-    "sequelize-cli": "^6.6.2"
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
-    "mariadb": "^3.4.0",
-    "sequelize": "^6.37.5"
+    "mariadb": "^3.4.0"
   }
 }

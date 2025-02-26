@@ -1,6 +1,6 @@
 import React from "react";
-import getIconColor from "../../utils/IconColor";
-import ProgressBar from "./ProgressBar";
+import getIconColor from "../../utils/IconColor.jsx";
+import ProgressBar from "./ProgressBar.jsx";
 
 const needs = [
   { name: "Hunger", value: 100 },

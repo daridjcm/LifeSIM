@@ -1,5 +1,3 @@
-import {useHref} from "react-router"
-
 export function Have() {
   return (
     <a
@@ -33,4 +31,4 @@ export function HaveCustomers() {
   );
 }
 
-export default {HaveCustomers, Have, NotHave};
+export default { HaveCustomers, Have, NotHave };

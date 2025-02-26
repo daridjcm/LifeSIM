@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@heroui/react";
-import Clock from "./Clock";
-import {useUser} from "../context/UserContext"
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+} from "@heroui/react";
+import Clock from "./Clock.jsx";
+import { useUser } from "../context/UserContext.jsx";
 
 export default function Nav() {
   const { user } = useUser();
@@ -11,7 +16,12 @@ export default function Nav() {
   }
 
   return (
-    <Navbar isBlurred="true" isBordered="true" className="bg-zinc-50" maxWidth="full">
+    <Navbar
+      isBlurred="true"
+      isBordered="true"
+      className="bg-zinc-50"
+      maxWidth="full"
+    >
       <NavbarBrand>
         <p className="font-bold text-2xl text-inherit">LifeSIM</p>
       </NavbarBrand>

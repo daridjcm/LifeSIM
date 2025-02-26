@@ -1,8 +1,12 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const invoiceController = require('../controllers/invoice.controller');
+import { verifyToken } from "../middlewares/authMiddleware.js";
+import {
+  createInvoice,
+  getInvoices,
+} from "../controllers/invoice.controller.js";
 
-router.post('/invoices', invoiceController.createInvoice);
-router.get('/invoices', invoiceController.getInvoices);
+router.post("/invoices", verifyToken, createInvoice);
+router.get("/invoices", getInvoices);
 
-module.exports = router;
+export default router;

@@ -6,14 +6,14 @@ const ProgressBar = ({ value, need }) => {
     need === "Hunger"
       ? "danger"
       : need === "Health"
-      ? "success"
-      : need === "Energy"
-      ? "warning"
-      : need === "Hygiene"
-      ? "primary"
-      : need === "Bladder"
-      ? "secondary"
-      : "default";
+        ? "success"
+        : need === "Energy"
+          ? "warning"
+          : need === "Hygiene"
+            ? "primary"
+            : need === "Bladder"
+              ? "secondary"
+              : "default";
 
   return (
     <CircularProgress

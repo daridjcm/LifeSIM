@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
-import ModalComponent from "../Modal";
-import TableCustomers, { customersCount } from "../../../utils/TableCustomers";
-import CustomButton from '../../CustomButton';
+import ModalComponent from "../Modal.jsx";
+import TableCustomers, {
+  customersCount,
+} from "../../../utils/TableCustomers.jsx";
+import CustomButton from "../../CustomButton.jsx";
 
 export default function PhoneCorporative() {
   const [customerCountHandler, setCustomerCount] = useState(customersCount);
@@ -13,7 +15,7 @@ export default function PhoneCorporative() {
   const ChatBoss = () => {
     setChatBoss(true);
     setTimeout(() => {
-      window.open('/boss', '_blank');
+      window.open("/boss", "_blank");
       setChatBoss(false);
     }, 2000);
   };
@@ -26,17 +28,19 @@ export default function PhoneCorporative() {
     setChatAnalia(true);
     setTimeout(() => {
       setChatAnalia(false);
-      window.open('/analia', '_blank');
+      window.open("/analia", "_blank");
     }, 2000);
   };
 
   return (
     <div className="flex flex-col gap-3 mt-4">
       <CustomButton
-        label={chatBoss ? "Entering to chat with Boss..." : "Chat with the Boss 📱"}
+        label={
+          chatBoss ? "Entering to chat with Boss..." : "Chat with the Boss 📱"
+        }
         onPress={() => {
-          document.getElementById('tasksList').classList.remove('hidden');
-          document.getElementById('chatBoss').classList.add('block');
+          document.getElementById("tasksList").classList.remove("hidden");
+          document.getElementById("chatBoss").classList.add("block");
           ChatBoss();
         }}
         id="chatBoss"
@@ -48,12 +52,19 @@ export default function PhoneCorporative() {
         id="tableCalls"
       />
       <CustomButton
-        label={chatAnalia ? "Entering to chat Analia..." : "Chat with Analia 📱"}
+        label={
+          chatAnalia ? "Entering to chat Analia..." : "Chat with Analia 📱"
+        }
         onPress={ChatAnalia}
         id="chatAnalia"
       />
 
-      <ModalComponent title="Table of Calls" desc="Here is a table, where you can add a new customer for the call." isOpen={isOpen} onOpenChange={onOpenChange}>
+      <ModalComponent
+        title="Table of Calls"
+        desc="Here is a table, where you can add a new customer for the call."
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <TableCustomers />
       </ModalComponent>
     </div>

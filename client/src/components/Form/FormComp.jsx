@@ -2,13 +2,12 @@ import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
 import { SelectItem, Select } from "@heroui/react";
-import { Have, NotHave, HaveCustomers } from "./HaveOrNot";
+import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
 
 const ConditionalWrapper = ({ condition, children }) => {
   return condition ? children : null;
 };
-
 
 export default function FormComp({
   title,
@@ -29,49 +28,57 @@ export default function FormComp({
         value: PropTypes.string,
         type: PropTypes.string.isRequired,
         options: PropTypes.array,
-      })
+      }),
     ).isRequired,
     statusForm: PropTypes.string.isRequired,
     btnText: PropTypes.string,
     isRequired: PropTypes.bool,
   };
-  
+
   const getUserData = async (token) => {
     try {
-      const response = await fetch('http://localhost:3000/api/user', {
-        method: 'GET',
+      const response = await fetch("http://localhost:3000/api/me", {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      
-      const result = await response.json(); 
+
+      const result = await response.json();
       if (response.ok) {
-        console.log("User data:", result.user); 
+        console.log("User data:", result.user);
       } else {
-        console.error("Error fetching user data:", result.message || "Something went wrong");
+        console.error(
+          "Error fetching user data:",
+          result.message || "Something went wrong",
+        );
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
-  
+
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      getUserData(token); 
+      getUserData(token);
     }
-  }, []);  
-  
+  }, []);
+
   const [action, setAction] = React.useState(`/${statusForm}`);
-  
+  const [gender, setGender] = React.useState("");
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     let data = Object.fromEntries(new FormData(e.currentTarget));
-    
-    const url = statusForm === "login" ? "http://localhost:3000/api/login" : "http://localhost:3000/api/signup";
+    console.log("Data to be sent:", data);
+
+    const url =
+      statusForm === "login"
+        ? "http://localhost:3000/api/login"
+        : "http://localhost:3000/api/signup";
 
     const handleNavigate = (url) => {
       if (url.includes("/api/login")) {
@@ -81,8 +88,8 @@ export default function FormComp({
       } else {
         return null;
       }
-    }
-    
+    };
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -91,16 +98,18 @@ export default function FormComp({
         },
         body: JSON.stringify(data),
       });
-      
-      const result = await response.json(); 
+
+      const result = await response.json();
       if (response.ok) {
-        alert(`${statusForm === "login" ? "Login" : "Registration"} successful`);
+        alert(
+          `${statusForm === "login" ? "Login" : "Registration"} successful`,
+        );
         const token = result.token;
-        console.log(token);        
+        console.log(token);
         localStorage.setItem("token", token);
         setTimeout(() => {
-          handleNavigate(url)
-        }, 500)
+          handleNavigate(url);
+        }, 500);
       } else {
         alert(`Error: ${result.message || "Something went wrong"}`);
       }
@@ -109,7 +118,6 @@ export default function FormComp({
       alert("An error occurred. Please try again.");
     }
   };
-    
 
   return (
     <Form
@@ -143,34 +151,48 @@ export default function FormComp({
         </div>
       </ConditionalWrapper>
 
-      {fields.map((field, index) => (
+      {fields.map((field, index) =>
         field.type === "select" ? (
           <Select
             key={index}
             isRequired
             errorMessage={`Please select a valid ${field.name}`}
+            name={field.name}
             label={field.label}
             labelPlacement="outside"
             items={field.options}
             placeholder={field.placeholder}
+            selectedKey={gender}
+            onSelectionChange={(value) => {
+              console.log("Selected Value:", value);
+              setGender(value);
+            }}
             aria-label={`Select ${field.name}`}
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                <SelectItem key={option.value} value={option.value} textValue={option.label}>
-                  {option.label}
-                  <p className="text-gray-500 text-opacity-80">{option.description}</p>
-                </SelectItem>
-              ))
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    textValue={option.label}
+                  >
+                    {option.label}
+                    <p className="text-gray-500 text-opacity-80">
+                      {option.description}
+                    </p>
+                  </SelectItem>
+                ))
               : null}
           </Select>
         ) : (
           <Input
             key={index}
             isRequired={isRequired}
-            errorMessage={field.type === "password"
-              ? "Password must be at least 8 characters."
-              : `Please enter a valid ${field.name}`}
+            errorMessage={
+              field.type === "password"
+                ? "Password must be at least 8 characters."
+                : `Please enter a valid ${field.name}`
+            }
             label={field.label}
             labelPlacement="outside"
             name={field.name}
@@ -180,10 +202,10 @@ export default function FormComp({
             pattern={field.type === "password" ? "^.{8,}$" : null}
             maxLength={field.type === "password" ? 20 : null}
           />
-        )
-      ))}
+        ),
+      )}
 
-      <ConditionalWrapper condition={statusForm !== ''}>
+      <ConditionalWrapper condition={statusForm !== ""}>
         <div className="flex gap-2 mt-2 mb-4">
           <Button
             color={
@@ -197,10 +219,10 @@ export default function FormComp({
             {statusForm === "login"
               ? "Enter"
               : statusForm === "signup"
-              ? "Register"
-              : statusForm === "customers"
-              ? "Add Customer"
-              : btnText}
+                ? "Register"
+                : statusForm === "customers"
+                  ? "Add Customer"
+                  : btnText}
           </Button>
         </div>
       </ConditionalWrapper>

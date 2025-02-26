@@ -3,5 +3,5 @@ export default function PorcentageTasks({ value }) {
     <>
       <span className="text-amber-500">({value}%)</span>
     </>
-  ); 
+  );
 }

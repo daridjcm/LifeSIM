@@ -1,7 +1,17 @@
 import { useState } from "react";
-import { Card, CardBody, CardFooter, Chip, Button, Tooltip } from "@heroui/react";
-import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
-import ModalAction from "./ModalAction";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Chip,
+  Button,
+  Tooltip,
+} from "@heroui/react";
+import {
+  ArrowLeftEndOnRectangleIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/solid";
+import ModalAction from "./ModalAction.jsx";
 
 export default function CardList({
   statusCard,
@@ -22,7 +32,7 @@ export default function CardList({
     setSelectedProducts((prev) =>
       prev.includes(itemProduct)
         ? prev.filter((i) => i !== itemProduct)
-        : [...prev, itemProduct]
+        : [...prev, itemProduct],
     );
   };
 
@@ -54,20 +64,28 @@ export default function CardList({
       case "Fast Food":
         return { color: "primary", content: "Consumed quickly, less filling." };
       case "Fruit":
-        return { color: "secondary", content: "Combines well with others, serves satiety." };
+        return {
+          color: "secondary",
+          content: "Combines well with others, serves satiety.",
+        };
       case "Vegetable":
-        return { color: "success", content: "Combines well with others, serves satiety" };
+        return {
+          color: "success",
+          content: "Combines well with others, serves satiety",
+        };
       case "Drink":
-        return { color: "danger", content: "Excessive consumption shortens longevity." };
+        return {
+          color: "danger",
+          content: "Excessive consumption shortens longevity.",
+        };
       default:
         return { color: "default", content: "Others." };
     }
   }
 
   const displayItems = Array.isArray(itemsToDisplay)
-  ? itemsToDisplay
-  : itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? [];
-
+    ? itemsToDisplay
+    : (itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? []);
 
   return (
     <>
@@ -128,13 +146,10 @@ export default function CardList({
                       </>
                     ) : (
                       <span className="flex items-center text-pretty">
-                        {selectedProducts.includes(item) ? (
-                          `${item.name} added`
-                        ) : (
-                          `Buy ${item.name} for ${item.price}`
-                        )
-                      }
-                      <ShoppingCartIcon className="size-5 text-white ml-1" />
+                        {selectedProducts.includes(item)
+                          ? `${item.name} added`
+                          : `Buy ${item.name} for ${item.price}`}
+                        <ShoppingCartIcon className="size-5 text-white ml-1" />
                       </span>
                     )}
                   </Button>
@@ -146,7 +161,9 @@ export default function CardList({
       </div>
 
       {/* Modal */}
-      {isModalOpen && selectedItem && <ModalAction item={selectedItem} onClose={closeModal} />}
+      {isModalOpen && selectedItem && (
+        <ModalAction item={selectedItem} onClose={closeModal} />
+      )}
     </>
   );
 }

@@ -1,8 +1,19 @@
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "@heroui/react";
 
-
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@heroui/react";
-
-export default function ModalComponent({ title, desc1, children, isOpen, onOpenChange }) {
+export default function ModalComponent({
+  title,
+  desc1,
+  children,
+  isOpen,
+  onOpenChange,
+}) {
   return (
     <Modal
       backdrop="opaque"
@@ -33,7 +44,8 @@ export default function ModalComponent({ title, desc1, children, isOpen, onOpenC
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1">{title}
+            <ModalHeader className="flex flex-col gap-1">
+              {title}
               <hr />
               <p className="text-sm mt-4 text-default-500">{desc1}</p>
             </ModalHeader>

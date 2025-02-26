@@ -1,39 +1,42 @@
-const { Invoice, Grocery } = require('../models');
+import db from "../models/index.js";
+const { Invoice } = db;
 
-const createInvoice = async (req, res) => {
+export const createInvoice = async (req, res) => {
   try {
-    // Get shopping list
-    const groceries = await Grocery.findAll();
+    const { totalAmount, items } = req.body;
 
-    if (groceries.length === 0) {
-      return res.status(400).json({ message: 'No items in the grocery list.' });
+    const userID = req.userID;
+    const invoiceCount = await Invoice.count({ where: { userID } });
+    const invoiceNumber = invoiceCount + 1;
+
+    if (!totalAmount || !items || !userID || !invoiceNumber) {
+      return res.status(400).json({ message: "Missing data required." });
     }
 
-    // Calculate the total to shopping list
-    const totalAmount = groceries.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
+    const newInvoice = await Invoice.create({
+      totalAmount: parseFloat(totalAmount),
+      userID,
+      items: JSON.stringify(items),
+      invoiceNumber,
+    });
 
-    // Create the invoice
-    const newInvoice = await Invoice.create({ totalAmount });
-
-    // Asign the products to invoice
-    await Promise.all(groceries.map(item => item.setInvoice(newInvoice)));
-
-    console.log('Invoice created:', newInvoice);
-    res.status(201).json({ message: 'Invoice created successfully', newInvoice });
+    console.log("Invoice created:", newInvoice);
+    res
+      .status(201)
+      .json({ message: "Invoice created successfully", invoice: newInvoice });
   } catch (error) {
-    res.status(500).json({ error: 'Error creating invoice', details: error });
+    console.error("Error creating invoice:", error);
+    res
+      .status(500)
+      .json({ error: "Error creating invoice", details: error.message });
   }
 };
 
-const getInvoices = async (req, res) => {
+export const getInvoices = async (req, res) => {
   try {
-    const invoices = await Invoice.findAll({
-      include: [{ model: Grocery, as: 'items' }]
-    });
+    const invoices = await Invoice.findAll();
     res.status(200).json({ invoices });
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching invoices', details: error });
+    res.status(500).json({ error: "Error fetching invoices", details: error });
   }
 };
-
-module.exports = { createInvoice, getInvoices };
