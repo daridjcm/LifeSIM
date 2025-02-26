@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { Alert } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
-import { useEffect, useState } from "react";
 import handleDownload from "./SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
@@ -42,6 +42,7 @@ export default function AtmTab({
   const [totalAmount, setTotalAmount] = useState(0);
   const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage());
   const [groceryList, setGroceryList] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchGroceryList = async () => {
@@ -61,10 +62,32 @@ export default function AtmTab({
     fetchGroceryList();
   }, []);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const res = await fetch("http://localhost:3000/api/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setUserData(data.user); // Assuming the response has 'user' data
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handlePayment = async () => {
     if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
-
-    console.log(groceryList);
 
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
@@ -83,6 +106,8 @@ export default function AtmTab({
         totalAmount,
         items: items,
         invoiceNumber: Date.now(),
+        userID: userData?.id,
+        username: userData?.username || "User",
       };
 
       console.log("Request Data:", requestData);
@@ -135,7 +160,7 @@ export default function AtmTab({
             1234 5678 9XXX XXXX
           </li>
           <li>
-            Titular <span>Usuario</span>
+            Titular <span>{userData?.name || "Usuario"}</span> {/* Display the Titular name */}
           </li>
         </ul>
         <div className="flex flex-col text-end text-slate-100 opacity-70">
@@ -151,7 +176,7 @@ export default function AtmTab({
         {invoice && (
           <CustomButton
             label="Download Report"
-            onPress={() => handleDownload(invoice)}
+            onPress={() => handleDownload(invoice, userData)} // Pass userData to download function
           />
         )}
       </div>

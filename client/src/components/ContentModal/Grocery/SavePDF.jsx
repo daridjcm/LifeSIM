@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export default function handleDownload(invoice) {
+export default function handleDownload(invoice, userData) {
   if (!invoice) return;
 
   const invoiceNumber = invoice.invoiceNumber;
@@ -16,25 +16,23 @@ export default function handleDownload(invoice) {
     },
   );
 
-  // Obtener items desde localStorage
   const storedData = JSON.parse(localStorage.getItem("selectedItems") || "{}");
-  const items = storedData.items || []; // Accedemos a los items dentro del objeto guardado
+  const items = storedData.items || []; 
 
-  console.log("Invoice items:", items); // Verifica que 'items' es el arreglo esperado
-
-  // Si no hay items, mostramos un mensaje
   if (items.length === 0) {
     console.log("No items found in localStorage.");
   }
 
   doc.setFontSize(11);
   doc.text("Invoice by LifeSIM", 20, 20);
-  doc.text("Signatured by CEO: @Daridjcm", 20, 25);
-  doc.text(`Date: ${formattedDate}`, 20, 30);
-  doc.text(`User ID: ${invoice.userID}`, 20, 35);
-  doc.text(`Invoice Number: #${invoiceNumber}`, 20, 40);
-  doc.text(`Total amount: $${invoice.totalAmount}`, 20, 50);
-  doc.text("Purchased products:", 20, 55);
+  doc.text(`Invoice Number: #${invoiceNumber}`, 20, 25);
+  doc.text("Signatured by CEO: @Daridjcm", 20, 30);
+  doc.text(`Date: ${formattedDate}`, 20, 35);
+  doc.text(`User: ${userData?.username}`, 20, 40);
+  doc.text(`User ID: ${userData?.id}`, 20, 45);
+
+  doc.text(`Total amount: $${invoice.totalAmount}`, 20, 55);
+  doc.text("Purchased products:", 20, 60);
 
   // Verificamos si 'items' tiene contenido
   if (Array.isArray(items) && items.length > 0) {
@@ -46,7 +44,7 @@ export default function handleDownload(invoice) {
     ]);
 
     autoTable(doc, {
-      startY: 58,
+      startY: 63,
       margin: { top: 10, left: 20, right: 20 },
       headStyles: {
         fontSize: 11.5,
