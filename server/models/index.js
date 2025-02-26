@@ -1,30 +1,38 @@
 import fs from 'fs';
 import path from 'path';
+import { Sequelize, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
-import { Sequelize } from 'sequelize';
-const basename = path.basename(import.meta.url);
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const db = {};
 
-fs.readdirSync(new URL('.', import.meta.url).pathname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 && 
-      file !== basename && 
-      file.slice(-3) === '.js'
-    );
-  })
-  .forEach(file => {
-    const model = import(`./${file}`).then(module => module.default(sequelize, Sequelize.DataTypes));
-    db[file.replace('.js', '')] = model;
+const loadModels = async () => {
+  const modelsDir = path.join(__dirname);
+  const modelFiles = fs.readdirSync(modelsDir)
+    .filter((file) => file.endsWith('.js') && file !== 'index.js');
+
+  await Promise.all(
+    modelFiles.map(async (file) => {
+      const module = await import(`./${file}`);
+      const model = module.default(sequelize, DataTypes);
+      db[model.name] = model;
+    })
+  );
+
+  Object.keys(db).forEach((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+  db.sequelize = sequelize;
+  db.Sequelize = Sequelize;
+};
 
-db.sequelize = sequelize;
+await loadModels();
 
 export default db;
 export { sequelize };

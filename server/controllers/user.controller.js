@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const { User } = await db;
+const { User } = db;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // SignUp
@@ -77,7 +77,7 @@ export const loginUser = async (req, res) => {
 // Get Current User
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.userId); // Fetch user data based on decoded user ID from token
+    const user = await User.findByPk(req.userID); // Fetch user data based on decoded user ID from token
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
       const token = localStorage.getItem('token');
 
       if (token) {
-        const response = await fetch('http://localhost:3000/api/user', {
+        const response = await fetch('http://localhost:3000/api/me', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

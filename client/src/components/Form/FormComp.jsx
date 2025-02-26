@@ -38,7 +38,7 @@ export default function FormComp({
   
   const getUserData = async (token) => {
     try {
-      const response = await fetch('http://localhost:3000/api/user', {
+      const response = await fetch('http://localhost:3000/api/me', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
