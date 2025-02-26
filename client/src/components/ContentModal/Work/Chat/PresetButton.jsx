@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "@heroui/react";
-import { TimeContext } from "../../../../context/TimeContext";
+import { TimeContext } from "../../../../context/TimeContext.jsx";
 
 export function PresetButton({ response, onClick }) {
   const [isDisabled, setIsDisabled] = useState(false);

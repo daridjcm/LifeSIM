@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Card, CardHeader, CardBody, Image, CardFooter, Button, ScrollShadow } from "@heroui/react";
 // Content Modal
-import ContentWork from "./ContentModal/Work/Work";
-import ContentBank from "./ContentModal/Bank/Bank";
+import ContentWork from "./ContentModal/Work/Work.jsx";
+import ContentBank from "./ContentModal/Bank/Bank.jsx";
 import ContentGrocery from "./ContentModal/Grocery"
 
 export default function ModalAction({ item, onClose }) {

@@ -1,5 +1,5 @@
-const express = require('express');
-const { saveGrocery, getGroceries } = require('../controllers/grocery.controller');
+import express from 'express'
+import { saveGrocery, getGroceries } from '../controllers/grocery.controller.js';
 const router = express.Router();
 
 // Save grocery items
@@ -8,4 +8,4 @@ router.post('/grocery', saveGrocery);
 // Get all groceries
 router.get('/grocery', getGroceries);
 
-module.exports = router;
+export default router;

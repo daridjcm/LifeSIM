@@ -1,6 +1,5 @@
-import React from "react";
 import { Tabs, Tab } from "@heroui/react";
-import { Loans, Overview, PayDebt, Save, Withdraw, Invert } from "./Forms";
+import { Loans, Overview, PayDebt, Save, Withdraw, Invert } from "./Forms.jsx";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("overview");

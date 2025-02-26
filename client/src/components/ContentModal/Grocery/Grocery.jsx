@@ -1,8 +1,8 @@
 import { Tabs, Tab } from "@heroui/react";
 import { useState } from "react";
-import ProductsTab from "./Products";
-import ShoppingListTab from "./Shopping";
-import AtmTab from "./ATM";
+import ProductsTab from "./Products.jsx";
+import ShoppingListTab from "./Shopping.jsx";
+import AtmTab from "./ATM.jsx";
 import { CreditCardIcon, ListBulletIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 export function Index({ itemsToDisplay, page, total, onChange }) {

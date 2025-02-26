@@ -4,8 +4,8 @@ import { TrashIcon, ChatBubbleLeftEllipsisIcon, ArrowLeftStartOnRectangleIcon } 
 import { Button } from "@heroui/react";
 import chatData1 from './chatBoss.json';
 import chatData2 from './chatAnalia.json';
-import { MessageBox } from "./MessageBox"
-import { PresetButton } from "./PresetButton"
+import { MessageBox } from "./MessageBox.jsx"
+import { PresetButton } from "./PresetButton.jsx"
 
 export default function Chat({ people }) {
   const [messages, setMessages] = useState([])

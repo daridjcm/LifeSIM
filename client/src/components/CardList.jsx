@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardBody, CardFooter, Chip, Button, Tooltip } from "@heroui/react";
 import { ArrowLeftEndOnRectangleIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
-import ModalAction from "./ModalAction";
+import ModalAction from "./ModalAction.jsx";
 
 export default function CardList({
   statusCard,

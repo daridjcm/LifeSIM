@@ -1,5 +1,3 @@
-
-
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@heroui/react";
 
 export default function ModalComponent({ title, desc1, children, isOpen, onOpenChange }) {

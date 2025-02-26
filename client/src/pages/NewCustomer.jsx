@@ -1,5 +1,6 @@
 import React from "react";
-import FormComp from "../components/Form/FormComp";
+import FormComp from "../components/Form/";
+
 export default function NewCustomer() {
   const fields = [
     {

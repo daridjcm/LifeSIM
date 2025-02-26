@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "@heroui/react";
 import PropTypes from "prop-types";
 import { SelectItem, Select } from "@heroui/react";
-import { Have, NotHave, HaveCustomers } from "./HaveOrNot";
+import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
 
 const ConditionalWrapper = ({ condition, children }) => {

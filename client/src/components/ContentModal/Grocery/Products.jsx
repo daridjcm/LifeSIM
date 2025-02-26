@@ -1,5 +1,5 @@
 import { Pagination } from "@heroui/react";
-import CardList from "../../CardList";
+import CardList from "../../CardList.jsx";
 
 export default function ProductsTab({ itemsToDisplay = [], page = 1, total = 1, onChange = () => { }, selectedProducts = [], setSelectedProducts = () => { } }) {
   return (

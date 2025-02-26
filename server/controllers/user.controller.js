@@ -1,14 +1,14 @@
-const { User } = require('../models');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const dotenv = require('dotenv');
-
+import db from '../models/index.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 dotenv.config();
 
+const { User } = await db;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // SignUp
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   console.log('SignUp endpoint reached');
   const { username, email, password, gender } = req.body;
 
@@ -41,7 +41,7 @@ const createUser = async (req, res) => {
 };
 
 // Login
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -75,7 +75,7 @@ const loginUser = async (req, res) => {
 };
 
 // Get Current User
-const getCurrentUser = async (req, res) => {
+export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.userId); // Fetch user data based on decoded user ID from token
 
@@ -88,10 +88,4 @@ const getCurrentUser = async (req, res) => {
     console.error('Error fetching user:', error);
     res.status(500).json({ message: 'Server error' });
   }
-};
-
-module.exports = {
-  createUser,
-  loginUser,
-  getCurrentUser,
 };

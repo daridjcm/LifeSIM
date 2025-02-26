@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Checkbox } from "@heroui/react";
 import { BanknotesIcon } from "@heroicons/react/24/solid";
-import PorcentageTasks from "../../PorcentageTasks";
-import PhoneCorporative from "./PhoneCorporative";
-import CustomButton from "../../CustomButton";
+import PorcentageTasks from "../../PorcentageTasks.jsx";
+import PhoneCorporative from "./PhoneCorporative.jsx";
+import CustomButton from "../../CustomButton.jsx";
 
 export default function ContentWork() {
   const [submitSignature, setSubmitSignature] = useState(false);

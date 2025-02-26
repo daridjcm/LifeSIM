@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
-import ModalComponent from "../Modal";
-import TableCustomers, { customersCount } from "../../../utils/TableCustomers";
-import CustomButton from '../../CustomButton';
+import ModalComponent from "../Modal.jsx";
+import TableCustomers, { customersCount } from "../../../utils/TableCustomers.jsx";
+import CustomButton from '../../CustomButton.jsx';
 
 export default function PhoneCorporative() {
   const [customerCountHandler, setCustomerCount] = useState(customersCount);

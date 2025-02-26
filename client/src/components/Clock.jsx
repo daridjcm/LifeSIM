@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { TimeContext } from "../context/TimeContext";
+import { TimeContext } from "../context/TimeContext.jsx";
 
 const Clock = () => {
   const time = useContext(TimeContext);

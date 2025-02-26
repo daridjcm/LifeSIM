@@ -1,7 +1,7 @@
 import { Alert } from "@heroui/react";
-import CustomButton from "../../CustomButton";
+import CustomButton from "../../CustomButton.jsx";
 import { useEffect, useState } from "react";
-import handleDownload from "./SavePDF";
+import handleDownload from "./SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
 
@@ -56,12 +56,12 @@ export default function AtmTab({
 
   const handlePayment = async () => {
     if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
-
+    
     console.log(groceryList)
-  
+    
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
-  
+    
     try {
       // Obtener items del localStorage y parsearlos
       const storedInvoice = loadInvoiceFromLocalStorage();
@@ -70,7 +70,7 @@ export default function AtmTab({
         quantity: item.quantity,
         price: item.price,
       }));
-  
+      
       // Datos para enviar al backend
       const requestData = {
         totalAmount,
@@ -78,13 +78,16 @@ export default function AtmTab({
         userID: "12345abc",
         invoiceNumber: Date.now(),
       };
-  
+      
+      const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:3000/api/invoices", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify(requestData),
       });
-  
+      
       if (!res.ok) throw new Error("Failed to create invoice");
   
       const invoiceData = await res.json();

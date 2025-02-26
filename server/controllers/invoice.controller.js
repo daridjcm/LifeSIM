@@ -1,8 +1,10 @@
-const { Invoice, Grocery } = require('../models');
+import db from '../models/index.js';
+const { Invoice, Grocery } = db;
 
-const createInvoice = async (req, res) => {
+export const createInvoice = async (req, res) => {
   try {
-    const { totalAmount, items, userID, invoiceNumber } = req.body;
+    const { totalAmount, items, invoiceNumber } = req.body;
+    const userID = req.userID;
 
     // Validar que todos los datos estén presentes
     if (!totalAmount || !items || !userID || !invoiceNumber) {
@@ -13,6 +15,7 @@ const createInvoice = async (req, res) => {
     const newInvoice = await Invoice.create({
       totalAmount,
       userID,
+      items: JSON.stringify(items),
       invoiceNumber
     });
 
@@ -36,7 +39,7 @@ const createInvoice = async (req, res) => {
 };
 
 
-const getInvoices = async (req, res) => {
+export const getInvoices = async (req, res) => {
   try {
     const invoices = await Invoice.findAll({
       include: [{ model: Grocery, as: 'items' }]
@@ -46,5 +49,3 @@ const getInvoices = async (req, res) => {
     res.status(500).json({ error: 'Error fetching invoices', details: error });
   }
 };
-
-module.exports = { createInvoice, getInvoices };

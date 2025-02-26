@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxGroup, cn, Image, Input, ScrollShadow, Select, SelectItem } from "@heroui/react";
-import CustomButton from "../../CustomButton";
+import CustomButton from "../../CustomButton.jsx";
 import { useState, useEffect } from "react";
 
 const STORAGE_KEY = "selectedItems";

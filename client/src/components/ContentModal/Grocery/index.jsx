@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Index } from "./Grocery";
-import { activitiesUser, products } from "../../../utils/data"
+import { Index } from "./Grocery.jsx";
+import { activitiesUser, products } from "../../../utils/data.js"
 
 export default function ContentGrocery({ statusCard }) {
   const itemsArray = products;

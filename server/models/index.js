@@ -1,12 +1,11 @@
-// server/models/index.js
-const fs = require('fs');
-const path = require('path');
-const { sequelize } = require('../config/database');
-const basename = path.basename(__filename);
-
+import fs from 'fs';
+import path from 'path';
+import { sequelize } from '../config/database.js';
+import { Sequelize } from 'sequelize';
+const basename = path.basename(import.meta.url);
 const db = {};
 
-fs.readdirSync(__dirname)
+fs.readdirSync(new URL('.', import.meta.url).pathname)
   .filter(file => {
     return (
       file.indexOf('.') !== 0 && 
@@ -15,8 +14,8 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, sequelize.Sequelize.DataTypes);
-    db[model.name] = model;
+    const model = import(`./${file}`).then(module => module.default(sequelize, Sequelize.DataTypes));
+    db[file.replace('.js', '')] = model;
   });
 
 Object.keys(db).forEach(modelName => {
@@ -27,4 +26,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 
-module.exports = db;
+export default db;
+export { sequelize };

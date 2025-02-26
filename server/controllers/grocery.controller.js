@@ -1,6 +1,6 @@
 let groceryItems = [];
 
-const saveGrocery = async (req, res) => {
+export const saveGrocery = async (req, res) => {
   try {
     const { selectedItems } = req.body;
     
@@ -31,7 +31,7 @@ const saveGrocery = async (req, res) => {
   }
 };
 
-const getGroceries = async (req, res) => {
+export const getGroceries = async (req, res) => {
   try {
     res.status(200).json({ groceries: groceryItems });
   } catch (error) {
@@ -41,5 +41,3 @@ const getGroceries = async (req, res) => {
     });
   }
 };
-
-module.exports = { saveGrocery, getGroceries };
