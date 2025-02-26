@@ -13,6 +13,11 @@ const saveToLocalStorage = (data) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataWithTimestamp));
 };
 
+const clearAll = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  window.location.reload();
+};
+
 const loadFromLocalStorage = () => {
   const storedData = localStorage.getItem(STORAGE_KEY);
   if (!storedData) return null;
@@ -136,6 +141,11 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             onPress={handleSend}
             isLoading={sendObject}
             loadingText="Saving changes..."
+            id="handleSend"
+          />          
+          <CustomButton
+            label={"Clear all"}
+            onPress={clearAll}
             id="handleSend"
           />
         </>
