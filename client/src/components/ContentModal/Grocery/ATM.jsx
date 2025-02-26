@@ -60,7 +60,6 @@ export default function AtmTab({
     setPaymentStatus("Making Payment...");
     
     try {
-      // Obtener items del localStorage y parsearlos
       const storedInvoice = loadInvoiceFromLocalStorage();
       const items = storedInvoice ? storedInvoice.items : groceryList.map((item) => ({
         name: item.name,
@@ -90,7 +89,7 @@ export default function AtmTab({
         console.error('Error details:', errorDetails);
         throw new Error('Failed to create invoice');
       }
-        
+
       const invoiceData = await res.json();
       const latestInvoice = invoiceData.invoice;
       setInvoice(latestInvoice);     

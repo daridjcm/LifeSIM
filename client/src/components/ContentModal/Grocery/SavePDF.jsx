@@ -13,6 +13,19 @@ export default function handleDownload(invoice) {
     day: "numeric"
   });
 
+  console.log('Invoice items:', invoice.items);
+  
+  // Check if it need be parsed to JSON
+  let items = invoice.items;
+  if (typeof items === 'string') {
+    try {
+      items = JSON.parse(items);
+    } catch (error) {
+      console.error('Error parsing items:', error);
+      items = []; 
+    }
+  }
+
   doc.setFontSize(11);
   doc.text("Invoice by LifeSIM", 20, 20);
   doc.text("Signatured by CEO: @Daridjcm", 20, 25);
@@ -22,8 +35,8 @@ export default function handleDownload(invoice) {
   doc.text(`Total amount: $${invoice.totalAmount}`, 20, 50);
   doc.text("Purchased products:", 20, 55);
 
-  if (Array.isArray(invoice.items) && invoice.items.length > 0) {
-    const rows = invoice.items.map(item => [
+  if (Array.isArray(items) && items.length > 0) {
+    const rows = items.map(item => [
       item.name || "N/A",
       item.quantity || "N/A",
       `$${item.price || 0}`,
@@ -47,5 +60,6 @@ export default function handleDownload(invoice) {
   } else {
     doc.text("No items available", 20, 60); 
   }
+
   doc.save(`invoice-lifesim-${invoiceNumber}.pdf`);
 }
