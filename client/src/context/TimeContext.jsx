@@ -14,9 +14,5 @@ export const TimeProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <TimeContext.Provider value={time}>
-      {children}
-    </TimeContext.Provider>
-  );
+  return <TimeContext.Provider value={time}>{children}</TimeContext.Provider>;
 };

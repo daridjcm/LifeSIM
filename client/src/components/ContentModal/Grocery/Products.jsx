@@ -1,7 +1,14 @@
 import { Pagination } from "@heroui/react";
 import CardList from "../../CardList.jsx";
 
-export default function ProductsTab({ itemsToDisplay = [], page = 1, total = 1, onChange = () => { }, selectedProducts = [], setSelectedProducts = () => { } }) {
+export default function ProductsTab({
+  itemsToDisplay = [],
+  page = 1,
+  total = 1,
+  onChange = () => {},
+  selectedProducts = [],
+  setSelectedProducts = () => {},
+}) {
   return (
     <>
       <CardList
@@ -11,7 +18,7 @@ export default function ProductsTab({ itemsToDisplay = [], page = 1, total = 1, 
         selectedProducts={selectedProducts}
         setSelectedProducts={setSelectedProducts}
       />
-      
+
       <Pagination
         showControls
         page={page}

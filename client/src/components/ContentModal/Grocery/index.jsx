@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Index } from "./Grocery.jsx";
-import { activitiesUser, products } from "../../../utils/data.js"
+import { activitiesUser, products } from "../../../utils/data.js";
 
 export default function ContentGrocery({ statusCard }) {
   const itemsArray = products;
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const displayedItems = statusCard === "activitiesUser" ? activitiesUser : itemsArray;
+  const displayedItems =
+    statusCard === "activitiesUser" ? activitiesUser : itemsArray;
 
   // Reset the current page when statusCard changes
   useEffect(() => {
@@ -19,7 +20,6 @@ export default function ContentGrocery({ statusCard }) {
   const currentItems = displayedItems.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (newPage) => {
-    console.log("Page changed to:", newPage);
     setCurrentPage(newPage);
   };
 

@@ -31,4 +31,4 @@ export function HaveCustomers() {
   );
 }
 
-export default {HaveCustomers, Have, NotHave};
+export default { HaveCustomers, Have, NotHave };

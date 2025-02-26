@@ -1,4 +1,13 @@
-import { Checkbox, CheckboxGroup, cn, Image, Input, ScrollShadow, Select, SelectItem } from "@heroui/react";
+import {
+  Checkbox,
+  CheckboxGroup,
+  cn,
+  Image,
+  Input,
+  ScrollShadow,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
 import { useState, useEffect } from "react";
 
@@ -15,6 +24,7 @@ const saveToLocalStorage = (data) => {
 
 const clearAll = () => {
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem("atmInvoice");
   window.location.reload();
 };
 
@@ -35,13 +45,19 @@ const loadFromLocalStorage = () => {
 
 function ShoppingList({ selectedItems, setSelectedItems }) {
   const [sendObject, setSendObj] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(selectedItems[0]?.name || "");
+  const [selectedProduct, setSelectedProduct] = useState(
+    selectedItems[0]?.name || "",
+  );
 
   const handleQuantityChange = (quantity) => {
     const updatedItems = selectedItems.map((product) =>
       product.name === selectedProduct
-        ? { ...product, quantity, price: (product.basePrice * quantity).toFixed(2) }
-        : product
+        ? {
+            ...product,
+            quantity,
+            price: (product.basePrice * quantity).toFixed(2),
+          }
+        : product,
     );
     setSelectedItems(updatedItems);
     saveToLocalStorage(updatedItems);
@@ -52,13 +68,16 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
   };
 
   const handleSend = async () => {
-    const updatedItems = selectedItems.map(item => ({
+    const updatedItems = selectedItems.map((item) => ({
       ...item,
       price: parseFloat(item.price),
       basePrice: parseFloat(item.basePrice),
     }));
 
-    console.log("Payload to send:", JSON.stringify({ selectedItems: updatedItems }));
+    console.log(
+      "Payload to send:",
+      JSON.stringify({ selectedItems: updatedItems }),
+    );
 
     setSendObj(true);
     try {
@@ -84,12 +103,12 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       <p>Products selected to buy.</p>
       {selectedItems.length > 0 ? (
         <>
-          <CheckboxGroup
-            orientation="vertical"
-            color="primary"
-            lineThrough
-          >
-            <ScrollShadow className="xl:h-[300px] lg:h-[200px]" hideScrollBar size={70}>
+          <CheckboxGroup orientation="vertical" color="primary" lineThrough>
+            <ScrollShadow
+              className="xl:h-[300px] lg:h-[200px]"
+              hideScrollBar
+              size={70}
+            >
               <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3">
                 {selectedItems.map((product) => (
                   <Checkbox key={product.name} value={product.name}>
@@ -110,7 +129,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             </ScrollShadow>
           </CheckboxGroup>
           <div className="flex items-start justify-around sm:flex-col lg:flex-row mb-3 mt-5">
-            <label className="mr-2" htmlFor="productSelect">Select product</label>
+            <label className="mr-2" htmlFor="productSelect">
+              Select product
+            </label>
             <Select
               id="productSelect"
               value={selectedProduct}
@@ -124,13 +145,21 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                 </SelectItem>
               ))}
             </Select>
-            <label className="mr-2 ml-3" htmlFor="quantityInput">Quantity</label>
-            <Input 
+            <label className="mr-2 ml-3" htmlFor="quantityInput">
+              Quantity
+            </label>
+            <Input
               id="quantityInput"
               variant="bordered"
               type="number"
-              value={selectedItems.find((product) => product.name === selectedProduct)?.quantity || 1}
-              onChange={(e) => handleQuantityChange(parseInt(e.target.value, 10))}
+              value={
+                selectedItems.find(
+                  (product) => product.name === selectedProduct,
+                )?.quantity || 1
+              }
+              onChange={(e) =>
+                handleQuantityChange(parseInt(e.target.value, 10))
+              }
               className="border border-gray-300 rounded-md text-center"
               min={1}
               max={50}
@@ -142,9 +171,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             isLoading={sendObject}
             loadingText="Saving changes..."
             id="handleSend"
-          />          
+          />
           <CustomButton
-            label={"Clear all"}
+            label={"Clear all (includes invoice)"}
             onPress={clearAll}
             id="handleSend"
           />
@@ -177,7 +206,10 @@ export default function ShoppingListTab({ selectedProducts = [] }) {
   return (
     <>
       <p className="text-2xl font-bold">Summary to Shopping List</p>
-      <ShoppingList selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+      <ShoppingList
+        selectedItems={selectedItems}
+        setSelectedItems={setSelectedItems}
+      />
     </>
   );
 }

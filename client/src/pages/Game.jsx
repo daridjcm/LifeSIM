@@ -15,7 +15,7 @@ export default function Game() {
             statusCard={"activitiesUser"}
             itemsToDisplay={activitiesUser}
             iconShow={true}
-            />
+          />
         </UserProvider>
         <NeedsPanel />
       </TimeProvider>

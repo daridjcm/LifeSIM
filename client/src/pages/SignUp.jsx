@@ -39,7 +39,7 @@ export default function SignUp() {
         action="/signup"
         title="Create your"
         fields={fields}
-        statusForm="signup"  // Indicating this is a signup form
+        statusForm="signup" // Indicating this is a signup form
         btnText="Register"
         isRequired={true}
       />

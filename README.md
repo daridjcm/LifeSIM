@@ -1,4 +1,5 @@
 # LifeSIM
+
 An interactive life simulation web game where users manage their daily routine and key decisions through an intuitive system. There is no avatar for the player, but actions and decisions are reflected in game statistics and results.
 
 - **Work:** 💼 Earn money to cover your needs and achieve your goals.
@@ -10,13 +11,16 @@ An interactive life simulation web game where users manage their daily routine a
 
 # Getting Started
 
-#### Clone Repository 
+#### Clone Repository
+
 - (HTTPS)
+
 ```bash
 git clone https://github.com/Daridjcm/LifeSIM.git
 ```
 
 - (SSH)
+
 ```bash
 git clone git@github.com:Daridjcm/LifeSIM.git
 ```
@@ -36,4 +40,5 @@ npm run start # Click or type in URL http://localhost:3000
 ```
 
 #
+
 [LifeSIM](https://github.com/Daridjcm/LifeSIM) © by [Daridjcm](https://github.com/Daridjcm/) is licensed under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1).

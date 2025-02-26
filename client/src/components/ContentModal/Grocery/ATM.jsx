@@ -30,8 +30,14 @@ const loadInvoiceFromLocalStorage = () => {
 };
 
 export default function AtmTab({
-  paymentStatus, setPaymentStatus, paymentProcessing, setPaymentProcessing,
-  alertVisible, setAlertVisible, alertType, setAlertType,
+  paymentStatus,
+  setPaymentStatus,
+  paymentProcessing,
+  setPaymentProcessing,
+  alertVisible,
+  setAlertVisible,
+  alertType,
+  setAlertType,
 }) {
   const [totalAmount, setTotalAmount] = useState(0);
   const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage());
@@ -43,7 +49,11 @@ export default function AtmTab({
         const res = await fetch("http://localhost:3000/api/grocery");
         const data = await res.json();
         setGroceryList(data.groceries);
-        setTotalAmount(data.groceries.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2));
+        setTotalAmount(
+          data.groceries
+            .reduce((total, item) => total + parseFloat(item.price), 0)
+            .toFixed(2),
+        );
       } catch (error) {
         console.error("Error fetching grocery list:", error);
       }
@@ -53,48 +63,51 @@ export default function AtmTab({
 
   const handlePayment = async () => {
     if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
-    
-    console.log(groceryList)
-    
+
+    console.log(groceryList);
+
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
-    
+
     try {
       const storedInvoice = loadInvoiceFromLocalStorage();
-      const items = storedInvoice ? storedInvoice.items : groceryList.map((item) => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-      }));
-      
+      const items = storedInvoice
+        ? storedInvoice.items
+        : groceryList.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          }));
+
       const requestData = {
         totalAmount,
         items: items,
         invoiceNumber: Date.now(),
       };
 
-      console.log('Request Data:', requestData)
-      
+      console.log("Request Data:", requestData);
+
       const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:3000/api/invoices", {
         method: "POST",
-        headers: { "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(requestData),
       });
-      
+
       if (!res.ok) {
         const errorDetails = await res.json();
-        console.error('Error details:', errorDetails);
-        throw new Error('Failed to create invoice');
+        console.error("Error details:", errorDetails);
+        throw new Error("Failed to create invoice");
       }
 
       const invoiceData = await res.json();
       const latestInvoice = invoiceData.invoice;
-      setInvoice(latestInvoice);     
+      setInvoice(latestInvoice);
       saveInvoiceToLocalStorage(latestInvoice);
-  
+
       setAlert("Payment Done ✅", "success");
     } catch (error) {
       setAlert("Payment Failed", "danger");
@@ -103,7 +116,7 @@ export default function AtmTab({
       setPaymentProcessing(false);
     }
   };
-  
+
   const setAlert = (status, type) => {
     setPaymentStatus(status);
     setAlertType(type);
@@ -118,8 +131,12 @@ export default function AtmTab({
       <div className="flex flex-col gap-3 bg-gradient-to-r from-green-700 to-green-500 p-10 rounded-md mt-7 mb-3 text-slate-50 text-xl shadow-lg w-full">
         <p>Card LifeSIM</p>
         <ul>
-          <li className="text-green-slate-100 opacity-70">1234 5678 9XXX XXXX</li>
-          <li>Titular <span>Usuario</span></li>
+          <li className="text-green-slate-100 opacity-70">
+            1234 5678 9XXX XXXX
+          </li>
+          <li>
+            Titular <span>Usuario</span>
+          </li>
         </ul>
         <div className="flex flex-col text-end text-slate-100 opacity-70">
           <p>ID:</p> 12345abc
@@ -127,9 +144,15 @@ export default function AtmTab({
       </div>
 
       <div className="flex gap-3">
-        <CustomButton label={paymentProcessing ? paymentStatus : paymentStatus} onPress={handlePayment} />
+        <CustomButton
+          label={paymentProcessing ? paymentStatus : paymentStatus}
+          onPress={handlePayment}
+        />
         {invoice && (
-          <CustomButton label="Download Report" onPress={() => handleDownload(invoice)} />
+          <CustomButton
+            label="Download Report"
+            onPress={() => handleDownload(invoice)}
+          />
         )}
       </div>
 
@@ -137,7 +160,11 @@ export default function AtmTab({
         <Alert
           color={alertType}
           title={alertType === "success" ? "Payment Done" : "Payment Failed"}
-          description={alertType === "success" ? "Payment has been made." : "Payment has been rejected."}
+          description={
+            alertType === "success"
+              ? "Payment has been made."
+              : "Payment has been rejected."
+          }
           isVisible={alertVisible}
           variant="faded"
           className="mt-5"

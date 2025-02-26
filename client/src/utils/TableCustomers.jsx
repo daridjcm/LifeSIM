@@ -1,7 +1,21 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@heroui/react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+} from "@heroui/react";
 
 const status = {
-  label: ["Make call", "Call rejected", "Call accepted", "Call completed", "No call"],
+  label: [
+    "Make call",
+    "Call rejected",
+    "Call accepted",
+    "Call completed",
+    "No call",
+  ],
   key: [1, 2, 3, 4, 5],
   color: ["primary", "danger", "success", "warning", "secondary"],
 };
@@ -61,36 +75,42 @@ const columns = [
 export default function TableCustomers() {
   return (
     <>
-    <Table shadow="md" aria-label="Table of Customers">
-      <TableHeader>
-        {columns.map((column) => (
-          <TableColumn key={column.key}>{column.label}</TableColumn>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {customers.map((row) => (
-          <TableRow key={row.key}>
-            {columns.map((column) => (
-              <TableCell key={column.key}>{row[column.key]}</TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-      <Button className="mt-4" color="primary" variant="ghost" size="md" onPress={() => window.location.href = '/customers/new'}>
+      <Table shadow="md" aria-label="Table of Customers">
+        <TableHeader>
+          {columns.map((column) => (
+            <TableColumn key={column.key}>{column.label}</TableColumn>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {customers.map((row) => (
+            <TableRow key={row.key}>
+              {columns.map((column) => (
+                <TableCell key={column.key}>{row[column.key]}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Button
+        className="mt-4"
+        color="primary"
+        variant="ghost"
+        size="md"
+        onPress={() => (window.location.href = "/customers/new")}
+      >
         Add a new customer
       </Button>
-    <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">
-      <p>Note about Call Status</p>
-      <p className="text-sm text-zinc-900">
-        <ul className="list-decimal list-inside">
-          <li>Make call - Call to the customer</li>
-          <li>Call rejected - The customer did not answer the call</li>
-          <li>Call accepted - The customer answered the call</li>
-          <li>Call completed - Call to the customer is completed</li>
-        </ul>
-      </p>
-    </div>
+      <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">
+        <p>Note about Call Status</p>
+        <p className="text-sm text-zinc-900">
+          <ul className="list-decimal list-inside">
+            <li>Make call - Call to the customer</li>
+            <li>Call rejected - The customer did not answer the call</li>
+            <li>Call accepted - The customer answered the call</li>
+            <li>Call completed - Call to the customer is completed</li>
+          </ul>
+        </p>
+      </div>
     </>
   );
 }
