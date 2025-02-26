@@ -1,10 +1,30 @@
+// server/models/index.js
+const fs = require('fs');
+const path = require('path');
 const { sequelize } = require('../config/database');
-const User = require('./user');
-const Invoice = require('./invoice');
+const basename = path.basename(__filename);
 
-// Sync models with database
-sequelize.sync({ alter: true })
-  .then(() => console.log('All models were synchronized successfully.'))
-  .catch(error => console.error('Sync Error:', error));
+const db = {};
 
-module.exports = { sequelize, User, Invoice };
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return (
+      file.indexOf('.') !== 0 && 
+      file !== basename && 
+      file.slice(-3) === '.js'
+    );
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, sequelize.Sequelize.DataTypes);
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+
+module.exports = db;

@@ -2,28 +2,39 @@ const { Invoice, Grocery } = require('../models');
 
 const createInvoice = async (req, res) => {
   try {
-    // Get shopping list
-    const groceries = await Grocery.findAll();
+    const { totalAmount, items, userID, invoiceNumber } = req.body;
 
-    if (groceries.length === 0) {
-      return res.status(400).json({ message: 'No items in the grocery list.' });
+    // Validar que todos los datos estén presentes
+    if (!totalAmount || !items || !userID || !invoiceNumber) {
+      return res.status(400).json({ message: 'Faltan datos requeridos.' });
     }
 
-    // Calculate the total to shopping list
-    const totalAmount = groceries.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
+    // Crear la factura en la base de datos
+    const newInvoice = await Invoice.create({
+      totalAmount,
+      userID,
+      invoiceNumber
+    });
 
-    // Create the invoice
-    const newInvoice = await Invoice.create({ totalAmount });
-
-    // Asign the products to invoice
-    await Promise.all(groceries.map(item => item.setInvoice(newInvoice)));
+    // Asignar los productos a la factura
+    await Promise.all(items.map(async (item) => {
+      const grocery = await Grocery.create({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        InvoiceId: newInvoice.id,  // Relacionar con la factura
+      });
+      await grocery.setInvoice(newInvoice); // Relacionar usando Sequelize
+    }));
 
     console.log('Invoice created:', newInvoice);
-    res.status(201).json({ message: 'Invoice created successfully', newInvoice });
+    res.status(201).json({ message: 'Invoice created successfully', invoice: newInvoice });
   } catch (error) {
-    res.status(500).json({ error: 'Error creating invoice', details: error });
+    console.error('Error creating invoice:', error);
+    res.status(500).json({ error: 'Error creating invoice', details: error.message });
   }
 };
+
 
 const getInvoices = async (req, res) => {
   try {

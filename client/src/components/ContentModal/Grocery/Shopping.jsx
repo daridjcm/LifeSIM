@@ -57,7 +57,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
 
     setSendObj(true);
     try {
-      const res = await fetch("http://localhost:3000/api/grocery/", {
+      const res = await fetch("http://localhost:3000/api/grocery", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

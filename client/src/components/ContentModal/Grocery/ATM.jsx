@@ -56,29 +56,42 @@ export default function AtmTab({
 
   const handlePayment = async () => {
     if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
+
+    console.log(groceryList)
+  
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
+  
     try {
+      // Obtener items del localStorage y parsearlos
+      const storedInvoice = loadInvoiceFromLocalStorage();
+      const items = storedInvoice ? storedInvoice.items : groceryList.map((item) => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      }));
+  
+      // Datos para enviar al backend
+      const requestData = {
+        totalAmount,
+        items: items,
+        userID: "12345abc",
+        invoiceNumber: Date.now(),
+      };
+  
       const res = await fetch("http://localhost:3000/api/invoices", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          totalAmount,
-          groceryList,
-          items: groceryList.map((item) => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price,
-          })),
-        }),
+        body: JSON.stringify(requestData),
       });
-
+  
       if (!res.ok) throw new Error("Failed to create invoice");
-
+  
       const invoiceData = await res.json();
       const latestInvoice = invoiceData.invoice;
-      setInvoice(latestInvoice);      saveInvoiceToLocalStorage(latestInvoice);
-
+      setInvoice(latestInvoice);     
+      saveInvoiceToLocalStorage(latestInvoice);
+  
       setAlert("Payment Done ✅", "success");
     } catch (error) {
       setAlert("Payment Failed", "danger");
@@ -87,7 +100,7 @@ export default function AtmTab({
       setPaymentProcessing(false);
     }
   };
-
+  
   const setAlert = (status, type) => {
     setPaymentStatus(status);
     setAlertType(type);

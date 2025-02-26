@@ -64,12 +64,14 @@ export default function FormComp({
   }, []);  
   
   const [action, setAction] = React.useState(`/${statusForm}`);
-  
+  const [gender, setGender] = React.useState('');
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     let data = Object.fromEntries(new FormData(e.currentTarget));
+    console.log("Data to be sent:", data);
     
     const url = statusForm === "login" ? "http://localhost:3000/api/login" : "http://localhost:3000/api/signup";
 
@@ -149,10 +151,16 @@ export default function FormComp({
             key={index}
             isRequired
             errorMessage={`Please select a valid ${field.name}`}
+            name={field.name}
             label={field.label}
             labelPlacement="outside"
             items={field.options}
             placeholder={field.placeholder}
+            selectedKey={gender}
+            onSelectionChange={(value) => {
+              console.log("Selected Value:", value); // Verifica el valor seleccionado
+              setGender(value); // Guarda solo el string
+            }}
             aria-label={`Select ${field.name}`}
           >
             {Array.isArray(field.options) && field.options.length > 0
