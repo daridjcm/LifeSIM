@@ -11,9 +11,15 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     items: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+      type: DataTypes.TEXT,
+      allowNull: false,
+      get() {
+        return JSON.parse(this.getDataValue('items'));
+      },
+      set(value) {
+        this.setDataValue('items', JSON.stringify(value));
+      }
+    },    
     userID: {
       type: DataTypes.INTEGER,
       allowNull: false,

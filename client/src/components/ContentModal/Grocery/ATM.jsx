@@ -5,7 +5,6 @@ import handleDownload from "./SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
 
-// Función para guardar la factura en localStorage
 const saveInvoiceToLocalStorage = (invoice) => {
   const invoiceWithTimestamp = {
     ...invoice,
@@ -14,7 +13,6 @@ const saveInvoiceToLocalStorage = (invoice) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceWithTimestamp));
 };
 
-// Función para cargar la factura desde localStorage si está disponible y no ha expirado
 const loadInvoiceFromLocalStorage = () => {
   const storedInvoice = localStorage.getItem(STORAGE_KEY);
   if (!storedInvoice) return null;
@@ -22,10 +20,9 @@ const loadInvoiceFromLocalStorage = () => {
   const parsedInvoice = JSON.parse(storedInvoice);
   const { timestamp } = parsedInvoice;
 
-  // Expiración de 24 horas
-  const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 día en milisegundos
+  const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
   if (Date.now() - timestamp > EXPIRATION_TIME) {
-    localStorage.removeItem(STORAGE_KEY); // Si ha expirado, eliminarlo
+    localStorage.removeItem(STORAGE_KEY);
     return null;
   }
 
@@ -37,7 +34,7 @@ export default function AtmTab({
   alertVisible, setAlertVisible, alertType, setAlertType,
 }) {
   const [totalAmount, setTotalAmount] = useState(0);
-  const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage()); // Cargar factura desde localStorage
+  const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage());
   const [groceryList, setGroceryList] = useState([]);
 
   useEffect(() => {
@@ -71,13 +68,13 @@ export default function AtmTab({
         price: item.price,
       }));
       
-      // Datos para enviar al backend
       const requestData = {
         totalAmount,
         items: items,
-        userID: "12345abc",
         invoiceNumber: Date.now(),
       };
+
+      console.log('Request Data:', requestData)
       
       const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:3000/api/invoices", {
@@ -88,8 +85,12 @@ export default function AtmTab({
         body: JSON.stringify(requestData),
       });
       
-      if (!res.ok) throw new Error("Failed to create invoice");
-  
+      if (!res.ok) {
+        const errorDetails = await res.json();
+        console.error('Error details:', errorDetails);
+        throw new Error('Failed to create invoice');
+      }
+        
       const invoiceData = await res.json();
       const latestInvoice = invoiceData.invoice;
       setInvoice(latestInvoice);     
