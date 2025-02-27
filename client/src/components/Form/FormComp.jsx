@@ -45,9 +45,7 @@ export default function FormComp({
       });
 
       const result = await response.json();
-      if (response.ok) {
-        console.log("User data:", result.user);
-      } else {
+      if (!response.ok) {
         console.error(
           "Error fetching user data:",
           result.message || "Something went wrong",
@@ -73,7 +71,6 @@ export default function FormComp({
     e.preventDefault();
 
     let data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Data to be sent:", data);
 
     const url =
       statusForm === "login"
@@ -105,7 +102,6 @@ export default function FormComp({
           `${statusForm === "login" ? "Login" : "Registration"} successful`,
         );
         const token = result.token;
-        console.log(token);
         localStorage.setItem("token", token);
         setTimeout(() => {
           handleNavigate(url);
