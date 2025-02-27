@@ -34,7 +34,7 @@ export default function ModalAction({ item, onClose }) {
         radius="md"
         shadow="md"
       >
-        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
+        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between mb-5">
           <div>
             <p className="text-default-500">Inside the</p>
             <h4 id="itemTitle" className="font-bold text-large">
