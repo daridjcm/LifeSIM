@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, Button } from "@heroui/react";
+import { Form, Input, Button, Select, SelectItem } from "@heroui/react";
+import { addToast } from "@heroui/toast";
+import SpinnerComp from "../Spinner.jsx";
 import PropTypes from "prop-types";
-import { SelectItem, Select } from "@heroui/react";
 import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
 
@@ -62,20 +63,19 @@ export default function FormComp({
       getUserData(token);
     }
   }, []);
-
+  
   const [action, setAction] = React.useState(`/${statusForm}`);
   const [gender, setGender] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false);
+  
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     let data = Object.fromEntries(new FormData(e.currentTarget));
 
-    const url =
-      statusForm === "login"
-        ? "http://localhost:3000/api/login"
-        : "http://localhost:3000/api/signup";
+    const url = statusForm === "login" ? "http://localhost:3000/api/login" : statusForm === "signup" ? "http://localhost:3000/api/signup" : "http://localhost:3000/api/customers/new";
 
     const handleNavigate = (url) => {
       if (url.includes("/api/login")) {
@@ -98,21 +98,19 @@ export default function FormComp({
 
       const result = await response.json();
       if (response.ok) {
-        alert(
-          `${statusForm === "login" ? "Login" : "Registration"} successful`,
-        );
         const token = result.token;
         localStorage.setItem("token", token);
         setTimeout(() => {
           handleNavigate(url);
-        }, 500);
+        }, 3000);
       } else {
         alert(`Error: ${result.message || "Something went wrong"}`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
+      alert("An error occurred. The server is not working as it should. Please report in https://github.com/Daridjcm/LifeSIM/issues/new");
     }
+    setLoading(false);
   };
 
   return (
@@ -167,17 +165,17 @@ export default function FormComp({
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    textValue={option.label}
-                  >
-                    {option.label}
-                    <p className="text-gray-500 text-opacity-80">
-                      {option.description}
-                    </p>
-                  </SelectItem>
-                ))
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  textValue={option.label}
+                >
+                  {option.label}
+                  <p className="text-gray-500 text-opacity-80">
+                    {option.description}
+                  </p>
+                </SelectItem>
+              ))
               : null}
           </Select>
         ) : (
@@ -211,6 +209,12 @@ export default function FormComp({
             }
             variant="flat"
             type="submit"
+            // onPress={() => {
+            //   addToast({
+            //     title: 'Notification',
+            //     description: `${statusForm === "login" ? "Login" : "Registration"} successful`,
+            //   })
+            // }}
           >
             {statusForm === "login"
               ? "Enter"
@@ -219,6 +223,7 @@ export default function FormComp({
                 : statusForm === "customers"
                   ? "Add Customer"
                   : btnText}
+            {loading ? <SpinnerComp color={statusForm === "login" || statusForm === "signup" ? "success" : "primary"} /> : null}
           </Button>
         </div>
       </ConditionalWrapper>
