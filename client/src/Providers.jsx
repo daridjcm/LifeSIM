@@ -17,8 +17,8 @@ export default function Providers({ children }) {
         toastProps={{
           variant: 'bordered',
           color: "default",
-          promise: new Promise((res) => setTimeout(res, 1000)).then(() => console.log("Promise resolved")),
-          timeout: 1300,
+          promise: new Promise((res) => setTimeout(res, 2000)).then(() => console.log("Promise resolved")),
+          timeout: 4000,
           classNames: {
             closeButton: "opacity-100 absolute right-4 top-1/2 -translate-y-1/2",
           },

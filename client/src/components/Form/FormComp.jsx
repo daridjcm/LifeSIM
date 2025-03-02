@@ -72,21 +72,15 @@ export default function FormComp({
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-
+  
     let data = Object.fromEntries(new FormData(e.currentTarget));
-
-    const url = statusForm === "login" ? "http://localhost:3000/api/login" : statusForm === "signup" ? "http://localhost:3000/api/signup" : "http://localhost:3000/api/customers/new";
-
-    const handleNavigate = (url) => {
-      if (url.includes("/api/login")) {
-        navigate("/game");
-      } else if (url.includes("/api/signup")) {
-        navigate("/login");
-      } else {
-        return null;
-      }
-    };
-
+  
+    const url = statusForm === "login" 
+      ? "http://localhost:3000/api/login" 
+      : statusForm === "signup" 
+        ? "http://localhost:3000/api/signup" 
+        : "http://localhost:3000/api/customers/new";
+  
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -95,23 +89,47 @@ export default function FormComp({
         },
         body: JSON.stringify(data),
       });
-
+  
       const result = await response.json();
+      
       if (response.ok) {
         const token = result.token;
-        localStorage.setItem("token", token);
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+  
+        addToast({
+          title: "Success",
+          description: `${
+            statusForm === "login" ? "Login successful" : 
+            statusForm === "signup" ? "Registration successful" : 
+            "Customer added successfully"
+          }`,
+          onClose: () => setLoading(false),
+        });
+  
         setTimeout(() => {
-          handleNavigate(url);
-        }, 3000);
+          if (statusForm === "login") navigate("/game");
+          else if (statusForm === "signup") navigate("/login");
+        }, 2000);
       } else {
-        alert(`Error: ${result.message || "Something went wrong"}`);
+        addToast({
+          title: "Error",
+          description: result.message || "Something went wrong. Please check your data.",
+          color: "danger",
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred. The server is not working as it should. Please report in https://github.com/Daridjcm/LifeSIM/issues/new");
+      addToast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again later.",
+        color: "danger",
+      });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  };  
 
   return (
     <Form
@@ -208,14 +226,7 @@ export default function FormComp({
                 : "primary"
             }
             variant="flat"
-            type="submit"
-            // onPress={() => {
-            //   addToast({
-            //     title: 'Notification',
-            //     description: `${statusForm === "login" ? "Login" : "Registration"} successful`,
-            //   })
-            // }}
-          >
+            type="submit"> 
             {statusForm === "login"
               ? "Enter"
               : statusForm === "signup"
