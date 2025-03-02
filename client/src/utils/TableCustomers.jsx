@@ -27,6 +27,7 @@ const status = {
   color: ["primary", "danger", "success", "warning", "secondary"],
 };
 
+// ToDo: Create a server route to customers.
 export const customers = [
   {
     id: 1,
