@@ -1,4 +1,5 @@
 import { Checkbox, CheckboxGroup, cn, Image, Input, ScrollShadow, Select, SelectItem } from "@heroui/react";
+import { addToast } from "@heroui/toast";
 import CustomButton from "../../CustomButton";
 import { useState, useEffect } from "react";
 
@@ -40,11 +41,19 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     );
     setSelectedItems(updatedItems);
     saveToLocalStorage(updatedItems);
+    addToast({
+      title: "Note",
+      description: "If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.",
+    })
   };
 
   const handleProductChange = (title) => {
     setSelectedProduct(title);
   };
+
+  const handleClear = () => {
+    localStorage.removeItem(STORAGE_KEY);
+  }
 
   const handleSend = async () => {
     const updatedItems = selectedItems.map(item => ({
@@ -73,7 +82,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       console.error("Error sending data:", error);
     }
   };
-
+  
   return (
     <>
       <p>Products selected to buy.</p>
@@ -82,12 +91,16 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
           <CheckboxGroup
             orientation="vertical"
             color="primary"
-            lineThrough
-          >
-            <ScrollShadow className="xl:h-[300px] lg:h-[200px]" hideScrollBar size={70}>
+            onChange={(checkedItems) => {
+              const updatedItems = selectedItems.filter((product) => !checkedItems.includes(product.name));
+              setSelectedItems(updatedItems);
+              saveToLocalStorage(updatedItems);
+            }}
+            >
+            <ScrollShadow className="xl:h-[250px] lg:h-[200px]" hideScrollBar size={70}>
               <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3">
                 {selectedItems.map((product) => (
-                  <Checkbox key={product.name} value={product.name}>
+                  <Checkbox key={product.name} value={product.name} lineThrough>
                     <Image
                       alt={product.name}
                       src={product.img}
@@ -96,7 +109,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                       shadow="sm"
                       radius="full"
                       className="object-cover"
-                    />
+                      />
                     <p className="ml-2">{product.name}</p>
                     <p className="ml-2 font-bold">${product.price}</p>
                   </Checkbox>
@@ -112,7 +125,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               onChange={(e) => handleProductChange(e.target.value)}
               className="border border-gray-300 rounded-md text-center"
               aria-label="Select product"
-            >
+              >
               {selectedItems.map((product) => (
                 <SelectItem key={product.name} value={product.name}>
                   {product.name}
@@ -120,7 +133,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               ))}
             </Select>
             <label className="mr-2 ml-3" htmlFor="quantityInput">Quantity</label>
-            <Input 
+            <Input
               id="quantityInput"
               variant="bordered"
               type="number"
@@ -129,15 +142,19 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               className="border border-gray-300 rounded-md text-center"
               min={1}
               max={50}
-            />
+              />
           </div>
           <CustomButton
             label={"Save changes"}
             onPress={handleSend}
             isLoading={sendObject}
             loadingText="Saving changes..."
-            id="handleSend"
-          />
+            />
+          <CustomButton
+            label={"Clear all"}
+            onPress={handleClear}
+            loadingText="Cleaning all..."
+            />
         </>
       ) : (
         <p className="text-gray-500">Not have products selected.</p>
@@ -149,16 +166,18 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
 export default function ShoppingListTab({ selectedProducts = [] }) {
   const [selectedItems, setSelectedItems] = useState(() => {
     const storedItems = loadFromLocalStorage();
-    if (storedItems) {
-      return storedItems;
-    }
-
-    return selectedProducts.map((product) => ({
-      ...product,
-      basePrice: product.price,
-      quantity: 1,
-    }));
+    return storedItems && storedItems.length > 0 ? storedItems : [];
   });
+  
+  useEffect(() => {
+    if (selectedProducts.length > 0) {
+      setSelectedItems(selectedProducts.map((product) => ({
+        ...product,
+        basePrice: product.price,
+        quantity: 1,
+      })));
+    }
+  }, [selectedProducts]);
 
   useEffect(() => {
     saveToLocalStorage(selectedItems);
@@ -167,7 +186,13 @@ export default function ShoppingListTab({ selectedProducts = [] }) {
   return (
     <>
       <p className="text-2xl font-bold">Summary to Shopping List</p>
-      <ShoppingList selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+      {selectedItems.length > 0 ? (
+        <ShoppingList selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+      ) : (
+        <p className="text-gray-500">No products selected.</p>
+      )
+    }
     </>
   );
 }
+

@@ -9,7 +9,7 @@ import {
 } from "@heroui/react";
 import {
   ArrowLeftEndOnRectangleIcon,
-  ShoppingCartIcon,
+  ShoppingCartIcon, CheckCircleIcon
 } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction.jsx";
 
@@ -146,11 +146,19 @@ export default function CardList({
                       </>
                     ) : (
                       <span className="flex items-center text-pretty">
-                        {selectedProducts.includes(item)
-                          ? `${item.name} added`
-                          : `Buy ${item.name} for ${item.price}`}
-                        <ShoppingCartIcon className="size-5 text-white ml-1" />
+                        {selectedProducts.includes(item) ? (
+                          <>
+                            {item.name} added
+                            <CheckCircleIcon className="size-5 text-green-500 ml-1" />
+                          </>
+                        ) : (
+                          <>
+                            Buy {item.name} for {item.price}
+                            <ShoppingCartIcon className="size-5 text-white ml-1" />
+                          </>
+                        )}
                       </span>
+
                     )}
                   </Button>
                 </div>
