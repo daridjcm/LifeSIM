@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
-import ModalComponent from "../Modal.jsx";
+import ModalComponent from "./Modal.jsx";
 import TableCustomers, {
   customersCount,
 } from "../../../utils/TableCustomers.jsx";
@@ -61,7 +61,7 @@ export default function PhoneCorporative() {
 
       <ModalComponent
         title="Table of Calls"
-        desc="Here is a table, where you can add a new customer for the call."
+        description="Here is a table, where you can add a new customer for the call."
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >

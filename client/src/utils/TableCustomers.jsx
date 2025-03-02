@@ -6,6 +6,7 @@ import {
   TableRow,
   TableCell,
   Button,
+  Chip
 } from "@heroui/react";
 
 const status = {
@@ -16,34 +17,40 @@ const status = {
     "Call completed",
     "No call",
   ],
-  key: [1, 2, 3, 4, 5],
+  key: [
+    "You need to call the customer",
+    "The customer did not answer",
+    "The customer answered the call",
+    "The call was successfully completed",
+    "No call was made",
+  ],
   color: ["primary", "danger", "success", "warning", "secondary"],
 };
 
 export const customers = [
   {
-    key: 1,
+    id: 1,
     name: "John Doe",
     phone: "123-456-7890",
-    status: 1,
+    status: 4,
     date: "Without date",
   },
   {
-    key: 2,
+    id: 2,
     name: "Jane Doe",
     phone: "555-123-4567",
-    status: 2,
+    status: 4,
     date: "Without date",
   },
   {
-    key: 3,
+    id: 3,
     name: "Bob Smith",
     phone: "987-654-3210",
-    status: 3,
+    status: 4,
     date: "Without date",
   },
   {
-    key: 4,
+    id: 4,
     name: "Alice Johnson",
     phone: "321-987-6543",
     status: 4,
@@ -84,10 +91,19 @@ export default function TableCustomers() {
         <TableBody>
           {customers.map((row) => (
             <TableRow key={row.key}>
-              {columns.map((column) => (
-                <TableCell key={column.key}>{row[column.key]}</TableCell>
-              ))}
-            </TableRow>
+            {columns.map((column) => (
+              <TableCell key={column.key}>
+                {column.key === "status" ? (
+                  <Chip color={status.color[row.status - 1]}>
+                    {status.label[row.status - 1]}
+                  </Chip>
+                ) : (
+                  row[column.key]
+                )}
+              </TableCell>
+            ))}
+          </TableRow>
+
           ))}
         </TableBody>
       </Table>
@@ -96,20 +112,22 @@ export default function TableCustomers() {
         color="primary"
         variant="ghost"
         size="md"
-        onPress={() => (window.location.href = "/customers/new")}
+        onPress={() => (
+          window.open("/customers/new", "_blank")
+        )}
       >
         Add a new customer
       </Button>
-      <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">
-        <p>Note about Call Status</p>
-        <p className="text-sm text-zinc-900">
-          <ul className="list-decimal list-inside">
-            <li>Make call - Call to the customer</li>
-            <li>Call rejected - The customer did not answer the call</li>
-            <li>Call accepted - The customer answered the call</li>
-            <li>Call completed - Call to the customer is completed</li>
-          </ul>
-        </p>
+
+      <div className="text-amber-600 bg-yellow-100 p-2 rounded-md mt-4">
+        <p className="font-semibold">Note about Call Status</p>
+        <ul className="flex flex-col gap-2 mt-3 list-decimal list-inside text-sm text-zinc-900">
+          {status.label.map((label, index) => (
+            <li key={status.key[index]}>
+              <Chip color={status.color[index]}>{label}</Chip> - {status.key[index]}
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );

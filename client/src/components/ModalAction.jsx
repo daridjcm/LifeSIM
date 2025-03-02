@@ -52,7 +52,7 @@ export default function ModalAction({ item, onClose }) {
           className={
             item.name == "Work"
               ? "py-2 max-h-[60vh] min-h-full"
-              : "max-h-full overflow-hidden"
+              : "max-h-full overflow-auto"
           }
         >
           {item.name == "Work" ? (

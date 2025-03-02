@@ -9,7 +9,7 @@ import {
 
 export default function ModalComponent({
   title,
-  desc1,
+  description,
   children,
   isOpen,
   onOpenChange,
@@ -47,7 +47,7 @@ export default function ModalComponent({
             <ModalHeader className="flex flex-col gap-1">
               {title}
               <hr />
-              <p className="text-sm mt-4 text-default-500">{desc1}</p>
+              <p className="text-sm mt-4 text-default-500">{description}</p>
             </ModalHeader>
             <ModalBody className="text-wrap">{children}</ModalBody>
             <ModalFooter>
