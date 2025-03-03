@@ -20,6 +20,7 @@
     "dotenv": "^16.4.7",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
-    "mariadb": "^3.4.0"
+    "mariadb": "^3.4.0",
+    "recharts": "^2.15.1"
   }
 }

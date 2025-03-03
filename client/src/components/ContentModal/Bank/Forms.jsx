@@ -1,3 +1,4 @@
+import LineChart from "./Chart";
 import FormComp from "../../Form/";
 
 export function Overview() {
@@ -65,13 +66,16 @@ export function Invert() {
   ];
 
   return (
-    <FormComp
-      title="Invert Money"
-      description="Be careful, once you have invested there is no turning back"
-      fields={fields}
-      isRequired={false}
-      btnText="Invert Money"
-    />
+    <>
+      <LineChart />
+      <FormComp
+        title="Invert Money"
+        description="Be careful, once you have invested there is no turning back"
+        fields={fields}
+        isRequired={false}
+        btnText="Invert Money"
+        />
+    </>
   );
 }
 
