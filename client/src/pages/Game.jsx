@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import Navbar from "../components/Navbar.jsx";
 import CardList from "../components/CardList.jsx";
 import NeedsPanel from "../components/NeedsPanel";
@@ -6,6 +7,7 @@ import { activitiesUser } from "../utils/data.js";
 import { UserProvider } from "../context/UserContext.jsx";
 
 export default function Game() {
+  const memoizedActivities = useMemo(() => activitiesUser, []);
   return (
     <>
       <TimeProvider>
@@ -13,7 +15,7 @@ export default function Game() {
           <Navbar />
           <CardList
             statusCard={"activitiesUser"}
-            itemsToDisplay={activitiesUser}
+            itemsToDisplay={memoizedActivities}
             iconShow={true}
           />
         </UserProvider>

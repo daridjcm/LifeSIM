@@ -1,5 +1,5 @@
 import { Tabs, Tab } from "@heroui/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import ProductsTab from "./Products.jsx";
 import ShoppingListTab from "./Shopping.jsx";
 import AtmTab from "./ATM.jsx";
@@ -9,7 +9,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/solid";
 
-export function Index({ itemsToDisplay, page, total, onChange }) {
+const Index = React.memo(({ itemsToDisplay, page, total, onChange }) => {
   // State Management
   const [paymentStatus, setPaymentStatus] = useState("Make Payment");
   const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -78,4 +78,6 @@ export function Index({ itemsToDisplay, page, total, onChange }) {
       </Tab>
     </Tabs>
   );
-}
+})
+
+export default Index;

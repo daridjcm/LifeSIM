@@ -12,7 +12,7 @@ import {
 // Content Modal
 import ContentWork from "./ContentModal/Work/Work.jsx";
 import ContentBank from "./ContentModal/Bank/Bank.jsx";
-import ContentGrocery from "./ContentModal/Grocery";
+import ContentGrocery from "./ContentModal/Grocery/ContentGrocery.jsx";
 
 export default function ModalAction({ item, onClose }) {
   useEffect(() => {

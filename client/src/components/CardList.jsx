@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardBody,
@@ -13,13 +13,13 @@ import {
 } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction.jsx";
 
-export default function CardList({
+const CardList = React.memo(({
   statusCard,
   iconShow,
   itemsToDisplay,
   selectedProducts,
   setSelectedProducts,
-}) {
+}) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -174,4 +174,6 @@ export default function CardList({
       )}
     </>
   );
-}
+})
+
+export default CardList;
