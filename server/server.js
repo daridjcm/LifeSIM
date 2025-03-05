@@ -28,7 +28,7 @@ app.use("/api", invoiceRoutes);
 app.get("/", (req, res) => res.send("API is running..."));
 
 sequelize
-  .sync({ force: false, alter: false })
+  .sync({ force: true, alter: false })
   .then(() => {
     console.log("Tables synchronized");
   })
@@ -36,6 +36,6 @@ sequelize
     console.error("Error synchronizing tables:", error);
   });
 
-app.listen(PORT, () =>
+app.listen(PORT, '0.0.0.0', () =>
   console.log(`Server running on http://localhost:${PORT}`),
 );
