@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardBody,
@@ -9,17 +9,17 @@ import {
 } from "@heroui/react";
 import {
   ArrowLeftEndOnRectangleIcon,
-  ShoppingCartIcon,
+  ShoppingCartIcon, CheckCircleIcon
 } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction.jsx";
 
-export default function CardList({
+const CardList = React.memo(({
   statusCard,
   iconShow,
   itemsToDisplay,
   selectedProducts,
   setSelectedProducts,
-}) {
+}) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -146,11 +146,19 @@ export default function CardList({
                       </>
                     ) : (
                       <span className="flex items-center text-pretty">
-                        {selectedProducts.includes(item)
-                          ? `${item.name} added`
-                          : `Buy ${item.name} for ${item.price}`}
-                        <ShoppingCartIcon className="size-5 text-white ml-1" />
+                        {selectedProducts.includes(item) ? (
+                          <>
+                            {item.name} added
+                            <CheckCircleIcon className="size-5 text-green-500 ml-1" />
+                          </>
+                        ) : (
+                          <>
+                            Buy {item.name} for {item.price}
+                            <ShoppingCartIcon className="size-5 text-white ml-1" />
+                          </>
+                        )}
                       </span>
+
                     )}
                   </Button>
                 </div>
@@ -166,4 +174,6 @@ export default function CardList({
       )}
     </>
   );
-}
+})
+
+export default CardList;

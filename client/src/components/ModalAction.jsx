@@ -12,7 +12,7 @@ import {
 // Content Modal
 import ContentWork from "./ContentModal/Work/Work.jsx";
 import ContentBank from "./ContentModal/Bank/Bank.jsx";
-import ContentGrocery from "./ContentModal/Grocery";
+import ContentGrocery from "./ContentModal/Grocery/ContentGrocery.jsx";
 
 export default function ModalAction({ item, onClose }) {
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ModalAction({ item, onClose }) {
         radius="md"
         shadow="md"
       >
-        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
+        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between mb-5">
           <div>
             <p className="text-default-500">Inside the</p>
             <h4 id="itemTitle" className="font-bold text-large">
@@ -52,7 +52,7 @@ export default function ModalAction({ item, onClose }) {
           className={
             item.name == "Work"
               ? "py-2 max-h-[60vh] min-h-full"
-              : "max-h-full overflow-hidden"
+              : "max-h-full overflow-auto"
           }
         >
           {item.name == "Work" ? (

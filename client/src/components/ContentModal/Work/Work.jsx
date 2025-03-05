@@ -77,12 +77,8 @@ export default function ContentWork() {
       </div>
 
       <div className="w-full bg-slate-100 rounded p-4 mt-4">
-        <p className="text-xl font-bold">Tasks assigned by your Boss</p>
+        <p className="text-xl font-bold">Report Day</p>
         <ul id="tasksList" className="list-none list-inside hidden">
-          <li>
-            Check excel file with the customers and later, add them to the table
-            of calls <PorcentageTasks value={40} />
-          </li>
           Signature in here to confirm your job today.{" "}
           <PorcentageTasks value={35} />
           <br />
@@ -94,10 +90,6 @@ export default function ContentWork() {
               className="border-2 mt-1 mb-3 ml-2 w-full px-2 py-1 rounded transition-all duration-200 hover:border-green-500 focus:border-green-500 border-slate-300 focus:outline-none focus:ring-1 focus:ring-green-500"
               placeholder="Type your username"
             />
-          </li>
-          <li>
-            Notify Analia about the tasks you have finished{" "}
-            <PorcentageTasks value={25} />
           </li>
         </ul>
         <CustomButton

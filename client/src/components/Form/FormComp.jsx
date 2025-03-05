@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, Button } from "@heroui/react";
+import { Form, Input, Button, Select, SelectItem } from "@heroui/react";
+import { addToast } from "@heroui/toast";
+import SpinnerComp from "../Spinner.jsx";
 import PropTypes from "prop-types";
-import { SelectItem, Select } from "@heroui/react";
 import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
 
@@ -45,9 +46,7 @@ export default function FormComp({
       });
 
       const result = await response.json();
-      if (response.ok) {
-        console.log("User data:", result.user);
-      } else {
+      if (!response.ok) {
         console.error(
           "Error fetching user data:",
           result.message || "Something went wrong",
@@ -64,32 +63,24 @@ export default function FormComp({
       getUserData(token);
     }
   }, []);
-
+  
   const [action, setAction] = React.useState(`/${statusForm}`);
   const [gender, setGender] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false);
+  
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-
+  
     let data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Data to be sent:", data);
-
-    const url =
-      statusForm === "login"
-        ? "http://localhost:3000/api/login"
-        : "http://localhost:3000/api/signup";
-
-    const handleNavigate = (url) => {
-      if (url.includes("/api/login")) {
-        navigate("/game");
-      } else if (url.includes("/api/signup")) {
-        navigate("/login");
-      } else {
-        return null;
-      }
-    };
-
+  
+    const url = statusForm === "login" 
+      ? "http://localhost:3000/api/login" 
+      : statusForm === "signup" 
+        ? "http://localhost:3000/api/signup" 
+        : "http://localhost:3000/api/customers/new";
+  
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -98,26 +89,47 @@ export default function FormComp({
         },
         body: JSON.stringify(data),
       });
-
+  
       const result = await response.json();
+      
       if (response.ok) {
-        alert(
-          `${statusForm === "login" ? "Login" : "Registration"} successful`,
-        );
         const token = result.token;
-        console.log(token);
-        localStorage.setItem("token", token);
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+  
+        addToast({
+          title: "Success",
+          description: `${
+            statusForm === "login" ? "Login successful" : 
+            statusForm === "signup" ? "Registration successful" : 
+            "Customer added successfully"
+          }`,
+          onClose: () => setLoading(false),
+        });
+  
         setTimeout(() => {
-          handleNavigate(url);
-        }, 500);
+          if (statusForm === "login") navigate("/game");
+          else if (statusForm === "signup") navigate("/login");
+        }, 2000);
       } else {
-        alert(`Error: ${result.message || "Something went wrong"}`);
+        addToast({
+          title: "Error",
+          description: result.message || "Something went wrong. Please check your data.",
+          color: "danger",
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
+      addToast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again later.",
+        color: "danger",
+      });
+    } finally {
+      setLoading(false);
     }
-  };
+  };  
 
   return (
     <Form
@@ -171,17 +183,17 @@ export default function FormComp({
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    textValue={option.label}
-                  >
-                    {option.label}
-                    <p className="text-gray-500 text-opacity-80">
-                      {option.description}
-                    </p>
-                  </SelectItem>
-                ))
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  textValue={option.label}
+                >
+                  {option.label}
+                  <p className="text-gray-500 text-opacity-80">
+                    {option.description}
+                  </p>
+                </SelectItem>
+              ))
               : null}
           </Select>
         ) : (
@@ -214,8 +226,7 @@ export default function FormComp({
                 : "primary"
             }
             variant="flat"
-            type="submit"
-          >
+            type="submit"> 
             {statusForm === "login"
               ? "Enter"
               : statusForm === "signup"
@@ -223,6 +234,7 @@ export default function FormComp({
                 : statusForm === "customers"
                   ? "Add Customer"
                   : btnText}
+            {loading ? <SpinnerComp color={statusForm === "login" || statusForm === "signup" ? "success" : "primary"} /> : null}
           </Button>
         </div>
       </ConditionalWrapper>
