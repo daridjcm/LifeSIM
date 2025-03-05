@@ -16,14 +16,10 @@
     "prettier": "^3.4.2"
   },
   "dependencies": {
-    "@heroui/toast": "^2.0.5",
     "dotenv": "^16.4.7",
-    "jspdf": "^2.5.2",
-    "jspdf-autotable": "^3.8.4",
-    "mariadb": "^3.4.0",
-    "recharts": "^2.15.1"
+    "mariadb": "^3.4.0"
   },
   "engines": {
-  "node": ">=20.0.0"
+    "node": ">=20.0.0"
   }
 }

@@ -28,7 +28,7 @@ app.use("/api", invoiceRoutes);
 app.get("/api", (req, res) => res.send("API is running..."));
 
 sequelize
-  .sync({ force: true, alter: false })
+  .sync({ force: false, alter: false })
   .then(() => {
     console.log("Tables synchronized");
   })
