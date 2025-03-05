@@ -25,7 +25,7 @@ app.use("/api", userRoutes);
 app.use("/api", groceryRoutes);
 app.use("/api", invoiceRoutes);
 
-app.get("/", (req, res) => res.send("API is running..."));
+app.get("/api", (req, res) => res.send("API is running..."));
 
 sequelize
   .sync({ force: true, alter: false })
