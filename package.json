@@ -22,5 +22,8 @@
     "jspdf-autotable": "^3.8.4",
     "mariadb": "^3.4.0",
     "recharts": "^2.15.1"
+  },
+  "engines": {
+  "node": ">=20.0.0"
   }
 }
