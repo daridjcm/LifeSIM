@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import path from "path"
 import cors from "cors";
 import { connectDB } from "./config/database.js";
 import { sequelize } from "./models/index.js";
@@ -11,6 +12,14 @@ import groceryRoutes from "./routes/grocery.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Serves files static of client
+app.use(express.static(path.resolve('client', 'dist')));
+
+// To handle routes not defined (React Router)
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve('client', 'dist', 'index.html'));
+});
 
 // Connect to MySQL
 connectDB();
@@ -25,7 +34,7 @@ app.use("/api", userRoutes);
 app.use("/api", groceryRoutes);
 app.use("/api", invoiceRoutes);
 
-app.get("/api", (req, res) => res.send("API is running..."));
+app.get("/", (req, res) => res.send("API is running..."));
 
 sequelize
   .sync({ force: false, alter: false })
