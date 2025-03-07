@@ -5,7 +5,7 @@ import PorcentageTasks from "../../PorcentageTasks.jsx";
 import PhoneCorporative from "./PhoneCorporative.jsx";
 import CustomButton from "../../CustomButton.jsx";
 
-export default function ContentWork() {
+export default function Index() {
   const [submitSignature, setSubmitSignature] = useState(false);
 
   return (

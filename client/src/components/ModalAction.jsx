@@ -10,9 +10,10 @@ import {
   ScrollShadow,
 } from "@heroui/react";
 // Content Modal
-import ContentWork from "./ContentModal/Work/Work.jsx";
-import ContentBank from "./ContentModal/Bank/Bank.jsx";
-import ContentGrocery from "./ContentModal/Grocery/ContentGrocery.jsx";
+import ContentWork from "./ContentModal/Work/Index.jsx";
+import ContentBank from "./ContentModal/Bank/Index.jsx";
+import ContentGrocery from "./ContentModal/Grocery/Index.jsx";
+import ContentHospital from "./ContentModal/Hospital/Index.jsx";
 
 export default function ModalAction({ item, onClose }) {
   useEffect(() => {
@@ -59,6 +60,8 @@ export default function ModalAction({ item, onClose }) {
             <ContentWork />
           ) : item.name == "Bank" ? (
             <ContentBank />
+          ) : item.name == "Hospital" ? (
+            <ContentHospital />
           ) : (
             <ContentGrocery />
           )}
