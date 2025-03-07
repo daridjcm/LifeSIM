@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useState, useEffect } from "react";
-import ContentGrocery from "./ContentGrocery.jsx";
 import { activitiesUser, products } from "../../../utils/data.js";
+import ContentGrocery from "./ContentGrocery.jsx";
 
-export default function Products({ statusCard }) {
+export default function Index({ statusCard }) {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -34,7 +34,7 @@ export default function Products({ statusCard }) {
   const totalPages = Math.ceil(displayedItems.length / itemsPerPage);
 
   return (
-    <Products
+    <ContentGrocery
       itemsToDisplay={currentItems}
       page={currentPage}
       total={totalPages}
