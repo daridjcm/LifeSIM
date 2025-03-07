@@ -6,6 +6,7 @@ import {
   Chip,
   Button,
   Tooltip,
+  Image,
 } from "@heroui/react";
 import {
   ArrowLeftEndOnRectangleIcon,
@@ -94,7 +95,7 @@ const CardList = React.memo(
 
     return (
       <>
-        <div className="gap-x-1 gap-y-5 mt-5 mb-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+        <div className="gap-x-5 gap-y-5 mt-2 mb-2 ml-5 mr-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
           {displayItems === 0 ? (
             <p>No hay productos para mostrar</p>
           ) : (
@@ -102,18 +103,17 @@ const CardList = React.memo(
               <Card
                 key={index}
                 shadow="sm"
-                className="m-auto max-w-[90%] min-w-[90%]"
+                className="m-0 max-w-fit"
                 aria-label={item.name}
               >
                 <CardBody className="overflow-hidden p-0">
-                  <img
+                  <Image
                     src={item.img}
                     alt={item.name}
-                    className={
-                      iconShow
-                        ? "w-full h-full"
-                        : "object-cover w-full max-w-fit sm:h-24 md:h-20 lg:max-h-fit m-auto"
-                    }
+                    width={420}
+                    height={350}
+                    isBlurred
+                    isZoomed
                   />
                   {iconShow ? null : (
                     <div className="flex justify-end mx-4">
