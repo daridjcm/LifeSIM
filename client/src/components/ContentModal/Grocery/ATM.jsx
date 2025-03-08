@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Alert } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
+import Card from "../../Card"
 import handleDownload from "./SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
+import { useUser } from "../../../context/UserContext.jsx"
+
 
 const saveInvoiceToLocalStorage = (invoice) => {
   const invoiceWithTimestamp = {
@@ -148,26 +151,13 @@ export default function AtmTab({
     setAlertVisible(true);
     setTimeout(() => setAlertVisible(false), 4500);
   };
-
+  const {user} = useUser();
   return (
     <>
       <p className="text-2xl font-bold">Summary Purchase</p>
       <p className="font-bold text-xl">Total: ${totalAmount}</p>
-      <div className="flex flex-col gap-3 bg-gradient-to-r from-green-700 to-green-500 p-10 rounded-md mt-7 mb-3 text-slate-50 text-xl shadow-lg w-full">
-        <p>Card LifeSIM</p>
-        <ul>
-          <li className="text-green-slate-100 opacity-70">
-            1234 5678 9XXX XXXX
-          </li>
-          <li>
-            Titular <span>{userData?.name || "Usuario"}</span> {/* Display the Titular name */}
-          </li>
-        </ul>
-        <div className="flex flex-col text-end text-slate-100 opacity-70">
-          <p>ID:</p> 12345abc
-        </div>
-      </div>
-
+      <Card type="Shopping Card" holder={user?.username} id={user?.id} expiry="Any" number_card="12345"/>
+      
       <div className="flex gap-3">
         <CustomButton
           label={paymentProcessing ? paymentStatus : paymentStatus}
@@ -176,7 +166,7 @@ export default function AtmTab({
         {invoice && (
           <CustomButton
             label="Download Report"
-            onPress={() => handleDownload(invoice, userData)} // Pass userData to download function
+            onPress={() => handleDownload(invoice, userData)}
           />
         )}
       </div>
