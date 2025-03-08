@@ -1,5 +1,12 @@
 import React from "react";
 import { Tabs, Tab } from "@heroui/react";
+import {
+  CalendarDateRangeIcon,
+  ClockIcon,
+  ClipboardDocumentListIcon,
+  UserIcon,
+  ClipboardDocumentCheckIcon,
+} from "@heroicons/react/24/solid";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("scheduleappointment");
@@ -17,47 +24,44 @@ export default function ContentBank() {
         key="scheduleappointment"
         title={
           <div className="flex items-center space-x-2">
+            <CalendarDateRangeIcon className="size-6" />
             <span>Schedule Appointment</span>
           </div>
         }
       ></Tab>
       <Tab
-        key="withdraw"
+        key="healthrecord"
         title={
           <div className="flex items-center space-x-2">
-            <span>Withdraw</span>
+            <ClockIcon className="size-6" />
+            <span>Health Record</span>
           </div>
         }
       ></Tab>
       <Tab
-        key="invert"
+        key="report"
         title={
           <div className="flex items-center space-x-2">
-            <span>Invert</span>
+            <ClipboardDocumentListIcon className="size-6" />
+            <span>Report</span>
           </div>
         }
       ></Tab>
       <Tab
-        key="transfer"
+        key="patient"
         title={
           <div className="flex items-center space-x-2">
-            <span>Transfer</span>
+            <UserIcon className="size-6" />
+            <span>Patient</span>
           </div>
         }
       ></Tab>
       <Tab
-        key="paydebt"
+        key="pillsreceted"
         title={
           <div className="flex items-center space-x-2">
-            <span>Pay Debt</span>
-          </div>
-        }
-      ></Tab>
-      <Tab
-        key="loans"
-        title={
-          <div className="flex items-center space-x-2">
-            <span>Loans</span>
+            <ClipboardDocumentCheckIcon className="size-6" />
+            <span>Pills Receted</span>
           </div>
         }
       ></Tab>
