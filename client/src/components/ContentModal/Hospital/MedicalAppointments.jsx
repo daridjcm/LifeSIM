@@ -106,7 +106,7 @@ export default function MedicalAppointments() {
                   src={doctor.data.avatar}
                 />
                 <div className="flex flex-col">
-                  <span>{doctor.data.name}</span>
+                  <span>{doctor.data.title}. {doctor.data.name}</span>
                   <span className="text-default-500 text-tiny">{doctor.data.specialist} ({doctor.data.experience} experience)</span>
                 </div>
               </div>
