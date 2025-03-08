@@ -7,9 +7,10 @@ import {
   UserIcon,
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
+import MedicalAppointments from "./MedicalAppointments";
 
 export default function ContentBank() {
-  const [selected, setSelected] = React.useState("scheduleappointment");
+  const [selected, setSelected] = React.useState("medicalappointments");
 
   return (
     <Tabs
@@ -21,14 +22,16 @@ export default function ContentBank() {
       fullWidth
     >
       <Tab
-        key="scheduleappointment"
+        key="medicalappointments"
         title={
           <div className="flex items-center space-x-2">
             <CalendarDateRangeIcon className="size-6" />
-            <span>Schedule Appointment</span>
+            <span>Medical Appointments</span>
           </div>
         }
-      ></Tab>
+      >
+        <MedicalAppointments/>
+      </Tab>
       <Tab
         key="healthrecord"
         title={

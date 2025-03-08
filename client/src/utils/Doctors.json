@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "name": "John Smith",
+    "title": "Dr",
+    "specialist": "Cardiologist",
+    "experience": "15 years",
+    "area": "Cardiovascular System",
+    "price_of_consult": 200
+  },
+  {
+    "id": 2,
+    "name": "Emily Johnson",
+    "title": "Dr",
+    "specialist": "Neurologist",
+    "experience": "10 years",
+    "area": "Nervous System",
+    "price_of_consult": 250
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "title": "Dr",
+    "specialist": "Orthopedic Surgeon",
+    "experience": "20 years",
+    "area": "Skeletal System",
+    "price_of_consult": 300
+  },
+  {
+    "id": 4,
+    "name": "Sarah Davis",
+    "title": "Dra",
+    "specialist": "Dermatologist",
+    "experience": "8 years",
+    "area": "Integumentary System",
+    "price_of_consult": 150
+  },
+  {
+    "id": 5,
+    "name": "William Wilson",
+    "title": "Dr",
+    "specialist": "Gastroenterologist",
+    "experience": "12 years",
+    "area": "Digestive System",
+    "price_of_consult": 220
+  },
+  {
+    "id": 6,
+    "name": "James Anderson",
+    "title": "Dr",
+    "specialist": "Pediatrician",
+    "experience": "18 years",
+    "area": "Pediatrics",
+    "price_of_consult": 380
+  },
+  {
+    "id": 7,
+    "name": "Olivia Martinez",
+    "title": "Dra",
+    "specialist": "Ophthalmologist",
+    "experience": "9 years",
+    "area": "Visual System",
+    "price_of_consult": 200
+  },
+  {
+    "id": 8,
+    "name": "David Lee",
+    "title": "Dr",
+    "specialist": "Psychiatrist",
+    "experience": "14 years",
+    "area": "Mental Health",
+    "price_of_consult": 230
+  },
+  {
+    "id": 9,
+    "name": "Sophia Garcia",
+    "title": "Dra",
+    "specialist": "Endocrinologist",
+    "experience": "11 years",
+    "area": "Endocrine System",
+    "price_of_consult": 240
+  },
+  {
+    "id": 10,
+    "name": "Daniel Martinez",
+    "title": "Dr",
+    "specialist": "Pulmonologist",
+    "experience": "16 years",
+    "area": "Respiratory System",
+    "price_of_consult": 260
+  },
+  {
+    "id": 11,
+    "name": "Isabella Hernandez",
+    "title": "Dra",
+    "specialist": "Rheumatologist",
+    "experience": "15 years",
+    "area": "Musculoskeletal System",
+    "price_of_consult": 220
+  },
+  {
+    "id": 12,
+    "name": "Matthew Clark",
+    "title": "Dr",
+    "specialist": "Urologist",
+    "experience": "12 years",
+    "area": "Urinary System",
+    "price_of_consult": 240
+  },
+  {
+    "id": 13,
+    "name": "Mia Rodriguez",
+    "title": "Dra",
+    "specialist": "Allergist",
+    "experience": "7 years",
+    "area": "Immune System",
+    "price_of_consult": 190
+  },
+  {
+    "id": 14,
+    "name": "Joshua Lewis",
+    "title": "Dr",
+    "specialist": "Oncologist",
+    "experience": "3 years",
+    "area": "Oncology",
+    "price_of_consult": 120
+  },
+  {
+    "id": 15,
+    "name": "Ava Walker",
+    "title": "Dra",
+    "specialist": "Hematologist",
+    "experience": "5 years",
+    "area": "Circulatory System",
+    "price_of_consult": 150
+  }
+]
