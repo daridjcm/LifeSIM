@@ -30,7 +30,7 @@ export default function Patient() {
         </div>
         <div className="flex-col border border-zinc-300 p-3 rounded-md w-full mt-5">
           <p className="font-semibold">Appointment Status:</p>
-          <p className="flex items-center mt-3"><ClockIcon className="size-7 mr-1 text-blue-500" />You have an appointment scheduled for</p>
+          <p className="flex items-center max-w-72 mt-3"><ClockIcon className="size-7 mr-1 text-blue-500" />You have an appointment scheduled for</p>
         </div>
       </div>
 
