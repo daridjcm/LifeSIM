@@ -8,6 +8,7 @@ import {
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
 import MedicalAppointments from "./MedicalAppointments";
+import Patient from "./Patient";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("medicalappointments");
@@ -58,7 +59,9 @@ export default function ContentBank() {
             <span>Patient</span>
           </div>
         }
-      ></Tab>
+      >
+        <Patient />
+      </Tab>
       <Tab
         key="pillsreceted"
         title={
