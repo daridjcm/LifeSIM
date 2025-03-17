@@ -6,7 +6,8 @@
     "specialist": "Cardiologist",
     "experience": "15 years",
     "area": "Cardiovascular System",
-    "price_of_consult": 200
+    "price_of_consult": 200,
+    "img": ["/images/doctors/JohnSmith-full.svg", "/images/doctors/JohnSmith-face.svg"]
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "specialist": "Neurologist",
     "experience": "10 years",
     "area": "Nervous System",
-    "price_of_consult": 250
+    "price_of_consult": 250,
+    "img": ["/images/doctors/EmilyJohnson-full.svg", "/images/doctors/EmilyJohnson-face.svg"]
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "specialist": "Orthopedic Surgeon",
     "experience": "20 years",
     "area": "Skeletal System",
-    "price_of_consult": 300
+    "price_of_consult": 300,
+    "img": ["/images/doctors/MichaelBrown-full.svg", "/images/doctors/MichaelBrown-face.svg"]
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "specialist": "Dermatologist",
     "experience": "8 years",
     "area": "Integumentary System",
-    "price_of_consult": 150
+    "price_of_consult": 150,
+    "img": ["/images/doctors/SarahDavis-full.svg", "/images/doctors/SarahDavis-face.svg"]
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "specialist": "Gastroenterologist",
     "experience": "12 years",
     "area": "Digestive System",
-    "price_of_consult": 220
+    "price_of_consult": 220,
+    "img": ["/images/doctors/WilliamWilson-full.svg", "/images/doctors/WilliamWilson-face.svg"]
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "specialist": "Pediatrician",
     "experience": "18 years",
     "area": "Pediatrics",
-    "price_of_consult": 380
+    "price_of_consult": 380,
+    "img": ["/images/doctors/JamesAnderson-full.svg", "/images/doctors/JamesAnderson-face.svg"]
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "specialist": "Ophthalmologist",
     "experience": "9 years",
     "area": "Visual System",
-    "price_of_consult": 200
+    "price_of_consult": 200,
+    "img": ["/images/doctors/OliviaMartinez-full.svg", "/images/doctors/OliviaMartinez-face.svg"]
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "specialist": "Psychiatrist",
     "experience": "14 years",
     "area": "Mental Health",
-    "price_of_consult": 230
+    "price_of_consult": 230,
+    "img": ["/images/doctors/DavidLee-full.svg", "/images/doctors/DavidLee-face.svg"]
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "specialist": "Endocrinologist",
     "experience": "11 years",
     "area": "Endocrine System",
-    "price_of_consult": 240
+    "price_of_consult": 240,
+    "img": ["/images/doctors/SophiaGarcia-full.svg", "/images/doctors/SophiaGarcia-face.svg"]
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "specialist": "Pulmonologist",
     "experience": "16 years",
     "area": "Respiratory System",
-    "price_of_consult": 260
+    "price_of_consult": 260,
+    "img": ["/images/doctors/DanielMartinez-full.svg", "/images/doctors/DanielMartinez-face.svg"]
   },
   {
     "id": 11,
@@ -96,7 +106,8 @@
     "specialist": "Rheumatologist",
     "experience": "15 years",
     "area": "Musculoskeletal System",
-    "price_of_consult": 220
+    "price_of_consult": 220,
+    "img": ["/images/doctors/IsabellaHernandez-full.svg", "/images/doctors/IsabellaHernandez-face.svg"]
   },
   {
     "id": 12,
@@ -105,7 +116,8 @@
     "specialist": "Urologist",
     "experience": "12 years",
     "area": "Urinary System",
-    "price_of_consult": 240
+    "price_of_consult": 240,
+    "img": ["/images/doctors/MatthewClark-full.svg", "/images/doctors/MatthewClark-face.svg"]
   },
   {
     "id": 13,
@@ -114,7 +126,8 @@
     "specialist": "Allergist",
     "experience": "7 years",
     "area": "Immune System",
-    "price_of_consult": 190
+    "price_of_consult": 190,
+    "img": ["/images/doctors/MiaRodriguez-full.svg", "/images/doctors/MiaRodriguez-face.svg"]
   },
   {
     "id": 14,
@@ -123,7 +136,8 @@
     "specialist": "Oncologist",
     "experience": "3 years",
     "area": "Oncology",
-    "price_of_consult": 120
+    "price_of_consult": 120,
+    "img": ["/images/doctors/JoshuaLewis-full.svg", "/images/doctors/JoshuaLewis-face.svg"]
   },
   {
     "id": 15,
@@ -132,6 +146,7 @@
     "specialist": "Hematologist",
     "experience": "5 years",
     "area": "Circulatory System",
-    "price_of_consult": 150
+    "price_of_consult": 150,
+    "img": ["/images/doctors/AvaWalker-full.svg", "/images/doctors/AvaWalker-face.svg"]
   }
 ]

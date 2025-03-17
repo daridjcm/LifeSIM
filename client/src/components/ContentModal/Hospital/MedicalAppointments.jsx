@@ -100,10 +100,12 @@ export default function MedicalAppointments() {
             return doctors.map((doctor) => (
               <div key={doctor.key} className="flex doctors-center gap-2">
                 <Avatar
+                  name={doctor.data.name}
                   alt={doctor.data.name}
                   className="flex-shrink-0"
                   size="md"
-                  src={doctor.data.avatar}
+                  src={doctor.data.img[1]}
+                  showFallback
                 />
                 <div className="flex flex-col">
                   <span>{doctor.data.title}. {doctor.data.name}</span>
@@ -116,7 +118,7 @@ export default function MedicalAppointments() {
           {(doctor) => (
             <SelectItem key={doctor.id} textValue={doctor.name}>
               <div className="flex gap-2 items-center">
-                <Avatar alt={doctor.name} className="flex-shrink-0" size="sm" src={doctor.avatar} />
+                <Avatar name={doctor.name} alt={doctor.name} className="flex-shrink-0" size="sm" src={doctor.img[1]} showFallback />
                 <div className="flex flex-col">
                   <span className="text-small">{doctor.name}</span>
                   <span className="text-tiny text-default-400">{doctor.specialist} - {doctor.area}</span>
