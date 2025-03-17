@@ -156,7 +156,7 @@ export default function AtmTab({
     <>
       <p className="text-2xl font-bold">Summary Purchase</p>
       <p className="font-bold text-xl">Total: ${totalAmount}</p>
-      <Card type="Shopping Card" holder={user?.username} id={user?.id} expiry="Any" number_card="12345"/>
+      <Card type="Shopping Card" holder={user?.username} id={user?.id} />
       
       <div className="flex gap-3">
         <CustomButton

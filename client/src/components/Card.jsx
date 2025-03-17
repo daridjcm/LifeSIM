@@ -26,19 +26,21 @@ export default function Card({ type, holder, id, expiry, number_card }) {
 
       {number_card && (
         <p className={`${typeClass} opacity-70 text-lg tracking-wider my-2`}>
-          {number_card}
+          {number_card || 0}
         </p>
       )}
 
       <div className="mt-2">
         <p className={`text-xs ${typeClass} opacity-80`}>HOLDER</p>
-        <p className="font-medium text-lg">{holder || "Desconocido"}</p>
+        <p className="font-medium text-lg">{holder || "Unknown"}</p>
       </div>
 
       <div className="mt-2 text-right">
         <p className={`text-xs ${typeClass} opacity-80`}>ID:</p>
-        <p className="font-medium">{id || "########"}</p>
+        <p className="font-medium">{id || "null"}</p>
       </div>
+      <p className="text-center opacity-40 text-xs">This card is signatured and validated by the ceo <a className="text-amber-400" href="https://instagram.com/Daridjcm" target="_blank">@daridjcm.</a>
+      </p>
     </div>
   )
 }

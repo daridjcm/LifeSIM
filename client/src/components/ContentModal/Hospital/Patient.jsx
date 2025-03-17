@@ -1,8 +1,10 @@
 import { Image } from "@heroui/react"
 import Card from "../../Card.jsx"
-import {ClockIcon} from "@heroicons/react/24/solid"
+import { ClockIcon } from "@heroicons/react/24/solid"
+import { useUser } from "../../../context/UserContext.jsx";
 
 export default function Patient() {
+  const {user} = useUser();
   return (
     <div className="flex flex-col lg:flex-row justify-between gap-6">
       <div className="border border-zinc-300 rounded-lg p-5 sm:w-full md:w-full lg:w-2/4 lg:h-auto">
@@ -28,7 +30,7 @@ export default function Patient() {
         </div>
         <div className="flex-col border border-zinc-300 p-3 rounded-md w-full mt-5">
           <p className="font-semibold">Appointment Status:</p>
-          <p className="flex items-center max-w-72 mt-3"><ClockIcon className="size-7 mr-1 text-blue-500" />You have an appointment scheduled for</p>
+          <p className="flex items-center mt-3"><ClockIcon className="size-7 mr-1 text-blue-500" />You have an appointment scheduled for</p>
         </div>
       </div>
 
@@ -36,12 +38,15 @@ export default function Patient() {
         <p className="text-3xl font-semibold">Health Insurance</p>
         <p className="mb-5">Details of your current coverage</p>
 
-        <Card type="Health Insurance"/>
+        <div className="flex flex-col gap-5 sm:max-w-md m-auto">
 
-        <div className="bg-yellow-100 p-3">
-          <p className="text-amber-500 opacity-80 font-semibold">Note:</p>
-          <p className="mb-3">If your health insurance plan in status <span className="text-red-400">expired</span>, you must go to the <span className="text-cyan-400 font-semibold">Bank</span> and renew it.</p>
-          <p>If you are a new user, you must apply for your health insurance at the Bank to receive the exclusive benefits included in the plan.</p>
+          <Card type="Health Insurance" holder={user?.username} id={user?.id}  />
+
+          <div className="bg-yellow-100 p-3 h-fit">
+            <p className="text-amber-500 opacity-80 font-semibold">Note:</p>
+            <p className="mb-3">If your health insurance plan in status <span className="text-red-400">expired</span>, you must go to the <span className="text-cyan-400 font-semibold">Bank</span> and renew it.</p>
+            <p>If you are a new user, you must apply for your health insurance at the Bank to receive the exclusive benefits included in the plan.</p>
+          </div>
         </div>
       </div>
     </div>
