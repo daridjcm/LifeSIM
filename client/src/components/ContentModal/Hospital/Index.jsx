@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import MedicalAppointments from "./MedicalAppointments";
 import Patient from "./Patient";
+import HealthRecord from "./HealthRecord";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("medicalappointments");
@@ -41,7 +42,9 @@ export default function ContentBank() {
             <span>Health Record</span>
           </div>
         }
-      ></Tab>
+      >
+        <HealthRecord />
+      </Tab>
       <Tab
         key="report"
         title={
