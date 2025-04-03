@@ -97,20 +97,20 @@ const CardList = React.memo(
       <>
         <div className="gap-x-5 gap-y-5 mt-2 mb-2 ml-5 mr-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
           {displayItems === 0 ? (
-            <p>No hay productos para mostrar</p>
+            <p>Not have items to show it.</p>
           ) : (
             displayItems.map((item, index) => (
               <Card
                 key={index}
                 shadow="sm"
-                className="m-0 max-w-fit"
+                className="m-0 max-w-full"
                 aria-label={item.name}
               >
                 <CardBody className="overflow-hidden p-0">
                   <Image
                     src={item.img}
                     alt={item.name}
-                    width={420}
+                    width={"100%"}
                     height={350}
                     isBlurred
                     isZoomed
