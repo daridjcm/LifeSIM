@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const Appointment = sequelize.define(
     "Appointment",
     {
-      userId: {
+      userID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -11,11 +11,11 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       time: {
-        type: DataTypes.TIME,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       specialist: {
@@ -40,10 +40,10 @@ export default (sequelize, DataTypes) => {
 
   Appointment.associate = (models) => {
     Appointment.belongsTo(models.User, {
-      foreignKey: "userId",
-      as: "user", // Alias for user association
-    });
-  };
+      foreignKey: "userID",
+      as: "user"
+      })
+    };
 
   return Appointment;
 };

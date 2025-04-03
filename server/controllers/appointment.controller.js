@@ -1,26 +1,30 @@
-let medicalAppointments = [];
+import db from "../models/index.js";
+const { Appointment } = db;
 
+// FIXME fix here too
 export const saveAppointment = async (req, res) => {
   try {
-    const { userId, doctor, date, time, specialist, area, status } = req.body;
+    const { userID, doctor, date, time, specialist, area, status } = req.body;
 
-    if (!userId || !doctor || !date || !time || !specialist || !area || !status) {
+    if (!userID || !doctor || !date || !time || !specialist || !area || !status) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
-    // Save appointment in memory
-    const newAppointment = {
-      userId,
+    // Convert "19/4/2025" → "2025-04-19"
+    const [day, month, year] = date.split("/");
+    const formattedDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+    const newAppointment = await Appointment.create({
+      userID,
       doctor,
-      date,
+      date: formattedDate,
       time,
       specialist,
       area,
       status,
-    };
+    });
 
-    medicalAppointments.push(newAppointment);
-
+    console.log("Appointment scheduled:", newAppointment);
     res.status(201).json({
       message: "Appointment saved successfully",
       appointment: newAppointment,
@@ -36,9 +40,9 @@ export const saveAppointment = async (req, res) => {
 
 export const getAppointments = async (req, res) => {
   try {
-    res.status(200).json({ appointments: medicalAppointments });
+    const appointments = await Appointment.findAll();
+    res.status(200).json({ appointments });
   } catch (error) {
-    console.error("Error fetching appointments:", error);
     res.status(500).json({
       error: "Error fetching appointments",
       details: error.message,
