@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -9,14 +9,12 @@ import {
   User,
   Chip
 } from "@heroui/react";
-import doctors from "../../../utils/Doctors.json"; // Importing as default
-
-let doctorsData = doctors; // Using the imported data directly
 
 export const columns = [
   { name: "DOCTOR", uid: "doctor" },
   { name: "SPECIALITY", uid: "speciality" },
   { name: "DATE", uid: "date" },
+  { name: "TIME", uid: "time" },
   { name: "STATUS APPOINTMENTS", uid: "status" },
 ];
 
@@ -24,40 +22,42 @@ const statusColorMap = {
   assisted: "success",
   canceled: "danger",
   scheduled: "warning",
-}; 
-
-// const fetchAppointments = async () => {
-//   try {
-//     const response = await axios.get('http://localhost:3000/api/appointments');
-//     console.log("Retrieved appointments:", response.data);
-//     alert("Appointments fetched successfully!");
-//   } catch (error) {
-//     console.error("Error fetching appointments:", error);
-//     alert("Failed to retrieve appointments.");
-//   }
-// };
-// fetchAppointments()
+};
 
 export default function HealthRecord() {
-  const renderCell = React.useCallback((doctor, columnKey) => {
-    const cellValue = doctor[columnKey];
+  const [appointments, setAppointments] = useState([]);
+
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/appointments");
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      setAppointments(data.appointments);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+      alert("Failed to retrieve appointments.");
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
+
+  const renderCell = React.useCallback((appointment, columnKey) => {
+    const cellValue = appointment[columnKey];
 
     switch (columnKey) {
       case "doctor":
         return (
-          <User
-            avatarProps={{ radius: "lg", src: doctor.img[1] }}
-            description={doctor.name}
-            name={cellValue}
-          >
-            {doctor.name}
-          </User>
+          <>
+            {appointment.doctor}
+          </>
         );
       case "speciality":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{doctor.specialist}</p>
+            <p className="text-bold text-sm capitalize text-default-400">{appointment.specialist}</p>
           </div>
         );
       case "status":
@@ -72,7 +72,7 @@ export default function HealthRecord() {
   }, []);
 
   return (
-    <Table aria-label="Example table with custom cells">
+    <Table aria-label="Appointments table">
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "date" ? "center" : "start"}>
@@ -80,7 +80,7 @@ export default function HealthRecord() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={doctorsData}>
+      <TableBody items={appointments}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
