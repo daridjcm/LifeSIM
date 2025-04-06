@@ -8,7 +8,7 @@ export const AlertProvider = ({ children }) => {
 
   const showAlert = (title, description) => {
     setAlert({ visible: true, title, description });
-    setTimeout(() => setAlert({ ...alert, visible: false }), 3000);
+    setTimeout(() => setAlert({ ...alert, visible: false }), 7000);
   };
 
   return (

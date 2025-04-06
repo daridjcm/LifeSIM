@@ -1,9 +1,20 @@
+import React from "react";
 import {Alert} from "@heroui/react";
 
-export default function AlertComp({title, description}) {
+export default function App({title, description}) {
+  const [isVisible, setIsVisible] = React.useState(true);
   return (
-    <div className="flex items-center justify-center w-full">
-      <Alert description={description} title={title} />
+    <div className="flex flex-col gap-4">
+      {isVisible &&
+        <Alert
+          description={description}
+          isVisible={isVisible}
+          title={title}
+          variant="faded"
+          onClose={() => setIsVisible(false)}
+        />
+      }
     </div>
   );
 }
+

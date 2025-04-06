@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxGroup, cn, Image, Input, ScrollShadow, Select, SelectItem } from "@heroui/react";
-import { addToast } from "@heroui/toast";
 import CustomButton from "../../CustomButton";
 import { useState, useEffect } from "react";
+import { useAlert } from "../../../context/AlertContext.jsx";
 
 const STORAGE_KEY = "selectedItems";
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
@@ -30,6 +30,7 @@ const loadFromLocalStorage = () => {
 };
 
 function ShoppingList({ selectedItems, setSelectedItems }) {
+  const { showAlert } = useAlert();
   const [sendObject, setSendObj] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(selectedItems[0]?.name || "");
 
@@ -41,11 +42,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     );
     setSelectedItems(updatedItems);
     saveToLocalStorage(updatedItems);
-    addToast({
-      title: "Note",
-      description: "If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.",
-    })
-  };
+  }
 
   const handleProductChange = (title) => {
     setSelectedProduct(title);
@@ -53,6 +50,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
 
   const handleClear = () => {
     localStorage.removeItem(STORAGE_KEY);
+    showAlert("Note", "If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.");
   }
 
   const handleSend = async () => {
@@ -61,6 +59,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       price: parseFloat(item.price),
       basePrice: parseFloat(item.basePrice),
     }));
+    showAlert("Products Saved ✅", "The shopping list has been saved, go to the cashier.");
 
     console.log("Payload to send:", JSON.stringify({ selectedItems: updatedItems }));
 

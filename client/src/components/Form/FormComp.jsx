@@ -100,14 +100,11 @@ export default function FormComp({
           localStorage.setItem("token", token);
         }
   
-        showAlert({
-          title: "Success",
-          description: `${
-            statusForm === "login" ? "Login successful" : 
-            statusForm === "signup" ? "Registration successful" : 
-            "Customer added successfully"
-          }`,
-        });
+        showAlert("Success", `${
+          statusForm === "login" ? "Login successful" : 
+          statusForm === "signup" ? "Registration successful" : 
+          "Customer added successfully"
+        }`,);
   
         setTimeout(() => {
           if (statusForm === "login") navigate("/game");
