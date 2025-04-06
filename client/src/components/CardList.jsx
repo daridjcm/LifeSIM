@@ -94,6 +94,7 @@ const CardList = React.memo(
       : (itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? []);
 
     return (
+      // Changes image width and height, find the apropiate
       <>
         <div className="gap-x-5 gap-y-5 mt-2 mb-2 ml-5 mr-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
           {displayItems === 0 ? (

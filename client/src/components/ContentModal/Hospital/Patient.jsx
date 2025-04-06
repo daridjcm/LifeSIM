@@ -17,6 +17,7 @@ export default function Patient() {
   };
 
 const fetchAppointments = async () => {
+  // check date and status, if status is cancelled (no display it)
   try {
     const response = await fetch("http://localhost:3000/api/appointments");
     if (!response.ok) throw new Error("Network response was not ok");
