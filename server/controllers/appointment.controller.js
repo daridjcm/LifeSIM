@@ -49,3 +49,35 @@ export const getAppointments = async (req, res) => {
     });
   }
 };
+
+export const updateAppointmentStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ error: "Status is required." });
+    }
+
+    const appointment = await Appointment.findByPk(id);
+
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found." });
+    }
+
+    appointment.status = status;
+    await appointment.save();
+
+    console.log("Appointment updated:", appointment);
+    res.status(200).json({
+      message: "Appointment status updated",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+    res.status(500).json({
+      error: "Error updating appointment",
+      details: error.message,
+    });
+  }
+};
