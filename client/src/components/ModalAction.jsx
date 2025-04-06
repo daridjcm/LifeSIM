@@ -60,9 +60,9 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
               <h4 id="itemTitle" className="font-bold text-large">{item.name}</h4>
             </div>
           </div>
-            <ul className="flex flex-row gap-x-28">
+            <ul className="flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2">
               {dynamicHeader.map((element, index) => (
-                <li key={index} className="bg-blue-200 px-5 py-1 rounded-full">{element}:</li>
+                <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">{element}:</li>
               ))}
           </ul>
         </CardHeader>

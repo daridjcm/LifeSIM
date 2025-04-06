@@ -4,6 +4,7 @@ import { useState } from "react";
 import { now, getLocalTimeZone, CalendarDateTime, toZoned } from "@internationalized/date";
 import { doctors } from "../../../utils/data.js";
 import { useUser } from "../../../context/UserContext.jsx";
+import { useAlert } from "../../../context/AlertContext.jsx";
 
 // FIXME fix format date to mysql for error
 export default function MedicalAppointments() {
@@ -13,6 +14,7 @@ export default function MedicalAppointments() {
   const [formattedDateTime, setFormattedDateTime] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const doctorsData = doctors;
+  const { showAlert } = useAlert();
 
   const schedules = ["08:00", "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00"];
 
@@ -52,7 +54,7 @@ export default function MedicalAppointments() {
   const { user } = useUser();
     const submitAppointment = async () => {
     if (!formattedDateTime || !selectedDoctor) {
-      return alert("Please select a date, time, and doctor.");
+      return showAlert("Check!", "Please select a date, time, and doctor.");
     }
 
     const appointmentData = {
@@ -74,14 +76,14 @@ export default function MedicalAppointments() {
     try {
       const result = await response.json();
       if (response.ok) {
-        alert(result.message);
+        showAlert("Appointment Scheduled", result.message);
       } else {
         console.error(result.error);
-        alert("Failed to save appointment.");
+        showAlert("Error", "Failed to save appointment.");
       }
     } catch (error) {
       console.error("Error parsing JSON response:", error);
-      alert("The server returned an invalid JSON response.");
+      showAlert("Error", "The server returned an invalid JSON response.");
     }
   }
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { Form, Input, Button, Select, SelectItem } from "@heroui/react";
-import { addToast } from "@heroui/toast";
 import SpinnerComp from "../Spinner.jsx";
 import PropTypes from "prop-types";
 import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
+import { useAlert } from "../../context/AlertContext.jsx";
 
 const ConditionalWrapper = ({ condition, children }) => {
   return condition ? children : null;
@@ -35,6 +35,8 @@ export default function FormComp({
     btnText: PropTypes.string,
     isRequired: PropTypes.bool,
   };
+
+  const { showAlert } = useAlert();
 
   const getUserData = async (token) => {
     try {
@@ -98,14 +100,13 @@ export default function FormComp({
           localStorage.setItem("token", token);
         }
   
-        addToast({
+        showAlert({
           title: "Success",
           description: `${
             statusForm === "login" ? "Login successful" : 
             statusForm === "signup" ? "Registration successful" : 
             "Customer added successfully"
           }`,
-          onClose: () => setLoading(false),
         });
   
         setTimeout(() => {
@@ -113,19 +114,11 @@ export default function FormComp({
           else if (statusForm === "signup") navigate("/login");
         }, 2000);
       } else {
-        addToast({
-          title: "Error",
-          description: result.message || "Something went wrong. Please check your data.",
-          color: "danger",
-        });
+        showAlert("Error", "Something went wrong. Please check your data.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      addToast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again later.",
-        color: "danger",
-      });
+      showAlert("Error", "An unexpected error occurred. Please try again later.");
     } finally {
       setLoading(false);
     }

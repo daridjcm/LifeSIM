@@ -9,13 +9,18 @@ import {
   User,
   Chip
 } from "@heroui/react";
+import CustomButton from "../../CustomButton.jsx";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import SpinnerComp from "../../Spinner.jsx"
+import { useAlert } from "../../../context/AlertContext.jsx";
 
 export const columns = [
   { name: "DOCTOR", uid: "doctor" },
   { name: "SPECIALITY", uid: "speciality" },
   { name: "DATE", uid: "date" },
   { name: "TIME", uid: "time" },
-  { name: "STATUS APPOINTMENTS", uid: "status" },
+  { name: "STATUS", uid: "status" },
+  { name: "CANCEL", uid: "cancel" }
 ];
 
 const statusColorMap = {
@@ -26,6 +31,7 @@ const statusColorMap = {
 
 export default function HealthRecord() {
   const [appointments, setAppointments] = useState([]);
+  const { showAlert } = useAlert();
 
   const fetchAppointments = async () => {
     try {
@@ -35,7 +41,7 @@ export default function HealthRecord() {
       setAppointments(data.appointments);
     } catch (error) {
       console.error("Error fetching appointments:", error);
-      alert("Failed to retrieve appointments.");
+      showAlert("Failed to retrieve appointments.");
     }
   };
 
@@ -43,21 +49,46 @@ export default function HealthRecord() {
     fetchAppointments();
   }, []);
 
+  const handleCancel = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "canceled" })
+      });
+
+      if (!res.ok) throw new Error("Failed to cancel appointment");
+
+      setTimeout(() => {
+        setAppointments((prev) =>
+          prev.map((appt) =>
+            appt.id === id ? { ...appt, status: "canceled" } : appt
+          )
+        );
+      }, "1500");
+      showAlert("The appointment was canceled sucessfully.");
+    } catch (err) {
+      console.error("Error canceling appointment:", err);
+      showAlert("Failed to cancel the appointment.");
+    }
+  };
+
+
   const renderCell = React.useCallback((appointment, columnKey) => {
     const cellValue = appointment[columnKey];
 
     switch (columnKey) {
       case "doctor":
         return (
-          <>
+          <p>
             {appointment.doctor}
-          </>
+          </p>
         );
       case "speciality":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{appointment.specialist}</p>
+            <p>{cellValue}</p>
+            <p>{appointment.specialist}</p>
           </div>
         );
       case "status":
@@ -65,6 +96,14 @@ export default function HealthRecord() {
           <Chip className="capitalize" color={statusColorMap[cellValue]} size="sm" variant="flat">
             {cellValue}
           </Chip>
+        );
+      case "cancel":
+        return (
+          <CustomButton 
+            key={appointment.id}
+            icon={<TrashIcon className="size-6"/>}
+            onPress={() => handleCancel(appointment.id)}
+          />
         );
       default:
         return cellValue;
@@ -80,7 +119,7 @@ export default function HealthRecord() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={appointments}>
+      <TableBody emptyContent={"No appointments to display."} items={appointments}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
