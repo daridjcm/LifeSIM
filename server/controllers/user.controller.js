@@ -94,3 +94,24 @@ export const getCurrentUser = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// Update User
+export const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { bloodType } = req.body;
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    user.bloodType = bloodType;
+    await user.save();
+
+    console.log(`Blood type saved for user ${id}:`, bloodType);
+    res.json(user);
+  } catch (err) {
+    console.error("Error saving blood type:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

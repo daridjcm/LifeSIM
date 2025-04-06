@@ -19,6 +19,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      bloodType: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: true,
