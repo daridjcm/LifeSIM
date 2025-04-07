@@ -7,9 +7,10 @@ import {
   UserIcon,
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
-import MedicalAppointments from "./MedicalAppointments";
-import Patient from "./Patient";
-import HealthRecord from "./HealthRecord";
+import MedicalAppointments from "./MedicalAppointments.jsx";
+import Patient from "./Patient.jsx";
+import HealthRecord from "./HealthRecord.jsx";
+import PillsReceted from "./PillsReceted.jsx"
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("medicalappointments");
@@ -73,7 +74,9 @@ export default function ContentBank() {
             <span>Pills Receted</span>
           </div>
         }
-      ></Tab>
+      >
+        <PillsReceted />
+      </Tab>
     </Tabs>
   );
 }
