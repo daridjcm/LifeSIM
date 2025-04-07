@@ -6,7 +6,6 @@ import { doctors } from "../../../utils/data.js";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 
-// FIXME fix format date to mysql for error
 export default function MedicalAppointments() {
   const [date, setDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);

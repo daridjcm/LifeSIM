@@ -16,30 +16,32 @@ export default function Patient() {
     return `${randomLetter}${rh}`;
   };
 
-const fetchAppointments = async () => {
-  // check date and status, if status is cancelled (no display it)
-  try {
-    const response = await fetch("http://localhost:3000/api/appointments");
-    if (!response.ok) throw new Error("Network response was not ok");
-    const data = await response.json();
-    const userAppointments = data.appointments.filter(
-      (appt) => appt.userID === user.id
-    );
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/appointments");
+      if (!response.ok) throw new Error("Network response was not ok");
 
-  const now = new Date();
-  const upcoming = userAppointments
-    .map(appt => ({
-      ...appt,
-      dateObj: new Date(appt.date + "Z")
-    }))
-    .filter(appt => appt.dateObj > now)
-    .sort((a, b) => a.dateObj - b.dateObj);
+      const data = await response.json();
+      const userAppointments = data.appointments.filter(
+        (appt) => appt.userID === user.id
+      );
 
-  setNextAppointment(upcoming[0] || null);
-  } catch (error) {
-    console.error("Error fetching appointments:", error);
-  }
-};
+      const now = new Date();
+      const upcoming = userAppointments
+        .map(appt => ({
+          ...appt,
+          dateObj: new Date(appt.date + "Z")
+        }))
+        .filter(appt => appt.dateObj > now 
+          && !['canceled', 'completed'].includes(appt.status))
+        .sort((a, b) => a.dateObj - b.dateObj);
+
+      setNextAppointment(upcoming[0] || null);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    }
+  };
+
 
   useEffect(() => {
     if (user?.id && !user.bloodType) {
