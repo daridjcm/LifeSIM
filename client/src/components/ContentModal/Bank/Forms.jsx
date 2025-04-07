@@ -158,6 +158,9 @@ export function Loans() {
       options: [
         { label: "Personal Loan", value: "personalloan" },
         { label: "Mortgage", value: "mortgage" },
+        { label: "Health Insurance - Basic", value: "healthinsurance-basic" },
+        { label: "Health Insurance - Medium", value: "healthinsurance-medium" },
+        { label: "Health Insurance - Premium", value: "healthinsurance-premium" },
       ],
     },
     {
