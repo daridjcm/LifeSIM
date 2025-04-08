@@ -1,20 +1,12 @@
-import { Image } from "@heroui/react"
-import Card from "../../Card.jsx"
-import { ClockIcon } from "@heroicons/react/24/solid"
+import { Image } from "@heroui/react";
+import Card from "../../Card.jsx";
+import { ClockIcon } from "@heroicons/react/24/solid";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useEffect, useState } from "react";
 
-export default function Patient() {
+export function Patient() {
   const { user } = useUser();
   const [nextAppointment, setNextAppointment] = useState(null);
-
-  const getBloodType = (id) => {
-    if (typeof id !== "number") return "N/A";
-    const letters = ["A", "B", "AB", "O"];
-    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
-    const rh = id % 2 === 0 ? "+" : "-";
-    return `${randomLetter}${rh}`;
-  };
 
   const fetchAppointments = async () => {
     try {
@@ -23,7 +15,7 @@ export default function Patient() {
 
       const data = await response.json();
       const userAppointments = data.appointments.filter(
-        (appt) => appt.userID === user.id
+        (appt) => appt.user_id === user?.id
       );
 
       const now = new Date();
@@ -42,30 +34,9 @@ export default function Patient() {
     }
   };
 
-
   useEffect(() => {
-    if (user?.id && !user.bloodType) {
-      const bloodType = getBloodType(user.id);
-      console.log("Generating a new bloodType", bloodType);
-
-      const saveBloodTypeToDB = async () => {
-        try {
-          const res = await fetch(`http://localhost:3000/api/user/${user.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ bloodType })
-          });
-
-          const updatedUser = await res.json();
-          console.log("User update in DB", updatedUser);
-        } catch (err) {
-          console.error("Error to save a bloodType", err);
-        }
-      };
-      saveBloodTypeToDB();
-    }
-
     if (user?.id) {
+      console.log(user)
       fetchAppointments();
     }
   }, [user]);
@@ -81,13 +52,13 @@ export default function Patient() {
           <p>User Name: <span>{user?.username}</span></p>
           <p>ID: <span>{user?.id}</span></p>
           <p>Gender: <span className={user?.gender === 'female' ? 'bg-pink-300 px-3 py-0 rounded-md' : 'bg-blue-300 px-3 py-1 rounded-md'}>{user?.gender}</span></p>
-          <p>Email: <span className="underline cursor-pointer">{user?.email}</span></p>
+          <p>Email: <span className="text-blue-500 cursor-pointer">{user?.email}</span></p>
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-row w-full gap-4">
           <div className="border border-zinc-300 p-3 rounded-md w-full sm:w-2/4 lg:w-2/4">
             <p className="opacity-60">Blood type</p>
-            <p className="font-bold">{user?.bloodType}</p>
+            <p className="font-bold">{user?.blood_type || "N/A"}</p>
           </div>
           <div className="border border-zinc-300 p-3 rounded-md w-full sm:w-2/4 lg:w-2/4">
             <p className="opacity-60">Allergies</p>

@@ -50,14 +50,15 @@ export default function MedicalAppointments() {
     }
   };
 
-  const { user } = useUser();
+    const { user } = useUser();
+
     const submitAppointment = async () => {
     if (!formattedDateTime || !selectedDoctor) {
       return showAlert("Check!", "Please select a date, time, and doctor.");
     }
 
     const appointmentData = {
-      userID: user.id,
+      user_id: user.id,
       doctor: selectedDoctor.name,
       date: formattedDateTime.formattedDate,
       time: formattedDateTime.formattedTime,

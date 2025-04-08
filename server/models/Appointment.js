@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const Appointment = sequelize.define(
     "Appointment",
     {
-      userID: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -40,8 +40,8 @@ export default (sequelize, DataTypes) => {
 
   Appointment.associate = (models) => {
     Appointment.belongsTo(models.User, {
-      foreignKey: "userID",
-      as: "user"
+      foreignKey: "user_id",
+      as: "users"
       })
     };
 

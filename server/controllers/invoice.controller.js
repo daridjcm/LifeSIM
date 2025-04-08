@@ -3,21 +3,21 @@ const { Invoice } = db;
 
 export const createInvoice = async (req, res) => {
   try {
-    const { totalAmount, items } = req.body;
+    const { total_amount, items } = req.body;
 
-    const userID = req.userID;
-    const invoiceCount = await Invoice.count({ where: { userID } });
-    const invoiceNumber = invoiceCount + 1;
+    const user_id = req.user_id;
+    const invoiceCount = await Invoice.count({ where: { user_id } });
+    const invoice_number = invoiceCount + 1;
 
-    if (!totalAmount || !items || !userID || !invoiceNumber) {
+    if (!total_amount || !items || !user_id || !invoice_number) {
       return res.status(400).json({ message: "Missing data required." });
     }
 
     const newInvoice = await Invoice.create({
-      totalAmount: parseFloat(totalAmount),
-      userID,
+      total_amount: parseFloat(total_amount),
+      user_id,
       items: JSON.stringify(items),
-      invoiceNumber,
+      invoice_number,
     });
 
     console.log("Invoice created:", newInvoice);

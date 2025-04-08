@@ -108,10 +108,10 @@ export default function FormComp({
   
         setTimeout(() => {
           if (statusForm === "login") navigate("/game");
-          else if (statusForm === "signup") navigate("/login");
+          else if (statusForm === "signup") navigate("/");
         }, 2000);
       } else {
-        showAlert("Error", "Something went wrong. Please check your data.");
+        showAlert("Error", `${result.message + '.' || 'Something went wrong.'} Please check your data.`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);

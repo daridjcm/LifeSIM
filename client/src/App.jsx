@@ -15,8 +15,8 @@ function App() {
         <Route path="game" element={<Game />} />
         <Route path="boss" element={<Chat people="boss" />} />
         <Route path="analia" element={<Chat people="analia" />} />
-        <Route path="login" element={<Login />} />
-        <Route index element={<SignUp />} />
+        <Route index element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
         <Route path="customers/new" element={<NewCustomer />} />
       </Routes>
     </BrowserRouter>

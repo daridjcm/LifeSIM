@@ -29,7 +29,7 @@ app.use("/api", appointmentsRoutes)
 app.get("/", (req, res) => res.send("API is running..."));
 
 sequelize
-  .sync({ force: false, alter: false })
+  .sync({ force: true, alter: false })
   .then(() => {
     console.log("Tables synchronized");
   })

@@ -8,7 +8,7 @@ import {
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
 import MedicalAppointments from "./MedicalAppointments.jsx";
-import Patient from "./Patient.jsx";
+import {Patient} from "./Patient.jsx";
 import HealthRecord from "./HealthRecord.jsx";
 import PillsReceted from "./PillsReceted.jsx"
 
