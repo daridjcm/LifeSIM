@@ -1,0 +1,16 @@
+ID,Name,Title,Specialist,Experience,Area,Price of Consult
+1,"John Smith",Dr,"Cardiologist","15 years","Cardiovascular System",200
+2,"Emily Johnson",Dra,"Neurologist","10 years","Nervous System",250
+3,"Michael Brown",Dr,"Orthopedic Surgeon","20 years","Skeletal System",300
+4,"Sarah Davis",Dra,"Dermatologist","8 years","Integumentary System",150
+5,"William Wilson",Dr,"Gastroenterologist","12 years","Digestive System",220
+6,"James Anderson",Dr,"Pediatrician","18 years","Pediatrics",380
+7,"Olivia Martinez",Dra,"Ophthalmologist","9 years","Visual System",200
+8,"David Lee",Dr,"Psychiatrist","14 years","Mental Health",230
+9,"Sophia Garcia",Dra,"Endocrinologist","11 years","Endocrine System",240
+10,"Daniel Martinez",Dr,"Pulmonologist","16 years","Respiratory System",260
+11,"Isabella Hernandez",Dra,"Rheumatologist","15 years","Musculoskeletal System",220
+12,"Matthew Clark",Dr,"Urologist","12 years","Urinary System",240
+13,"Mia Rodriguez",Dra,"Allergist","7 years","Immune System",190
+14,"Joshua Lewis",Dr,"Oncologist","3 years","Oncology",120
+15,"Ava Walker",Dra,"Hematologist","5 years","Circulatory System",150

@@ -1,0 +1,51 @@
+ID,Name,Category,Price
+1,"Burger","Fast Food",5.99
+2,"Pizza","Fast Food",8.99
+3,"Hot Dog","Fast Food",4.99
+4,"French Fries","Fast Food",3.99
+5,"Chicken Nuggets","Fast Food",6.99
+6,"Cheese Burger","Fast Food",6.49
+7,"Chicken Roll","Fast Food",7.49
+8,"Fish Roll","Fast Food",7.99
+9,"Taco","Fast Food",3.49
+10,"Burrito","Fast Food",6.99
+11,"Pineapple","Fruit",3.99
+12,"Apple","Fruit",1.49
+13,"Banana","Fruit",0.99
+14,"Orange","Fruit",1.29
+15,"Strawberry","Fruit",2.99
+16,"Grapes","Fruit",2.49
+17,"Mango","Fruit",2.99
+18,"Pear","Fruit",1.79
+19,"Blueberry","Fruit",3.49
+20,"Raspberry","Fruit",3.99
+21,"Lime","Fruit",0.89
+22,"Avocado","Fruit",2.99
+23,"Coconut","Fruit",4.49
+24,"Carrot","Vegetable",1.19
+25,"Tomato","Vegetable",1.39
+26,"Lettuce","Vegetable",1.79
+27,"Cucumber","Vegetable",1.59
+28,"Potato","Vegetable",0.99
+29,"Onion","Vegetable",1.29
+30,"Garlic","Vegetable",1.99
+31,"Spinach","Vegetable",2.29
+32,"Broccoli","Vegetable",2.99
+33,"Bell Pepper","Vegetable",2.49
+34,"Eggplant","Vegetable",2.19
+35,"Zucchini","Vegetable",1.89
+36,"Corn","Vegetable",1.59
+37,"Celery","Vegetable",1.99
+38,"Radish","Vegetable",1.49
+39,"Coca Cola","Drink",1.99
+40,"Pepsi","Drink",1.89
+41,"Orange Juice","Drink",2.49
+42,"Lemonade","Drink",2.29
+43,"Water","Drink",0.99
+44,"Sprite","Drink",1.89
+45,"Fanta","Drink",1.79
+46,"Iced Tea","Drink",2.19
+47,"Milk","Drink",1.59
+48,"Coffee","Drink",2.99
+49,"Energy Drink","Drink",3.49
+50,"Ginger Ale","Drink",1.69
