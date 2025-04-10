@@ -4,7 +4,7 @@ import { ClockIcon } from "@heroicons/react/24/solid";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useEffect, useState } from "react";
 
-export function Patient() {
+export default function Patient() {
   const { user } = useUser();
   const [nextAppointment, setNextAppointment] = useState(null);
 
@@ -36,7 +36,6 @@ export function Patient() {
 
   useEffect(() => {
     if (user?.id) {
-      console.log(user)
       fetchAppointments();
     }
   }, [user]);
