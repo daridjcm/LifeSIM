@@ -8,9 +8,10 @@ import {
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/solid";
 import MedicalAppointments from "./MedicalAppointments.jsx";
-import {Patient} from "./Patient.jsx";
+import Patient from "./Patient.jsx";
 import HealthRecord from "./HealthRecord.jsx";
-import PillsReceted from "./PillsReceted.jsx"
+import PillsReceted from "./PillsReceted.jsx";
+import Consult from "./Consult.jsx";
 
 export default function ContentBank() {
   const [selected, setSelected] = React.useState("medicalappointments");
@@ -47,14 +48,16 @@ export default function ContentBank() {
         <HealthRecord />
       </Tab>
       <Tab
-        key="report"
+        key="consult"
         title={
           <div className="flex items-center space-x-2">
             <ClipboardDocumentListIcon className="size-6" />
-            <span>Report</span>
+            <span>Consult</span>
           </div>
         }
-      ></Tab>
+      >
+        <Consult/>
+      </Tab>
       <Tab
         key="patient"
         title={
