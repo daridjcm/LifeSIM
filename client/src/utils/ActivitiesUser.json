@@ -1,37 +1,37 @@
 [
   {
     "name": "Work",
-    "img": "/images/activities/work3d.jpeg",
+    "img": "/images/activities/work3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Bank",
-    "img": "/images/activities/bank3d.jpeg",
+    "img": "/images/activities/bank3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Grocery",
-    "img": "/images/activities/supermarket3d.jpeg",
+    "img": "/images/activities/supermarket3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Hospital",
-    "img": "/images/activities/hospital3d.jpeg",
+    "img": "/images/activities/hospital3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Cafeteria",
-    "img": "/images/activities/cafeteria3d.jpeg",
+    "img": "/images/activities/cafeteria3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Home",
-    "img": "/images/activities/home3d.jpeg",
+    "img": "/images/activities/home3d.avif",
     "desc": "Go to"
   },
   {
     "name": "Phone",
-    "img": "/images/activities/phone3d.jpeg",
+    "img": "/images/activities/phone3d.avif",
     "desc": "Go to"
   }
 ]
