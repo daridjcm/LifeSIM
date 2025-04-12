@@ -26,6 +26,10 @@ app.use("/api", groceryRoutes);
 app.use("/api", invoiceRoutes);
 app.use("/api", appointmentsRoutes)
 
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'robots.txt'));
+});
+
 app.get("/", (req, res) => res.send("API is running..."));
 
 sequelize
