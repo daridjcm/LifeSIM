@@ -96,26 +96,28 @@ const CardList = React.memo(
     return (
       // Changes image width and height, find the apropiate
       <>
-        <div className="gap-x-5 gap-y-5 mt-2 mb-2 ml-5 mr-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
+        <div className="gap-5 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 m-5">
           {displayItems === 0 ? (
             <p>Not have items to show it.</p>
           ) : (
             displayItems.map((item, index) => (
               <Card
                 key={index}
-                shadow="sm"
-                className="m-0 max-w-full"
+                shadow="md"
+                className="gap-5"
                 aria-label={item.name}
               >
                 <CardBody className="overflow-hidden p-0">
-                  <Image
-                    src={item.img}
-                    alt={item.name}
-                    width={"100%"}
-                    height={350}
-                    isBlurred
-                    isZoomed
-                  />
+                <Image
+                classNames={{
+                  img: "sm:w-[350px] md:w-[400px] lg:w-full sm:h-fit md:h-[300px] lg:h-fit"
+                }}
+
+                  src={item.img}
+                  alt={item.name}
+                  isBlurred
+                  isZoomed
+                />
                   {iconShow ? null : (
                     <div className="flex justify-end mx-4">
                       <Tooltip
