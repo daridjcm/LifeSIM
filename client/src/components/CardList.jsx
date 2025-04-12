@@ -94,7 +94,7 @@ const CardList = React.memo(
       : (itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? []);
 
     return (
-      // Changes image width and height, find the apropiate
+      // Changes image width and height, find the apropiate to CardList and Grocery Products.
       <>
         <div className="gap-5 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 m-5">
           {displayItems === 0 ? (
@@ -110,9 +110,8 @@ const CardList = React.memo(
                 <CardBody className="overflow-hidden p-0">
                 <Image
                 classNames={{
-                  img: "sm:w-[350px] md:w-[400px] lg:w-full sm:h-fit md:h-[300px] lg:h-fit"
+                  img: "sm:w-[350px] md:w-[400px] lg:w-full sm:h-fit md:h-[300px] lg:h-fit object-cover"
                 }}
-
                   src={item.img}
                   alt={item.name}
                   isBlurred
