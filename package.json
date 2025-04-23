@@ -18,8 +18,8 @@
   "dependencies": {
     "@heroui/toast": "^2.0.5",
     "dotenv": "^16.4.7",
-    "jspdf": "^2.5.2",
-    "jspdf-autotable": "^3.8.4",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "mariadb": "^3.4.0",
     "recharts": "^2.15.1"
   }
