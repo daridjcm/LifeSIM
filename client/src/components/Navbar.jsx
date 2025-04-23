@@ -11,15 +11,11 @@ import { useUser } from "../context/UserContext.jsx";
 export default function Nav() {
   const { user } = useUser();
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Navbar
       isBlurred="true"
       isBordered="true"
-      className="bg-zinc-50"
+      className="bg-zinc-50 mb-5"
       maxWidth="full"
     >
       <NavbarBrand>

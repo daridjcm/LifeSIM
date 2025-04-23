@@ -39,9 +39,9 @@ const CardList = React.memo(
       );
     };
 
-    function closeModal() {
+    const closeModal = () => {
       setIsModalOpen(false);
-    }
+    };
 
     function getColor(item) {
       switch (item.name) {
@@ -77,7 +77,7 @@ const CardList = React.memo(
         case "Vegetable":
           return {
             color: "success",
-            content: "Combines well with others, serves satiety",
+            content: "Combines well with others, serves satiety.",
           };
         case "Drink":
           return {
@@ -94,30 +94,30 @@ const CardList = React.memo(
       : (itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? []);
 
     return (
-      // Changes image width and height, find the apropiate to CardList and Grocery Products.
       <>
-        <div className="gap-5 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 m-5">
-          {displayItems === 0 ? (
-            <p>Not have items to show it.</p>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 mb-5">
+          {displayItems.length === 0 ? (
+            <p>Not have items to show.</p>
           ) : (
             displayItems.map((item, index) => (
               <Card
                 key={index}
                 shadow="md"
-                className="gap-5"
+                className="w-full"
                 aria-label={item.name}
               >
                 <CardBody className="overflow-hidden p-0">
-                <Image
-                classNames={{
-                  img: "sm:w-[350px] md:w-[400px] lg:w-full sm:h-fit md:h-[300px] lg:h-fit object-cover"
-                }}
-                  src={item.img}
-                  alt={item.name}
-                  isBlurred
-                  isZoomed
-                />
-                  {iconShow ? null : (
+                  <Image
+                    classNames={{
+                      img: "w-full h-[200px] object-cover",
+                    }}
+                    src={item.img}
+                    alt={item.name}
+                    isBlurred
+                    isZoomed
+                  />
+
+                  {!iconShow && (
                     <div className="flex justify-end mx-4">
                       <Tooltip
                         color={getColor2(item).color}
@@ -137,9 +137,7 @@ const CardList = React.memo(
                 </CardBody>
                 <CardFooter className="text-small justify-between">
                   <p className="text-default-500 text-xl">{item.desc}</p>
-                  <div
-                    className={iconShow ? "flex gap-2" : "flex gap-2 w-full"}
-                  >
+                  <div className="flex gap-2 w-full">
                     <Button
                       size="md"
                       isPressible
@@ -153,20 +151,16 @@ const CardList = React.memo(
                           {item.name}
                           <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
                         </>
+                      ) : selectedProducts.includes(item) ? (
+                        <>
+                          {item.name} added
+                          <CheckCircleIcon className="size-5 text-green-500 ml-1" />
+                        </>
                       ) : (
-                        <span className="flex items-center text-pretty">
-                          {selectedProducts.includes(item) ? (
-                            <>
-                              {item.name} added
-                              <CheckCircleIcon className="size-5 text-green-500 ml-1" />
-                            </>
-                          ) : (
-                            <>
-                              Buy {item.name} for {item.price}
-                              <ShoppingCartIcon className="size-5 text-white ml-1" />
-                            </>
-                          )}
-                        </span>
+                        <>
+                          Buy {item.name} for {item.price}
+                          <ShoppingCartIcon className="size-5 text-white ml-1" />
+                        </>
                       )}
                     </Button>
                   </div>
@@ -176,7 +170,6 @@ const CardList = React.memo(
           )}
         </div>
 
-        {/* Modal */}
         {isModalOpen && selectedItem && (
           <ModalAction item={selectedItem} onClose={closeModal} />
         )}
