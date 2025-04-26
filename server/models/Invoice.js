@@ -14,12 +14,6 @@ export default (sequelize, DataTypes) => {
       items: {
         type: DataTypes.JSON,
         allowNull: false,
-        get() {
-          return JSON.parse(this.getDataValue("items"));
-        },
-        set(value) {
-          this.setDataValue("items", JSON.parse(value));
-        },
       },
       user_id: {
         type: DataTypes.INTEGER,

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Alert } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
-import Card from "../../Card"
+import Card from "../../Card";
 import handleDownload from "./SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
-import { useUser } from "../../../context/UserContext.jsx"
-
+import { useUser } from "../../../context/UserContext.jsx";
 
 const saveInvoiceToLocalStorage = (invoice) => {
   const invoiceWithTimestamp = {
@@ -42,7 +41,7 @@ export default function AtmTab({
   alertType,
   setAlertType,
 }) {
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [total_amount, setTotalAmount] = useState(0);
   const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage());
   const [groceryList, setGroceryList] = useState([]);
   const [userData, setUserData] = useState(null);
@@ -106,11 +105,11 @@ export default function AtmTab({
           }));
 
       const requestData = {
-        totalAmount,
+        total_amount,
         items: items,
         invoiceNumber: Date.now(),
-        userID: userData?.id,
-        username: userData?.username || "User",
+        userID: userData.id,
+        username: userData.username,
       };
 
       console.log("Request Data:", requestData);
@@ -151,13 +150,13 @@ export default function AtmTab({
     setAlertVisible(true);
     setTimeout(() => setAlertVisible(false), 4500);
   };
-  const {user} = useUser();
+  const { user } = useUser();
   return (
     <>
       <p className="text-2xl font-bold">Summary Purchase</p>
-      <p className="font-bold text-xl">Total: ${totalAmount}</p>
+      <p className="font-bold text-xl">Total: ${total_amount}</p>
       <Card type="Shopping Card" holder={user?.username} id={user?.id} />
-      
+
       <div className="flex gap-3">
         <CustomButton
           label={paymentProcessing ? paymentStatus : paymentStatus}

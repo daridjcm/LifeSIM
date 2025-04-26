@@ -5,7 +5,7 @@ export const createInvoice = async (req, res) => {
   try {
     const { total_amount, items } = req.body;
 
-    const user_id = req.user_id;
+    const user_id = req.userID;
     const invoiceCount = await Invoice.count({ where: { user_id } });
     const invoice_number = invoiceCount + 1;
 
@@ -16,7 +16,7 @@ export const createInvoice = async (req, res) => {
     const newInvoice = await Invoice.create({
       total_amount: parseFloat(total_amount),
       user_id,
-      items: JSON.stringify(items),
+      items: items,
       invoice_number,
     });
 
