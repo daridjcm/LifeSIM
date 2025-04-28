@@ -15,25 +15,27 @@ export default function Patient() {
 
       const data = await response.json();
       const userAppointments = data.appointments.filter(
-        (appt) => appt.user_id === user?.id
+        (appt) => appt.user_id === user?.id,
       );
 
       const now = new Date();
       const upcoming = userAppointments
-        .map(appt => ({
+        .map((appt) => ({
           ...appt,
-          dateObj: new Date(appt.date + "Z")
+          dateObj: new Date(`${appt.date}T${appt.time}Z`),
         }))
-        .filter(appt => appt.dateObj > now 
-          && !['canceled', 'completed'].includes(appt.status))
-        .sort((a, b) => a.dateObj - b.dateObj);
+        .filter(
+          (appt) =>
+            new Date(appt.dateObj) < now &&
+            !["canceled", "completed"].includes(appt.status),
+        )
+        .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
 
       setNextAppointment(upcoming[0] || null);
     } catch (error) {
       console.error("Error fetching appointments:", error);
     }
   };
-
   useEffect(() => {
     if (user?.id) {
       fetchAppointments();
@@ -48,10 +50,28 @@ export default function Patient() {
 
         <div className="mt-5 mb-8">
           <Image />
-          <p>User Name: <span>{user?.username}</span></p>
-          <p>ID: <span>{user?.id}</span></p>
-          <p>Gender: <span className={user?.gender === 'female' ? 'bg-pink-300 px-3 py-0 rounded-md' : 'bg-blue-300 px-3 py-1 rounded-md'}>{user?.gender}</span></p>
-          <p>Email: <span className="text-blue-500 cursor-pointer">{user?.email}</span></p>
+          <p>
+            User Name: <span>{user?.username}</span>
+          </p>
+          <p>
+            ID: <span>{user?.id}</span>
+          </p>
+          <p>
+            Gender:{" "}
+            <span
+              className={
+                user?.gender === "female"
+                  ? "bg-pink-300 px-3 py-0 rounded-md"
+                  : "bg-blue-300 px-3 py-1 rounded-md"
+              }
+            >
+              {user?.gender}
+            </span>
+          </p>
+          <p>
+            Email:{" "}
+            <span className="text-blue-500 cursor-pointer">{user?.email}</span>
+          </p>
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-row w-full gap-4">
@@ -69,9 +89,11 @@ export default function Patient() {
           <p className="font-semibold">Appointment Status:</p>
           <p className="flex items-center mt-3">
             <ClockIcon className="size-28 mr-1 text-blue-500" />
-            <span>{nextAppointment
-              ? `You have an appointment with Dr. ${nextAppointment.doctor} (${nextAppointment.specialist}) on ${nextAppointment.date} at ${nextAppointment.time}`
-              : "Not have appointments scheduled"}</span>
+            <span>
+              {nextAppointment
+                ? `You have an appointment with ${nextAppointment.title}. ${nextAppointment.doctor} (${nextAppointment.specialist}) on ${nextAppointment.date} at ${nextAppointment.time}`
+                : "Not have appointments scheduled"}
+            </span>
           </p>
         </div>
       </div>
@@ -85,12 +107,14 @@ export default function Patient() {
           <div className="bg-yellow-100 p-3 h-fit">
             <p className="text-amber-500 opacity-80 font-semibold">Note:</p>
             <p className="mb-3">
-              If your health insurance plan in status <span className="text-red-400">expired</span>,
-              you must go to the <span className="text-cyan-400 font-semibold">Bank</span> and renew it.
+              If your health insurance plan in status{" "}
+              <span className="text-red-400">expired</span>, you must go to the{" "}
+              <span className="text-cyan-400 font-semibold">Bank</span> and
+              renew it.
             </p>
             <p>
-              If you are a new user, you must apply for your health insurance at the Bank to receive
-              the exclusive benefits included in the plan.
+              If you are a new user, you must apply for your health insurance at
+              the Bank to receive the exclusive benefits included in the plan.
             </p>
           </div>
         </div>

@@ -4,9 +4,19 @@ const { Appointment } = db;
 // FIXME fix here too
 export const saveAppointment = async (req, res) => {
   try {
-    const { user_id, doctor, date, time, specialist, area, status } = req.body;
+    const { user_id, title, doctor, date, time, specialist, area, status } =
+      req.body;
 
-    if (!user_id || !doctor || !date || !time || !specialist || !area || !status) {
+    if (
+      !user_id ||
+      !title ||
+      !doctor ||
+      !date ||
+      !time ||
+      !specialist ||
+      !area ||
+      !status
+    ) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
@@ -16,6 +26,7 @@ export const saveAppointment = async (req, res) => {
 
     const newAppointment = await Appointment.create({
       user_id,
+      title,
       doctor,
       date: formattedDate,
       time,

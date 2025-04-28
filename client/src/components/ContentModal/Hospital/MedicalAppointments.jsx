@@ -1,7 +1,12 @@
 import { Calendar, DateInput, Select, SelectItem, Avatar } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
 import { useState } from "react";
-import { now, getLocalTimeZone, CalendarDateTime, toZoned } from "@internationalized/date";
+import {
+  now,
+  getLocalTimeZone,
+  CalendarDateTime,
+  toZoned,
+} from "@internationalized/date";
 import { doctors } from "../../../utils/data.js";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
@@ -15,7 +20,16 @@ export default function MedicalAppointments() {
   const doctorsData = doctors;
   const { showAlert } = useAlert();
 
-  const schedules = ["08:00", "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00"];
+  const schedules = [
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "14:00",
+    "15:00",
+    "16:00",
+  ];
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
@@ -23,13 +37,23 @@ export default function MedicalAppointments() {
 
     try {
       const [hours, minutes] = time.split(":").map((num) => parseInt(num, 10));
-      const newDateTime = new CalendarDateTime(date.year, date.month, date.day, hours, minutes, 0);
+      const newDateTime = new CalendarDateTime(
+        date.year,
+        date.month,
+        date.day,
+        hours,
+        minutes,
+        0,
+      );
       const zonedDateTime = toZoned(newDateTime, getLocalTimeZone());
       setDateTime(zonedDateTime);
 
       const jsDate = zonedDateTime.toDate();
       const formattedDate = jsDate.toLocaleDateString();
-      const formattedTime = jsDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const formattedTime = jsDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
       setFormattedDateTime({ formattedDate, formattedTime, jsDate });
     } catch (error) {
@@ -50,15 +74,16 @@ export default function MedicalAppointments() {
     }
   };
 
-    const { user } = useUser();
+  const { user } = useUser();
 
-    const submitAppointment = async () => {
+  const submitAppointment = async () => {
     if (!formattedDateTime || !selectedDoctor) {
       return showAlert("Check!", "Please select a date, time, and doctor.");
     }
 
     const appointmentData = {
       user_id: user.id,
+      title: selectedDoctor.title,
       doctor: selectedDoctor.name,
       date: formattedDateTime.formattedDate,
       time: formattedDateTime.formattedTime,
@@ -72,7 +97,7 @@ export default function MedicalAppointments() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(appointmentData),
     });
-        
+
     try {
       const result = await response.json();
       if (response.ok) {
@@ -85,7 +110,7 @@ export default function MedicalAppointments() {
       console.error("Error parsing JSON response:", error);
       showAlert("Error", "The server returned an invalid JSON response.");
     }
-  }
+  };
 
   return (
     <div className="flex sm:flex-col md:flex-row lg:flex-row gap-8 flex-wrap justify-around">
@@ -120,7 +145,7 @@ export default function MedicalAppointments() {
             const key = Array.from(keys)[0];
             const doctor = doctorsData.find((doc) => doc.id.toString() === key);
             setSelectedDoctor(doctor || null);
-          }}          
+          }}
         >
           {doctorsData.map((doctor) => (
             <SelectItem key={doctor.id} textValue={doctor.name}>
@@ -143,7 +168,6 @@ export default function MedicalAppointments() {
             </SelectItem>
           ))}
         </Select>
-
 
         <p>Medical appointment scheduled for:</p>
         <div className="flex sm:flex-col md:flex-row lg:flex-row gap-5">

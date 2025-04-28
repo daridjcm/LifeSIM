@@ -6,6 +6,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       doctor: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,9 +45,9 @@ export default (sequelize, DataTypes) => {
   Appointment.associate = (models) => {
     Appointment.belongsTo(models.User, {
       foreignKey: "user_id",
-      as: "users"
-      })
-    };
+      as: "users",
+    });
+  };
 
   return Appointment;
 };
