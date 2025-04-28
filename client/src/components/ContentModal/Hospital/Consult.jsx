@@ -8,6 +8,7 @@ import {
   SelectItem,
   Slider,
   tv,
+  Spinner,
 } from "@heroui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import CustomButton from "../../CustomButton";
@@ -145,13 +146,48 @@ export function Symptoms({ onProgressChange, onSymptomsChange }) {
 }
 
 function Diagnosis({ symptoms }) {
-  console.log("Diagnosis symptoms:", symptoms);
+  const [appointments, setAppointments] = useState([]);
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/appointments");
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      setAppointments(data.appointments);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+      showAlert("Failed to retrieve appointments.");
+    }
+  };
 
+  function timeToMinutes(time) {
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+
+  // Ordenar las citas primero por médico y luego por hora
+  appointments.sort((a, b) => {
+    if (a.doctor !== b.doctor) {
+      return a.doctor.localeCompare(b.doctor);
+    } else {
+      return timeToMinutes(a.time) - timeToMinutes(b.time);
+    }
+  });
+
+  console.log("Diagnosis symptoms:", symptoms);
+  console.log("Appointments:", appointments);
   if (symptoms.length) {
     // full image of doctor selected appointment
     return (
-      <div className="text-center">
-        Evaluating your health and the diagnosis...
+      <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
+        <img src="/images/doctors/OliviaMartinez-full.svg" />
+
+        <div className="flex flex-col text-4xl">
+          Evaluating your health and the diagnosis
+          <Spinner
+            classNames={{ label: "text-foreground mt-4" }}
+            variant="wave"
+          />
+        </div>
       </div>
     );
   } else {
