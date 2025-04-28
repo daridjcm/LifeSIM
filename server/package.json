@@ -20,5 +20,8 @@
     "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.3"
   }
 }

@@ -1,7 +1,29 @@
 import db from "../models/index.js";
+import cron from "node-cron";
+
 const { Appointment } = db;
 
-// FIXME fix here too
+// Function to delete canceled appointments older than one hour
+const deleteOldCanceledAppointments = async () => {
+  try {
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000); // Current time minus one hour
+    await Appointment.destroy({
+      where: {
+        status: "canceled",
+        updatedAt: {
+          [db.Sequelize.Op.lt]: oneMinuteAgo, // Assuming you have an updatedAt field
+        },
+      },
+    });
+    console.log("Old canceled appointments deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting old canceled appointments:", error);
+  }
+};
+
+// Schedule the job to run every hour
+cron.schedule("* * * * *", deleteOldCanceledAppointments); // Runs at the start of every hour
+
 export const saveAppointment = async (req, res) => {
   try {
     const { user_id, title, doctor, date, time, specialist, area, status } =
@@ -23,6 +45,20 @@ export const saveAppointment = async (req, res) => {
     // Convert "19/4/2025" → "2025-04-19"
     const [day, month, year] = date.split("/");
     const formattedDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+    // Check for duplicate appointment
+    const existingAppointment = await Appointment.findOne({
+      where: {
+        user_id,
+        doctor,
+        date: formattedDate,
+        time,
+      },
+    });
+
+    if (existingAppointment) {
+      return res.status(409).json({ error: "Duplicate appointment found." });
+    }
 
     const newAppointment = await Appointment.create({
       user_id,

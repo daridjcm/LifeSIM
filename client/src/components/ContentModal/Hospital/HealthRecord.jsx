@@ -7,11 +7,11 @@ import {
   TableRow,
   TableCell,
   User,
-  Chip
+  Chip,
 } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import SpinnerComp from "../../Spinner.jsx"
+import SpinnerComp from "../../Spinner.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 
 export const columns = [
@@ -20,7 +20,7 @@ export const columns = [
   { name: "DATE", uid: "date" },
   { name: "TIME", uid: "time" },
   { name: "STATUS", uid: "status" },
-  { name: "CANCEL", uid: "cancel" }
+  { name: "CANCEL", uid: "cancel" },
 ];
 
 const statusColorMap = {
@@ -54,7 +54,7 @@ export default function HealthRecord() {
       const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "canceled" })
+        body: JSON.stringify({ status: "canceled" }),
       });
 
       if (!res.ok) throw new Error("Failed to cancel appointment");
@@ -62,10 +62,10 @@ export default function HealthRecord() {
       setTimeout(() => {
         setAppointments((prev) =>
           prev.map((appt) =>
-            appt.id === id ? { ...appt, status: "canceled" } : appt
-          )
+            appt.id === id ? { ...appt, status: "canceled" } : appt,
+          ),
         );
-      }, "1500");
+      }, "1000");
       showAlert("The appointment was canceled sucessfully.");
     } catch (err) {
       console.error("Error canceling appointment:", err);
@@ -73,17 +73,12 @@ export default function HealthRecord() {
     }
   };
 
-
   const renderCell = React.useCallback((appointment, columnKey) => {
     const cellValue = appointment[columnKey];
 
     switch (columnKey) {
       case "doctor":
-        return (
-          <p>
-            {appointment.doctor}
-          </p>
-        );
+        return <p>{appointment.doctor}</p>;
       case "speciality":
         return (
           <div className="flex flex-col">
@@ -93,15 +88,20 @@ export default function HealthRecord() {
         );
       case "status":
         return (
-          <Chip className="capitalize" color={statusColorMap[cellValue]} size="sm" variant="flat">
+          <Chip
+            className="capitalize"
+            color={statusColorMap[cellValue]}
+            size="sm"
+            variant="flat"
+          >
             {cellValue}
           </Chip>
         );
       case "cancel":
         return (
-          <CustomButton 
+          <CustomButton
             key={appointment.id}
-            icon={<TrashIcon className="size-6"/>}
+            icon={<TrashIcon className="size-6" />}
             onPress={() => handleCancel(appointment.id)}
           />
         );
@@ -114,15 +114,23 @@ export default function HealthRecord() {
     <Table aria-label="Appointments table">
       <TableHeader columns={columns}>
         {(column) => (
-          <TableColumn key={column.uid} align={column.uid === "date" ? "center" : "start"}>
+          <TableColumn
+            key={column.uid}
+            align={column.uid === "date" ? "center" : "start"}
+          >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No appointments to display."} items={appointments}>
+      <TableBody
+        emptyContent={"No appointments to display."}
+        items={appointments}
+      >
         {(item) => (
           <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {(columnKey) => (
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>
