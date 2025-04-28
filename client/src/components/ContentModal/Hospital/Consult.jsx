@@ -164,7 +164,6 @@ function Diagnosis({ symptoms }) {
     return hours * 60 + minutes;
   }
 
-  // Ordenar las citas primero por médico y luego por hora
   appointments.sort((a, b) => {
     if (a.doctor !== b.doctor) {
       return a.doctor.localeCompare(b.doctor);
@@ -176,7 +175,7 @@ function Diagnosis({ symptoms }) {
   console.log("Diagnosis symptoms:", symptoms);
   console.log("Appointments:", appointments);
   if (symptoms.length) {
-    // full image of doctor selected appointment
+    // TODO: Perform the functionality to verify the doctor's name and search the image.
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
         <img src="/images/doctors/OliviaMartinez-full.svg" />
