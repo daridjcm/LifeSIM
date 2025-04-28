@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import CardList from "../components/CardList.jsx";
 import NeedsPanel from "../components/NeedsPanel";
@@ -9,6 +9,16 @@ import { useUser } from "../context/UserContext.jsx";
 export default function Game() {
   const memoizedActivities = useMemo(() => activitiesUser, []);
   const { user } = useUser();
+
+  useEffect(() => {
+    if (!user) {
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
 
   if (!user) {
     return <div>Loading game...</div>;
