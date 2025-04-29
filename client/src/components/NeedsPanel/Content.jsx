@@ -1,5 +1,5 @@
 import React from "react";
-import getIconColor from "../../utils/IconColor.jsx";
+import getIconColor from "./IconColor.jsx";
 import ProgressBar from "./ProgressBar.jsx";
 
 const needs = [
