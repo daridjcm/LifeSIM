@@ -12,7 +12,7 @@ import {
 } from "@heroui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import CustomButton from "../../CustomButton";
-import { symptoms, doctors } from "../../../utils/data";
+import { symptoms, doctors, diseases } from "../../../utils/data";
 
 // Symptoms data in JSON format
 const symptomCategories = symptoms;
@@ -231,7 +231,18 @@ export default function Content() {
         <CustomButton
           label="Next Step"
           className="mt-5"
-          onPress={handleNextStep} // Call the handleNextStep function on press
+          onPress={() => {
+            // Filtrar enfermedades que tienen al menos 3 síntomas coincidentes
+            const matchedDiseases = diseases.filter((disease) => {
+              const matchingSymptoms = disease.symptoms.filter((symptom) =>
+                selectedSymptoms.includes(symptom),
+              );
+              return matchingSymptoms.length >= 3; // Al menos 3 síntomas coincidentes
+            });
+
+            // Mostrar enfermedades coincidentes o manejar de acuerdo
+            console.log("Matched Diseases:", matchedDiseases);
+          }}
         />
       )}
     </>

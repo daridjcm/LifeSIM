@@ -26,8 +26,9 @@ export default function Patient() {
         }))
         .filter(
           (appt) =>
-            new Date(appt.dateObj) < now &&
-            !["canceled", "completed"].includes(appt.status),
+            new Date(appt.dateObj) < now ||
+            (new Date(appt.dateObj) > now &&
+              !["canceled", "completed"].includes(appt.status)),
         )
         .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
 

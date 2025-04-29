@@ -139,13 +139,7 @@
     "name": "Gastroenteritis",
     "system": "Digestive System",
     "severity": "moderate",
-    "symptoms": [
-      "diarrhea",
-      "nausea",
-      "vomiting",
-      "abdominal cramps",
-      "fever"
-    ],
+    "symptoms": ["diarrhea", "nausea", "vomiting", "abdominal cramps", "fever"],
     "treatments": [
       {
         "pill_name": "Loperamide",
@@ -431,7 +425,7 @@
     "severity": "moderate",
     "symptoms": [
       "burning sensation during urination",
-      "frequent urge to urinate",
+      "frequent urination",
       "cloudy urine",
       "pelvic pain",
       "strong-smelling urine"
@@ -893,13 +887,7 @@
     "name": "Lupus",
     "system": "Immune System",
     "severity": "severe",
-    "symptoms": [
-      "fatigue",
-      "joint pain",
-      "skin rash",
-      "fever",
-      "organ damage"
-    ],
+    "symptoms": ["fatigue", "joint pain", "skin rash", "fever", "organ damage"],
     "treatments": [
       {
         "pill_name": "Hydroxychloroquine",
@@ -1009,13 +997,7 @@
     "name": "Celiac Disease",
     "system": "Immune System",
     "severity": "moderate",
-    "symptoms": [
-      "diarrhea",
-      "bloating",
-      "weight loss",
-      "fatigue",
-      "rash"
-    ],
+    "symptoms": ["diarrhea", "bloating", "weight loss", "fatigue", "rash"],
     "treatments": [
       {
         "pill_name": "Gluten-Free Diet",
@@ -1125,13 +1107,7 @@
     "name": "Sjögren’s Syndrome",
     "system": "Immune System",
     "severity": "mild",
-    "symptoms": [
-      "dry mouth",
-      "dry eyes",
-      "fatigue",
-      "joint pain",
-      "swelling"
-    ],
+    "symptoms": ["dry mouth", "dry eyes", "fatigue", "joint pain", "swelling"],
     "treatments": [
       {
         "pill_name": "Pilocarpine",
@@ -1763,13 +1739,7 @@
     "name": "Eczema",
     "system": "Integumentary System",
     "severity": "moderate",
-    "symptoms": [
-      "itching",
-      "red patches",
-      "dry skin",
-      "blisters",
-      "cracking"
-    ],
+    "symptoms": ["itching", "red patches", "dry skin", "blisters", "cracking"],
     "treatments": [
       {
         "pill_name": "Hydrocortisone",
@@ -1821,13 +1791,7 @@
     "name": "Dermatitis",
     "system": "Integumentary System",
     "severity": "mild",
-    "symptoms": [
-      "itching",
-      "rash",
-      "redness",
-      "swelling",
-      "scaling"
-    ],
+    "symptoms": ["itching", "rash", "redness", "swelling", "scaling"],
     "treatments": [
       {
         "pill_name": "Loratadine",
@@ -2169,13 +2133,7 @@
     "name": "Blepharitis",
     "system": "Visual System",
     "severity": "mild",
-    "symptoms": [
-      "red eyelids",
-      "itching",
-      "flaking",
-      "crusting",
-      "burning"
-    ],
+    "symptoms": ["red eyelids", "itching", "flaking", "crusting", "burning"],
     "treatments": [
       {
         "pill_name": "Antibiotic Ointment",
@@ -2517,13 +2475,7 @@
     "name": "Measles",
     "system": "Pediatrics",
     "severity": "severe",
-    "symptoms": [
-      "rash",
-      "high fever",
-      "cough",
-      "runny nose",
-      "red eyes"
-    ],
+    "symptoms": ["rash", "high fever", "cough", "runny nose", "red eyes"],
     "treatments": [
       {
         "pill_name": "Vitamin A",
@@ -2923,13 +2875,7 @@
     "name": "Rheumatoid Arthritis",
     "system": "Musculoskeletal System",
     "severity": "severe",
-    "symptoms": [
-      "joint pain",
-      "stiffness",
-      "swelling",
-      "fatigue",
-      "fever"
-    ],
+    "symptoms": ["joint pain", "stiffness", "swelling", "fatigue", "fever"],
     "treatments": [
       {
         "pill_name": "Methotrexate",
