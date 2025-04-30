@@ -128,3 +128,42 @@ export const updateAppointmentStatus = async (req, res) => {
     });
   }
 };
+
+export const reportAppointment = async (req, res) => {
+  try {
+    const { user_id, doctor, appointment_id, disease, status, treatments } =
+      req.body;
+
+    if (
+      !user_id ||
+      !doctor ||
+      !appointment_id ||
+      !disease ||
+      !status ||
+      !treatments
+    ) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+
+    const report = await db.Report.create({
+      user_id,
+      doctor,
+      appointment_id,
+      disease,
+      status,
+      treatments,
+    });
+
+    console.log("Appointment reported:", report);
+    res.status(201).json({
+      message: "Appointment reported successfully",
+      report,
+    });
+  } catch (error) {
+    console.error("Error reporting appointment:", error);
+    res.status(500).json({
+      error: "Error reporting appointment",
+      details: error.message,
+    });
+  }
+};

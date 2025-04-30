@@ -13,9 +13,12 @@ import {
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import CustomButton from "../../CustomButton";
 import { symptoms, doctors, diseases } from "../../../utils/data";
+import { useUser } from "../../../context/UserContext.jsx";
+import { useAlert } from "../../../context/AlertContext.jsx";
 
 // Symptoms data in JSON format
 const symptomCategories = symptoms;
+let newProgress;
 
 export function Symptoms({ onProgressChange, onSymptomsChange }) {
   const CustomCheckbox = (props) => {
@@ -84,7 +87,7 @@ export function Symptoms({ onProgressChange, onSymptomsChange }) {
     : [];
 
   useEffect(() => {
-    const newProgress = groupSelected.length >= 3 ? 30 : 0;
+    newProgress = groupSelected.length >= 4 ? 30 : 0;
     onProgressChange(newProgress);
     onSymptomsChange(groupSelected);
   }, [groupSelected, onProgressChange, onSymptomsChange]);
@@ -144,42 +147,94 @@ export function Symptoms({ onProgressChange, onSymptomsChange }) {
     </div>
   );
 }
+function SendReport({ diseasesMatched }) {
+  const { user } = useUser();
+  const [nextAppointment, setNextAppointment] = useState(null);
+  const { showAlert } = useAlert();
 
-function Diagnosis({ symptoms }) {
-  const [appointments, setAppointments] = useState([]);
   const fetchAppointments = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/appointments");
       if (!response.ok) throw new Error("Network response was not ok");
+
       const data = await response.json();
-      setAppointments(data.appointments);
+      const userAppointments = data.appointments.filter(
+        (appt) => appt.user_id === user?.id,
+      );
+
+      const now = new Date();
+      const upcoming = userAppointments
+        .map((appt) => ({
+          ...appt,
+          dateObj: new Date(`${appt.date}T${appt.time}Z`),
+        }))
+        .filter(
+          (appt) =>
+            new Date(appt.dateObj) < now ||
+            (new Date(appt.dateObj) > now &&
+              !["canceled", "completed"].includes(appt.status)),
+        )
+        .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
+
+      setNextAppointment(upcoming[0] || null);
     } catch (error) {
       console.error("Error fetching appointments:", error);
-      showAlert("Failed to retrieve appointments.");
     }
   };
-
-  function timeToMinutes(time) {
-    const [hours, minutes, seconds] = time.split(":").map(Number);
-    return hours * 60 + minutes;
-  }
-
-  appointments.sort((a, b) => {
-    if (a.doctor !== b.doctor) {
-      return a.doctor.localeCompare(b.doctor);
-    } else {
-      return timeToMinutes(a.time) - timeToMinutes(b.time);
+  useEffect(() => {
+    if (user?.id) {
+      fetchAppointments();
     }
-  });
+  }, [user]);
 
-  console.log("Diagnosis symptoms:", symptoms);
-  console.log("Appointments:", appointments);
-  if (symptoms.length) {
-    // TODO: Perform the functionality to verify the doctor's name and search the image.
+  const reportData = {
+    user_id: user?.id,
+    doctor: nextAppointment.doctor,
+    appointment_id: nextAppointment.id,
+    disease: diseasesMatched.name,
+    status: "completed",
+    treatments: diseasesMatched.treatments, // [only names and join ","]
+  };
+  console.log(reportData);
+
+  const response = fetch("http://localhost:3000/api/appointments/report", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reportData),
+  });
+  console.log(response);
+
+  try {
+    const result = response.json();
+    if (response.ok) {
+      showAlert("Report sent and downloaded", result.message);
+    } else {
+      console.error(result.error);
+      showAlert("Error", "Failed to download report and send to server.");
+    }
+  } catch (error) {
+    console.error("Error parsing JSON response:", error);
+    showAlert("Error", "The server returned an invalid JSON response.");
+  }
+}
+
+function Diagnosis({ onProgressChange, symptoms, matchedDiseases }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    const timer = setTimeout(() => {
+      setLoading(false); // Set loading to false after 3 seconds
+      onProgressChange(70);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup the timer on unmount
+  }, [onProgressChange]);
+
+  if (loading) {
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
-        <img src="/images/doctors/OliviaMartinez-full.svg" />
-
+        <img src="/images/doctors/OliviaMartinez-full.svg" alt="Doctor" />
         <div className="flex flex-col text-4xl">
           Evaluating your health and the diagnosis
           <Spinner
@@ -189,24 +244,73 @@ function Diagnosis({ symptoms }) {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div>
-        You have not chosen the symptoms, your health cannot be assessed.
-      </div>
-    );
   }
+
+  return (
+    <div className="p-5">
+      <h2 className="text-3xl font-semibold mb-4">Diagnosis of Disease</h2>
+      {matchedDiseases.length > 0 ? (
+        <ul className="space-y-4">
+          {matchedDiseases.map((disease) => (
+            <div
+              key={disease.name}
+              className="bg-primary rounded-md p-4 text-white shadow-md"
+            >
+              <li className="text-2xl font-bold">{disease.system}</li>
+              <li className="text-xl">Disease: {disease.name}</li>
+              <li
+                className={`text-lg ${disease.severity === "severe" ? "text-red-500" : "text-amber-500"}`}
+              >
+                Severity: {disease.severity}
+              </li>
+              {disease.symptoms && disease.symptoms.length > 0 && (
+                <div className="mt-2">
+                  <p className="text-lg font-semibold">Symptoms:</p>
+                  <ul className="list-disc list-inside">
+                    {disease.symptoms.map((symptom, index) => (
+                      <li key={index} className="text-white">
+                        {symptom}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+          <CustomButton
+            label="Download and send Report 🖨️"
+            className="mt-5"
+            onPress={() => {
+              <SendReport diseasesMatched={matchedDiseases} />;
+            }}
+          />
+        </ul>
+      ) : (
+        <p className="text-lg">
+          No diseases matched your symptoms. Please check your symptoms and add
+          it.
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default function Content() {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(newProgress);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
+  const [matchedDiseases, setMatchedDiseases] = useState([]);
 
   const handleNextStep = () => {
+    const diseasesMatched = diseases.filter((disease) => {
+      const matchingSymptoms = disease.symptoms.filter((symptom) =>
+        selectedSymptoms.includes(symptom),
+      );
+      return matchingSymptoms.length >= 4;
+    });
+    setMatchedDiseases(diseasesMatched);
     setShowDiagnosis(true);
   };
-
   return (
     <>
       <Slider
@@ -217,32 +321,24 @@ export default function Content() {
         size="sm"
       />
 
-      {/* Show Symptoms or Diagnosis based on state */}
       {!showDiagnosis ? (
         <Symptoms
           onProgressChange={setProgress}
-          onSymptomsChange={setSelectedSymptoms} // Pass the selected symptoms here
+          onSymptomsChange={setSelectedSymptoms}
         />
       ) : (
-        <Diagnosis symptoms={selectedSymptoms} />
+        <Diagnosis
+          onProgressChange={setProgress}
+          symptoms={selectedSymptoms}
+          matchedDiseases={matchedDiseases}
+        />
       )}
 
-      {progress === 30 && !showDiagnosis && (
+      {progress > 0 && !showDiagnosis && (
         <CustomButton
           label="Next Step"
           className="mt-5"
-          onPress={() => {
-            // Filtrar enfermedades que tienen al menos 3 síntomas coincidentes
-            const matchedDiseases = diseases.filter((disease) => {
-              const matchingSymptoms = disease.symptoms.filter((symptom) =>
-                selectedSymptoms.includes(symptom),
-              );
-              return matchingSymptoms.length >= 3; // Al menos 3 síntomas coincidentes
-            });
-
-            // Mostrar enfermedades coincidentes o manejar de acuerdo
-            console.log("Matched Diseases:", matchedDiseases);
-          }}
+          onPress={handleNextStep}
         />
       )}
     </>
