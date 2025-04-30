@@ -167,3 +167,21 @@ export const reportAppointment = async (req, res) => {
     });
   }
 };
+
+export const getReports = async (req, res) => {
+  try {
+    const reports = await db.Report.findAll();
+
+    console.log("Reports retrieved:", reports);
+    res.status(200).json({
+      message: "Reports retrieved successfully",
+      reports,
+    });
+  } catch (error) {
+    console.error("Error retrieving reports:", error);
+    res.status(500).json({
+      error: "Error retrieving reports",
+      details: error.message,
+    });
+  }
+};

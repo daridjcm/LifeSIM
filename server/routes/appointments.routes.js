@@ -4,6 +4,7 @@ import {
   getAppointments,
   updateAppointmentStatus,
   reportAppointment,
+  getReports,
 } from "../controllers/appointment.controller.js";
 const router = express.Router();
 
@@ -11,6 +12,7 @@ const router = express.Router();
 router.post("/appointments", saveAppointment);
 router.get("/appointments", getAppointments);
 router.put("/appointments/:id", updateAppointmentStatus);
+router.get("/appointments/report", getReports);
 router.post("/appointments/report", reportAppointment);
 
 export default router;
