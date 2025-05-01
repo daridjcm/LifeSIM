@@ -9,6 +9,11 @@ An interactive life simulation web game where users manage their daily routine a
 - **Hospital:** 🏥 Visit the doctor (pay), pick up medications, download medical history documents, medical orders and prescription medications, schedule an appointment.
 - **Phone:** 📱 Manage your contacts, chats, calendar, schedules and more activities.
 
+# Technologies used
+1. **Front-End:** ReactJSX, TailwindCSS, Heroicons, HeroUI and Vite.
+2. **Back-End:** Express, JSONWebToken, Dotenv, Sequelize, bcrypt, body-parser, CORS and Node Cron.
+3. **General:** MariaDB, Recharts, JSPDF, JSPDF-AutoTable, Nodemon, Prettier, Concurrently.
+
 # Getting Started
 
 #### Clone Repository
@@ -33,7 +38,7 @@ cd ./server && npm install && cd ../
 npm install && npm start # Click or type get URL (Vite and/or Server)
 ```
 
-## Get files of the general project
+## Get files for the general project
 ```bash
 # For Excel (only read and organized)
 https://docs.google.com/spreadsheets/d/1_-o_6pyXByXr1yzdKn9mIDyN2herqXiW18dPMZJd2YY/edit?usp=sharing
