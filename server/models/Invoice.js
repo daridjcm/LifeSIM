@@ -2,26 +2,20 @@ export default (sequelize, DataTypes) => {
   const Invoice = sequelize.define(
     "Invoice",
     {
-      invoiceNumber: {
+      invoice_number: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      totalAmount: {
+      total_amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
       items: {
-        type: DataTypes.TEXT,
+        type: DataTypes.JSON,
         allowNull: false,
-        get() {
-          return JSON.parse(this.getDataValue("items"));
-        },
-        set(value) {
-          this.setDataValue("items", JSON.stringify(value));
-        },
       },
-      userID: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -35,7 +29,7 @@ export default (sequelize, DataTypes) => {
   // Relation with User
   Invoice.associate = (models) => {
     Invoice.belongsTo(models.User, {
-      foreignKey: "userID",
+      foreignKey: "user_id",
       as: "user",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",

@@ -3,6 +3,7 @@ import {
   ChatBubbleLeftIcon,
 } from "@heroicons/react/24/outline";
 
+// Message box component
 export function MessageBox({ sender, content, timestamp }) {
   return (
     <div

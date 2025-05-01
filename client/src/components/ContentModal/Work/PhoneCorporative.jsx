@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useDisclosure } from "@heroui/react";
 import ModalComponent from "./Modal.jsx";
-import TableCustomers, {
-  customersCount,
-} from "../../../utils/TableCustomers.jsx";
+import TableCustomers, { customersCount } from "./TableCustomers.jsx";
 import CustomButton from "../../CustomButton.jsx";
 
 export default function PhoneCorporative() {
@@ -12,6 +10,7 @@ export default function PhoneCorporative() {
   const [chatAnalia, setChatAnalia] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  // Redirect to chat with boss
   const ChatBoss = () => {
     setChatBoss(true);
     setTimeout(() => {
@@ -20,10 +19,12 @@ export default function PhoneCorporative() {
     }, 2000);
   };
 
+  // Redirect form to add customer
   const TableCalls = () => {
     onOpen();
   };
 
+  // Redirect to chat with Analia
   const ChatAnalia = () => {
     setChatAnalia(true);
     setTimeout(() => {
@@ -32,6 +33,7 @@ export default function PhoneCorporative() {
     }, 2000);
   };
 
+  // Render content Phone Corporative
   return (
     <div className="flex flex-col gap-3 mt-4">
       <CustomButton

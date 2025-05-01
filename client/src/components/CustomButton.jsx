@@ -1,16 +1,26 @@
 import React from "react";
 import { Button } from "@heroui/react";
 
-const CustomButton = ({ label, onPress, isLoading, loadingText, icon, id }) => {
+const CustomButton = ({
+  label,
+  onPress,
+  isLoading,
+  loadingText,
+  icon,
+  id,
+  variant,
+  size,
+  className,
+}) => {
   return (
     <Button
       color="primary"
-      variant="flat"
-      size="md"
+      variant={variant || "flat"}
+      size={size || "md"}
       onPress={onPress}
       aria-label={label}
       id={id}
-      className="mr-2"
+      className={className || "mr-2"}
     >
       {isLoading ? loadingText : label} {icon}
     </Button>

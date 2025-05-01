@@ -1,0 +1,2983 @@
+[
+  {
+    "id": 1,
+    "name": "Common Cold",
+    "system": "Respiratory System",
+    "severity": "mild",
+    "symptoms": [
+      "runny nose",
+      "sore throat",
+      "cough",
+      "mild fever",
+      "sneezing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Acetaminophen",
+        "pill_description": "Reduces fever and pain.",
+        "pill_price": 10.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Dextromethorphan",
+        "pill_description": "Suppresses cough.",
+        "pill_price": 8.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 100
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Asthma",
+    "system": "Respiratory System",
+    "severity": "moderate",
+    "symptoms": [
+      "shortness of breath",
+      "chest tightness",
+      "wheezing",
+      "coughing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Albuterol",
+        "pill_description": "Relieves bronchospasms.",
+        "pill_price": 15.0,
+        "pill_weight": "2mg",
+        "pill_tablets": 50
+      },
+      {
+        "pill_name": "Montelukast",
+        "pill_description": "Reduces airway inflammation.",
+        "pill_price": 20.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Pneumonia",
+    "system": "Respiratory System",
+    "severity": "severe",
+    "symptoms": [
+      "high fever",
+      "chills",
+      "cough with phlegm",
+      "difficulty breathing",
+      "fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Azithromycin",
+        "pill_description": "Antibiotic that fights bacteria.",
+        "pill_price": 18.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 6
+      },
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces fever and inflammation.",
+        "pill_price": 5.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Bronchitis",
+    "system": "Respiratory System",
+    "severity": "moderate",
+    "symptoms": [
+      "persistent cough",
+      "mucus production",
+      "chest discomfort",
+      "fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Guaifenesin",
+        "pill_description": "Helps to thin and loosen mucus.",
+        "pill_price": 7.0,
+        "pill_weight": "1000mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Chronic Obstructive Pulmonary Disease (COPD)",
+    "system": "Respiratory System",
+    "severity": "severe",
+    "symptoms": [
+      "shortness of breath",
+      "chronic cough",
+      "frequent respiratory infections",
+      "fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Tiotropium",
+        "pill_description": "Long-acting bronchodilator for easier breathing.",
+        "pill_price": 25.0,
+        "pill_weight": "18mcg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Prednisone",
+        "pill_description": "Reduces inflammation in the airways.",
+        "pill_price": 10.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 15
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Gastroenteritis",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": ["diarrhea", "nausea", "vomiting", "abdominal cramps", "fever"],
+    "treatments": [
+      {
+        "pill_name": "Loperamide",
+        "pill_description": "Used to treat diarrhea.",
+        "pill_price": 6.0,
+        "pill_weight": "2mg",
+        "pill_tablets": 8
+      },
+      {
+        "pill_name": "Paracetamol",
+        "pill_description": "Used to treat pain and fever.",
+        "pill_price": 4.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 16
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Peptic Ulcer",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": [
+      "burning stomach pain",
+      "bloating",
+      "nausea",
+      "loss of appetite",
+      "weight loss"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Omeprazole",
+        "pill_description": "Reduces stomach acid.",
+        "pill_price": 10.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 14
+      },
+      {
+        "pill_name": "Amoxicillin",
+        "pill_description": "Antibiotic used to treat infections.",
+        "pill_price": 12.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Irritable Bowel Syndrome",
+    "system": "Digestive System",
+    "severity": "mild",
+    "symptoms": [
+      "abdominal pain",
+      "bloating",
+      "diarrhea",
+      "constipation",
+      "gas"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Loperamide",
+        "pill_description": "Used to treat diarrhea.",
+        "pill_price": 6.0,
+        "pill_weight": "2mg",
+        "pill_tablets": 8
+      },
+      {
+        "pill_name": "Ranitidine",
+        "pill_description": "Used for treating ulcers and GERD.",
+        "pill_price": 8.0,
+        "pill_weight": "150mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Constipation",
+    "system": "Digestive System",
+    "severity": "mild",
+    "symptoms": [
+      "infrequent bowel movements",
+      "hard stools",
+      "bloating",
+      "discomfort",
+      "straining"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Bisacodyl",
+        "pill_description": "Stimulant laxative for short-term relief of constipation.",
+        "pill_price": 5.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 10
+      },
+      {
+        "pill_name": "Docusate",
+        "pill_description": "Stool softener to relieve constipation.",
+        "pill_price": 4.5,
+        "pill_weight": "100mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Gastritis",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": [
+      "stomach pain",
+      "nausea",
+      "vomiting",
+      "loss of appetite",
+      "indigestion"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Omeprazole",
+        "pill_description": "Reduces stomach acid.",
+        "pill_price": 10.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 14
+      },
+      {
+        "pill_name": "Ranitidine",
+        "pill_description": "Used for treating ulcers and GERD.",
+        "pill_price": 8.0,
+        "pill_weight": "150mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "GERD",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": [
+      "heartburn",
+      "regurgitation",
+      "chest pain",
+      "difficulty swallowing",
+      "dry cough"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ranitidine",
+        "pill_description": "Used for treating ulcers and GERD.",
+        "pill_price": 8.0,
+        "pill_weight": "150mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Omeprazole",
+        "pill_description": "Reduces stomach acid.",
+        "pill_price": 10.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 14
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Liver Cirrhosis",
+    "system": "Digestive System",
+    "severity": "severe",
+    "symptoms": [
+      "fatigue",
+      "nausea",
+      "loss of appetite",
+      "swelling in legs",
+      "jaundice"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Spironolactone",
+        "pill_description": "Reduces fluid retention.",
+        "pill_price": 6.0,
+        "pill_weight": "25mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Furosemide",
+        "pill_description": "Diuretic to manage fluid buildup.",
+        "pill_price": 5.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Pancreatitis",
+    "system": "Digestive System",
+    "severity": "severe",
+    "symptoms": [
+      "upper abdominal pain",
+      "nausea",
+      "vomiting",
+      "fever",
+      "rapid pulse"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Tramadol",
+        "pill_description": "Pain reliever for moderate to severe pain.",
+        "pill_price": 9.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Omeprazole",
+        "pill_description": "Reduces stomach acid.",
+        "pill_price": 10.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 14
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Hepatitis A",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": [
+      "fatigue",
+      "nausea",
+      "abdominal pain",
+      "loss of appetite",
+      "jaundice"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Paracetamol",
+        "pill_description": "Used to treat pain and fever.",
+        "pill_price": 4.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 16
+      },
+      {
+        "pill_name": "Multivitamins",
+        "pill_description": "Supports overall health and recovery.",
+        "pill_price": 6.5,
+        "pill_weight": "1 tablet",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Gallstones",
+    "system": "Digestive System",
+    "severity": "moderate",
+    "symptoms": [
+      "sudden upper right abdomen pain",
+      "nausea",
+      "vomiting",
+      "bloating",
+      "indigestion"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ursodiol",
+        "pill_description": "Dissolves cholesterol gallstones.",
+        "pill_price": 14.0,
+        "pill_weight": "300mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces inflammation and pain.",
+        "pill_price": 5.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Urinary Tract Infection",
+    "system": "Urinary System",
+    "severity": "moderate",
+    "symptoms": [
+      "burning sensation during urination",
+      "frequent urination",
+      "cloudy urine",
+      "pelvic pain",
+      "strong-smelling urine"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Nitrofurantoin",
+        "pill_description": "Antibiotic for urinary tract infections.",
+        "pill_price": 10.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces inflammation and pain.",
+        "pill_price": 5.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Kidney Stones",
+    "system": "Urinary System",
+    "severity": "severe",
+    "symptoms": [
+      "intense back or side pain",
+      "nausea",
+      "blood in urine",
+      "painful urination",
+      "frequent urination"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Tamsulosin",
+        "pill_description": "Relaxes muscles in the urinary tract to ease stone passage.",
+        "pill_price": 12.0,
+        "pill_weight": "0.4mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Naproxen",
+        "pill_description": "Pain reliever for kidney stone discomfort.",
+        "pill_price": 6.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Interstitial Cystitis",
+    "system": "Urinary System",
+    "severity": "moderate",
+    "symptoms": [
+      "chronic bladder pressure",
+      "bladder pain",
+      "frequent urination",
+      "pelvic discomfort",
+      "urgency"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Pentosan Polysulfate",
+        "pill_description": "Relieves bladder pain and discomfort.",
+        "pill_price": 15.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Hydroxyzine",
+        "pill_description": "Antihistamine that helps relieve bladder symptoms.",
+        "pill_price": 8.0,
+        "pill_weight": "25mg",
+        "pill_tablets": 25
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Bladder Infection",
+    "system": "Urinary System",
+    "severity": "moderate",
+    "symptoms": [
+      "burning urination",
+      "cloudy urine",
+      "pelvic pain",
+      "urgency",
+      "blood in urine"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Trimethoprim",
+        "pill_description": "Antibiotic used to treat bladder infections.",
+        "pill_price": 7.5,
+        "pill_weight": "200mg",
+        "pill_tablets": 14
+      },
+      {
+        "pill_name": "Phenazopyridine",
+        "pill_description": "Relieves urinary tract pain, burning, and urgency.",
+        "pill_price": 5.5,
+        "pill_weight": "100mg",
+        "pill_tablets": 12
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Kidney Infection",
+    "system": "Urinary System",
+    "severity": "severe",
+    "symptoms": [
+      "fever",
+      "chills",
+      "nausea",
+      "back pain",
+      "frequent urination"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ciprofloxacin",
+        "pill_description": "Antibiotic for treating kidney infections.",
+        "pill_price": 11.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 14
+      },
+      {
+        "pill_name": "Paracetamol",
+        "pill_description": "Pain and fever reducer.",
+        "pill_price": 4.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Breast Cancer",
+    "system": "Oncology",
+    "severity": "severe",
+    "symptoms": [
+      "lump in the breast",
+      "nipple discharge",
+      "change in breast shape",
+      "swelling in part of the breast",
+      "skin irritation"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Tamoxifen",
+        "pill_description": "Blocks estrogen receptors to slow cancer growth.",
+        "pill_price": 50.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Letrozole",
+        "pill_description": "Aromatase inhibitor used in hormone-sensitive breast cancer.",
+        "pill_price": 60.0,
+        "pill_weight": "2.5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Lung Cancer",
+    "system": "Oncology",
+    "severity": "severe",
+    "symptoms": [
+      "chronic cough",
+      "chest pain",
+      "weight loss",
+      "shortness of breath",
+      "coughing up blood"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Gefitinib",
+        "pill_description": "Inhibits cancer cell growth in non-small cell lung cancer.",
+        "pill_price": 80.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Erlotinib",
+        "pill_description": "Used to treat advanced non-small cell lung cancer.",
+        "pill_price": 85.0,
+        "pill_weight": "150mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Leukemia",
+    "system": "Oncology",
+    "severity": "severe",
+    "symptoms": [
+      "frequent infections",
+      "fatigue",
+      "bleeding easily",
+      "fever",
+      "weight loss"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Imatinib",
+        "pill_description": "Targeted therapy for chronic myeloid leukemia.",
+        "pill_price": 100.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Dasatinib",
+        "pill_description": "Used to treat Philadelphia chromosome-positive leukemia.",
+        "pill_price": 120.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Prostate Cancer",
+    "system": "Oncology",
+    "severity": "moderate",
+    "symptoms": [
+      "frequent urination",
+      "weak urine stream",
+      "erectile dysfunction",
+      "painful ejaculation",
+      "pelvic discomfort"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Bicalutamide",
+        "pill_description": "Anti-androgen used in prostate cancer treatment.",
+        "pill_price": 45.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Leuprolide",
+        "pill_description": "Hormone therapy for advanced prostate cancer.",
+        "pill_price": 70.0,
+        "pill_weight": "7.5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Skin Cancer",
+    "system": "Oncology",
+    "severity": "moderate",
+    "symptoms": [
+      "changing mole",
+      "skin lesion",
+      "itching",
+      "bleeding from lesion",
+      "new skin growth"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Vismodegib",
+        "pill_description": "Used to treat basal cell carcinoma.",
+        "pill_price": 90.0,
+        "pill_weight": "150mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Fluorouracil",
+        "pill_description": "Topical chemotherapy for skin cancer.",
+        "pill_price": 25.0,
+        "pill_weight": "5%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Hypertension",
+    "system": "Circulatory System",
+    "severity": "moderate",
+    "symptoms": [
+      "headaches",
+      "shortness of breath",
+      "nosebleeds",
+      "dizziness",
+      "chest pain"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Lisinopril",
+        "pill_description": "ACE inhibitor that lowers blood pressure.",
+        "pill_price": 12.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Amlodipine",
+        "pill_description": "Calcium channel blocker used for hypertension.",
+        "pill_price": 10.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Atherosclerosis",
+    "system": "Circulatory System",
+    "severity": "severe",
+    "symptoms": [
+      "chest pain",
+      "fatigue",
+      "shortness of breath",
+      "numbness in limbs",
+      "weak pulse"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Atorvastatin",
+        "pill_description": "Reduces cholesterol levels to prevent artery blockage.",
+        "pill_price": 15.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Clopidogrel",
+        "pill_description": "Prevents blood clots in patients with heart disease.",
+        "pill_price": 18.0,
+        "pill_weight": "75mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Heart Failure",
+    "system": "Circulatory System",
+    "severity": "severe",
+    "symptoms": [
+      "shortness of breath",
+      "fatigue",
+      "swelling in legs",
+      "rapid heartbeat",
+      "persistent coughing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Furosemide",
+        "pill_description": "Diuretic to reduce fluid buildup.",
+        "pill_price": 8.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Metoprolol",
+        "pill_description": "Beta-blocker that improves heart function.",
+        "pill_price": 10.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Peripheral Artery Disease",
+    "system": "Circulatory System",
+    "severity": "moderate",
+    "symptoms": [
+      "leg pain when walking",
+      "numbness",
+      "cold feet",
+      "slow healing wounds",
+      "weak pulse in legs"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Cilostazol",
+        "pill_description": "Improves blood flow in the limbs.",
+        "pill_price": 20.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Aspirin",
+        "pill_description": "Reduces blood clotting and improves circulation.",
+        "pill_price": 5.0,
+        "pill_weight": "81mg",
+        "pill_tablets": 100
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Aneurysm",
+    "system": "Circulatory System",
+    "severity": "severe",
+    "symptoms": [
+      "sudden severe headache",
+      "blurred vision",
+      "nausea",
+      "loss of consciousness",
+      "stiff neck"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Nimodipine",
+        "pill_description": "Prevents brain damage after a ruptured aneurysm.",
+        "pill_price": 22.0,
+        "pill_weight": "30mg",
+        "pill_tablets": 21
+      },
+      {
+        "pill_name": "Propranolol",
+        "pill_description": "Used to manage blood pressure and heart rate.",
+        "pill_price": 9.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Rheumatoid Arthritis",
+    "system": "Immune System",
+    "severity": "moderate",
+    "symptoms": [
+      "joint pain",
+      "swelling",
+      "stiffness",
+      "fatigue",
+      "loss of joint function"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Methotrexate",
+        "pill_description": "Reduces immune system activity to treat RA.",
+        "pill_price": 25.0,
+        "pill_weight": "7.5mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Sulfasalazine",
+        "pill_description": "Anti-inflammatory for autoimmune diseases.",
+        "pill_price": 15.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Lupus",
+    "system": "Immune System",
+    "severity": "severe",
+    "symptoms": ["fatigue", "joint pain", "skin rash", "fever", "organ damage"],
+    "treatments": [
+      {
+        "pill_name": "Hydroxychloroquine",
+        "pill_description": "Manages skin and joint symptoms of lupus.",
+        "pill_price": 20.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Belimumab",
+        "pill_description": "Monoclonal antibody for systemic lupus.",
+        "pill_price": 80.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Psoriasis",
+    "system": "Immune System",
+    "severity": "mild",
+    "symptoms": [
+      "red patches",
+      "dry skin",
+      "itching",
+      "cracked skin",
+      "thickened nails"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Apremilast",
+        "pill_description": "Reduces inflammation in psoriatic diseases.",
+        "pill_price": 35.0,
+        "pill_weight": "30mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Cyclosporine",
+        "pill_description": "Suppresses immune response in severe psoriasis.",
+        "pill_price": 40.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Multiple Sclerosis",
+    "system": "Immune System",
+    "severity": "severe",
+    "symptoms": [
+      "numbness",
+      "muscle weakness",
+      "vision loss",
+      "coordination issues",
+      "fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Fingolimod",
+        "pill_description": "Prevents immune cells from attacking the nervous system.",
+        "pill_price": 100.0,
+        "pill_weight": "0.5mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Teriflunomide",
+        "pill_description": "Slows MS progression.",
+        "pill_price": 85.0,
+        "pill_weight": "14mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Type 1 Diabetes",
+    "system": "Immune System",
+    "severity": "severe",
+    "symptoms": [
+      "frequent urination",
+      "extreme thirst",
+      "fatigue",
+      "blurred vision",
+      "weight loss"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Insulin Glargine",
+        "pill_description": "Long-acting insulin to manage blood sugar.",
+        "pill_price": 50.0,
+        "pill_weight": "100 units/mL",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Pramlintide",
+        "pill_description": "Slows gastric emptying and regulates glucose.",
+        "pill_price": 30.0,
+        "pill_weight": "600mcg/mL",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Celiac Disease",
+    "system": "Immune System",
+    "severity": "moderate",
+    "symptoms": ["diarrhea", "bloating", "weight loss", "fatigue", "rash"],
+    "treatments": [
+      {
+        "pill_name": "Gluten-Free Diet",
+        "pill_description": "Eliminates immune-triggering gluten from diet.",
+        "pill_price": 0.0,
+        "pill_weight": "n/a",
+        "pill_tablets": 0
+      },
+      {
+        "pill_name": "Probiotics",
+        "pill_description": "Support gut health in gluten intolerance.",
+        "pill_price": 20.0,
+        "pill_weight": "1 billion CFU",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Hashimoto’s Thyroiditis",
+    "system": "Immune System",
+    "severity": "moderate",
+    "symptoms": [
+      "fatigue",
+      "weight gain",
+      "cold sensitivity",
+      "constipation",
+      "depression"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Levothyroxine",
+        "pill_description": "Synthetic thyroid hormone replacement.",
+        "pill_price": 15.0,
+        "pill_weight": "100mcg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Selenium",
+        "pill_description": "Supports thyroid function.",
+        "pill_price": 8.0,
+        "pill_weight": "200mcg",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Graves’ Disease",
+    "system": "Immune System",
+    "severity": "moderate",
+    "symptoms": [
+      "weight loss",
+      "anxiety",
+      "irritability",
+      "heat sensitivity",
+      "bulging eyes"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Methimazole",
+        "pill_description": "Blocks thyroid hormone synthesis.",
+        "pill_price": 10.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Beta-blockers",
+        "pill_description": "Relieves symptoms like rapid heartbeat.",
+        "pill_price": 7.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Ankylosing Spondylitis",
+    "system": "Immune System",
+    "severity": "moderate",
+    "symptoms": [
+      "back pain",
+      "stiffness",
+      "fatigue",
+      "reduced flexibility",
+      "inflammation"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Indomethacin",
+        "pill_description": "NSAID to reduce inflammation.",
+        "pill_price": 14.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Etanercept",
+        "pill_description": "Biologic that reduces immune system attacks.",
+        "pill_price": 120.0,
+        "pill_weight": "25mg",
+        "pill_tablets": 4
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Sjögren’s Syndrome",
+    "system": "Immune System",
+    "severity": "mild",
+    "symptoms": ["dry mouth", "dry eyes", "fatigue", "joint pain", "swelling"],
+    "treatments": [
+      {
+        "pill_name": "Pilocarpine",
+        "pill_description": "Stimulates saliva and tear production.",
+        "pill_price": 22.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Hydroxychloroquine",
+        "pill_description": "Controls joint and muscle symptoms.",
+        "pill_price": 18.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Hypertension",
+    "system": "Cardiovascular System",
+    "severity": "moderate",
+    "symptoms": [
+      "headache",
+      "dizziness",
+      "nosebleeds",
+      "blurred vision",
+      "chest pain"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Lisinopril",
+        "pill_description": "Lowers blood pressure by relaxing blood vessels.",
+        "pill_price": 12.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Amlodipine",
+        "pill_description": "Calcium channel blocker to treat high blood pressure.",
+        "pill_price": 15.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Coronary Artery Disease",
+    "system": "Cardiovascular System",
+    "severity": "severe",
+    "symptoms": [
+      "chest pain",
+      "shortness of breath",
+      "fatigue",
+      "heart attack",
+      "irregular heartbeat"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Atorvastatin",
+        "pill_description": "Lowers cholesterol to prevent plaque buildup.",
+        "pill_price": 18.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Clopidogrel",
+        "pill_description": "Prevents blood clots.",
+        "pill_price": 22.0,
+        "pill_weight": "75mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Heart Failure",
+    "system": "Cardiovascular System",
+    "severity": "severe",
+    "symptoms": [
+      "shortness of breath",
+      "fatigue",
+      "swollen legs",
+      "rapid heartbeat",
+      "persistent cough"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Furosemide",
+        "pill_description": "Diuretic to reduce fluid buildup.",
+        "pill_price": 10.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Carvedilol",
+        "pill_description": "Improves heart function and reduces blood pressure.",
+        "pill_price": 13.0,
+        "pill_weight": "12.5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Arrhythmia",
+    "system": "Cardiovascular System",
+    "severity": "moderate",
+    "symptoms": [
+      "fluttering chest",
+      "racing heartbeat",
+      "slow heartbeat",
+      "chest pain",
+      "dizziness"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Amiodarone",
+        "pill_description": "Stabilizes heart rhythm.",
+        "pill_price": 25.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Propranolol",
+        "pill_description": "Slows heart rate and controls arrhythmias.",
+        "pill_price": 11.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Atherosclerosis",
+    "system": "Cardiovascular System",
+    "severity": "severe",
+    "symptoms": [
+      "chest pain",
+      "numbness",
+      "leg pain",
+      "high blood pressure",
+      "stroke"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Rosuvastatin",
+        "pill_description": "Reduces cholesterol to slow artery blockage.",
+        "pill_price": 19.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Aspirin",
+        "pill_description": "Prevents blood clots and reduces inflammation.",
+        "pill_price": 6.0,
+        "pill_weight": "81mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Peripheral Artery Disease",
+    "system": "Cardiovascular System",
+    "severity": "moderate",
+    "symptoms": [
+      "leg cramps",
+      "numbness",
+      "weak pulse",
+      "cold legs",
+      "shiny skin"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Cilostazol",
+        "pill_description": "Improves blood flow and reduces leg pain.",
+        "pill_price": 17.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Pentoxifylline",
+        "pill_description": "Increases blood flow by making red blood cells flexible.",
+        "pill_price": 14.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Cardiomyopathy",
+    "system": "Cardiovascular System",
+    "severity": "severe",
+    "symptoms": [
+      "breathlessness",
+      "swollen legs",
+      "fatigue",
+      "dizziness",
+      "irregular heartbeat"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Metoprolol",
+        "pill_description": "Beta-blocker that helps heart pump more effectively.",
+        "pill_price": 12.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Spironolactone",
+        "pill_description": "Reduces fluid retention and eases heart workload.",
+        "pill_price": 9.0,
+        "pill_weight": "25mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Angina",
+    "system": "Cardiovascular System",
+    "severity": "moderate",
+    "symptoms": [
+      "chest pressure",
+      "sweating",
+      "nausea",
+      "fatigue",
+      "dizziness"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Nitroglycerin",
+        "pill_description": "Relieves chest pain by relaxing blood vessels.",
+        "pill_price": 7.0,
+        "pill_weight": "0.4mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Isosorbide Mononitrate",
+        "pill_description": "Prevents chest pain episodes.",
+        "pill_price": 10.0,
+        "pill_weight": "30mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Endocarditis",
+    "system": "Cardiovascular System",
+    "severity": "severe",
+    "symptoms": [
+      "fever",
+      "chills",
+      "fatigue",
+      "shortness of breath",
+      "muscle aches"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Vancomycin",
+        "pill_description": "Antibiotic used for serious bacterial infections.",
+        "pill_price": 85.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 14
+      },
+      {
+        "pill_name": "Gentamicin",
+        "pill_description": "Antibiotic for bacterial infections in the heart.",
+        "pill_price": 75.0,
+        "pill_weight": "80mg",
+        "pill_tablets": 14
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Pericarditis",
+    "system": "Cardiovascular System",
+    "severity": "moderate",
+    "symptoms": [
+      "sharp chest pain",
+      "fever",
+      "fatigue",
+      "shortness of breath",
+      "dry cough"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Colchicine",
+        "pill_description": "Reduces inflammation in the heart lining.",
+        "pill_price": 16.0,
+        "pill_weight": "0.6mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces inflammation and pain.",
+        "pill_price": 5.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Epilepsy",
+    "system": "Nervous System",
+    "severity": "moderate",
+    "symptoms": [
+      "seizures",
+      "confusion",
+      "loss of consciousness",
+      "staring spells",
+      "temporary paralysis"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Valproate",
+        "pill_description": "Prevents seizures by stabilizing electrical activity in the brain.",
+        "pill_price": 18.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Lamotrigine",
+        "pill_description": "Controls seizures and mood disorders.",
+        "pill_price": 20.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Parkinson's Disease",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "tremor",
+      "slowed movement",
+      "muscle stiffness",
+      "impaired posture",
+      "speech changes"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Levodopa",
+        "pill_description": "Improves movement by replenishing dopamine.",
+        "pill_price": 35.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Selegiline",
+        "pill_description": "Helps increase dopamine in the brain.",
+        "pill_price": 25.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Multiple Sclerosis",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "vision problems",
+      "muscle weakness",
+      "tingling",
+      "balance issues",
+      "fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Interferon beta-1a",
+        "pill_description": "Slows MS progression and reduces flare-ups.",
+        "pill_price": 90.0,
+        "pill_weight": "22mcg",
+        "pill_tablets": 4
+      },
+      {
+        "pill_name": "Glatiramer acetate",
+        "pill_description": "Protects nerves by modifying immune activity.",
+        "pill_price": 95.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 12
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Alzheimer's Disease",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "memory loss",
+      "confusion",
+      "difficulty thinking",
+      "disorientation",
+      "behavior changes"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Donepezil",
+        "pill_description": "Improves memory and awareness.",
+        "pill_price": 18.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Memantine",
+        "pill_description": "Helps with symptoms of moderate to severe Alzheimer's.",
+        "pill_price": 22.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Migraine",
+    "system": "Nervous System",
+    "severity": "moderate",
+    "symptoms": [
+      "intense headache",
+      "nausea",
+      "sensitivity to light",
+      "blurred vision",
+      "aura"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Sumatriptan",
+        "pill_description": "Relieves migraine symptoms by narrowing blood vessels.",
+        "pill_price": 12.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 10
+      },
+      {
+        "pill_name": "Topiramate",
+        "pill_description": "Prevents chronic migraines.",
+        "pill_price": 15.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Stroke",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "numbness on one side",
+      "difficulty speaking",
+      "confusion",
+      "loss of balance",
+      "severe headache"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Aspirin",
+        "pill_description": "Reduces the risk of further clots.",
+        "pill_price": 5.0,
+        "pill_weight": "81mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Clopidogrel",
+        "pill_description": "Prevents new strokes by reducing clotting.",
+        "pill_price": 18.0,
+        "pill_weight": "75mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Bell's Palsy",
+    "system": "Nervous System",
+    "severity": "mild",
+    "symptoms": [
+      "facial droop",
+      "inability to close eye",
+      "tearing",
+      "loss of taste",
+      "facial pain"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Prednisone",
+        "pill_description": "Reduces nerve inflammation.",
+        "pill_price": 10.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 21
+      },
+      {
+        "pill_name": "Acyclovir",
+        "pill_description": "Antiviral medication in case of viral cause.",
+        "pill_price": 14.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Neuralgia",
+    "system": "Nervous System",
+    "severity": "moderate",
+    "symptoms": [
+      "sharp pain",
+      "burning sensation",
+      "numbness",
+      "sensitivity to touch",
+      "tingling"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Gabapentin",
+        "pill_description": "Treats nerve pain by affecting nerve signals.",
+        "pill_price": 17.0,
+        "pill_weight": "300mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Pregabalin",
+        "pill_description": "Used for neuropathic pain relief.",
+        "pill_price": 19.0,
+        "pill_weight": "75mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Meningitis",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "fever",
+      "headache",
+      "stiff neck",
+      "nausea",
+      "sensitivity to light"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ceftriaxone",
+        "pill_description": "Powerful antibiotic for bacterial meningitis.",
+        "pill_price": 45.0,
+        "pill_weight": "1g",
+        "pill_tablets": 7
+      },
+      {
+        "pill_name": "Dexamethasone",
+        "pill_description": "Reduces inflammation in the brain.",
+        "pill_price": 8.0,
+        "pill_weight": "4mg",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Amyotrophic Lateral Sclerosis (ALS)",
+    "system": "Nervous System",
+    "severity": "severe",
+    "symptoms": [
+      "muscle weakness",
+      "difficulty speaking",
+      "trouble swallowing",
+      "muscle cramps",
+      "respiratory issues"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Riluzole",
+        "pill_description": "Slows progression of ALS.",
+        "pill_price": 40.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Edaravone",
+        "pill_description": "Protects nerves from damage in ALS.",
+        "pill_price": 110.0,
+        "pill_weight": "30mg",
+        "pill_tablets": 14
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Acne",
+    "system": "Integumentary System",
+    "severity": "mild",
+    "symptoms": [
+      "pimples",
+      "blackheads",
+      "whiteheads",
+      "oily skin",
+      "scarring"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Benzoyl Peroxide",
+        "pill_description": "Kills acne-causing bacteria and reduces inflammation.",
+        "pill_price": 10.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Doxycycline",
+        "pill_description": "Antibiotic used to reduce acne inflammation.",
+        "pill_price": 18.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Eczema",
+    "system": "Integumentary System",
+    "severity": "moderate",
+    "symptoms": ["itching", "red patches", "dry skin", "blisters", "cracking"],
+    "treatments": [
+      {
+        "pill_name": "Hydrocortisone",
+        "pill_description": "Reduces skin inflammation and itching.",
+        "pill_price": 9.0,
+        "pill_weight": "20mg",
+        "pill_tablets": 15
+      },
+      {
+        "pill_name": "Tacrolimus",
+        "pill_description": "Immunosuppressant used for severe eczema.",
+        "pill_price": 22.0,
+        "pill_weight": "1mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Psoriasis",
+    "system": "Integumentary System",
+    "severity": "moderate",
+    "symptoms": [
+      "red patches",
+      "silvery scales",
+      "dry skin",
+      "itching",
+      "cracked skin"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Methotrexate",
+        "pill_description": "Slows skin cell growth and reduces inflammation.",
+        "pill_price": 20.0,
+        "pill_weight": "2.5mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Cyclosporine",
+        "pill_description": "Suppresses immune activity to manage flare-ups.",
+        "pill_price": 35.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Dermatitis",
+    "system": "Integumentary System",
+    "severity": "mild",
+    "symptoms": ["itching", "rash", "redness", "swelling", "scaling"],
+    "treatments": [
+      {
+        "pill_name": "Loratadine",
+        "pill_description": "Relieves allergic skin reactions.",
+        "pill_price": 7.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Clemastine",
+        "pill_description": "Antihistamine for skin irritation and rash.",
+        "pill_price": 8.0,
+        "pill_weight": "1mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Skin Cancer",
+    "system": "Integumentary System",
+    "severity": "severe",
+    "symptoms": [
+      "new growths",
+      "changing moles",
+      "bleeding",
+      "non-healing sores",
+      "scaly patches"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Fluorouracil",
+        "pill_description": "Topical treatment for precancerous skin lesions.",
+        "pill_price": 28.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 10
+      },
+      {
+        "pill_name": "Imiquimod",
+        "pill_description": "Stimulates immune response to attack cancer cells.",
+        "pill_price": 30.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Osteoporosis",
+    "system": "Skeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "bone fractures",
+      "loss of height",
+      "back pain",
+      "stooped posture",
+      "brittle bones"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Alendronate",
+        "pill_description": "Slows bone loss and increases bone density.",
+        "pill_price": 25.0,
+        "pill_weight": "70mg",
+        "pill_tablets": 4
+      },
+      {
+        "pill_name": "Calcium Carbonate",
+        "pill_description": "Helps maintain bone strength.",
+        "pill_price": 10.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Osteoarthritis",
+    "system": "Skeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "joint pain",
+      "stiffness",
+      "swelling",
+      "reduced motion",
+      "grating sensation"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces pain and inflammation.",
+        "pill_price": 8.0,
+        "pill_weight": "400mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Naproxen",
+        "pill_description": "Nonsteroidal anti-inflammatory drug for joint pain.",
+        "pill_price": 12.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Rickets",
+    "system": "Skeletal System",
+    "severity": "mild",
+    "symptoms": [
+      "delayed growth",
+      "bowed legs",
+      "muscle weakness",
+      "bone pain",
+      "soft bones"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Vitamin D",
+        "pill_description": "Promotes calcium absorption to strengthen bones.",
+        "pill_price": 6.0,
+        "pill_weight": "1000 IU",
+        "pill_tablets": 100
+      },
+      {
+        "pill_name": "Calcium Gluconate",
+        "pill_description": "Calcium supplement to improve bone formation.",
+        "pill_price": 14.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Paget's Disease",
+    "system": "Skeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "bone pain",
+      "joint stiffness",
+      "bent bones",
+      "hearing loss",
+      "increased head size"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Risedronate",
+        "pill_description": "Slows abnormal bone breakdown and rebuilding.",
+        "pill_price": 30.0,
+        "pill_weight": "35mg",
+        "pill_tablets": 4
+      },
+      {
+        "pill_name": "Calcitonin",
+        "pill_description": "Hormone therapy to regulate bone metabolism.",
+        "pill_price": 22.0,
+        "pill_weight": "200 IU",
+        "pill_tablets": 15
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Bone Fracture",
+    "system": "Skeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "severe pain",
+      "swelling",
+      "bruising",
+      "deformity",
+      "inability to move limb"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Acetaminophen",
+        "pill_description": "Relieves pain from bone injury.",
+        "pill_price": 9.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Hydrocodone",
+        "pill_description": "Narcotic pain reliever for moderate to severe pain.",
+        "pill_price": 18.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Conjunctivitis",
+    "system": "Visual System",
+    "severity": "mild",
+    "symptoms": [
+      "redness",
+      "itchy eyes",
+      "watery discharge",
+      "gritty feeling",
+      "crusting eyelids"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Antihistamine Eye Drops",
+        "pill_description": "Relieves allergic conjunctivitis symptoms.",
+        "pill_price": 12.0,
+        "pill_weight": "0.05%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Ofloxacin",
+        "pill_description": "Antibiotic eye drops for bacterial infections.",
+        "pill_price": 15.0,
+        "pill_weight": "0.3%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Cataract",
+    "system": "Visual System",
+    "severity": "moderate",
+    "symptoms": [
+      "cloudy vision",
+      "difficulty seeing at night",
+      "halos around lights",
+      "fading colors",
+      "double vision"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Phenylephrine",
+        "pill_description": "Dilates pupil for better vision temporarily.",
+        "pill_price": 9.0,
+        "pill_weight": "2.5%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "NSAID Eye Drops",
+        "pill_description": "Reduces inflammation before/after surgery.",
+        "pill_price": 20.0,
+        "pill_weight": "0.1%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Glaucoma",
+    "system": "Visual System",
+    "severity": "severe",
+    "symptoms": [
+      "vision loss",
+      "eye pain",
+      "halo vision",
+      "headache",
+      "nausea"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Latanoprost",
+        "pill_description": "Reduces intraocular pressure.",
+        "pill_price": 28.0,
+        "pill_weight": "0.005%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Timolol",
+        "pill_description": "Beta blocker that reduces eye pressure.",
+        "pill_price": 24.0,
+        "pill_weight": "0.25%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Macular Degeneration",
+    "system": "Visual System",
+    "severity": "severe",
+    "symptoms": [
+      "blurred vision",
+      "loss of central vision",
+      "difficulty recognizing faces",
+      "straight lines appear wavy",
+      "dark spots"
+    ],
+    "treatments": [
+      {
+        "pill_name": "AREDS Supplement",
+        "pill_description": "Slows progression of age-related macular degeneration.",
+        "pill_price": 35.0,
+        "pill_weight": "Various",
+        "pill_tablets": 60
+      },
+      {
+        "pill_name": "Ranibizumab",
+        "pill_description": "Inhibits blood vessel growth in retina.",
+        "pill_price": 85.0,
+        "pill_weight": "10mg/mL",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Dry Eye Syndrome",
+    "system": "Visual System",
+    "severity": "mild",
+    "symptoms": [
+      "burning sensation",
+      "itchiness",
+      "redness",
+      "blurred vision",
+      "eye fatigue"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Artificial Tears",
+        "pill_description": "Lubricates eyes and relieves dryness.",
+        "pill_price": 8.0,
+        "pill_weight": "0.5%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Cyclosporine Eye Drops",
+        "pill_description": "Increases tear production.",
+        "pill_price": 40.0,
+        "pill_weight": "0.05%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Blepharitis",
+    "system": "Visual System",
+    "severity": "mild",
+    "symptoms": ["red eyelids", "itching", "flaking", "crusting", "burning"],
+    "treatments": [
+      {
+        "pill_name": "Antibiotic Ointment",
+        "pill_description": "Treats bacterial eyelid infections.",
+        "pill_price": 16.0,
+        "pill_weight": "1%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Eyelid Cleanser",
+        "pill_description": "Maintains eyelid hygiene and reduces symptoms.",
+        "pill_price": 10.0,
+        "pill_weight": "Various",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Retinal Detachment",
+    "system": "Visual System",
+    "severity": "severe",
+    "symptoms": [
+      "sudden flashes",
+      "floaters",
+      "shadow over vision",
+      "vision loss",
+      "blurred vision"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Dorzolamide",
+        "pill_description": "Reduces fluid buildup and pressure.",
+        "pill_price": 22.0,
+        "pill_weight": "2%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Brimonidine",
+        "pill_description": "Decreases intraocular pressure.",
+        "pill_price": 18.0,
+        "pill_weight": "0.2%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Color Blindness",
+    "system": "Visual System",
+    "severity": "mild",
+    "symptoms": [
+      "difficulty distinguishing colors",
+      "trouble with red-green shades",
+      "visual confusion",
+      "learning challenges",
+      "eye strain"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Color Filters",
+        "pill_description": "Lenses or filters to improve color perception.",
+        "pill_price": 50.0,
+        "pill_weight": "N/A",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Vitamin A",
+        "pill_description": "Supports retina health.",
+        "pill_price": 10.0,
+        "pill_weight": "5000 IU",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name": "Amblyopia (Lazy Eye)",
+    "system": "Visual System",
+    "severity": "mild",
+    "symptoms": [
+      "poor depth perception",
+      "squinting",
+      "eye misalignment",
+      "blurry vision",
+      "eye strain"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Eye Patch",
+        "pill_description": "Covers dominant eye to strengthen weaker eye.",
+        "pill_price": 5.0,
+        "pill_weight": "N/A",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Atropine Drops",
+        "pill_description": "Blurs dominant eye vision to train weaker eye.",
+        "pill_price": 14.0,
+        "pill_weight": "1%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Uveitis",
+    "system": "Visual System",
+    "severity": "moderate",
+    "symptoms": [
+      "eye pain",
+      "light sensitivity",
+      "blurred vision",
+      "redness",
+      "floaters"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Prednisolone Acetate",
+        "pill_description": "Steroid eye drops for inflammation.",
+        "pill_price": 26.0,
+        "pill_weight": "1%",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Cyclopentolate",
+        "pill_description": "Dilates pupil and reduces pain.",
+        "pill_price": 17.0,
+        "pill_weight": "1%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Chickenpox",
+    "system": "Pediatrics",
+    "severity": "mild",
+    "symptoms": [
+      "itchy rash",
+      "fever",
+      "tiredness",
+      "loss of appetite",
+      "headache"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Calamine Lotion",
+        "pill_description": "Soothes itching from skin rash.",
+        "pill_price": 6.0,
+        "pill_weight": "120ml",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Acetaminophen",
+        "pill_description": "Reduces fever and relieves pain.",
+        "pill_price": 4.0,
+        "pill_weight": "160mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Hand, Foot, and Mouth Disease",
+    "system": "Pediatrics",
+    "severity": "mild",
+    "symptoms": [
+      "fever",
+      "sore throat",
+      "rash on hands and feet",
+      "mouth sores",
+      "loss of appetite"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Relieves fever and pain.",
+        "pill_price": 5.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Oral Rehydration Salts",
+        "pill_description": "Prevents dehydration due to mouth pain.",
+        "pill_price": 3.0,
+        "pill_weight": "4g",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "Croup",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "barking cough",
+      "stridor",
+      "hoarseness",
+      "fever",
+      "difficulty breathing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Dexamethasone",
+        "pill_description": "Steroid that reduces airway inflammation.",
+        "pill_price": 7.0,
+        "pill_weight": "0.5mg",
+        "pill_tablets": 10
+      },
+      {
+        "pill_name": "Nebulized Epinephrine",
+        "pill_description": "Provides quick relief from severe symptoms.",
+        "pill_price": 18.0,
+        "pill_weight": "2.25%",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Bronchiolitis",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "wheezing",
+      "coughing",
+      "rapid breathing",
+      "runny nose",
+      "fever"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Saline Nasal Drops",
+        "pill_description": "Clears nasal congestion.",
+        "pill_price": 4.0,
+        "pill_weight": "10ml",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Bronchodilator",
+        "pill_description": "Opens airways for easier breathing.",
+        "pill_price": 12.0,
+        "pill_weight": "2.5mg",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Otitis Media",
+    "system": "Pediatrics",
+    "severity": "mild",
+    "symptoms": [
+      "ear pain",
+      "fever",
+      "irritability",
+      "trouble hearing",
+      "fluid drainage"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Amoxicillin",
+        "pill_description": "Antibiotic for ear infections.",
+        "pill_price": 10.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 15
+      },
+      {
+        "pill_name": "Ear Drops",
+        "pill_description": "Soothes ear pain and inflammation.",
+        "pill_price": 6.0,
+        "pill_weight": "5ml",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Whooping Cough",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "severe coughing fits",
+      "vomiting after cough",
+      "fatigue",
+      "low-grade fever",
+      "bluish skin"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Azithromycin",
+        "pill_description": "Antibiotic to treat infection and prevent spread.",
+        "pill_price": 14.0,
+        "pill_weight": "100mg",
+        "pill_tablets": 5
+      },
+      {
+        "pill_name": "Cough Suppressant",
+        "pill_description": "Reduces severity of coughing.",
+        "pill_price": 8.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Mumps",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "swollen cheeks",
+      "jaw pain",
+      "fever",
+      "headache",
+      "muscle aches"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Paracetamol",
+        "pill_description": "Reduces fever and relieves pain.",
+        "pill_price": 4.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Ice Packs",
+        "pill_description": "Reduces swelling and discomfort.",
+        "pill_price": 2.0,
+        "pill_weight": "N/A",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Measles",
+    "system": "Pediatrics",
+    "severity": "severe",
+    "symptoms": ["rash", "high fever", "cough", "runny nose", "red eyes"],
+    "treatments": [
+      {
+        "pill_name": "Vitamin A",
+        "pill_description": "Boosts immune system response.",
+        "pill_price": 6.0,
+        "pill_weight": "200000 IU",
+        "pill_tablets": 2
+      },
+      {
+        "pill_name": "Fever Reducer",
+        "pill_description": "Controls high temperature.",
+        "pill_price": 5.0,
+        "pill_weight": "160mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Scarlet Fever",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "red rash",
+      "sore throat",
+      "fever",
+      "swollen glands",
+      "flushed face"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Penicillin",
+        "pill_description": "Antibiotic for streptococcal infection.",
+        "pill_price": 9.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 10
+      },
+      {
+        "pill_name": "Throat Lozenges",
+        "pill_description": "Soothes throat pain.",
+        "pill_price": 3.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 15
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Respiratory Syncytial Virus (RSV)",
+    "system": "Pediatrics",
+    "severity": "moderate",
+    "symptoms": [
+      "runny nose",
+      "cough",
+      "fever",
+      "wheezing",
+      "difficulty breathing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Palivizumab",
+        "pill_description": "Prevents severe RSV in high-risk children.",
+        "pill_price": 100.0,
+        "pill_weight": "50mg",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Oxygen Therapy",
+        "pill_description": "Supports breathing in severe cases.",
+        "pill_price": 25.0,
+        "pill_weight": "N/A",
+        "pill_tablets": 1
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "name": "Type 1 Diabetes",
+    "system": "Endocrine System",
+    "severity": "severe",
+    "symptoms": [
+      "frequent urination",
+      "increased thirst",
+      "unexplained weight loss",
+      "fatigue",
+      "blurred vision"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Insulin",
+        "pill_description": "Regulates blood sugar levels.",
+        "pill_price": 50.0,
+        "pill_weight": "100 units/ml",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Glucose Tablets",
+        "pill_description": "Treats low blood sugar quickly.",
+        "pill_price": 8.0,
+        "pill_weight": "4g",
+        "pill_tablets": 10
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Type 2 Diabetes",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "increased thirst",
+      "frequent urination",
+      "hunger",
+      "fatigue",
+      "blurred vision"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Metformin",
+        "pill_description": "Helps control blood sugar levels.",
+        "pill_price": 12.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Glipizide",
+        "pill_description": "Stimulates insulin release.",
+        "pill_price": 10.0,
+        "pill_weight": "5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Hyperthyroidism",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "rapid heartbeat",
+      "weight loss",
+      "nervousness",
+      "tremors",
+      "heat intolerance"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Methimazole",
+        "pill_description": "Inhibits excess thyroid hormone production.",
+        "pill_price": 15.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Propranolol",
+        "pill_description": "Relieves rapid heartbeat and tremors.",
+        "pill_price": 9.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Hypothyroidism",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "fatigue",
+      "weight gain",
+      "cold sensitivity",
+      "dry skin",
+      "depression"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Levothyroxine",
+        "pill_description": "Replaces missing thyroid hormone.",
+        "pill_price": 10.0,
+        "pill_weight": "50mcg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Calcium Supplements",
+        "pill_description": "Prevents bone loss from low thyroid hormone.",
+        "pill_price": 7.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Cushing's Syndrome",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "weight gain",
+      "fatty hump between shoulders",
+      "purple stretch marks",
+      "high blood pressure",
+      "mood swings"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ketoconazole",
+        "pill_description": "Blocks cortisol production.",
+        "pill_price": 22.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "Metyrapone",
+        "pill_description": "Reduces cortisol levels.",
+        "pill_price": 24.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Addison's Disease",
+    "system": "Endocrine System",
+    "severity": "severe",
+    "symptoms": [
+      "fatigue",
+      "weight loss",
+      "low blood pressure",
+      "darkened skin",
+      "salt craving"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Hydrocortisone",
+        "pill_description": "Replaces cortisol.",
+        "pill_price": 20.0,
+        "pill_weight": "10mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Fludrocortisone",
+        "pill_description": "Helps maintain sodium balance.",
+        "pill_price": 18.0,
+        "pill_weight": "0.1mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Polycystic Ovary Syndrome (PCOS)",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "irregular periods",
+      "acne",
+      "weight gain",
+      "excess hair growth",
+      "infertility"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Birth Control Pills",
+        "pill_description": "Regulate menstruation and hormones.",
+        "pill_price": 15.0,
+        "pill_weight": "Varies",
+        "pill_tablets": 28
+      },
+      {
+        "pill_name": "Metformin",
+        "pill_description": "Improves insulin resistance.",
+        "pill_price": 12.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Gigantism",
+    "system": "Endocrine System",
+    "severity": "severe",
+    "symptoms": [
+      "abnormal growth",
+      "delayed puberty",
+      "headache",
+      "vision problems",
+      "excessive sweating"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Octreotide",
+        "pill_description": "Suppresses growth hormone production.",
+        "pill_price": 45.0,
+        "pill_weight": "100mcg/ml",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Bromocriptine",
+        "pill_description": "Reduces levels of growth hormone.",
+        "pill_price": 20.0,
+        "pill_weight": "2.5mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Graves' Disease",
+    "system": "Endocrine System",
+    "severity": "moderate",
+    "symptoms": [
+      "bulging eyes",
+      "weight loss",
+      "anxiety",
+      "tremors",
+      "irregular heartbeat"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Radioactive Iodine",
+        "pill_description": "Destroys overactive thyroid cells.",
+        "pill_price": 35.0,
+        "pill_weight": "8mCi",
+        "pill_tablets": 1
+      },
+      {
+        "pill_name": "Beta Blockers",
+        "pill_description": "Manages symptoms like tremors and rapid heartbeat.",
+        "pill_price": 10.0,
+        "pill_weight": "40mg",
+        "pill_tablets": 20
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Goiter",
+    "system": "Endocrine System",
+    "severity": "mild",
+    "symptoms": [
+      "neck swelling",
+      "tight throat feeling",
+      "coughing",
+      "hoarseness",
+      "trouble swallowing"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Levothyroxine",
+        "pill_description": "Reduces thyroid-stimulating hormone.",
+        "pill_price": 10.0,
+        "pill_weight": "50mcg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Iodine Supplement",
+        "pill_description": "Corrects iodine deficiency.",
+        "pill_price": 5.0,
+        "pill_weight": "150mcg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Osteoporosis",
+    "system": "Musculoskeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "bone fragility",
+      "back pain",
+      "loss of height",
+      "stooped posture",
+      "easy fractures"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Alendronate",
+        "pill_description": "Slows bone loss and increases bone mass.",
+        "pill_price": 25.0,
+        "pill_weight": "70mg",
+        "pill_tablets": 4
+      },
+      {
+        "pill_name": "Calcium with Vitamin D",
+        "pill_description": "Supports bone strength.",
+        "pill_price": 15.0,
+        "pill_weight": "1000mg/800IU",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Rheumatoid Arthritis",
+    "system": "Musculoskeletal System",
+    "severity": "severe",
+    "symptoms": ["joint pain", "stiffness", "swelling", "fatigue", "fever"],
+    "treatments": [
+      {
+        "pill_name": "Methotrexate",
+        "pill_description": "Suppresses the immune system to reduce inflammation.",
+        "pill_price": 30.0,
+        "pill_weight": "2.5mg",
+        "pill_tablets": 20
+      },
+      {
+        "pill_name": "NSAIDs",
+        "pill_description": "Reduces pain and inflammation.",
+        "pill_price": 10.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Osteoarthritis",
+    "system": "Musculoskeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "joint pain",
+      "stiffness",
+      "loss of flexibility",
+      "grating sensation",
+      "bone spurs"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Acetaminophen",
+        "pill_description": "Relieves pain in mild osteoarthritis.",
+        "pill_price": 8.0,
+        "pill_weight": "500mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Glucosamine",
+        "pill_description": "May help maintain cartilage.",
+        "pill_price": 18.0,
+        "pill_weight": "1500mg",
+        "pill_tablets": 60
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Tendinitis",
+    "system": "Musculoskeletal System",
+    "severity": "mild",
+    "symptoms": [
+      "pain at joint",
+      "swelling",
+      "warmth",
+      "reduced mobility",
+      "tenderness"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Ibuprofen",
+        "pill_description": "Reduces pain and swelling.",
+        "pill_price": 6.0,
+        "pill_weight": "200mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Naproxen",
+        "pill_description": "Anti-inflammatory used for pain.",
+        "pill_price": 10.0,
+        "pill_weight": "250mg",
+        "pill_tablets": 30
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Fibromyalgia",
+    "system": "Musculoskeletal System",
+    "severity": "moderate",
+    "symptoms": [
+      "widespread pain",
+      "fatigue",
+      "sleep problems",
+      "memory issues",
+      "mood disturbances"
+    ],
+    "treatments": [
+      {
+        "pill_name": "Duloxetine",
+        "pill_description": "Used to treat pain and depression.",
+        "pill_price": 20.0,
+        "pill_weight": "30mg",
+        "pill_tablets": 30
+      },
+      {
+        "pill_name": "Pregabalin",
+        "pill_description": "Helps reduce nerve-related pain.",
+        "pill_price": 22.0,
+        "pill_weight": "75mg",
+        "pill_tablets": 30
+      }
+    ]
+  }
+]

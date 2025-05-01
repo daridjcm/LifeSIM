@@ -7,6 +7,13 @@ dotenv.config();
 const { User } = db;
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const getBloodType = (id) => {
+  const letters = ["A", "B", "AB", "O"];
+  const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+  const rh = id % 2 === 0 ? "+" : "-";
+  return `${randomLetter}${rh}`;
+};
+
 // SignUp
 export const createUser = async (req, res) => {
   console.log("SignUp endpoint reached");
@@ -28,6 +35,8 @@ export const createUser = async (req, res) => {
     });
 
     const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: "1h" });
+    const blood_type = getBloodType(newUser.id);
+    await newUser.update({ blood_type });
 
     res.status(201).json({
       message: "User created successfully",
@@ -73,6 +82,7 @@ export const loginUser = async (req, res) => {
         email: user.email,
       },
     });
+    console.log(token, user)
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).json({ message: "Server error" });
@@ -92,5 +102,26 @@ export const getCurrentUser = async (req, res) => {
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update User
+export const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { blood_type } = req.body;
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    user.blood_type = blood_type;
+    await user.save();
+
+    console.log(`Blood type saved for user ${id}:`, blood_type);
+    res.json(user);
+  } catch (err) {
+    console.error("Error saving blood type:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

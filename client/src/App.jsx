@@ -7,6 +7,7 @@ import NotFound from "./pages/404Error.jsx";
 import NewCustomer from "./pages/NewCustomer.jsx";
 import Chat from "./components/ContentModal/Work/Chat/Chat.jsx";
 
+// Define routes to navigate through the application
 function App() {
   return (
     <BrowserRouter>
@@ -15,8 +16,8 @@ function App() {
         <Route path="game" element={<Game />} />
         <Route path="boss" element={<Chat people="boss" />} />
         <Route path="analia" element={<Chat people="analia" />} />
-        <Route path="login" element={<Login />} />
-        <Route index element={<SignUp />} />
+        <Route index element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
         <Route path="customers/new" element={<NewCustomer />} />
       </Routes>
     </BrowserRouter>
