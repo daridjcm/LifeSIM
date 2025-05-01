@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { activitiesUser, products } from "../../../utils/data.js";
 import ContentGrocery from "./ContentGrocery.jsx";
 
+// Handle products display and pagination
 export default function Index({ statusCard }) {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);

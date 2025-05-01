@@ -9,6 +9,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/solid";
 
+// Render Tabs for the grocery content
 const ContentGrocery = React.memo(
   ({ itemsToDisplay, page, total, onChange }) => {
     // State Management

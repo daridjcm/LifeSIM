@@ -7,6 +7,7 @@ import handleDownload from "./SavePDF.jsx";
 const STORAGE_KEY = "atmInvoice";
 import { useUser } from "../../../context/UserContext.jsx";
 
+// Save invoice data to local storage
 const saveInvoiceToLocalStorage = (invoice) => {
   const invoiceWithTimestamp = {
     ...invoice,
@@ -15,6 +16,7 @@ const saveInvoiceToLocalStorage = (invoice) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceWithTimestamp));
 };
 
+// Load invoice data from local storage
 const loadInvoiceFromLocalStorage = () => {
   const storedInvoice = localStorage.getItem(STORAGE_KEY);
   if (!storedInvoice) return null;
@@ -64,6 +66,7 @@ export default function AtmTab({
     fetchGroceryList();
   }, []);
 
+  // Get user data for ATM transaction
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -88,12 +91,14 @@ export default function AtmTab({
     fetchUserData();
   }, []);
 
+  // Handle payment
   const handlePayment = async () => {
     if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
 
     setPaymentProcessing(true);
     setPaymentStatus("Making Payment...");
 
+    // Products selected
     try {
       const storedInvoice = loadInvoiceFromLocalStorage();
       const items = storedInvoice
@@ -104,6 +109,7 @@ export default function AtmTab({
             price: item.price,
           }));
 
+      // Define invoice data
       const requestData = {
         total_amount,
         items: items,
@@ -114,6 +120,7 @@ export default function AtmTab({
 
       console.log("Request Data:", requestData);
 
+      // Get token and send request to create invoice
       const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:3000/api/invoices", {
         method: "POST",
@@ -151,6 +158,8 @@ export default function AtmTab({
     setTimeout(() => setAlertVisible(false), 4500);
   };
   const { user } = useUser();
+
+  // Render view ATM
   return (
     <>
       <p className="text-2xl font-bold">Summary Purchase</p>

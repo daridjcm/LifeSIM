@@ -1,6 +1,8 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
+// Create invoice in PDF format and handle data
+// TODO: Implement reuse component for the invoice and hospital report
 export default function handleDownload(invoice, userData) {
   if (!invoice) return;
 
@@ -17,7 +19,7 @@ export default function handleDownload(invoice, userData) {
   );
 
   const storedData = JSON.parse(localStorage.getItem("selectedItems") || "{}");
-  const items = storedData.items || []; 
+  const items = storedData.items || [];
 
   if (items.length === 0) {
     console.log("No items found in localStorage.");
@@ -34,7 +36,7 @@ export default function handleDownload(invoice, userData) {
   doc.text(`Total amount: $${invoice.totalAmount}`, 20, 55);
   doc.text("Purchased products:", 20, 60);
 
-  // Verificamos si 'items' tiene contenido
+  // Check if items array is valid and has items
   if (Array.isArray(items) && items.length > 0) {
     const rows = items.map((item) => [
       item.name || "N/A",
@@ -60,6 +62,5 @@ export default function handleDownload(invoice, userData) {
   } else {
     doc.text("No items available", 20, 60);
   }
-
   doc.save(`invoice-lifesim-${invoiceNumber}.pdf`);
 }
