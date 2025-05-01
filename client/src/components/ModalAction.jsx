@@ -19,6 +19,7 @@ import ContentHospital from "./ContentModal/Hospital/Index.jsx";
 export default function ModalAction({ item, onClose, listHeader = [] }) {
   const [isClosing, setIsClosing] = useState(false);
 
+  // Handle close for the modal
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -27,6 +28,7 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
     }, 1000);
   };
 
+  // If the user clicks Escape key
   useEffect(() => {
     const closeOnEscape = (e) => {
       if (e.key === "Escape") {
@@ -40,6 +42,8 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
   if (!item) return null;
 
   let dynamicHeader = [];
+
+  // Define dynamic header based on item name
   switch (item.name) {
     case "Work":
       dynamicHeader = [
@@ -64,6 +68,7 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
       dynamicHeader = [];
   }
 
+  // Render view based on item name
   return ReactDOM.createPortal(
     <div
       className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3 transition-opacity duration-300 ${
@@ -108,6 +113,7 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
               : "max-h-full overflow-auto"
           }
         >
+          // Render content based on item name
           {item.name === "Work" ? (
             <ContentWork />
           ) : item.name === "Bank" ? (

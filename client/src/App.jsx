@@ -7,6 +7,7 @@ import NotFound from "./pages/404Error.jsx";
 import NewCustomer from "./pages/NewCustomer.jsx";
 import Chat from "./components/ContentModal/Work/Chat/Chat.jsx";
 
+// Define routes to navigate through the application
 function App() {
   return (
     <BrowserRouter>

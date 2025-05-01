@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/solid";
 import ModalAction from "./ModalAction.jsx";
 
+// Component used to display a list of activities user or products
 const CardList = React.memo(
   ({
     statusCard,

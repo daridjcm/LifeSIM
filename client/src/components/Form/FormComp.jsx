@@ -6,6 +6,7 @@ import { Have, NotHave, HaveCustomers } from "./HaveOrNot.jsx";
 import { useNavigate } from "react-router";
 import { useAlert } from "../../context/AlertContext.jsx";
 
+// Conditional wrapper component
 const ConditionalWrapper = ({ condition, children }) => {
   return condition ? children : null;
 };
@@ -18,6 +19,7 @@ export default function FormComp({
   btnText,
   isRequired,
 }) {
+  // Define props types
   FormComp.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -38,6 +40,7 @@ export default function FormComp({
 
   const { showAlert } = useAlert();
 
+  // Handle user data fetching
   const getUserData = async (token) => {
     try {
       const response = await fetch("http://localhost:3000/api/me", {
@@ -59,30 +62,35 @@ export default function FormComp({
     }
   };
 
+  // Check if token exists
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       getUserData(token);
     }
   }, []);
-  
+
   const [action, setAction] = React.useState(`/${statusForm}`);
   const [gender, setGender] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  
+
+  // Handle navigation to button click
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-  
+
     let data = Object.fromEntries(new FormData(e.currentTarget));
-  
-    const url = statusForm === "login" 
-      ? "http://localhost:3000/api/login" 
-      : statusForm === "signup" 
-        ? "http://localhost:3000/api/signup" 
-        : "http://localhost:3000/api/customers/new";
-  
+
+    // Conditional URL based on statusForm
+    const url =
+      statusForm === "login"
+        ? "http://localhost:3000/api/login"
+        : statusForm === "signup"
+          ? "http://localhost:3000/api/signup"
+          : "http://localhost:3000/api/customers/new";
+
+    // If submission is successful, so send data to server
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -91,36 +99,50 @@ export default function FormComp({
         },
         body: JSON.stringify(data),
       });
-  
+
       const result = await response.json();
-      
+
       if (response.ok) {
         const token = result.token;
         if (token) {
           localStorage.setItem("token", token);
         }
-  
-        showAlert("Success", `${
-          statusForm === "login" ? "Login successful" : 
-          statusForm === "signup" ? "Registration successful" : 
-          "Customer added successfully"
-        }`,);
-  
+
+        // Show success message
+        showAlert(
+          "Success",
+          `${
+            statusForm === "login"
+              ? "Login successful"
+              : statusForm === "signup"
+                ? "Registration successful"
+                : "Customer added successfully"
+          }`,
+        );
+
+        // Handle route change after successful submission
         setTimeout(() => {
           if (statusForm === "login") navigate("/game");
           else if (statusForm === "signup") navigate("/");
         }, 2000);
       } else {
-        showAlert("Error", `${result.message + '.' || 'Something went wrong.'} Please check your data.`);
+        showAlert(
+          "Error",
+          `${result.message + "." || "Something went wrong."} Please check your data.`,
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      showAlert("Error", "An unexpected error occurred. Please try again later.");
+      showAlert(
+        "Error",
+        "An unexpected error occurred. Please try again later.",
+      );
     } finally {
       setLoading(false);
     }
-  };  
+  };
 
+  // Render form component
   return (
     <Form
       action={action}
@@ -143,7 +165,7 @@ export default function FormComp({
           </h1>
         </div>
       </ConditionalWrapper>
-
+      // Title of the form
       <ConditionalWrapper
         condition={!(title === "Welcome again to" || title === "Create your")}
       >
@@ -152,7 +174,6 @@ export default function FormComp({
           <p>{description}</p>
         </div>
       </ConditionalWrapper>
-
       {fields.map((field, index) =>
         field.type === "select" ? (
           <Select
@@ -173,17 +194,17 @@ export default function FormComp({
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                <SelectItem
-                  key={option.value}
-                  value={option.value}
-                  textValue={option.label}
-                >
-                  {option.label}
-                  <p className="text-gray-500 text-opacity-80">
-                    {option.description}
-                  </p>
-                </SelectItem>
-              ))
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    textValue={option.label}
+                  >
+                    {option.label}
+                    <p className="text-gray-500 text-opacity-80">
+                      {option.description}
+                    </p>
+                  </SelectItem>
+                ))
               : null}
           </Select>
         ) : (
@@ -206,7 +227,6 @@ export default function FormComp({
           />
         ),
       )}
-
       <ConditionalWrapper condition={statusForm !== ""}>
         <div className="flex gap-2 mt-2 mb-4">
           <Button
@@ -216,7 +236,8 @@ export default function FormComp({
                 : "primary"
             }
             variant="flat"
-            type="submit"> 
+            type="submit"
+          >
             {statusForm === "login"
               ? "Enter"
               : statusForm === "signup"
@@ -224,11 +245,19 @@ export default function FormComp({
                 : statusForm === "customers"
                   ? "Add Customer"
                   : btnText}
-            {loading ? <SpinnerComp color={statusForm === "login" || statusForm === "signup" ? "success" : "primary"} /> : null}
+            {loading ? (
+              <SpinnerComp
+                color={
+                  statusForm === "login" || statusForm === "signup"
+                    ? "success"
+                    : "primary"
+                }
+              />
+            ) : null}
           </Button>
         </div>
       </ConditionalWrapper>
-
+      // Links helping
       {statusForm === "login" ? (
         <NotHave />
       ) : statusForm === "signup" ? (
