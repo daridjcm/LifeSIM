@@ -17,6 +17,7 @@ export default function Chat({ people }) {
   const [presetResponses, setPresetResponses] = useState([]);
   const [responses, setResponses] = useState([]);
 
+  // Handle initial data loading
   useEffect(() => {
     if (setSelectedPerson && people === "boss") {
       setPresetResponses(chatData1.userPresetResponses);
@@ -27,6 +28,7 @@ export default function Chat({ people }) {
     }
   }, []);
 
+  // Handle preset response selection
   const handlePresetResponse = (response) => {
     const newUserMessage = {
       id: Date.now().toString(),
@@ -55,10 +57,12 @@ export default function Chat({ people }) {
     }, 1000);
   };
 
+  // Handle clear chat
   const handleClearChat = () => {
     setMessages([]);
   };
 
+  // Render buttons to the chat
   return (
     <div className="flex w-auto m-auto h-screen bg-zinc-800 overflow-hidden">
       <div className="w-full mx-auto p-4 flex flex-col">

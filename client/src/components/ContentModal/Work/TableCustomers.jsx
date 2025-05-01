@@ -27,7 +27,8 @@ const status = {
   color: ["primary", "danger", "success", "warning", "secondary"],
 };
 
-// ToDo: Create a server route to customers.
+// TODO: Create a server route to customers.
+// Customers presets
 export const customers = [
   {
     id: 1,
@@ -61,6 +62,7 @@ export const customers = [
 
 export const customersCount = customers.length;
 
+// Define columns to display in the table
 const columns = [
   {
     key: "name",
@@ -80,6 +82,7 @@ const columns = [
   },
 ];
 
+// Render the table
 export default function TableCustomers() {
   return (
     <>
@@ -112,7 +115,7 @@ export default function TableCustomers() {
         color="primary"
         variant="ghost"
         size="md"
-        onPress={() => window.open("/customers/new", "_blank")}
+        onPress={() => window.open("/customers/new", "_blank")} // Open a new window to create a new customer
       >
         Add a new customer
       </Button>

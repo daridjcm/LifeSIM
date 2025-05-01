@@ -8,6 +8,7 @@ import CustomButton from "../../CustomButton.jsx";
 export default function Index() {
   const [submitSignature, setSubmitSignature] = useState(false);
 
+  // Render the dashboard to Work
   return (
     <>
       <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
@@ -83,6 +84,7 @@ export default function Index() {
         <CustomButton
           label="Submit"
           onPress={() => {
+            // TODO: Handle submit logic here
             let valueSaved = document.getElementById("checkSignature").value;
             valueSaved === user.username
               ? setSubmitSignature(true)
