@@ -14,6 +14,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import SpinnerComp from "../../Spinner.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 
+// Define the columns for the table
 export const columns = [
   { name: "DOCTOR", uid: "doctor" },
   { name: "SPECIALITY", uid: "speciality" },
@@ -23,6 +24,7 @@ export const columns = [
   { name: "CANCEL", uid: "cancel" },
 ];
 
+// Define the status for the appointment
 const statusColorMap = {
   assisted: "success",
   canceled: "danger",
@@ -33,6 +35,7 @@ export default function HealthRecord() {
   const [appointments, setAppointments] = useState([]);
   const { showAlert } = useAlert();
 
+  // Get appointments from the server
   const fetchAppointments = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/appointments");
@@ -49,6 +52,7 @@ export default function HealthRecord() {
     fetchAppointments();
   }, []);
 
+  // Handle appointment cancellation
   const handleCancel = async (id) => {
     try {
       const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
@@ -73,6 +77,7 @@ export default function HealthRecord() {
     }
   };
 
+  // Render appointment details
   const renderCell = React.useCallback((appointment, columnKey) => {
     const cellValue = appointment[columnKey];
 
@@ -110,6 +115,7 @@ export default function HealthRecord() {
     }
   }, []);
 
+  // Render table
   return (
     <Table aria-label="Appointments table">
       <TableHeader columns={columns}>

@@ -76,11 +76,13 @@ export default function MedicalAppointments() {
 
   const { user } = useUser();
 
+  // Send appointment data to the server
   const submitAppointment = async () => {
     if (!formattedDateTime || !selectedDoctor) {
       return showAlert("Check!", "Please select a date, time, and doctor.");
     }
 
+    // Define appointment data JSON object
     const appointmentData = {
       user_id: user.id,
       title: selectedDoctor.title,
@@ -92,12 +94,14 @@ export default function MedicalAppointments() {
       status: "scheduled",
     };
 
+    // Make a POST request to the server
     const response = await fetch("http://localhost:3000/api/appointments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(appointmentData),
     });
 
+    // Handle response
     try {
       const result = await response.json();
       if (response.ok) {
@@ -112,6 +116,7 @@ export default function MedicalAppointments() {
     }
   };
 
+  // Render the form to schedule an appointment
   return (
     <div className="flex sm:flex-col md:flex-row lg:flex-row gap-8 flex-wrap justify-around">
       <div className="flex flex-col gap-3">

@@ -8,6 +8,7 @@ export default function Patient() {
   const { user } = useUser();
   const [nextAppointment, setNextAppointment] = useState(null);
 
+  // Get appointments
   const fetchAppointments = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/appointments");
@@ -19,19 +20,21 @@ export default function Patient() {
       );
 
       const now = new Date();
+      // Compare dates to the current date
       const upcoming = userAppointments
         .map((appt) => ({
           ...appt,
           dateObj: new Date(`${appt.date}T${appt.time}Z`),
         }))
+        // Filter appointments based on date and status
         .filter(
           (appt) =>
             new Date(appt.dateObj) < now ||
             (new Date(appt.dateObj) > now &&
               !["canceled", "completed"].includes(appt.status)),
         )
+        // Sort appointments by date
         .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
-
       setNextAppointment(upcoming[0] || null);
     } catch (error) {
       console.error("Error fetching appointments:", error);
@@ -43,6 +46,7 @@ export default function Patient() {
     }
   }, [user]);
 
+  // Render view information of patient
   return (
     <div className="flex flex-col lg:flex-row justify-between gap-6">
       <div className="border border-zinc-300 rounded-lg p-5 sm:w-full md:w-full lg:w-2/4 lg:h-auto">

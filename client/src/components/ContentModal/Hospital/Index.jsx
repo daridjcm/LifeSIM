@@ -13,7 +13,8 @@ import HealthRecord from "./HealthRecord.jsx";
 import PillsReceted from "./PillsReceted.jsx";
 import Consult from "./Consult.jsx";
 
-export default function ContentBank() {
+// Tabs content
+export default function ContentHospital() {
   const [selected, setSelected] = React.useState("medicalappointments");
 
   return (
@@ -34,7 +35,7 @@ export default function ContentBank() {
           </div>
         }
       >
-        <MedicalAppointments/>
+        <MedicalAppointments />
       </Tab>
       <Tab
         key="healthrecord"
@@ -56,7 +57,7 @@ export default function ContentBank() {
           </div>
         }
       >
-        <Consult/>
+        <Consult />
       </Tab>
       <Tab
         key="patient"
