@@ -11,26 +11,38 @@ import {
 } from "recharts";
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/solid";
 
-// ToDo: changes months for hours today.
+// Handle data generation random
+// TODO: changes months for hours today.
 const generateRandomData = () => {
   const currentMonth = new Date().getMonth();
   const months = [
-    "January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
-  return months.slice(0, currentMonth + 1).map(month => {
+  return months.slice(0, currentMonth + 1).map((month) => {
     const low = Math.floor(Math.random() * 5000);
     const line = Math.floor(Math.random() * 10000);
     return {
       name: month,
       low,
       line,
-      color: line > 5000 ? "#00FF00" : "#FF0000" 
+      color: line > 5000 ? "#00FF00" : "#FF0000",
     };
   });
 };
 
+// Render view to chart
 export default function FakeBankInvestment() {
   const [data, setData] = useState(generateRandomData());
 
@@ -61,15 +73,21 @@ export default function FakeBankInvestment() {
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" label={{ value: "Month", position: "insideBottom", offset: -5 }} />
-          <YAxis domain={[100, 1000]} label={{ value: "Value", angle: -90, position: "insideLeft" }} />
+          <XAxis
+            dataKey="name"
+            label={{ value: "Month", position: "insideBottom", offset: -5 }}
+          />
+          <YAxis
+            domain={[100, 1000]}
+            label={{ value: "Value", angle: -90, position: "insideLeft" }}
+          />
           <Tooltip />
           <Legend />
-          <Line 
-            type="monotone" 
-            dataKey="line" 
-            stroke={data.length > 0 ? data[data.length - 1].color : "#000000"} 
-            strokeDasharray="3 4 5 2" 
+          <Line
+            type="monotone"
+            dataKey="line"
+            stroke={data.length > 0 ? data[data.length - 1].color : "#000000"}
+            strokeDasharray="3 4 5 2"
           />
         </LineChart>
       </ResponsiveContainer>

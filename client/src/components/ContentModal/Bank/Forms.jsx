@@ -1,6 +1,7 @@
 import LineChart from "./Chart";
 import FormComp from "../../Form/";
 
+// Overview of your financial status
 export function Overview() {
   const fields = [
     {
@@ -34,6 +35,7 @@ export function Overview() {
   );
 }
 
+// Withdraw money from your account
 export function Withdraw() {
   const fields = [
     {
@@ -55,6 +57,7 @@ export function Withdraw() {
   );
 }
 
+// Deposit money to invest it
 export function Invert() {
   const fields = [
     {
@@ -74,11 +77,12 @@ export function Invert() {
         fields={fields}
         isRequired={false}
         btnText="Invert Money"
-        />
+      />
     </>
   );
 }
 
+// Save money to invest or pay debt
 export function Save() {
   const fields = [
     {
@@ -127,6 +131,7 @@ export function Save() {
   );
 }
 
+// To pay debt
 export function PayDebt() {
   const fields = [
     {
@@ -148,6 +153,7 @@ export function PayDebt() {
   );
 }
 
+// To solicit loans for personal, mortgage, health insurance
 export function Loans() {
   const fields = [
     {
@@ -160,7 +166,10 @@ export function Loans() {
         { label: "Mortgage", value: "mortgage" },
         { label: "Health Insurance - Basic", value: "healthinsurance-basic" },
         { label: "Health Insurance - Medium", value: "healthinsurance-medium" },
-        { label: "Health Insurance - Premium", value: "healthinsurance-premium" },
+        {
+          label: "Health Insurance - Premium",
+          value: "healthinsurance-premium",
+        },
       ],
     },
     {
