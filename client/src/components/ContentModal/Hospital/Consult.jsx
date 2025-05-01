@@ -18,6 +18,8 @@ import { useAlert } from "../../../context/AlertContext.jsx";
 
 const symptomCategories = symptoms;
 
+// Checkbox component to text symptoms
+// Todo: Move component to a separate file
 const CustomCheckbox = ({ children, ...props }) => {
   const checkbox = tv({
     slots: {
@@ -72,6 +74,7 @@ const CustomCheckbox = ({ children, ...props }) => {
   );
 };
 
+// Select symptoms
 const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
   const [selectedSystem, setSelectedSystem] = useState(null);
   const [groupSelected, setGroupSelected] = useState([]);
@@ -140,11 +143,13 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
   );
 };
 
+// Send report to the server
 const SendReport = ({ diseaseDetected }) => {
   const { user } = useUser();
-  const [nextAppointment, setNextAppointment] = useState([]);
+  const [nextAppointment, setNextAppointment] = useState(null);
   const [diseases, setDiseaseDetected] = useState(diseaseDetected);
   const { showAlert } = useAlert();
+
   const fetchAppointments = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/appointments");
@@ -155,7 +160,7 @@ const SendReport = ({ diseaseDetected }) => {
         (appt) => appt.user_id === user?.id,
       );
 
-      console.log("User  Appointments:", userAppointments); // Log user appointments
+      console.log("User Appointments:", userAppointments); // Log user appointments
 
       const now = new Date();
       const upcoming = userAppointments
@@ -163,15 +168,12 @@ const SendReport = ({ diseaseDetected }) => {
           ...appt,
           dateObj: new Date(`${appt.date}T${appt.time}Z`),
         }))
-        .filter(
-          (appt) =>
-            new Date(appt.dateObj) > now &&
-            !["canceled", "completed"].includes(appt.status),
-        )
+        .filter((appt) => new Date(appt.dateObj) > now)
         .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
-      // todo: changes logic to handle multiple appointments or one appointment.
-      setNextAppointment(upcoming[0] || null);
-      console.log(nextAppointment); // Log upcoming appointments
+
+      console.log(upcoming);
+      // Set the next appointment as the closest one
+      setNextAppointment(upcoming[0]);
     } catch (error) {
       console.error("Error fetching appointments:", error);
     }
@@ -181,13 +183,13 @@ const SendReport = ({ diseaseDetected }) => {
     if (user?.id) {
       fetchAppointments();
     }
-  }, [user]);
+  }, [user?.id]);
 
   const handleSendReport = async () => {
     console.log("Next Appointment:", nextAppointment); // Log the next appointment
-
     if (!nextAppointment) {
       showAlert("Error", "No upcoming appointment found.");
+      return;
     }
 
     const reportData = {
@@ -233,6 +235,7 @@ const SendReport = ({ diseaseDetected }) => {
   );
 };
 
+// Evaluate the diagnosis and symptoms to determine the disease
 const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   const [loading, setLoading] = useState(true);
 
@@ -303,6 +306,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   );
 };
 
+// Render the content
 export default function Content() {
   const [progress, setProgress] = useState(0);
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -320,6 +324,7 @@ export default function Content() {
     setShowDiagnosis(true);
   };
 
+  // Slider progress to appointment and modals
   return (
     <>
       <Slider
