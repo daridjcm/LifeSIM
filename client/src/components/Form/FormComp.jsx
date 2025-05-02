@@ -165,7 +165,6 @@ export default function FormComp({
           </h1>
         </div>
       </ConditionalWrapper>
-      // Title of the form
       <ConditionalWrapper
         condition={!(title === "Welcome again to" || title === "Create your")}
       >
@@ -256,8 +255,8 @@ export default function FormComp({
             ) : null}
           </Button>
         </div>
+        {/* Help links */}
       </ConditionalWrapper>
-      // Links helping
       {statusForm === "login" ? (
         <NotHave />
       ) : statusForm === "signup" ? (

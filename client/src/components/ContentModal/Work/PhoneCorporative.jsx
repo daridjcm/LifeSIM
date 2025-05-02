@@ -33,7 +33,9 @@ export default function PhoneCorporative() {
     }, 2000);
   };
 
-  // Render content Phone Corporative
+  {
+    /* Render content Phone Corporative */
+  }
   return (
     <div className="flex flex-col gap-3 mt-4">
       <CustomButton

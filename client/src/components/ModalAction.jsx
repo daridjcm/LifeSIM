@@ -68,7 +68,9 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
       dynamicHeader = [];
   }
 
-  // Render view based on item name
+  {
+    /* Render view based on item name */
+  }
   return ReactDOM.createPortal(
     <div
       className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3 transition-opacity duration-300 ${
@@ -113,7 +115,7 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
               : "max-h-full overflow-auto"
           }
         >
-          // Render content based on item name
+          {/* Render content based on item name */}
           {item.name === "Work" ? (
             <ContentWork />
           ) : item.name === "Bank" ? (
