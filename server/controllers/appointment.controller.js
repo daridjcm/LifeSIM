@@ -1,7 +1,7 @@
 import db from "../models/index.js";
 import cron from "node-cron";
 
-const { Appointment } = db;
+const { Appointment, Report } = db;
 
 // Function to delete canceled appointments older than one hour
 const deleteOldCanceledAppointments = async () => {
@@ -53,6 +53,9 @@ export const saveAppointment = async (req, res) => {
         doctor,
         date: formattedDate,
         time,
+        specialist,
+        area,
+        status,
       },
     });
 
@@ -131,37 +134,67 @@ export const updateAppointmentStatus = async (req, res) => {
 
 export const reportAppointment = async (req, res) => {
   try {
-    const { user_id, doctor, appointment_id, disease, status, treatments } =
-      req.body;
+    const {
+      user_id,
+      doctor,
+      appointment_id,
+      system,
+      disease,
+      status,
+      treatments,
+      symptoms,
+    } = req.body;
 
+    // Validate required fields
     if (
       !user_id ||
       !doctor ||
       !appointment_id ||
+      !system ||
       !disease ||
       !status ||
-      !treatments
+      !treatments ||
+      !symptoms // Corrected from system to symptoms
     ) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
+    // Check for duplicate report
+    const existingReport = await Report.findOne({
+      where: {
+        user_id,
+        appointment_id,
+        doctor,
+        disease,
+        status,
+        system,
+      },
+    });
+
+    if (existingReport) {
+      return res.status(409).json({ error: "Duplicate appointment found." });
+    }
+
+    // Create the report
     const report = await db.Report.create({
       user_id,
       doctor,
       appointment_id,
+      system,
       disease,
       status,
       treatments,
+      symptoms,
     });
 
     console.log("Appointment reported:", report);
-    res.status(201).json({
+    return res.status(201).json({
       message: "Appointment reported successfully",
       report,
     });
   } catch (error) {
     console.error("Error reporting appointment:", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: "Error reporting appointment",
       details: error.message,
     });

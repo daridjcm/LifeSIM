@@ -14,6 +14,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      system: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       disease: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -23,6 +27,10 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       treatments: {
+        type: DataTypes.JSON,
+        allowNull: false,
+      },
+      symptoms: {
         type: DataTypes.STRING,
         allowNull: false,
       },

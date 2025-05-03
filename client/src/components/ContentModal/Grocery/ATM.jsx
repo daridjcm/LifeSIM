@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Alert } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
 import Card from "../../Card";
-import handleDownload from "./SavePDF.jsx";
+import handleDownload from "../../SavePDF.jsx";
 
 const STORAGE_KEY = "atmInvoice";
 import { useUser } from "../../../context/UserContext.jsx";
@@ -174,7 +174,7 @@ export default function AtmTab({
         {invoice && (
           <CustomButton
             label="Download Report"
-            onPress={() => handleDownload(invoice, userData)}
+            onPress={() => handleDownload("Invoice", invoice, userData)}
           />
         )}
       </div>

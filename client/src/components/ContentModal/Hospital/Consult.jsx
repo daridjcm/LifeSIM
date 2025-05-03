@@ -15,6 +15,7 @@ import CustomButton from "../../CustomButton";
 import { symptoms, diseases } from "../../../utils/data";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
+import handleDownload from "../../SavePDF.jsx";
 
 const symptomCategories = symptoms;
 
@@ -144,9 +145,9 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
 };
 
 // Send report to the server
-const SendReport = ({ diseaseDetected }) => {
-  const { user } = useUser();
+const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
   const [nextAppointment, setNextAppointment] = useState(null);
+  const { user } = useUser();
   const [diseases, setDiseaseDetected] = useState(diseaseDetected);
   const { showAlert } = useAlert();
 
@@ -187,22 +188,22 @@ const SendReport = ({ diseaseDetected }) => {
 
   const handleSendReport = async () => {
     console.log("Next Appointment:", nextAppointment); // Log the next appointment
+    console.log(diseases, diseaseDetected);
     if (!nextAppointment) {
       showAlert("Error", "No upcoming appointment found.");
       return;
     }
 
     const reportData = {
+      appointment_id: nextAppointment.id,
       user_id: nextAppointment.user_id,
       doctor: nextAppointment.doctor,
-      appointment_id: nextAppointment.id,
+      system: diseases.system,
       disease: diseases.name,
       status: "completed",
-      treatments: diseaseDetected.treatments
-        .map((treatment) => treatment.pill_name)
-        .join(", "), // Join treatment names into a string
+      treatments: diseases.treatments.map((treatment) => treatment),
+      symptoms: diseases.symptoms.map((symptom) => symptom).join(", "),
     };
-
     try {
       const response = await fetch(
         "http://localhost:3000/api/appointments/report",
@@ -216,6 +217,7 @@ const SendReport = ({ diseaseDetected }) => {
       const result = await response.json();
       if (response.ok) {
         showAlert("Success", result.message);
+        handleDownload("HealthReport", reportData, user);
       } else {
         console.error(result.error);
         showAlert("Error", "Failed to send report to the server.");
@@ -249,6 +251,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   }, [onProgressChange]);
 
   if (loading) {
+    console.log(symptoms);
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
         <img src="/images/doctors/OliviaMartinez-full.svg" alt="Doctor" />
@@ -294,7 +297,10 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
               )}
             </div>
           ))}
-          <SendReport diseaseDetected={matchedDiseases[0]} />
+          <SendReport
+            diseaseDetected={matchedDiseases[0]}
+            selectedSymptoms={symptoms}
+          />
         </ul>
       ) : (
         <p className="text-lg">
@@ -324,37 +330,41 @@ export default function Content() {
     setShowDiagnosis(true);
   };
 
-  // Slider progress to appointment and modals
-  return (
-    <>
-      <Slider
-        value={progress}
-        getValue={(p) => `${p} of 100%`}
-        label="Progress Appointment"
-        maxValue={100}
-        size="sm"
-      />
+  // convert nextAppointment to variable useState global.
+  if (nextAppointment) {
+    return (
+      <>
+        <Slider
+          value={progress}
+          getValue={(p) => `${p} of 100%`}
+          label="Progress Appointment"
+          maxValue={100}
+          size="sm"
+        />
 
-      {!showDiagnosis ? (
-        <Symptoms
-          onProgressChange={setProgress}
-          onSymptomsChange={setSelectedSymptoms}
-        />
-      ) : (
-        <Diagnosis
-          onProgressChange={setProgress}
-          symptoms={selectedSymptoms}
-          matchedDiseases={matchedDiseases}
-        />
-      )}
+        {!showDiagnosis ? (
+          <Symptoms
+            onProgressChange={setProgress}
+            onSymptomsChange={setSelectedSymptoms}
+          />
+        ) : (
+          <Diagnosis
+            onProgressChange={setProgress}
+            symptoms={selectedSymptoms}
+            matchedDiseases={matchedDiseases}
+          />
+        )}
 
-      {progress > 0 && !showDiagnosis && (
-        <CustomButton
-          label="Next Step"
-          className="mt-5"
-          onPress={handleNextStep}
-        />
-      )}
-    </>
-  );
+        {progress > 0 && !showDiagnosis && (
+          <CustomButton
+            label="Next Step"
+            className="mt-5"
+            onPress={handleNextStep}
+          />
+        )}
+      </>
+    );
+  } else {
+    return <div>Not have next appointment yet.</div>;
+  }
 }
