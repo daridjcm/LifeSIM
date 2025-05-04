@@ -10,7 +10,10 @@ const needs = [
   { name: "Bladder", value: 100 },
 ];
 
-const Content = () => (
+// TODO: This is a identifiers for the objects for categories. Depending on the category, show different icons to display in the inventory.
+const objects = ['pills', 'products', 'documents', 'cash'];
+
+const Content1 = () => (
   <ul className="flex flex-col m-auto justify-center gap-10">
     {needs.map(({ name, value }) => (
       <div className="flex flex-col items-center" key={name}>
@@ -23,4 +26,9 @@ const Content = () => (
   </ul>
 );
 
-export default Content;
+// TODO: Create logic for the second content
+const Content2 = () => (
+  <div></div>
+);
+
+export default {Content1};

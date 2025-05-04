@@ -9,10 +9,10 @@ import {
   ScrollShadow,
   Button,
 } from "@heroui/react";
-import { FaceSmileIcon } from "@heroicons/react/20/solid";
-import Content1 from "./Content.jsx";
+import { InboxIcon } from "@heroicons/react/20/solid";
 
-const NeedsPanel = () => {
+
+const Inventory = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -24,13 +24,13 @@ const NeedsPanel = () => {
           onPress={onOpen}
           isIconOnly
         >
-          <FaceSmileIcon />
+          <InboxIcon />
         </Button>
       <Drawer isOpen={isOpen} size="xs" onOpenChange={onClose}>
         <DrawerContent>
-          <DrawerHeader>Needs Panel</DrawerHeader>
+          <DrawerHeader>Inventory</DrawerHeader>
           <DrawerBody>
-            <Content1 />
+            {/* <Content2 /> */}
           </DrawerBody>
           <DrawerFooter>
             <Button color="primary" onPress={onClose}>
@@ -44,4 +44,4 @@ const NeedsPanel = () => {
   );
 };
 
-export default NeedsPanel;
+export default Inventory;
