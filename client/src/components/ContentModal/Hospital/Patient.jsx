@@ -3,48 +3,17 @@ import Card from "../../Card.jsx";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useEffect, useState } from "react";
+import { useAppointment } from "../../../context/AppointmentContext.jsx";
 
 export default function Patient() {
   const { user } = useUser();
-  const [nextAppointment, setNextAppointment] = useState(null);
+  const { nextAppointment, fetchAppointments } = useAppointment();
 
-  // Get appointments
-  const fetchAppointments = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/appointments");
-      if (!response.ok) throw new Error("Network response was not ok");
-
-      const data = await response.json();
-      const userAppointments = data.appointments.filter(
-        (appt) => appt.user_id === user?.id,
-      );
-
-      const now = new Date();
-      // Compare dates to the current date
-      const upcoming = userAppointments
-        .map((appt) => ({
-          ...appt,
-          dateObj: new Date(`${appt.date}T${appt.time}Z`),
-        }))
-        // Filter appointments based on date and status
-        .filter(
-          (appt) =>
-            new Date(appt.dateObj) < now ||
-            (new Date(appt.dateObj) > now &&
-              !["canceled", "completed"].includes(appt.status)),
-        )
-        // Sort appointments by date
-        .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
-      setNextAppointment(upcoming[0] || null);
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-    }
-  };
   useEffect(() => {
     if (user?.id) {
-      fetchAppointments();
+      fetchAppointments(user?.id);
     }
-  }, [user]);
+  }, [user?.id, fetchAppointments]);
 
   // Render view information of patient
   return (

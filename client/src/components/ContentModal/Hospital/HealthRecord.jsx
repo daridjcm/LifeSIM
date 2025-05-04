@@ -6,16 +6,16 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  User,
   Chip,
 } from "@heroui/react";
 import CustomButton from "../../CustomButton.jsx";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import SpinnerComp from "../../Spinner.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
+import { useAppointment } from "../../../context/AppointmentContext.jsx";
+import { useUser } from "../../../context/UserContext.jsx";
 
 // Define the columns for the table
-export const columns = [
+const columns = [
   { name: "DOCTOR", uid: "doctor" },
   { name: "SPECIALITY", uid: "speciality" },
   { name: "DATE", uid: "date" },
@@ -34,23 +34,23 @@ const statusColorMap = {
 export default function HealthRecord() {
   const [appointments, setAppointments] = useState([]);
   const { showAlert } = useAlert();
-
-  // Get appointments from the server
-  const fetchAppointments = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/appointments");
-      if (!response.ok) throw new Error("Network response was not ok");
-      const data = await response.json();
-      setAppointments(data.appointments);
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-      showAlert("Failed to retrieve appointments.");
-    }
-  };
+  const { fetchAppointments } = useAppointment();
+  const { user } = useUser();
 
   useEffect(() => {
-    fetchAppointments();
-  }, []);
+    const loadAppointments = async () => {
+      if (!user?.id) return;
+      try {
+        const data = await fetchAppointments(user.id);
+        setAppointments(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("Failed to fetch appointments:", err);
+        setAppointments([]);
+      }
+    };
+  
+    loadAppointments();
+  }, [fetchAppointments, user?.id]);
 
   // Handle appointment cancellation
   const handleCancel = async (id) => {
@@ -130,7 +130,7 @@ export default function HealthRecord() {
       </TableHeader>
       <TableBody
         emptyContent={"No appointments to display."}
-        items={appointments}
+        items={Array.isArray(appointments) ? appointments : []}
       >
         {(item) => (
           <TableRow key={item.id}>
@@ -140,6 +140,7 @@ export default function HealthRecord() {
           </TableRow>
         )}
       </TableBody>
+
     </Table>
   );
 }

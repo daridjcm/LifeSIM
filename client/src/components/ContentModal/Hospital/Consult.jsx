@@ -16,6 +16,7 @@ import { symptoms, diseases } from "../../../utils/data";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 import handleDownload from "../../SavePDF.jsx";
+import { useAppointment } from "../../../context/AppointmentContext.jsx"; // Adjust the path as necessary
 
 const symptomCategories = symptoms;
 
@@ -146,45 +147,16 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
 
 // Send report to the server
 const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
-  const [nextAppointment, setNextAppointment] = useState(null);
+  const { nextAppointment, fetchAppointments } = useAppointment();
   const { user } = useUser();
   const [diseases, setDiseaseDetected] = useState(diseaseDetected);
   const { showAlert } = useAlert();
 
-  const fetchAppointments = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/appointments");
-      if (!response.ok) throw new Error("Network response was not ok");
-
-      const data = await response.json();
-      const userAppointments = data.appointments.filter(
-        (appt) => appt.user_id === user?.id,
-      );
-
-      console.log("User Appointments:", userAppointments); // Log user appointments
-
-      const now = new Date();
-      const upcoming = userAppointments
-        .map((appt) => ({
-          ...appt,
-          dateObj: new Date(`${appt.date}T${appt.time}Z`),
-        }))
-        .filter((appt) => new Date(appt.dateObj) > now)
-        .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
-
-      console.log(upcoming);
-      // Set the next appointment as the closest one
-      setNextAppointment(upcoming[0]);
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-    }
-  };
-
   useEffect(() => {
     if (user?.id) {
-      fetchAppointments();
+      fetchAppointments(user?.id);
     }
-  }, [user?.id]);
+  }, [fetchAppointments]);
 
   const handleSendReport = async () => {
     console.log("Next Appointment:", nextAppointment); // Log the next appointment
@@ -220,7 +192,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
         handleDownload("HealthReport", reportData, user);
       } else {
         console.error(result.error);
-        showAlert("Error", "Failed to send report to the server.");
+        showAlert("Error", result.error);
       }
     } catch (error) {
       console.error("Error sending report:", error);
@@ -318,6 +290,7 @@ export default function Content() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
   const [matchedDiseases, setMatchedDiseases] = useState([]);
+  const { nextAppointment } = useAppointment();
 
   const handleNextStep = () => {
     const diseasesMatched = diseases.filter((disease) => {

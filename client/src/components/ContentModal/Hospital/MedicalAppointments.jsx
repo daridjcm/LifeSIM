@@ -108,7 +108,7 @@ export default function MedicalAppointments() {
         showAlert("Appointment Scheduled", result.message);
       } else {
         console.error(result.error);
-        showAlert("Error", "Failed to save appointment.");
+        showAlert("Error", result.error);
       }
     } catch (error) {
       console.error("Error parsing JSON response:", error);
