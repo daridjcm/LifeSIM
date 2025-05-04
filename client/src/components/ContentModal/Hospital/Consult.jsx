@@ -1,80 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
-  useCheckbox,
   CheckboxGroup,
-  Chip,
-  VisuallyHidden,
   Select,
   SelectItem,
   Slider,
-  tv,
   Spinner,
 } from "@heroui/react";
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import CustomButton from "../../CustomButton";
 import { symptoms, diseases } from "../../../utils/data";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 import handleDownload from "../../SavePDF.jsx";
 import { useAppointment } from "../../../context/AppointmentContext.jsx"; // Adjust the path as necessary
+import CustomCheckbox from "./CustomCheckbox.jsx";
 
 const symptomCategories = symptoms;
-
-// Checkbox component to text symptoms
-// Todo: Move component to a separate file
-const CustomCheckbox = ({ children, ...props }) => {
-  const checkbox = tv({
-    slots: {
-      base: "border-default hover:bg-default-200",
-      content: "text-default-500",
-    },
-    variants: {
-      isSelected: {
-        true: {
-          base: "border-primary bg-primary hover:bg-primary-500 hover:border-primary-500",
-          content: "text-primary-foreground pl-1",
-        },
-      },
-      isFocusVisible: {
-        true: {
-          base: "outline-none ring-2 ring-focus ring-offset-2 ring-offset-background",
-        },
-      },
-    },
-  });
-
-  const {
-    isSelected,
-    isFocusVisible,
-    getBaseProps,
-    getLabelProps,
-    getInputProps,
-  } = useCheckbox({ ...props });
-
-  const styles = checkbox({ isSelected, isFocusVisible });
-
-  return (
-    <label {...getBaseProps()}>
-      <VisuallyHidden>
-        <input {...getInputProps()} />
-      </VisuallyHidden>
-      <Chip
-        classNames={{
-          base: styles.base(),
-          content: styles.content(),
-        }}
-        color="primary"
-        startContent={
-          isSelected ? <CheckCircleIcon className="size-5 text-white" /> : null
-        }
-        variant="faded"
-        {...getLabelProps()}
-      >
-        {children || (isSelected ? "Enabled" : "Disabled")}
-      </Chip>
-    </label>
-  );
-};
 
 // Select symptoms
 const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
@@ -159,8 +99,6 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
   }, [fetchAppointments]);
 
   const handleSendReport = async () => {
-    console.log("Next Appointment:", nextAppointment); // Log the next appointment
-    console.log(diseases, diseaseDetected);
     if (!nextAppointment) {
       showAlert("Error", "No upcoming appointment found.");
       return;
@@ -223,7 +161,6 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   }, [onProgressChange]);
 
   if (loading) {
-    console.log(symptoms);
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
         <img src="/images/doctors/OliviaMartinez-full.svg" alt="Doctor" />
