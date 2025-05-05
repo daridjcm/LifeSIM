@@ -26,7 +26,7 @@ const columns = [
 
 // Define the status for the appointment
 const statusColorMap = {
-  assisted: "success",
+  completed: "success",
   canceled: "danger",
   scheduled: "warning",
 };

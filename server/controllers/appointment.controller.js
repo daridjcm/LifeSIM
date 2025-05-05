@@ -140,6 +140,7 @@ export const reportAppointment = async (req, res) => {
       appointment_id,
       system,
       disease,
+      severity,
       status,
       treatments,
       symptoms,
@@ -152,6 +153,7 @@ export const reportAppointment = async (req, res) => {
       !appointment_id ||
       !system ||
       !disease ||
+      !severity ||
       !status ||
       !treatments ||
       !symptoms // Corrected from system to symptoms
@@ -166,6 +168,7 @@ export const reportAppointment = async (req, res) => {
         appointment_id,
         doctor,
         disease,
+        severity,
         status,
         system,
       },
@@ -182,6 +185,7 @@ export const reportAppointment = async (req, res) => {
       appointment_id,
       system,
       disease,
+      severity,
       status,
       treatments,
       symptoms,

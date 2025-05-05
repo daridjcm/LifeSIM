@@ -11,7 +11,7 @@ import { symptoms, diseases } from "../../../utils/data";
 import { useUser } from "../../../context/UserContext.jsx";
 import { useAlert } from "../../../context/AlertContext.jsx";
 import handleDownload from "../../SavePDF.jsx";
-import { useAppointment } from "../../../context/AppointmentContext.jsx"; // Adjust the path as necessary
+import { useAppointment } from "../../../context/AppointmentContext.jsx";
 import CustomCheckbox from "./CustomCheckbox.jsx";
 
 const symptomCategories = symptoms;
@@ -26,7 +26,7 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
     : [];
 
   useEffect(() => {
-    const newProgress = groupSelected.length >= 4 ? 30 : 0;
+    const newProgress = groupSelected.length > 5 ? 30 : 0;
     onProgressChange(newProgress);
     onSymptomsChange(groupSelected);
   }, [groupSelected, onProgressChange, onSymptomsChange]);
@@ -103,40 +103,49 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       showAlert("Error", "No upcoming appointment found.");
       return;
     }
-
+  
     const reportData = {
       appointment_id: nextAppointment.id,
       user_id: nextAppointment.user_id,
       doctor: nextAppointment.doctor,
       system: diseases.system,
       disease: diseases.name,
+      severity: diseases.severity,
       status: "completed",
       treatments: diseases.treatments.map((treatment) => treatment),
       symptoms: diseases.symptoms.map((symptom) => symptom).join(", "),
     };
+  
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/appointments/report",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(reportData),
-        },
-      );
-
-      const result = await response.json();
-      if (response.ok) {
-        showAlert("Success", result.message);
+      // Send report data
+      const reportResponse = await fetch("http://localhost:3000/api/appointments/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportData),
+      });
+  
+      // Update appointment status
+      const statusResponse = await fetch(`http://localhost:3000/api/appointments/${nextAppointment.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "completed" }),
+      });
+  
+      const reportResult = await reportResponse.json();
+      const statusResult = await statusResponse.json();
+  
+      if (reportResponse.ok && statusResponse.ok) {
+        showAlert("Success", reportResult.message);
         handleDownload("HealthReport", reportData, user);
       } else {
-        console.error(result.error);
-        showAlert("Error", result.error);
+        console.error(reportResult.error || statusResult.error);
+        showAlert("Error", reportResult.error || statusResult.error);
       }
     } catch (error) {
       console.error("Error sending report:", error);
       showAlert("Error", "An error occurred while sending the report.");
     }
-  };
+  };  
 
   return (
     <CustomButton
@@ -160,6 +169,8 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
     return () => clearTimeout(timer);
   }, [onProgressChange]);
 
+
+  // TODO: Add image of doctor depending on the nextAppointment
   if (loading) {
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
@@ -182,7 +193,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
         <ul className="space-y-4">
           {matchedDiseases.map((disease) => (
             <div
-              key={disease.name}
+              key={disease.id}
               className="bg-primary rounded-md p-4 text-white shadow-md"
             >
               <li className="text-2xl font-bold">{disease.system}</li>
@@ -275,6 +286,6 @@ export default function Content() {
       </>
     );
   } else {
-    return <div>Not have next appointment yet.</div>;
+    return <div>Not have next appointment yet. Please check the health record or schedule an appointment.</div>
   }
 }

@@ -77,7 +77,7 @@ function createHealthReportPDF(doc, healthReport, userData) {
   doc.text("Health Report", 20, 20);
   doc.text(`User: ${userData?.username || "N/A"}`, 20, 30);
   doc.text(
-    `Appointment Number: ${healthReport.appointment_id || "N/A"}`,
+    `Appointment ID: ${healthReport.appointment_id || "N/A"}`,
     20,
     35,
   );
