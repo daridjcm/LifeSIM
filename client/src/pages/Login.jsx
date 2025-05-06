@@ -1,25 +1,25 @@
-import React from "react";
-import FormComp from "../components/Form";
+import React from 'react';
+import FormComp from '../components/Form';
 
 export default function Login() {
   const fields = [
     {
-      name: "username",
-      label: "Username",
-      placeholder: "Enter your username",
-      type: "text",
+      name: 'username',
+      label: 'Username',
+      placeholder: 'Enter your username',
+      type: 'text',
     },
     {
-      name: "email",
-      label: "Email",
-      placeholder: "Enter your email",
-      type: "email",
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Enter your email',
+      type: 'email',
     },
     {
-      name: "password",
-      label: "Password",
-      placeholder: "**********",
-      type: "password",
+      name: 'password',
+      label: 'Password',
+      placeholder: '**********',
+      type: 'password',
     },
   ];
 

@@ -1,11 +1,11 @@
-import "./css/index.css";
-import { BrowserRouter, Routes, Route } from "react-router";
-import Game from "./pages/Game.jsx";
-import Login from "./pages/Login.jsx";
-import SignUp from "./pages/SignUp.jsx";
-import NotFound from "./pages/404Error.jsx";
-import NewCustomer from "./pages/NewCustomer.jsx";
-import Chat from "./components/ContentModal/Work/Chat/Chat.jsx";
+import './css/index.css';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Game from './pages/Game.jsx';
+import Login from './pages/Login.jsx';
+import SignUp from './pages/SignUp.jsx';
+import NotFound from './pages/404Error.jsx';
+import NewCustomer from './pages/NewCustomer.jsx';
+import Chat from './components/ContentModal/Work/Chat/Chat.jsx';
 
 // Define routes to navigate through the application
 function App() {

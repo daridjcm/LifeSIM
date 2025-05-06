@@ -1,19 +1,19 @@
-import React from "react";
-import { CircularProgress } from "@heroui/react";
+import React from 'react';
+import { CircularProgress } from '@heroui/react';
 
 const ProgressBar = ({ value, need }) => {
   const color =
-    need === "Hunger"
-      ? "danger"
-      : need === "Health"
-        ? "success"
-        : need === "Energy"
-          ? "warning"
-          : need === "Hygiene"
-            ? "primary"
-            : need === "Bladder"
-              ? "secondary"
-              : "default";
+    need === 'Hunger'
+      ? 'danger'
+      : need === 'Health'
+        ? 'success'
+        : need === 'Energy'
+          ? 'warning'
+          : need === 'Hygiene'
+            ? 'primary'
+            : need === 'Bladder'
+              ? 'secondary'
+              : 'default';
 
   return (
     <CircularProgress

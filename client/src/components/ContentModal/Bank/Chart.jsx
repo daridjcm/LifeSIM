@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   LineChart,
   Line,
@@ -8,26 +8,26 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts";
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/solid";
+} from 'recharts';
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
 
 // Handle data generation random
 // TODO: changes months for hours today.
 const generateRandomData = () => {
   const currentMonth = new Date().getMonth();
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   return months.slice(0, currentMonth + 1).map((month) => {
@@ -37,7 +37,7 @@ const generateRandomData = () => {
       name: month,
       low,
       line,
-      color: line > 5000 ? "#00FF00" : "#FF0000",
+      color: line > 5000 ? '#00FF00' : '#FF0000',
     };
   });
 };
@@ -75,18 +75,18 @@ export default function FakeBankInvestment() {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             dataKey="name"
-            label={{ value: "Month", position: "insideBottom", offset: -5 }}
+            label={{ value: 'Month', position: 'insideBottom', offset: -5 }}
           />
           <YAxis
             domain={[100, 1000]}
-            label={{ value: "Value", angle: -90, position: "insideLeft" }}
+            label={{ value: 'Value', angle: -90, position: 'insideLeft' }}
           />
           <Tooltip />
           <Legend />
           <Line
             type="monotone"
             dataKey="line"
-            stroke={data.length > 0 ? data[data.length - 1].color : "#000000"}
+            stroke={data.length > 0 ? data[data.length - 1].color : '#000000'}
             strokeDasharray="3 4 5 2"
           />
         </LineChart>

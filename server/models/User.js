@@ -1,39 +1,18 @@
 export default (sequelize, DataTypes) => {
   const User = sequelize.define(
-    "User",
+    'User',
     {
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      gender: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      blood_type: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
+      username: { type: DataTypes.STRING, allowNull: false },
+      email: { type: DataTypes.STRING, allowNull: false, unique: true },
+      password: { type: DataTypes.STRING, allowNull: false },
+      gender: { type: DataTypes.STRING, allowNull: false },
+      blood_type: { type: DataTypes.STRING, allowNull: true },
     },
-    {
-      tableName: "users",
-    },
+    { tableName: 'users' },
   );
 
   User.associate = (models) => {
-    User.hasMany(models.Invoice, {
-      foreignKey: "user_id",
-      as: "invoices",
-    });
+    User.hasMany(models.Invoice, { foreignKey: 'user_id', as: 'invoices' });
   };
 
   return User;

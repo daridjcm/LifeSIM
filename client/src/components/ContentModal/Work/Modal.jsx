@@ -5,7 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-} from "@heroui/react";
+} from '@heroui/react';
 
 export default function ModalComponent({
   title,
@@ -24,18 +24,12 @@ export default function ModalComponent({
           enter: {
             y: 0,
             opacity: 1,
-            transition: {
-              duration: 0.3,
-              ease: "easeOut",
-            },
+            transition: { duration: 0.3, ease: 'easeOut' },
           },
           exit: {
             y: -20,
             opacity: 0,
-            transition: {
-              duration: 0.2,
-              ease: "easeIn",
-            },
+            transition: { duration: 0.2, ease: 'easeIn' },
           },
         },
       }}

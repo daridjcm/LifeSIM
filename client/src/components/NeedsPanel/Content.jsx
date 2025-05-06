@@ -1,13 +1,13 @@
-import React from "react";
-import getIconColor from "./IconColor.jsx";
-import ProgressBar from "./ProgressBar.jsx";
+import React from 'react';
+import getIconColor from './IconColor.jsx';
+import ProgressBar from './ProgressBar.jsx';
 
 const needs = [
-  { name: "Hunger", value: 100 },
-  { name: "Health", value: 100 },
-  { name: "Energy", value: 100 },
-  { name: "Hygiene", value: 100 },
-  { name: "Bladder", value: 100 },
+  { name: 'Hunger', value: 100 },
+  { name: 'Health', value: 100 },
+  { name: 'Energy', value: 100 },
+  { name: 'Hygiene', value: 100 },
+  { name: 'Bladder', value: 100 },
 ];
 
 // TODO: This is a identifiers for the objects for categories. Depending on the category, show different icons to display in the inventory.
@@ -27,8 +27,6 @@ const Content1 = () => (
 );
 
 // TODO: Create logic for the second content
-const Content2 = () => (
-  <div></div>
-);
+const Content2 = () => <div></div>;
 
-export default {Content1};
+export default { Content1 };

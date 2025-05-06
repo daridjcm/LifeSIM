@@ -1,21 +1,21 @@
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { useCheckbox, Chip, VisuallyHidden, tv } from "@heroui/react";
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { useCheckbox, Chip, VisuallyHidden, tv } from '@heroui/react';
 const CustomCheckbox = ({ children, ...props }) => {
   const checkbox = tv({
     slots: {
-      base: "border-default hover:bg-default-200",
-      content: "text-default-500",
+      base: 'border-default hover:bg-default-200',
+      content: 'text-default-500',
     },
     variants: {
       isSelected: {
         true: {
-          base: "border-primary bg-primary hover:bg-primary-500 hover:border-primary-500",
-          content: "text-primary-foreground pl-1",
+          base: 'border-primary bg-primary hover:bg-primary-500 hover:border-primary-500',
+          content: 'text-primary-foreground pl-1',
         },
       },
       isFocusVisible: {
         true: {
-          base: "outline-none ring-2 ring-focus ring-offset-2 ring-offset-background",
+          base: 'outline-none ring-2 ring-focus ring-offset-2 ring-offset-background',
         },
       },
     },
@@ -37,10 +37,7 @@ const CustomCheckbox = ({ children, ...props }) => {
         <input {...getInputProps()} />
       </VisuallyHidden>
       <Chip
-        classNames={{
-          base: styles.base(),
-          content: styles.content(),
-        }}
+        classNames={{ base: styles.base(), content: styles.content() }}
         color="primary"
         startContent={
           isSelected ? <CheckCircleIcon className="size-5 text-white" /> : null
@@ -48,7 +45,7 @@ const CustomCheckbox = ({ children, ...props }) => {
         variant="faded"
         {...getLabelProps()}
       >
-        {children || (isSelected ? "Enabled" : "Disabled")}
+        {children || (isSelected ? 'Enabled' : 'Disabled')}
       </Chip>
     </label>
   );

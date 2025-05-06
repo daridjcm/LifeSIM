@@ -1,35 +1,35 @@
-import React from "react";
-import FormComp from "../components/Form/";
+import React from 'react';
+import FormComp from '../components/Form/';
 
 export default function SignUp() {
   const fields = [
     {
-      name: "username",
-      label: "Username",
-      placeholder: "Create your username",
-      type: "text",
+      name: 'username',
+      label: 'Username',
+      placeholder: 'Create your username',
+      type: 'text',
     },
     {
-      name: "email",
-      label: "Email",
-      placeholder: "Enter your email",
-      type: "email",
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Enter your email',
+      type: 'email',
     },
     {
-      name: "gender",
-      label: "Gender",
-      placeholder: "Select your gender",
-      type: "select",
+      name: 'gender',
+      label: 'Gender',
+      placeholder: 'Select your gender',
+      type: 'select',
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
       ],
     },
     {
-      name: "password",
-      label: "Password",
-      placeholder: "Create your password",
-      type: "password",
+      name: 'password',
+      label: 'Password',
+      placeholder: 'Create your password',
+      type: 'password',
     },
   ];
 

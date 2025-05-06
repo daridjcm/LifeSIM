@@ -1,14 +1,14 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
-import express from "express";
-import cors from "cors";
-import { connectDB } from "./config/database.js";
-import { sequelize } from "./models/index.js";
-import userRoutes from "./routes/user.routes.js";
-import invoiceRoutes from "./routes/invoices.routes.js";
-import groceryRoutes from "./routes/grocery.routes.js";
-import appointmentsRoutes from "./routes/appointments.routes.js";
+import express from 'express';
+import cors from 'cors';
+import { connectDB } from './config/database.js';
+import { sequelize } from './models/index.js';
+import userRoutes from './routes/user.routes.js';
+import invoiceRoutes from './routes/invoices.routes.js';
+import groceryRoutes from './routes/grocery.routes.js';
+import appointmentsRoutes from './routes/appointments.routes.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -21,24 +21,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/api", userRoutes);
-app.use("/api", groceryRoutes);
-app.use("/api", invoiceRoutes);
-app.use("/api", appointmentsRoutes);
+app.use('/api', userRoutes);
+app.use('/api', groceryRoutes);
+app.use('/api', invoiceRoutes);
+app.use('/api', appointmentsRoutes);
 
-app.get("/robots.txt", (req, res) => {
-  res.sendFile(path.join(__dirname, "robots.txt"));
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'robots.txt'));
 });
 
-app.get("/", (req, res) => res.send("API is running..."));
+app.get('/', (req, res) => res.send('API is running...'));
 
 sequelize
   .sync({ force: false, alter: true })
   .then(() => {
-    console.log("Tables synchronized");
+    console.log('Tables synchronized');
   })
   .catch((error) => {
-    console.error("Error synchronizing tables:", error);
+    console.error('Error synchronizing tables:', error);
   });
 
 app.listen(PORT, () =>

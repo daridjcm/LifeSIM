@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Card,
   CardBody,
@@ -7,13 +7,13 @@ import {
   Button,
   Tooltip,
   Image,
-} from "@heroui/react";
+} from '@heroui/react';
 import {
   ArrowLeftEndOnRectangleIcon,
   ShoppingCartIcon,
   CheckCircleIcon,
-} from "@heroicons/react/24/solid";
-import ModalAction from "./ModalAction.jsx";
+} from '@heroicons/react/24/solid';
+import ModalAction from './ModalAction.jsx';
 
 // Component used to display a list of activities user or products
 const CardList = React.memo(
@@ -46,47 +46,47 @@ const CardList = React.memo(
 
     function getColor(item) {
       switch (item.name) {
-        case "Work":
-          return "text-blue-800 bg-blue-400";
-        case "Bank":
-          return "text-cyan-800 bg-cyan-400";
-        case "Grocery":
-          return "text-green-800 bg-green-400";
-        case "Hospital":
-          return "text-blue-800 bg-blue-400";
-        case "Cafeteria":
-          return "text-orange-800 bg-orange-400";
-        case "Home":
-          return "text-red-800 bg-red-400";
+        case 'Work':
+          return 'text-blue-800 bg-blue-400';
+        case 'Bank':
+          return 'text-cyan-800 bg-cyan-400';
+        case 'Grocery':
+          return 'text-green-800 bg-green-400';
+        case 'Hospital':
+          return 'text-blue-800 bg-blue-400';
+        case 'Cafeteria':
+          return 'text-orange-800 bg-orange-400';
+        case 'Home':
+          return 'text-red-800 bg-red-400';
         default:
-          return "text-zinc-300 bg-zinc-900";
+          return 'text-zinc-300 bg-zinc-900';
       }
     }
 
     function getColor2(item) {
       switch (item.category) {
-        case "Fast Food":
+        case 'Fast Food':
           return {
-            color: "primary",
-            content: "Consumed quickly, less filling.",
+            color: 'primary',
+            content: 'Consumed quickly, less filling.',
           };
-        case "Fruit":
+        case 'Fruit':
           return {
-            color: "secondary",
-            content: "Combines well with others, serves satiety.",
+            color: 'secondary',
+            content: 'Combines well with others, serves satiety.',
           };
-        case "Vegetable":
+        case 'Vegetable':
           return {
-            color: "success",
-            content: "Combines well with others, serves satiety.",
+            color: 'success',
+            content: 'Combines well with others, serves satiety.',
           };
-        case "Drink":
+        case 'Drink':
           return {
-            color: "danger",
-            content: "Excessive consumption shortens longevity.",
+            color: 'danger',
+            content: 'Excessive consumption shortens longevity.',
           };
         default:
-          return { color: "default", content: "Others." };
+          return { color: 'default', content: 'Others.' };
       }
     }
 
@@ -109,9 +109,7 @@ const CardList = React.memo(
               >
                 <CardBody className="overflow-hidden p-0">
                   <Image
-                    classNames={{
-                      img: "w-full h-[200px] object-cover",
-                    }}
+                    classNames={{ img: 'w-full h-[200px] object-cover' }}
                     src={item.img}
                     alt={item.name}
                     isBlurred

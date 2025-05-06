@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   CheckboxGroup,
   Select,
   SelectItem,
   Slider,
   Spinner,
-} from "@heroui/react";
-import CustomButton from "../../CustomButton";
-import { symptoms, diseases } from "../../../utils/data";
-import { useUser } from "../../../context/UserContext.jsx";
-import { useAlert } from "../../../context/AlertContext.jsx";
-import handleDownload from "../../SavePDF.jsx";
-import { useAppointment } from "../../../context/AppointmentContext.jsx";
-import CustomCheckbox from "./CustomCheckbox.jsx";
-import { doctors } from "../../../utils/data";
+} from '@heroui/react';
+import CustomButton from '../../CustomButton';
+import { symptoms, diseases } from '../../../utils/data';
+import { useUser } from '../../../context/UserContext.jsx';
+import { useAlert } from '../../../context/AlertContext.jsx';
+import handleDownload from '../../SavePDF.jsx';
+import { useAppointment } from '../../../context/AppointmentContext.jsx';
+import CustomCheckbox from './CustomCheckbox.jsx';
+import { doctors } from '../../../utils/data';
 
 const symptomCategories = symptoms;
 
@@ -78,7 +78,7 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
             ))}
           </CheckboxGroup>
           <p className="mt-4 ml-1 text-default-500">
-            Symptoms: {groupSelected.join(", ")}
+            Symptoms: {groupSelected.join(', ')}
           </p>
         </div>
       )}
@@ -101,7 +101,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
 
   const handleSendReport = async () => {
     if (!nextAppointment) {
-      showAlert("Error", "No upcoming appointment found.");
+      showAlert('Error', 'No upcoming appointment found.');
       return;
     }
 
@@ -112,39 +112,45 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       system: diseases.system,
       disease: diseases.name,
       severity: diseases.severity,
-      status: "completed",
+      status: 'completed',
       treatments: diseases.treatments.map((treatment) => treatment),
-      symptoms: diseases.symptoms.map((symptom) => symptom).join(", "),
+      symptoms: diseases.symptoms.map((symptom) => symptom).join(', '),
     };
 
     try {
       // Send report data
-      const reportResponse = await fetch("http://localhost:3000/api/appointments/report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(reportData),
-      });
+      const reportResponse = await fetch(
+        'http://localhost:3000/api/appointments/report',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(reportData),
+        },
+      );
 
       // Update appointment status
-      const statusResponse = await fetch(`http://localhost:3000/api/appointments/${nextAppointment.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "completed" }),
-      });
+      const statusResponse = await fetch(
+        `http://localhost:3000/api/appointments/${nextAppointment.id}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'completed' }),
+        },
+      );
 
       const reportResult = await reportResponse.json();
       const statusResult = await statusResponse.json();
 
       if (reportResponse.ok && statusResponse.ok) {
-        showAlert("Success", reportResult.message);
-        handleDownload("HealthReport", reportData, user);
+        showAlert('Success', reportResult.message);
+        handleDownload('HealthReport', reportData, user);
       } else {
         console.error(reportResult.error || statusResult.error);
-        showAlert("Error", reportResult.error || statusResult.error);
+        showAlert('Error', reportResult.error || statusResult.error);
       }
     } catch (error) {
-      console.error("Error sending report:", error);
-      showAlert("Error", "An error occurred while sending the report.");
+      console.error('Error sending report:', error);
+      showAlert('Error', 'An error occurred while sending the report.');
     }
   };
 
@@ -172,22 +178,20 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   }, [onProgressChange]);
 
   const handleDoctor = () => {
-    if (!nextAppointment) return "/images/default-doctor.svg";
-    const doctor = doctors.find(doc => doc.name === nextAppointment.doctor);
-    return doctor ? doctor.img[0] : "/images/default-doctor.svg";
+    if (!nextAppointment) return '/images/default-doctor.svg';
+    const doctor = doctors.find((doc) => doc.name === nextAppointment.doctor);
+    return doctor ? doctor.img[0] : '/images/default-doctor.svg';
   };
 
   // TODO: Add image of doctor depending on the nextAppointment
   if (loading) {
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
-        {handleDoctor() && (
-          <img src={handleDoctor()} alt="Doctor" />
-        )}
+        {handleDoctor() && <img src={handleDoctor()} alt="Doctor" />}
         <div className="flex flex-col text-4xl">
           Evaluating your health and the diagnosis
           <Spinner
-            classNames={{ label: "text-foreground mt-4" }}
+            classNames={{ label: 'text-foreground mt-4' }}
             variant="wave"
           />
         </div>
@@ -208,7 +212,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
               <li className="text-2xl font-bold">{disease.system}</li>
               <li className="text-xl">Disease: {disease.name}</li>
               <li
-                className={`text-lg ${disease.severity === "severe" ? "text-red-500" : "text-amber-500"}`}
+                className={`text-lg ${disease.severity === 'severe' ? 'text-red-500' : 'text-amber-500'}`}
               >
                 Severity: {disease.severity}
               </li>
@@ -295,6 +299,11 @@ export default function Content() {
       </>
     );
   } else {
-    return <div>Your health cannot be taken care of because it is not yet time. Please check the health record or schedule an appointment.</div>
+    return (
+      <div>
+        Your health cannot be taken care of because it is not yet time. Please
+        check the health record or schedule an appointment.
+      </div>
+    );
   }
 }

@@ -7,20 +7,17 @@ import {
   ScrollShadow,
   Select,
   SelectItem,
-} from "@heroui/react";
-import CustomButton from "../../CustomButton";
-import { useState, useEffect } from "react";
-import { useAlert } from "../../../context/AlertContext.jsx";
+} from '@heroui/react';
+import CustomButton from '../../CustomButton';
+import { useState, useEffect } from 'react';
+import { useAlert } from '../../../context/AlertContext.jsx';
 
-const STORAGE_KEY = "selectedItems";
+const STORAGE_KEY = 'selectedItems';
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
 // Save products selected to local storage
 const saveToLocalStorage = (data) => {
-  const dataWithTimestamp = {
-    items: data,
-    timestamp: Date.now(),
-  };
+  const dataWithTimestamp = { items: data, timestamp: Date.now() };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataWithTimestamp));
 };
 
@@ -45,7 +42,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
   const { showAlert } = useAlert();
   const [sendObject, setSendObj] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(
-    selectedItems[0]?.name || "",
+    selectedItems[0]?.name || '',
   );
 
   // Handle quantity change for selected product
@@ -71,8 +68,8 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
   const handleClear = () => {
     localStorage.removeItem(STORAGE_KEY);
     showAlert(
-      "Note",
-      "If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.",
+      'Note',
+      'If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.',
     );
   };
 
@@ -84,31 +81,29 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       basePrice: parseFloat(item.basePrice),
     }));
     showAlert(
-      "Products Saved ✅",
-      "The shopping list has been saved, go to the cashier.",
+      'Products Saved ✅',
+      'The shopping list has been saved, go to the cashier.',
     );
 
     console.log(
-      "Payload to send:",
+      'Payload to send:',
       JSON.stringify({ selectedItems: updatedItems }),
     );
 
     setSendObj(true);
     try {
-      const res = await fetch("http://localhost:3000/api/grocery", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await fetch('http://localhost:3000/api/grocery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ selectedItems: updatedItems }),
       });
 
       const data = await res.json();
-      console.log("Response from server:", data);
+      console.log('Response from server:', data);
       setSendObj(false);
     } catch (error) {
       setSendObj(false);
-      console.error("Error sending data:", error);
+      console.error('Error sending data:', error);
     }
   };
 
@@ -191,13 +186,13 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             />
           </div>
           <CustomButton
-            label={"Save changes"}
+            label={'Save changes'}
             onPress={handleSend}
             isLoading={sendObject}
             loadingText="Saving changes..."
           />
           <CustomButton
-            label={"Clear all"}
+            label={'Clear all'}
             onPress={handleClear}
             loadingText="Cleaning all..."
           />

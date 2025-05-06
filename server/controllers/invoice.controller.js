@@ -1,4 +1,4 @@
-import db from "../models/index.js";
+import db from '../models/index.js';
 const { Invoice } = db;
 
 export const createInvoice = async (req, res) => {
@@ -10,7 +10,7 @@ export const createInvoice = async (req, res) => {
     const invoice_number = invoiceCount + 1;
 
     if (!total_amount || !items || !user_id || !invoice_number) {
-      return res.status(400).json({ message: "Missing data required." });
+      return res.status(400).json({ message: 'Missing data required.' });
     }
 
     const newInvoice = await Invoice.create({
@@ -20,15 +20,15 @@ export const createInvoice = async (req, res) => {
       invoice_number,
     });
 
-    console.log("Invoice created:", newInvoice);
+    console.log('Invoice created:', newInvoice);
     res
       .status(201)
-      .json({ message: "Invoice created successfully", invoice: newInvoice });
+      .json({ message: 'Invoice created successfully', invoice: newInvoice });
   } catch (error) {
-    console.error("Error creating invoice:", error);
+    console.error('Error creating invoice:', error);
     res
       .status(500)
-      .json({ error: "Error creating invoice", details: error.message });
+      .json({ error: 'Error creating invoice', details: error.message });
   }
 };
 
@@ -37,6 +37,6 @@ export const getInvoices = async (req, res) => {
     const invoices = await Invoice.findAll();
     res.status(200).json({ invoices });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching invoices", details: error });
+    res.status(500).json({ error: 'Error fetching invoices', details: error });
   }
 };

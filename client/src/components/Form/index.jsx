@@ -1,1 +1,1 @@
-export { default } from "./FormComp";
+export { default } from './FormComp';

@@ -4,9 +4,9 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-} from "@heroui/react";
-import Clock from "./Clock.jsx";
-import { useUser } from "../context/UserContext.jsx";
+} from '@heroui/react';
+import Clock from './Clock.jsx';
+import { useUser } from '../context/UserContext.jsx';
 
 export default function Nav() {
   const { user } = useUser();

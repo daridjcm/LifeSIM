@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import CustomButton from "../../CustomButton.jsx";
-import { Chip, ScrollShadow } from "@heroui/react";
-import { diseases } from "../../../utils/data.js";
-import SearchBox from "../../SearchBox.jsx";
+import React, { useEffect, useState } from 'react';
+import CustomButton from '../../CustomButton.jsx';
+import { Chip, ScrollShadow } from '@heroui/react';
+import { diseases } from '../../../utils/data.js';
+import SearchBox from '../../SearchBox.jsx';
 
 export default function PillsReceted() {
   const [pills, setPills] = useState([]);
   const [pills2, setPills2] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleBuy = (name, tablets, price) => { 
+  const handleBuy = (name, tablets, price) => {
     // TODO: Handle buy logic here
     console.log(`Buying ${name} x ${tablets} for $${price}`);
   };
@@ -17,30 +17,30 @@ export default function PillsReceted() {
   useEffect(() => {
     const fetchPills = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/appointments/report", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await fetch(
+          'http://localhost:3000/api/appointments/report',
+          { method: 'GET', headers: { 'Content-Type': 'application/json' } },
+        );
         if (!response.ok) {
-          throw new Error("Failed to fetch pills data");
+          throw new Error('Failed to fetch pills data');
         }
 
         const data = await response.json();
-        const treatments = data.reports.flatMap(report => report.treatments);
+        const treatments = data.reports.flatMap((report) => report.treatments);
         setPills(treatments);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching pills:", error);
+        console.error('Error fetching pills:', error);
         setLoading(false);
       }
     };
 
     const fetchPills2 = async () => {
-      const allTreatments = diseases.flatMap(disease => disease.treatments);
+      const allTreatments = diseases.flatMap((disease) => disease.treatments);
       setPills2(allTreatments);
       setLoading(false);
     };
-    console.log(pills2)
+    console.log(pills2);
 
     fetchPills();
     fetchPills2();
@@ -79,7 +79,13 @@ export default function PillsReceted() {
                   label={`Collect it ($${pill.pill_price})`}
                   variant="solid"
                   size="sm"
-                  onPress={() => handleBuy(pill.pill_name, pill.pill_tablets, pill.pill_price)}
+                  onPress={() =>
+                    handleBuy(
+                      pill.pill_name,
+                      pill.pill_tablets,
+                      pill.pill_price,
+                    )
+                  }
                 />
               </div>
             ))}

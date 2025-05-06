@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { useState, useEffect } from "react";
-import { activitiesUser, products } from "../../../utils/data.js";
-import ContentGrocery from "./ContentGrocery.jsx";
+import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { activitiesUser, products } from '../../../utils/data.js';
+import ContentGrocery from './ContentGrocery.jsx';
 
 // Handle products display and pagination
 export default function Index({ statusCard }) {
@@ -9,7 +9,7 @@ export default function Index({ statusCard }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const displayedItems = useMemo(() => {
-    return statusCard === "activitiesUser" ? activitiesUser : products;
+    return statusCard === 'activitiesUser' ? activitiesUser : products;
   }, [statusCard]);
 
   // Reset the current page when statusCard changes
@@ -28,7 +28,7 @@ export default function Index({ statusCard }) {
   };
 
   if (!Array.isArray(displayedItems)) {
-    console.error("Error: displayedItems is not an array", displayedItems);
+    console.error('Error: displayedItems is not an array', displayedItems);
     return <p>No products available to display.</p>;
   }
 

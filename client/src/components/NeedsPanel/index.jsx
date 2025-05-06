@@ -1,5 +1,5 @@
-import NeedsPanel from "./NeedsPanel.jsx";
-import Inventory from "./Inventory.jsx";
+import NeedsPanel from './NeedsPanel.jsx';
+import Inventory from './Inventory.jsx';
 
 export default function PanelBar() {
   return (
@@ -7,5 +7,5 @@ export default function PanelBar() {
       <NeedsPanel />
       <Inventory />
     </div>
-  )
+  );
 }

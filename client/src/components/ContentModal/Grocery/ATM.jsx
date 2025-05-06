@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
-import { Alert } from "@heroui/react";
-import CustomButton from "../../CustomButton.jsx";
-import Card from "../../Card";
-import handleDownload from "../../SavePDF.jsx";
+import { useEffect, useState } from 'react';
+import { Alert } from '@heroui/react';
+import CustomButton from '../../CustomButton.jsx';
+import Card from '../../Card';
+import handleDownload from '../../SavePDF.jsx';
 
-const STORAGE_KEY = "atmInvoice";
-import { useUser } from "../../../context/UserContext.jsx";
+const STORAGE_KEY = 'atmInvoice';
+import { useUser } from '../../../context/UserContext.jsx';
 
 // Save invoice data to local storage
 const saveInvoiceToLocalStorage = (invoice) => {
-  const invoiceWithTimestamp = {
-    ...invoice,
-    timestamp: Date.now(),
-  };
+  const invoiceWithTimestamp = { ...invoice, timestamp: Date.now() };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceWithTimestamp));
 };
 
@@ -51,7 +48,7 @@ export default function AtmTab({
   useEffect(() => {
     const fetchGroceryList = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/grocery");
+        const res = await fetch('http://localhost:3000/api/grocery');
         const data = await res.json();
         setGroceryList(data.groceries);
         setTotalAmount(
@@ -60,7 +57,7 @@ export default function AtmTab({
             .toFixed(2),
         );
       } catch (error) {
-        console.error("Error fetching grocery list:", error);
+        console.error('Error fetching grocery list:', error);
       }
     };
     fetchGroceryList();
@@ -70,13 +67,11 @@ export default function AtmTab({
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         if (!token) return;
 
-        const res = await fetch("http://localhost:3000/api/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const res = await fetch('http://localhost:3000/api/me', {
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         if (res.ok) {
@@ -84,7 +79,7 @@ export default function AtmTab({
           setUserData(data.user); // Assuming the response has 'user' data
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error('Error fetching user data:', error);
       }
     };
 
@@ -93,10 +88,10 @@ export default function AtmTab({
 
   // Handle payment
   const handlePayment = async () => {
-    if (groceryList.length === 0) return setAlert("Cart is empty!", "danger");
+    if (groceryList.length === 0) return setAlert('Cart is empty!', 'danger');
 
     setPaymentProcessing(true);
-    setPaymentStatus("Making Payment...");
+    setPaymentStatus('Making Payment...');
 
     // Products selected
     try {
@@ -118,14 +113,14 @@ export default function AtmTab({
         username: userData.username,
       };
 
-      console.log("Request Data:", requestData);
+      console.log('Request Data:', requestData);
 
       // Get token and send request to create invoice
-      const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/api/invoices", {
-        method: "POST",
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:3000/api/invoices', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(requestData),
@@ -133,8 +128,8 @@ export default function AtmTab({
 
       if (!res.ok) {
         const errorDetails = await res.json();
-        console.error("Error details:", errorDetails);
-        throw new Error("Failed to create invoice");
+        console.error('Error details:', errorDetails);
+        throw new Error('Failed to create invoice');
       }
 
       const invoiceData = await res.json();
@@ -142,10 +137,10 @@ export default function AtmTab({
       setInvoice(latestInvoice);
       saveInvoiceToLocalStorage(latestInvoice);
 
-      setAlert("Payment Done ✅", "success");
+      setAlert('Payment Done ✅', 'success');
     } catch (error) {
-      setAlert("Payment Failed", "danger");
-      console.error("Error during payment:", error);
+      setAlert('Payment Failed', 'danger');
+      console.error('Error during payment:', error);
     } finally {
       setPaymentProcessing(false);
     }
@@ -174,7 +169,7 @@ export default function AtmTab({
         {invoice && (
           <CustomButton
             label="Download Report"
-            onPress={() => handleDownload("Invoice", invoice, userData)}
+            onPress={() => handleDownload('Invoice', invoice, userData)}
           />
         )}
       </div>
@@ -182,11 +177,11 @@ export default function AtmTab({
       {alertVisible && (
         <Alert
           color={alertType}
-          title={alertType === "success" ? "Payment Done" : "Payment Failed"}
+          title={alertType === 'success' ? 'Payment Done' : 'Payment Failed'}
           description={
-            alertType === "success"
-              ? "Payment has been made."
-              : "Payment has been rejected."
+            alertType === 'success'
+              ? 'Payment has been made.'
+              : 'Payment has been rejected.'
           }
           isVisible={alertVisible}
           variant="faded"

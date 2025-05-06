@@ -1,26 +1,21 @@
-import LineChart from "./Chart";
-import FormComp from "../../Form/";
+import LineChart from './Chart';
+import FormComp from '../../Form/';
 
 // Overview of your financial status
 export function Overview() {
   const fields = [
     {
-      name: "currentbalance",
-      label: "Current Balance",
-      value: "$",
-      type: "text",
+      name: 'currentbalance',
+      label: 'Current Balance',
+      value: '$',
+      type: 'text',
     },
+    { name: 'savings', label: 'Savings', value: '$', type: 'text' },
     {
-      name: "savings",
-      label: "Savings",
-      value: "$",
-      type: "text",
-    },
-    {
-      name: "outstandingdebt",
-      label: "Outstanding Debt",
-      value: "$",
-      type: "text",
+      name: 'outstandingdebt',
+      label: 'Outstanding Debt',
+      value: '$',
+      type: 'text',
     },
   ];
 
@@ -38,12 +33,7 @@ export function Overview() {
 // Withdraw money from your account
 export function Withdraw() {
   const fields = [
-    {
-      name: "withdraw",
-      label: "Withdraw Money",
-      value: 0,
-      type: "number",
-    },
+    { name: 'withdraw', label: 'Withdraw Money', value: 0, type: 'number' },
   ];
 
   return (
@@ -61,10 +51,10 @@ export function Withdraw() {
 export function Invert() {
   const fields = [
     {
-      name: "invertmoney",
-      label: "Invert Money",
-      placeholder: "Enter your quantity of money to invert",
-      type: "number",
+      name: 'invertmoney',
+      label: 'Invert Money',
+      placeholder: 'Enter your quantity of money to invert',
+      type: 'number',
     },
   ];
 
@@ -86,30 +76,30 @@ export function Invert() {
 export function Save() {
   const fields = [
     {
-      name: "accounttype",
-      label: "Account Type",
-      placeholder: "Select account type",
-      type: "select",
+      name: 'accounttype',
+      label: 'Account Type',
+      placeholder: 'Select account type',
+      type: 'select',
       options: [
         {
-          label: "Savings Account",
-          value: "savingsaccount",
+          label: 'Savings Account',
+          value: 'savingsaccount',
           description:
             "You to save money and meet long-term goals. You doesn't allow invert money.",
         },
         {
-          label: "Current Account",
-          value: "currentaccount",
+          label: 'Current Account',
+          value: 'currentaccount',
           description:
-            "You does allow invert money, purchase products and pay debt.",
+            'You does allow invert money, purchase products and pay debt.',
         },
       ],
     },
     {
-      name: "amounttotransfer",
-      label: "Amount",
-      placeholder: "Enter amount",
-      type: "number",
+      name: 'amounttotransfer',
+      label: 'Amount',
+      placeholder: 'Enter amount',
+      type: 'number',
     },
   ];
 
@@ -135,10 +125,10 @@ export function Save() {
 export function PayDebt() {
   const fields = [
     {
-      name: "amounttopay",
-      label: "Amount to Pay",
-      placeholder: "Enter amount",
-      type: "number",
+      name: 'amounttopay',
+      label: 'Amount to Pay',
+      placeholder: 'Enter amount',
+      type: 'number',
     },
   ];
 
@@ -157,26 +147,26 @@ export function PayDebt() {
 export function Loans() {
   const fields = [
     {
-      name: "loantype",
-      label: "Loan Type",
-      placeholder: "Select loan type",
-      type: "select",
+      name: 'loantype',
+      label: 'Loan Type',
+      placeholder: 'Select loan type',
+      type: 'select',
       options: [
-        { label: "Personal Loan", value: "personalloan" },
-        { label: "Mortgage", value: "mortgage" },
-        { label: "Health Insurance - Basic", value: "healthinsurance-basic" },
-        { label: "Health Insurance - Medium", value: "healthinsurance-medium" },
+        { label: 'Personal Loan', value: 'personalloan' },
+        { label: 'Mortgage', value: 'mortgage' },
+        { label: 'Health Insurance - Basic', value: 'healthinsurance-basic' },
+        { label: 'Health Insurance - Medium', value: 'healthinsurance-medium' },
         {
-          label: "Health Insurance - Premium",
-          value: "healthinsurance-premium",
+          label: 'Health Insurance - Premium',
+          value: 'healthinsurance-premium',
         },
       ],
     },
     {
-      name: "loanamount",
-      label: "Loan Amount",
-      placeholder: "Enter amount",
-      type: "number",
+      name: 'loanamount',
+      label: 'Loan Amount',
+      placeholder: 'Enter amount',
+      type: 'number',
     },
   ];
   return (

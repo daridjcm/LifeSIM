@@ -1,15 +1,15 @@
-import { Calendar, DateInput, Select, SelectItem, Avatar } from "@heroui/react";
-import CustomButton from "../../CustomButton.jsx";
-import { useState } from "react";
+import { Calendar, DateInput, Select, SelectItem, Avatar } from '@heroui/react';
+import CustomButton from '../../CustomButton.jsx';
+import { useState } from 'react';
 import {
   now,
   getLocalTimeZone,
   CalendarDateTime,
   toZoned,
-} from "@internationalized/date";
-import { doctors } from "../../../utils/data.js";
-import { useUser } from "../../../context/UserContext.jsx";
-import { useAlert } from "../../../context/AlertContext.jsx";
+} from '@internationalized/date';
+import { doctors } from '../../../utils/data.js';
+import { useUser } from '../../../context/UserContext.jsx';
+import { useAlert } from '../../../context/AlertContext.jsx';
 
 export default function MedicalAppointments() {
   const [date, setDate] = useState(null);
@@ -21,14 +21,14 @@ export default function MedicalAppointments() {
   const { showAlert } = useAlert();
 
   const schedules = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "14:00",
-    "15:00",
-    "16:00",
+    '08:00',
+    '09:00',
+    '10:00',
+    '11:00',
+    '12:00',
+    '14:00',
+    '15:00',
+    '16:00',
   ];
 
   const handleTimeClick = (time) => {
@@ -36,7 +36,7 @@ export default function MedicalAppointments() {
     if (!date) return;
 
     try {
-      const [hours, minutes] = time.split(":").map((num) => parseInt(num, 10));
+      const [hours, minutes] = time.split(':').map((num) => parseInt(num, 10));
       const newDateTime = new CalendarDateTime(
         date.year,
         date.month,
@@ -51,13 +51,13 @@ export default function MedicalAppointments() {
       const jsDate = zonedDateTime.toDate();
       const formattedDate = jsDate.toLocaleDateString();
       const formattedTime = jsDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
+        hour: '2-digit',
+        minute: '2-digit',
       });
 
       setFormattedDateTime({ formattedDate, formattedTime, jsDate });
     } catch (error) {
-      console.error("Error processing dateTime:", error);
+      console.error('Error processing dateTime:', error);
     }
   };
 
@@ -79,7 +79,7 @@ export default function MedicalAppointments() {
   // Send appointment data to the server
   const submitAppointment = async () => {
     if (!formattedDateTime || !selectedDoctor) {
-      return showAlert("Check!", "Please select a date, time, and doctor.");
+      return showAlert('Check!', 'Please select a date, time, and doctor.');
     }
 
     // Define appointment data JSON object
@@ -91,13 +91,13 @@ export default function MedicalAppointments() {
       time: formattedDateTime.formattedTime,
       specialist: selectedDoctor.specialist,
       area: selectedDoctor.area,
-      status: "scheduled",
+      status: 'scheduled',
     };
 
     // Make a POST request to the server
-    const response = await fetch("http://localhost:3000/api/appointments", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('http://localhost:3000/api/appointments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(appointmentData),
     });
 
@@ -105,14 +105,14 @@ export default function MedicalAppointments() {
     try {
       const result = await response.json();
       if (response.ok) {
-        showAlert("Appointment Scheduled", result.message);
+        showAlert('Appointment Scheduled', result.message);
       } else {
         console.error(result.error);
-        showAlert("Error", result.error);
+        showAlert('Error', result.error);
       }
     } catch (error) {
-      console.error("Error parsing JSON response:", error);
-      showAlert("Error", "The server returned an invalid JSON response.");
+      console.error('Error parsing JSON response:', error);
+      showAlert('Error', 'The server returned an invalid JSON response.');
     }
   };
 
@@ -134,7 +134,7 @@ export default function MedicalAppointments() {
             <CustomButton
               key={time}
               label={time}
-              variant={selectedTime === time ? "solid" : "bordered"}
+              variant={selectedTime === time ? 'solid' : 'bordered'}
               onPress={() => handleTimeClick(time)}
               isDisabled={!date}
             />
@@ -142,7 +142,7 @@ export default function MedicalAppointments() {
         </div>
 
         <Select
-          classNames={{ base: "w-full", trigger: "h-12" }}
+          classNames={{ base: 'w-full', trigger: 'h-12' }}
           label="Assign doctor"
           labelPlacement="outside"
           placeholder="Select a doctor"
@@ -160,7 +160,7 @@ export default function MedicalAppointments() {
                   alt={doctor.name}
                   className="flex-shrink-0"
                   size="sm"
-                  src={doctor.img[1] || ""}
+                  src={doctor.img[1] || ''}
                   showFallback
                 />
                 <div className="flex flex-col">

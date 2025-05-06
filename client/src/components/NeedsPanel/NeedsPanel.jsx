@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Drawer,
   DrawerContent,
@@ -8,9 +8,9 @@ import {
   useDisclosure,
   ScrollShadow,
   Button,
-} from "@heroui/react";
-import { FaceSmileIcon } from "@heroicons/react/20/solid";
-import Content1 from "./Content.jsx";
+} from '@heroui/react';
+import { FaceSmileIcon } from '@heroicons/react/20/solid';
+import Content1 from './Content.jsx';
 
 const NeedsPanel = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,14 +18,14 @@ const NeedsPanel = () => {
   return (
     <>
       <Button
-          className="p-1 text-white"
-          size="lg"
-          color="primary"
-          onPress={onOpen}
-          isIconOnly
-        >
-          <FaceSmileIcon />
-        </Button>
+        className="p-1 text-white"
+        size="lg"
+        color="primary"
+        onPress={onOpen}
+        isIconOnly
+      >
+        <FaceSmileIcon />
+      </Button>
       <Drawer isOpen={isOpen} size="xs" onOpenChange={onClose}>
         <DrawerContent>
           <DrawerHeader>Needs Panel</DrawerHeader>

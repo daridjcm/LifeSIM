@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({ message: 'No token provided' });
   }
 
   try {
@@ -11,6 +11,6 @@ export const verifyToken = (req, res, next) => {
     req.userID = decoded.id;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: 'Invalid token' });
   }
 };

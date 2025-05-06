@@ -1,5 +1,5 @@
-import db from "../models/index.js";
-import cron from "node-cron";
+import db from '../models/index.js';
+import cron from 'node-cron';
 
 const { Appointment, Report } = db;
 
@@ -9,20 +9,20 @@ const deleteOldCanceledAppointments = async () => {
     const oneMinuteAgo = new Date(Date.now() - 60 * 1000); // Current time minus one hour
     await Appointment.destroy({
       where: {
-        status: "canceled",
+        status: 'canceled',
         updatedAt: {
           [db.Sequelize.Op.lt]: oneMinuteAgo, // Assuming you have an updatedAt field
         },
       },
     });
-    console.log("Old canceled appointments deleted successfully.");
+    console.log('Old canceled appointments deleted successfully.');
   } catch (error) {
-    console.error("Error deleting old canceled appointments:", error);
+    console.error('Error deleting old canceled appointments:', error);
   }
 };
 
 // Schedule the job to run every hour
-cron.schedule("* * * * *", deleteOldCanceledAppointments); // Runs at the start of every hour
+cron.schedule('* * * * *', deleteOldCanceledAppointments); // Runs at the start of every hour
 
 export const saveAppointment = async (req, res) => {
   try {
@@ -39,12 +39,12 @@ export const saveAppointment = async (req, res) => {
       !area ||
       !status
     ) {
-      return res.status(400).json({ error: "All fields are required." });
+      return res.status(400).json({ error: 'All fields are required.' });
     }
 
     // Convert "19/4/2025" → "2025-04-19"
-    const [day, month, year] = date.split("/");
-    const formattedDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    const [day, month, year] = date.split('/');
+    const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
     // Check for duplicate appointment
     const existingAppointment = await Appointment.findOne({
@@ -60,7 +60,7 @@ export const saveAppointment = async (req, res) => {
     });
 
     if (existingAppointment) {
-      return res.status(409).json({ error: "Duplicate appointment found." });
+      return res.status(409).json({ error: 'Duplicate appointment found.' });
     }
 
     const newAppointment = await Appointment.create({
@@ -74,17 +74,18 @@ export const saveAppointment = async (req, res) => {
       status,
     });
 
-    console.log("Appointment scheduled:", newAppointment);
-    res.status(201).json({
-      message: "Appointment saved successfully",
-      appointment: newAppointment,
-    });
+    console.log('Appointment scheduled:', newAppointment);
+    res
+      .status(201)
+      .json({
+        message: 'Appointment saved successfully',
+        appointment: newAppointment,
+      });
   } catch (error) {
-    console.error("Error saving appointment:", error);
-    res.status(500).json({
-      error: "Error saving appointment",
-      details: error.message,
-    });
+    console.error('Error saving appointment:', error);
+    res
+      .status(500)
+      .json({ error: 'Error saving appointment', details: error.message });
   }
 };
 
@@ -93,10 +94,9 @@ export const getAppointments = async (req, res) => {
     const appointments = await Appointment.findAll();
     res.status(200).json({ appointments });
   } catch (error) {
-    res.status(500).json({
-      error: "Error fetching appointments",
-      details: error.message,
-    });
+    res
+      .status(500)
+      .json({ error: 'Error fetching appointments', details: error.message });
   }
 };
 
@@ -106,29 +106,27 @@ export const updateAppointmentStatus = async (req, res) => {
     const { status } = req.body;
 
     if (!status) {
-      return res.status(400).json({ error: "Status is required." });
+      return res.status(400).json({ error: 'Status is required.' });
     }
 
     const appointment = await Appointment.findByPk(id);
 
     if (!appointment) {
-      return res.status(404).json({ error: "Appointment not found." });
+      return res.status(404).json({ error: 'Appointment not found.' });
     }
 
     appointment.status = status;
     await appointment.save();
 
-    console.log("Appointment updated:", appointment);
-    res.status(200).json({
-      message: "Appointment status updated",
-      appointment,
-    });
+    console.log('Appointment updated:', appointment);
+    res
+      .status(200)
+      .json({ message: 'Appointment status updated', appointment });
   } catch (error) {
-    console.error("Error updating appointment:", error);
-    res.status(500).json({
-      error: "Error updating appointment",
-      details: error.message,
-    });
+    console.error('Error updating appointment:', error);
+    res
+      .status(500)
+      .json({ error: 'Error updating appointment', details: error.message });
   }
 };
 
@@ -158,7 +156,7 @@ export const reportAppointment = async (req, res) => {
       !treatments ||
       !symptoms // Corrected from system to symptoms
     ) {
-      return res.status(400).json({ error: "All fields are required." });
+      return res.status(400).json({ error: 'All fields are required.' });
     }
 
     // Check for duplicate report
@@ -175,7 +173,7 @@ export const reportAppointment = async (req, res) => {
     });
 
     if (existingReport) {
-      return res.status(409).json({ error: "Duplicate appointment found." });
+      return res.status(409).json({ error: 'Duplicate appointment found.' });
     }
 
     // Create the report
@@ -191,17 +189,15 @@ export const reportAppointment = async (req, res) => {
       symptoms,
     });
 
-    console.log("Appointment reported:", report);
-    return res.status(201).json({
-      message: "Appointment reported successfully",
-      report,
-    });
+    console.log('Appointment reported:', report);
+    return res
+      .status(201)
+      .json({ message: 'Appointment reported successfully', report });
   } catch (error) {
-    console.error("Error reporting appointment:", error);
-    return res.status(500).json({
-      error: "Error reporting appointment",
-      details: error.message,
-    });
+    console.error('Error reporting appointment:', error);
+    return res
+      .status(500)
+      .json({ error: 'Error reporting appointment', details: error.message });
   }
 };
 
@@ -209,16 +205,14 @@ export const getReports = async (req, res) => {
   try {
     const reports = await db.Report.findAll();
 
-    console.log("Reports retrieved:", reports);
-    res.status(200).json({
-      message: "Reports retrieved successfully",
-      reports,
-    });
+    console.log('Reports retrieved:', reports);
+    res
+      .status(200)
+      .json({ message: 'Reports retrieved successfully', reports });
   } catch (error) {
-    console.error("Error retrieving reports:", error);
-    res.status(500).json({
-      error: "Error retrieving reports",
-      details: error.message,
-    });
+    console.error('Error retrieving reports:', error);
+    res
+      .status(500)
+      .json({ error: 'Error retrieving reports', details: error.message });
   }
 };

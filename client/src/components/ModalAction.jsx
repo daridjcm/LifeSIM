@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import {
   Card,
   CardHeader,
@@ -8,13 +8,13 @@ import {
   CardFooter,
   Button,
   ScrollShadow,
-} from "@heroui/react";
+} from '@heroui/react';
 
 // Content Modal
-import ContentWork from "./ContentModal/Work/Index.jsx";
-import ContentBank from "./ContentModal/Bank/Index.jsx";
-import ContentGrocery from "./ContentModal/Grocery/Index.jsx";
-import ContentHospital from "./ContentModal/Hospital/Index.jsx";
+import ContentWork from './ContentModal/Work/Index.jsx';
+import ContentBank from './ContentModal/Bank/Index.jsx';
+import ContentGrocery from './ContentModal/Grocery/Index.jsx';
+import ContentHospital from './ContentModal/Hospital/Index.jsx';
 
 export default function ModalAction({ item, onClose, listHeader = [] }) {
   const [isClosing, setIsClosing] = useState(false);
@@ -31,12 +31,12 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
   // If the user clicks Escape key
   useEffect(() => {
     const closeOnEscape = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         handleClose();
       }
     };
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
   }, []);
 
   if (!item) return null;
@@ -45,24 +45,24 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
 
   // Define dynamic header based on item name
   switch (item.name) {
-    case "Work":
+    case 'Work':
       dynamicHeader = [
-        "Profession",
-        "Work Experience",
-        "Company",
-        "Money earn per day",
+        'Profession',
+        'Work Experience',
+        'Company',
+        'Money earn per day',
       ];
       break;
-    case "Bank":
+    case 'Bank':
       dynamicHeader = [
-        "Savings Account",
-        "Current Account",
-        "Money Inverted",
-        "Debt",
+        'Savings Account',
+        'Current Account',
+        'Money Inverted',
+        'Debt',
       ];
       break;
-    case "Hospital":
-      dynamicHeader = ["Health"];
+    case 'Hospital':
+      dynamicHeader = ['Health'];
       break;
     default:
       dynamicHeader = [];
@@ -74,12 +74,12 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
   return ReactDOM.createPortal(
     <div
       className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3 transition-opacity duration-300 ${
-        isClosing ? "opacity-0" : "opacity-100"
+        isClosing ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <Card
         className={`h-full w-full lg:max-h-screen lg:max-w-full p-2 transform transition-transform duration-300 ${
-          isClosing ? "scale-95" : "scale-100"
+          isClosing ? 'scale-95' : 'scale-100'
         }`}
         radius="md"
         shadow="md"
@@ -110,17 +110,17 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
         </CardHeader>
         <CardBody
           className={
-            item.name === "Work"
-              ? "py-2 max-h-[60vh] min-h-full"
-              : "max-h-full overflow-auto"
+            item.name === 'Work'
+              ? 'py-2 max-h-[60vh] min-h-full'
+              : 'max-h-full overflow-auto'
           }
         >
           {/* Render content based on item name */}
-          {item.name === "Work" ? (
+          {item.name === 'Work' ? (
             <ContentWork />
-          ) : item.name === "Bank" ? (
+          ) : item.name === 'Bank' ? (
             <ContentBank />
-          ) : item.name === "Hospital" ? (
+          ) : item.name === 'Hospital' ? (
             <ContentHospital />
           ) : (
             <ContentGrocery />

@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "@heroui/react";
+import React from 'react';
+import { Button } from '@heroui/react';
 
 const CustomButton = ({
   label,
@@ -15,12 +15,12 @@ const CustomButton = ({
   return (
     <Button
       color="primary"
-      variant={variant || "flat"}
-      size={size || "md"}
+      variant={variant || 'flat'}
+      size={size || 'md'}
       onPress={onPress}
       aria-label={label}
       id={id}
-      className={className || "mr-2"}
+      className={className || 'mr-2'}
     >
       {isLoading ? loadingText : label} {icon}
     </Button>

@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const UserContext = createContext();
 
@@ -11,13 +11,11 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
 
       if (token) {
-        const response = await fetch("http://localhost:3000/api/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await fetch('http://localhost:3000/api/me', {
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         const data = await response.json();

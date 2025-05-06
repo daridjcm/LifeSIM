@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useDisclosure } from "@heroui/react";
-import ModalComponent from "./Modal.jsx";
-import TableCustomers, { customersCount } from "./TableCustomers.jsx";
-import CustomButton from "../../CustomButton.jsx";
+import { useState } from 'react';
+import { useDisclosure } from '@heroui/react';
+import ModalComponent from './Modal.jsx';
+import TableCustomers, { customersCount } from './TableCustomers.jsx';
+import CustomButton from '../../CustomButton.jsx';
 
 export default function PhoneCorporative() {
   const [customerCountHandler, setCustomerCount] = useState(customersCount);
@@ -14,7 +14,7 @@ export default function PhoneCorporative() {
   const ChatBoss = () => {
     setChatBoss(true);
     setTimeout(() => {
-      window.open("/boss", "_blank");
+      window.open('/boss', '_blank');
       setChatBoss(false);
     }, 2000);
   };
@@ -29,7 +29,7 @@ export default function PhoneCorporative() {
     setChatAnalia(true);
     setTimeout(() => {
       setChatAnalia(false);
-      window.open("/analia", "_blank");
+      window.open('/analia', '_blank');
     }, 2000);
   };
 
@@ -40,13 +40,9 @@ export default function PhoneCorporative() {
     <div className="flex flex-col gap-3 mt-4">
       <CustomButton
         label={
-          chatBoss ? "Entering to chat with Boss..." : "Chat with the Boss 📱"
+          chatBoss ? 'Entering to chat with Boss...' : 'Chat with the Boss 📱'
         }
-        onPress={() => {
-          document.getElementById("tasksList").classList.remove("hidden");
-          document.getElementById("chatBoss").classList.add("block");
-          ChatBoss();
-        }}
+        onPress={ChatBoss}
         id="chatBoss"
       />
       <CustomButton
@@ -57,7 +53,7 @@ export default function PhoneCorporative() {
       />
       <CustomButton
         label={
-          chatAnalia ? "Entering to chat Analia..." : "Chat with Analia 📱"
+          chatAnalia ? 'Entering to chat Analia...' : 'Chat with Analia 📱'
         }
         onPress={ChatAnalia}
         id="chatAnalia"

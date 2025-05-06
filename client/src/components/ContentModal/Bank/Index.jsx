@@ -1,6 +1,6 @@
-import React from "react";
-import { Tabs, Tab } from "@heroui/react";
-import { Loans, Overview, PayDebt, Save, Withdraw, Invert } from "./Forms.jsx";
+import React from 'react';
+import { Tabs, Tab } from '@heroui/react';
+import { Loans, Overview, PayDebt, Save, Withdraw, Invert } from './Forms.jsx';
 import {
   DocumentTextIcon,
   CurrencyDollarIcon,
@@ -8,11 +8,11 @@ import {
   BanknotesIcon,
   CreditCardIcon,
   GlobeAltIcon,
-} from "@heroicons/react/24/solid";
+} from '@heroicons/react/24/solid';
 
 // Render Tabs for the content Bank
 export default function ContentBank() {
-  const [selected, setSelected] = React.useState("overview");
+  const [selected, setSelected] = React.useState('overview');
 
   return (
     <Tabs

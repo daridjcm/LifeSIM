@@ -1,10 +1,14 @@
-import { createContext, useContext, useState } from "react";
-import AlertComp from "../components/AlertComp.jsx";
+import { createContext, useContext, useState } from 'react';
+import AlertComp from '../components/AlertComp.jsx';
 
 const AlertContext = createContext();
 
 export const AlertProvider = ({ children }) => {
-  const [alert, setAlert] = useState({ visible: false, title: "", description: "" });
+  const [alert, setAlert] = useState({
+    visible: false,
+    title: '',
+    description: '',
+  });
 
   const showAlert = (title, description) => {
     setAlert({ visible: true, title, description });

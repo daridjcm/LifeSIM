@@ -1,9 +1,9 @@
-import { Image } from "@heroui/react";
-import Card from "../../Card.jsx";
-import { ClockIcon } from "@heroicons/react/24/solid";
-import { useUser } from "../../../context/UserContext.jsx";
-import { useEffect, useState } from "react";
-import { useAppointment } from "../../../context/AppointmentContext.jsx";
+import { Image } from '@heroui/react';
+import Card from '../../Card.jsx';
+import { ClockIcon } from '@heroicons/react/24/solid';
+import { useUser } from '../../../context/UserContext.jsx';
+import { useEffect, useState } from 'react';
+import { useAppointment } from '../../../context/AppointmentContext.jsx';
 
 export default function Patient() {
   const { user } = useUser();
@@ -31,19 +31,19 @@ export default function Patient() {
             ID: <span>{user?.id}</span>
           </p>
           <p>
-            Gender:{" "}
+            Gender:{' '}
             <span
               className={
-                user?.gender === "female"
-                  ? "bg-pink-300 px-3 py-0 rounded-md"
-                  : "bg-blue-300 px-3 py-1 rounded-md"
+                user?.gender === 'female'
+                  ? 'bg-pink-300 px-3 py-0 rounded-md'
+                  : 'bg-blue-300 px-3 py-1 rounded-md'
               }
             >
               {user?.gender}
             </span>
           </p>
           <p>
-            Email:{" "}
+            Email:{' '}
             <span className="text-blue-500 cursor-pointer">{user?.email}</span>
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function Patient() {
         <div className="flex flex-col sm:flex-row lg:flex-row w-full gap-4">
           <div className="border border-zinc-300 p-3 rounded-md w-full sm:w-2/4 lg:w-2/4">
             <p className="opacity-60">Blood type</p>
-            <p className="font-bold">{user?.blood_type || "N/A"}</p>
+            <p className="font-bold">{user?.blood_type || 'N/A'}</p>
           </div>
           <div className="border border-zinc-300 p-3 rounded-md w-full sm:w-2/4 lg:w-2/4">
             <p className="opacity-60">Allergies</p>
@@ -66,7 +66,7 @@ export default function Patient() {
             <span>
               {nextAppointment
                 ? `You have an appointment with ${nextAppointment.title}. ${nextAppointment.doctor} (${nextAppointment.specialist}) on ${nextAppointment.date} at ${nextAppointment.time}`
-                : "Not have appointments scheduled"}
+                : 'Not have appointments scheduled'}
             </span>
           </p>
         </div>
@@ -81,8 +81,8 @@ export default function Patient() {
           <div className="bg-yellow-100 p-3 h-fit">
             <p className="text-amber-500 opacity-80 font-semibold">Note:</p>
             <p className="mb-3">
-              If your health insurance plan in status{" "}
-              <span className="text-red-400">expired</span>, you must go to the{" "}
+              If your health insurance plan in status{' '}
+              <span className="text-red-400">expired</span>, you must go to the{' '}
               <span className="text-cyan-400 font-semibold">Bank</span> and
               renew it.
             </p>

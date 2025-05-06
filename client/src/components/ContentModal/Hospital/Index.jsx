@@ -1,21 +1,21 @@
-import React from "react";
-import { Tabs, Tab } from "@heroui/react";
+import React from 'react';
+import { Tabs, Tab } from '@heroui/react';
 import {
   CalendarDateRangeIcon,
   ClockIcon,
   ClipboardDocumentListIcon,
   UserIcon,
   ClipboardDocumentCheckIcon,
-} from "@heroicons/react/24/solid";
-import MedicalAppointments from "./MedicalAppointments.jsx";
-import Patient from "./Patient.jsx";
-import HealthRecord from "./HealthRecord.jsx";
-import PillsReceted from "./PillsReceted.jsx";
-import Consult from "./Consult.jsx";
+} from '@heroicons/react/24/solid';
+import MedicalAppointments from './MedicalAppointments.jsx';
+import Patient from './Patient.jsx';
+import HealthRecord from './HealthRecord.jsx';
+import PillsReceted from './PillsReceted.jsx';
+import Consult from './Consult.jsx';
 
 // Tabs content
 export default function ContentHospital() {
-  const [selected, setSelected] = React.useState("medicalappointments");
+  const [selected, setSelected] = React.useState('medicalappointments');
 
   return (
     <Tabs

@@ -1,5 +1,5 @@
-import { Pagination } from "@heroui/react";
-import CardList from "../../CardList.jsx";
+import { Pagination } from '@heroui/react';
+import CardList from '../../CardList.jsx';
 
 // Render pagination component and list of products
 export default function ProductsTab({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   TableHeader,
@@ -7,28 +7,28 @@ import {
   TableRow,
   TableCell,
   Chip,
-} from "@heroui/react";
-import CustomButton from "../../CustomButton.jsx";
-import { TrashIcon } from "@heroicons/react/24/solid";
-import { useAlert } from "../../../context/AlertContext.jsx";
-import { useAppointment } from "../../../context/AppointmentContext.jsx";
-import { useUser } from "../../../context/UserContext.jsx";
+} from '@heroui/react';
+import CustomButton from '../../CustomButton.jsx';
+import { TrashIcon } from '@heroicons/react/24/solid';
+import { useAlert } from '../../../context/AlertContext.jsx';
+import { useAppointment } from '../../../context/AppointmentContext.jsx';
+import { useUser } from '../../../context/UserContext.jsx';
 
 // Define the columns for the table
 const columns = [
-  { name: "DOCTOR", uid: "doctor" },
-  { name: "SPECIALITY", uid: "speciality" },
-  { name: "DATE", uid: "date" },
-  { name: "TIME", uid: "time" },
-  { name: "STATUS", uid: "status" },
-  { name: "CANCEL", uid: "cancel" },
+  { name: 'DOCTOR', uid: 'doctor' },
+  { name: 'SPECIALITY', uid: 'speciality' },
+  { name: 'DATE', uid: 'date' },
+  { name: 'TIME', uid: 'time' },
+  { name: 'STATUS', uid: 'status' },
+  { name: 'CANCEL', uid: 'cancel' },
 ];
 
 // Define the status for the appointment
 const statusColorMap = {
-  completed: "success",
-  canceled: "danger",
-  scheduled: "warning",
+  completed: 'success',
+  canceled: 'danger',
+  scheduled: 'warning',
 };
 
 export default function HealthRecord() {
@@ -44,11 +44,11 @@ export default function HealthRecord() {
         const data = await fetchAppointments(user.id);
         setAppointments(Array.isArray(data) ? data : []);
       } catch (err) {
-        console.error("Failed to fetch appointments:", err);
+        console.error('Failed to fetch appointments:', err);
         setAppointments([]);
       }
     };
-  
+
     loadAppointments();
   }, [user?.id]);
 
@@ -56,24 +56,24 @@ export default function HealthRecord() {
   const handleCancel = async (id) => {
     try {
       const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "canceled" }),
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'canceled' }),
       });
 
-      if (!res.ok) throw new Error("Failed to cancel appointment");
+      if (!res.ok) throw new Error('Failed to cancel appointment');
 
       setTimeout(() => {
         setAppointments((prev) =>
           prev.map((appt) =>
-            appt.id === id ? { ...appt, status: "canceled" } : appt,
+            appt.id === id ? { ...appt, status: 'canceled' } : appt,
           ),
         );
-      }, "1000");
-      showAlert("The appointment was canceled sucessfully.");
+      }, '1000');
+      showAlert('The appointment was canceled sucessfully.');
     } catch (err) {
-      console.error("Error canceling appointment:", err);
-      showAlert("Failed to cancel the appointment.");
+      console.error('Error canceling appointment:', err);
+      showAlert('Failed to cancel the appointment.');
     }
   };
 
@@ -82,16 +82,16 @@ export default function HealthRecord() {
     const cellValue = appointment[columnKey];
 
     switch (columnKey) {
-      case "doctor":
+      case 'doctor':
         return <p>{appointment.doctor}</p>;
-      case "speciality":
+      case 'speciality':
         return (
           <div className="flex flex-col">
             <p>{cellValue}</p>
             <p>{appointment.specialist}</p>
           </div>
         );
-      case "status":
+      case 'status':
         return (
           <Chip
             className="capitalize"
@@ -102,7 +102,7 @@ export default function HealthRecord() {
             {cellValue}
           </Chip>
         );
-      case "cancel":
+      case 'cancel':
         return (
           <CustomButton
             key={appointment.id}
@@ -122,14 +122,14 @@ export default function HealthRecord() {
         {(column) => (
           <TableColumn
             key={column.uid}
-            align={column.uid === "date" ? "center" : "start"}
+            align={column.uid === 'date' ? 'center' : 'start'}
           >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
       <TableBody
-        emptyContent={"No appointments to display."}
+        emptyContent={'No appointments to display.'}
         items={Array.isArray(appointments) ? appointments : []}
       >
         {(item) => (
@@ -140,7 +140,6 @@ export default function HealthRecord() {
           </TableRow>
         )}
       </TableBody>
-
     </Table>
   );
 }

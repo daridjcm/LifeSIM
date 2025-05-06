@@ -1,22 +1,22 @@
-import { Tabs, Tab } from "@heroui/react";
-import React, { useState } from "react";
-import ProductsTab from "./Products.jsx";
-import ShoppingListTab from "./Shopping.jsx";
-import AtmTab from "./ATM.jsx";
+import { Tabs, Tab } from '@heroui/react';
+import React, { useState } from 'react';
+import ProductsTab from './Products.jsx';
+import ShoppingListTab from './Shopping.jsx';
+import AtmTab from './ATM.jsx';
 import {
   CreditCardIcon,
   ListBulletIcon,
   ShoppingCartIcon,
-} from "@heroicons/react/24/solid";
+} from '@heroicons/react/24/solid';
 
 // Render Tabs for the grocery content
 const ContentGrocery = React.memo(
   ({ itemsToDisplay, page, total, onChange }) => {
     // State Management
-    const [paymentStatus, setPaymentStatus] = useState("Make Payment");
+    const [paymentStatus, setPaymentStatus] = useState('Make Payment');
     const [paymentProcessing, setPaymentProcessing] = useState(false);
     const [alertVisible, setAlertVisible] = useState(false);
-    const [alertType, setAlertType] = useState("success"); // success or danger
+    const [alertType, setAlertType] = useState('success'); // success or danger
     const [selectedProducts, setSelectedProducts] = useState([]);
 
     return (

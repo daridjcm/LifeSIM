@@ -1,5 +1,5 @@
-import { ExclamationCircleIcon, HomeIcon } from "@heroicons/react/24/outline";
-import { Button } from "@heroui/react";
+import { ExclamationCircleIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { Button } from '@heroui/react';
 
 const NotFound = () => {
   return (
@@ -16,7 +16,7 @@ const NotFound = () => {
           <Button
             variant="flat"
             size="lg"
-            onPress={() => (window.location.href = "/")}
+            onPress={() => (window.location.href = '/')}
             className="text-primary-500 hover:scale-105 hover:bg-primary-600 hover:text-primary-50 transition-all duration-300 ease-in-out"
           >
             <span className="animate-appear-from-left">Teleport Back Home</span>
