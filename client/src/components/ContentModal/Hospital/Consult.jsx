@@ -295,6 +295,6 @@ export default function Content() {
       </>
     );
   } else {
-    return <div>Not have next appointment yet. Please check the health record or schedule an appointment.</div>
+    return <div>Your health cannot be taken care of because it is not yet time. Please check the health record or schedule an appointment.</div>
   }
 }
