@@ -13,7 +13,7 @@ export default function Patient() {
     if (user?.id) {
       fetchAppointments(user?.id);
     }
-  }, [user?.id, fetchAppointments]);
+  }, [user?.id]);
 
   // Render view information of patient
   return (

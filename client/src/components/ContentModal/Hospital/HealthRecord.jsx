@@ -50,7 +50,7 @@ export default function HealthRecord() {
     };
   
     loadAppointments();
-  }, [fetchAppointments, user?.id]);
+  }, [user?.id]);
 
   // Handle appointment cancellation
   const handleCancel = async (id) => {

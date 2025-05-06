@@ -13,6 +13,7 @@ import { useAlert } from "../../../context/AlertContext.jsx";
 import handleDownload from "../../SavePDF.jsx";
 import { useAppointment } from "../../../context/AppointmentContext.jsx";
 import CustomCheckbox from "./CustomCheckbox.jsx";
+import { doctors } from "../../../utils/data";
 
 const symptomCategories = symptoms;
 
@@ -103,7 +104,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       showAlert("Error", "No upcoming appointment found.");
       return;
     }
-  
+
     const reportData = {
       appointment_id: nextAppointment.id,
       user_id: nextAppointment.user_id,
@@ -115,7 +116,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       treatments: diseases.treatments.map((treatment) => treatment),
       symptoms: diseases.symptoms.map((symptom) => symptom).join(", "),
     };
-  
+
     try {
       // Send report data
       const reportResponse = await fetch("http://localhost:3000/api/appointments/report", {
@@ -123,17 +124,17 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reportData),
       });
-  
+
       // Update appointment status
       const statusResponse = await fetch(`http://localhost:3000/api/appointments/${nextAppointment.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "completed" }),
       });
-  
+
       const reportResult = await reportResponse.json();
       const statusResult = await statusResponse.json();
-  
+
       if (reportResponse.ok && statusResponse.ok) {
         showAlert("Success", reportResult.message);
         handleDownload("HealthReport", reportData, user);
@@ -145,7 +146,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       console.error("Error sending report:", error);
       showAlert("Error", "An error occurred while sending the report.");
     }
-  };  
+  };
 
   return (
     <CustomButton
@@ -159,6 +160,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
 // Evaluate the diagnosis and symptoms to determine the disease
 const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   const [loading, setLoading] = useState(true);
+  const { nextAppointment } = useAppointment();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -169,12 +171,19 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
     return () => clearTimeout(timer);
   }, [onProgressChange]);
 
+  const handleDoctor = () => {
+    if (!nextAppointment) return "/images/default-doctor.svg";
+    const doctor = doctors.find(doc => doc.name === nextAppointment.doctor);
+    return doctor ? doctor.img[0] : "/images/default-doctor.svg";
+  };
 
   // TODO: Add image of doctor depending on the nextAppointment
   if (loading) {
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
-        <img src="/images/doctors/OliviaMartinez-full.svg" alt="Doctor" />
+        {handleDoctor() && (
+          <img src={handleDoctor()} alt="Doctor" />
+        )}
         <div className="flex flex-col text-4xl">
           Evaluating your health and the diagnosis
           <Spinner

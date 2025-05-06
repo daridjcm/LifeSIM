@@ -1,53 +1,88 @@
+import React, { useEffect, useState } from "react";
 import CustomButton from "../../CustomButton.jsx";
 import { Chip, ScrollShadow } from "@heroui/react";
-// import { useEffect, useState } from "react";
-
-// const response = await fetch(
-//   "http://localhost:3000/api/appointments/report",
-//   {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(reportData),
-//   },
-// ); // Fetch the report data from the server
-
-// const pillsData = await response.JSON();
+import { diseases } from "../../../utils/data.js";
+import SearchBox from "../../SearchBox.jsx";
 
 export default function PillsReceted() {
-  // const [pills, setPills] = useState([]);
+  const [pills, setPills] = useState([]);
+  const [pills2, setPills2] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   // Simulate fetching data
-  //   setPills(pillsData.treatments);
-  // }, [response]);
-  // TODO: Fix fetch, because causes error SIGILL
+  const handleBuy = (name, tablets, price) => { 
+    // TODO: Handle buy logic here
+    console.log(`Buying ${name} x ${tablets} for $${price}`);
+  };
+
+  useEffect(() => {
+    const fetchPills = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/appointments/report", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch pills data");
+        }
+
+        const data = await response.json();
+        const treatments = data.reports.flatMap(report => report.treatments);
+        setPills(treatments);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching pills:", error);
+        setLoading(false);
+      }
+    };
+
+    const fetchPills2 = async () => {
+      const allTreatments = diseases.flatMap(disease => disease.treatments);
+      setPills2(allTreatments);
+      setLoading(false);
+    };
+    console.log(pills2)
+
+    fetchPills();
+    fetchPills2();
+  }, []);
+
+  if (loading) {
+    return <p>Loading pills...</p>;
+  }
+
+  // TODO: Implement the search box functionality for the pills
 
   return (
-    <div className="flex sm:flex-col md:flex-row lg:flex-row justify-between w-full gap-5">
+    <div className="flex sm:flex-col md:flex-row lg:flex-row justify-between w-full h-full gap-5">
       {/* Comercial Pills Section */}
       <div className="bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2">
         <p className="font-semibold">Pills Comercial</p>
-        <div className="flex justify-between bg-zinc-200 p-4 rounded-lg">
+        {<SearchBox />}
+        <div className="flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg">
           <ScrollShadow
             hideScrollBar
-            className="sm:h-[550px] md:h-[400px] lg:h-[300px]"
+            className="sm:h-[550px] md:h-[400px] lg:h-[500px]"
           >
-            <div className="mb-2">
-              <p className="text-xl text-blue-500 flex-col">Fluoxetina</p>
-              <Chip
-                className="capitalize"
-                color="primary"
-                size="sm"
-                variant="flat"
-              >
-                30 tablets
-              </Chip>
-              <p className="flex-col text-sm">
-                It is used to treat depression, obsessive-compulsive disorder,
-                and bulimia nervosa, among others.
-              </p>
-            </div>
-            <CustomButton label="Buy it for $xxx" variant="solid" size="sm" />
+            {pills2.map((pill, index) => (
+              <div className="mb-4" key={index}>
+                <p className="text-xl text-blue-500">{pill.pill_name}</p>
+                <Chip
+                  className="capitalize"
+                  color="primary"
+                  size="sm"
+                  variant="flat"
+                >
+                  {pill.pill_tablets} tablets
+                </Chip>
+                <p className="text-sm">{pill.pill_description}</p>
+                <CustomButton
+                  label={`Collect it ($${pill.pill_price})`}
+                  variant="solid"
+                  size="sm"
+                  onPress={() => handleBuy(pill.pill_name, pill.pill_tablets, pill.pill_price)}
+                />
+              </div>
+            ))}
           </ScrollShadow>
         </div>
       </div>
@@ -55,10 +90,11 @@ export default function PillsReceted() {
       {/* Receted Pills Section */}
       <div className="bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2">
         <p className="font-semibold">Pills Receted</p>
-        <div className="flex justify-between bg-zinc-200 p-4 rounded-lg">
+        {<SearchBox />}
+        <div className="flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg">
           <ScrollShadow
             hideScrollBar
-            className="sm:h-[550px] md:h-[400px] lg:h-[300px]"
+            className="sm:h-[550px] md:h-[400px] lg:h-[500px]"
           >
             {pills.map((pill, index) => (
               <div className="mb-4" key={index}>
@@ -69,7 +105,7 @@ export default function PillsReceted() {
                   size="sm"
                   variant="flat"
                 >
-                  30 tablets
+                  {pill.pill_tablets} tablets
                 </Chip>
                 <p className="text-sm">{pill.pill_description}</p>
                 <CustomButton
