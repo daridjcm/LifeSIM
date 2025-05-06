@@ -10,10 +10,12 @@ export const AppointmentProvider = ({ children }) => {
       const response = await fetch("http://localhost:3000/api/appointments");
       if (!response.ok) throw new Error("Network response was not ok");
   
-      const data = await response.json();
-      const userAppointments = data.appointments.filter(
-        (appt) => appt.user_id === userID,
-      );
+      const { appointments } = await response.json();
+      
+      const userAppointments = appointments
+        .filter((appt) => 
+          appt.user_id === userID
+        );
   
       const now = new Date();
       const upcoming = userAppointments
@@ -21,7 +23,12 @@ export const AppointmentProvider = ({ children }) => {
           ...appt,
           dateObj: new Date(`${appt.date}T${appt.time}Z`),
         }))
-        .filter((appt) => new Date(appt.dateObj) > now)
+        .filter(
+          (appt) =>
+            new Date(appt.dateObj) > now &&
+            appt.status !== "completed" &&
+            appt.status !== "canceled"
+        )
         .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
   
       setNextAppointment(upcoming[0] || null);
@@ -31,8 +38,7 @@ export const AppointmentProvider = ({ children }) => {
       console.error("Error fetching appointments:", error);
       return [];
     }
-  };
-  
+  };  
 
   return (
     <AppointmentContext.Provider
