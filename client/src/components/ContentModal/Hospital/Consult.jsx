@@ -183,7 +183,6 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
     return doctor ? doctor.img[0] : '/images/default-doctor.svg';
   };
 
-  // TODO: Add image of doctor depending on the nextAppointment
   if (loading) {
     return (
       <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">

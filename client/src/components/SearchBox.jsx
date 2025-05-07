@@ -30,7 +30,7 @@ export const SearchIcon = (props) => {
   );
 };
 
-export default function SearchBox() {
+export default function SearchBox({ placeholder, onChange }) {
   return (
     <Input
       isClearable
@@ -56,7 +56,8 @@ export default function SearchBox() {
         ],
       }}
       label="Search"
-      placeholder="Type to search..."
+      placeholder={placeholder}
+      onChange={onChange}
       radius="lg"
       startContent={
         <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
