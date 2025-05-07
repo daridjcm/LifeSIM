@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { readFile } from 'fs/promises';
 
-// --- PARTE 1: Exportar resumen de enfermedades por sistema ---
+// --- SECTION 1: Export list of diseases by system ---
 const diseasesData = await readFile(
   new URL('./Diseases.json', import.meta.url),
   'utf-8',
@@ -39,16 +39,16 @@ for (const system of sortedSystems) {
 csvDiseases += `"Total",${totalDiseases},${totalTreatments}\n`;
 
 fs.writeFileSync(path.resolve('./CSV/diseases.csv'), csvDiseases, 'utf-8');
-console.log('✅ Archivo diseases.csv generado correctamente.');
+console.log('✅ File diseases.csv generated correctly.');
 
-// --- PARTE 2: Exportar lista de doctores sin imágenes ---
+// --- SECTION 2: Export list of doctors ---
 const doctorsData = await readFile(
   new URL('./Doctors.json', import.meta.url),
   'utf-8',
 );
 const doctors = JSON.parse(doctorsData);
 
-console.log(`👨‍⚕️ Total de doctores: ${doctors.length}`);
+console.log(`👨‍⚕️ Total Doctors: ${doctors.length}`);
 
 let csvDoctors = 'ID,Name,Title,Specialist,Experience,Area,Price of Consult\n';
 
@@ -59,19 +59,19 @@ for (const doctor of doctors) {
 }
 
 fs.writeFileSync(path.resolve('./CSV/doctors.csv'), csvDoctors, 'utf-8');
-console.log('✅ Archivo doctors.csv generado correctamente.');
+console.log('✅ File doctors.csv generated correctly.');
 
-// --- PARTE 3: Exportar productos omitidos `quantity` e `img` ---
+// --- SECTION 3: Export list of products ---
 const productsData = await readFile(
   new URL('./Products.json', import.meta.url),
   'utf-8',
 );
 const products = JSON.parse(productsData);
 
-// Contar productos
-console.log(`🧴 Total de productos: ${products.length}`);
+// Count the number of products
+console.log(`🧴 Total Products: ${products.length}`);
 
-// Generar CSV con solo campos deseados
+// Add rows to CSV
 let csvProducts = 'ID,Name,Category,Price\n';
 
 for (const product of products) {
@@ -80,11 +80,11 @@ for (const product of products) {
 }
 
 fs.writeFileSync(path.resolve('./CSV/products.csv'), csvProducts, 'utf-8');
-console.log('✅ Archivo products.csv generado correctamente.');
+console.log('✅ File products.csv generated correctly.');
 
-// --- PARTE 4: Exportar sintomas únicos de cada sistema ---
+// --- SECTION 4: Export list of symptoms by system ---
 
-// Coger cada sintoma único
+// Get each unique symptom by system
 const collectUniqueSymptoms = (data) => {
   const symptomsBySystem = {};
 
@@ -93,21 +93,21 @@ const collectUniqueSymptoms = (data) => {
     const symptoms = item.symptoms;
 
     if (!symptomsBySystem[system]) {
-      symptomsBySystem[system] = new Set(); // Usa el conjunto para evitar duplicados
+      symptomsBySystem[system] = new Set(); // Use the Set data structure to store unique symptoms
     }
 
     symptoms.forEach((symptom) => {
-      symptomsBySystem[system].add(symptom); // Añade el sintoma al conjunto
+      symptomsBySystem[system].add(symptom); // Add the symptom to the set
     });
   });
 
   return symptomsBySystem;
 };
 
-// Colecciona los sintomas
+// Collect all unique symptoms
 const uniqueSymptoms = collectUniqueSymptoms(diseases);
 
-// Prepara los datos
+// Add rows to CSV
 let csvSymptoms = 'System,Symptom\n';
 
 for (const [system, symptoms] of Object.entries(uniqueSymptoms)) {
@@ -121,4 +121,4 @@ fs.writeFileSync(
   csvSymptoms,
   'utf-8',
 );
-console.log('✅ Archivo unique_symptoms.csv generado correctamente.');
+console.log('✅ File unique_symptoms.csv generated correctly.');
