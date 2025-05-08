@@ -9,10 +9,19 @@ import {
   CreditCardIcon,
   GlobeAltIcon,
 } from '@heroicons/react/24/solid';
+import ReusableTable from '../../Table.jsx';
 
 // Render Tabs for the content Bank
 export default function ContentBank() {
   const [selected, setSelected] = React.useState('overview');
+
+  const columns = [
+    { key: 'id', label: 'ID' },
+    { key: 'date', label: 'DATE' },
+    { key: 'from', label: 'FROM' },
+    { key: 'amount', label: 'AMOUNT' },
+    { key: 'to', label: 'TO' }
+  ];
 
   return (
     <Tabs
@@ -32,7 +41,14 @@ export default function ContentBank() {
           </div>
         }
       >
-        <Overview />
+        <>
+          <Overview />
+          <ReusableTable
+            type="bank"
+            data={[]}
+            columns={columns}
+          />
+        </>
       </Tab>
       <Tab
         key="withdraw"

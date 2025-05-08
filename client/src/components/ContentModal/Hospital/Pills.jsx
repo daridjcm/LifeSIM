@@ -4,7 +4,7 @@ import { Chip, ScrollShadow } from '@heroui/react';
 import { diseases } from '../../../utils/data.js';
 import SearchBox from '../../SearchBox.jsx';
 
-export default function PillsReceted() {
+export default function Pills() {
   const [pills, setPills] = useState([]); // Pills Comercial
   const [pills2, setPills2] = useState([]); // Pills Receted
   const [loading, setLoading] = useState(true);
@@ -88,7 +88,7 @@ export default function PillsReceted() {
                 </Chip>
                 <p className="text-sm">{pill.pill_description}</p>
                 <CustomButton
-                  label={`Collect it ($${pill.pill_price})`}
+                  label={`Buy it ($${pill.pill_price})`}
                   variant="solid"
                   size="sm"
                   onPress={() =>

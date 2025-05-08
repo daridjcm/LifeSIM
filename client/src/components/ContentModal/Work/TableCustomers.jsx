@@ -1,13 +1,8 @@
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
   Button,
   Chip,
 } from '@heroui/react';
+import ReusableTable from '../../Table.jsx';
 
 const status = {
   label: [
@@ -76,30 +71,13 @@ export default function TableCustomers() {
   return (
     <div className="flex sm:flex-col md:flex-row lg:flex-row gap-4">
       <div>
-        <Table shadow="md" aria-label="Table of Customers">
-          <TableHeader>
-            {columns.map((column) => (
-              <TableColumn key={column.key}>{column.label}</TableColumn>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {customers.map((row) => (
-              <TableRow key={row.id}>
-                {columns.map((column) => (
-                  <TableCell key={column.key}>
-                    {column.key === 'status' ? (
-                      <Chip color={status.color[row.status - 1]}>
-                        {status.label[row.status - 1]}
-                      </Chip>
-                    ) : (
-                      row[column.key]
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <ReusableTable
+          columns={columns}
+          data={customers}
+          status={status}
+          title="Customers"
+          description="List of customers"
+        />
         <Button
           className="mt-4 w-full"
           color="primary"

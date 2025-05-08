@@ -145,7 +145,7 @@ export default function FormComp({
       className={
         title === 'Welcome again to' || title === 'Create your'
           ? 'w-full m-auto max-w-xs flex flex-col gap-4'
-          : 'flex gap-2'
+          : 'flex gap-2 mb-5'
       }
       validationBehavior="native"
       onReset={() => setAction('reset')}

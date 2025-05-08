@@ -10,7 +10,7 @@ import {
 import MedicalAppointments from './MedicalAppointments.jsx';
 import Patient from './Patient.jsx';
 import HealthRecord from './HealthRecord.jsx';
-import PillsReceted from './PillsReceted.jsx';
+import Pills from './Pills.jsx';
 import Consult from './Consult.jsx';
 
 // Tabs content
@@ -71,7 +71,7 @@ export default function ContentHospital() {
         <Patient />
       </Tab>
       <Tab
-        key="pillsreceted"
+        key="Pills"
         title={
           <div className="flex items-center space-x-2">
             <ClipboardDocumentCheckIcon className="size-6" />
@@ -79,7 +79,7 @@ export default function ContentHospital() {
           </div>
         }
       >
-        <PillsReceted />
+        <Pills />
       </Tab>
     </Tabs>
   );
