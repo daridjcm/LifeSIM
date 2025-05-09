@@ -1,6 +1,7 @@
 import db from '../models/index.js';
 import cron from 'node-cron';
 
+// #region APPOINTMENTS
 const { Appointment, Report } = db;
 
 // Function to delete canceled appointments older than one hour
@@ -130,6 +131,7 @@ export const updateAppointmentStatus = async (req, res) => {
   }
 };
 
+// #region REPORTS
 export const reportAppointment = async (req, res) => {
   try {
     const {

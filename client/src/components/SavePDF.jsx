@@ -28,6 +28,7 @@ function createInvoicePDF(doc, invoice, userData) {
 
   const storedData = JSON.parse(localStorage.getItem('selectedItems') || '{}');
   const items = storedData.items || [];
+  console.log(items);
 
   doc.setFontSize(11);
   doc.text('Invoice by LifeSIM', 20, 20);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Modal,
   ModalContent,
@@ -13,6 +14,10 @@ export default function ModalComponent({
   children,
   isOpen,
   onOpenChange,
+  btnColor1,
+  btnColor2,
+  buttonText1,
+  buttonText2,
 }) {
   return (
     <Modal
@@ -33,7 +38,7 @@ export default function ModalComponent({
           },
         },
       }}
-      onOpenChange={onOpenChange} // Pass onOpenChange to Modal to control state
+      onOpenChange={onOpenChange}
     >
       <ModalContent>
         {(onClose) => (
@@ -45,12 +50,16 @@ export default function ModalComponent({
             </ModalHeader>
             <ModalBody className="text-wrap">{children}</ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button color="primary" onPress={onClose}>
-                Save changes
-              </Button>
+              {buttonText1 && (
+                <Button color={btnColor1} variant="light" onPress={onClose}>
+                  {buttonText1}
+                </Button>
+              )}
+              {buttonText2 && (
+                <Button color={btnColor2} onPress={onClose}>
+                  {buttonText2}
+                </Button>
+              )}
             </ModalFooter>
           </>
         )}
@@ -58,3 +67,15 @@ export default function ModalComponent({
     </Modal>
   );
 }
+
+ModalComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  children: PropTypes.node,
+  isOpen: PropTypes.bool.isRequired,
+  onOpenChange: PropTypes.func.isRequired,
+  btnColor1: PropTypes.string,       // opcional
+  btnColor2: PropTypes.string,       // opcional
+  buttonText1: PropTypes.string,     // opcional
+  buttonText2: PropTypes.string,     // opcional
+};

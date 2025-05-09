@@ -14,7 +14,7 @@ const getBloodType = (id) => {
   return `${randomLetter}${rh}`;
 };
 
-// SignUp
+// #region SignUp
 export const createUser = async (req, res) => {
   console.log('SignUp endpoint reached');
   const { username, email, password, gender } = req.body;
@@ -56,7 +56,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-// Login
+// #region Login
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -89,7 +89,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// Get Current User
+// #region Get Current User
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.userID); // Fetch user data based on decoded user ID from token
@@ -105,7 +105,7 @@ export const getCurrentUser = async (req, res) => {
   }
 };
 
-// Update User
+// #region Update User
 export const updateUser = async (req, res) => {
   const { id } = req.params;
   const { blood_type } = req.body;

@@ -64,6 +64,10 @@ export default function PhoneCorporative() {
         description="Here is a table, where you can add a new customer for the call."
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        btnColor1="danger"
+        btnColor2="primary"
+        buttonText1="Close"
+        buttonText2="Save changes"
       >
         <TableCustomers />
       </ModalComponent>

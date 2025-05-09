@@ -53,6 +53,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             ...product,
             quantity,
             price: (product.basePrice * quantity).toFixed(2),
+            basePrice: product.basePrice,
           }
         : product,
     );
@@ -62,15 +63,6 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
 
   const handleProductChange = (title) => {
     setSelectedProduct(title);
-  };
-
-  // Handle clear all products
-  const handleClear = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    showAlert(
-      'Note',
-      'If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.',
-    );
   };
 
   // Handle send products to the server
@@ -105,6 +97,15 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       setSendObj(false);
       console.error('Error sending data:', error);
     }
+  };
+
+  // Handle clear all products
+  const handleClear = () => {
+    setSelectedItems([]);
+    showAlert(
+      'Note ⚠️',
+      "Tap a product to cross it out or tap 'Clear all' to delete all products.",
+    );
   };
 
   // Render view to display selected products

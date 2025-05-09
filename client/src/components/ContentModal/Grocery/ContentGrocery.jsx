@@ -14,9 +14,7 @@ const ContentGrocery = React.memo(
   ({ itemsToDisplay, page, total, onChange }) => {
     // State Management
     const [paymentStatus, setPaymentStatus] = useState('Make Payment');
-    const [paymentProcessing, setPaymentProcessing] = useState(false);
-    const [alertVisible, setAlertVisible] = useState(false);
-    const [alertType, setAlertType] = useState('success'); // success or danger
+    const [paymentProcessing, setPaymentProcessing] = useState(true);
     const [selectedProducts, setSelectedProducts] = useState([]);
 
     return (
@@ -68,14 +66,11 @@ const ContentGrocery = React.memo(
           }
         >
           <AtmTab
+            products={selectedProducts}
             paymentStatus={paymentStatus}
             setPaymentStatus={setPaymentStatus}
             paymentProcessing={paymentProcessing}
             setPaymentProcessing={setPaymentProcessing}
-            alertVisible={alertVisible}
-            setAlertVisible={setAlertVisible}
-            alertType={alertType}
-            setAlertType={setAlertType}
           />
         </Tab>
       </Tabs>
