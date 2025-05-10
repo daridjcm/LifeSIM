@@ -119,6 +119,7 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
           {item.name === 'Work' ? (
             <ContentWork />
           ) : item.name === 'Bank' ? (
+            // todo: add modal for create bank account
             <ContentBank />
           ) : item.name === 'Hospital' ? (
             <ContentHospital />

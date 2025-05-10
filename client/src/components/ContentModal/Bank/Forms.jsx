@@ -1,23 +1,33 @@
 import LineChart from './Chart';
 import FormComp from '../../Form/';
+import { useEffect, useState } from 'react';
+import { useBank } from '../../../context/BankContext.jsx';
 
 // Overview of your financial status
 export function Overview() {
-  const fields = [
-    {
-      name: 'currentbalance',
-      label: 'Current Balance',
-      value: '$',
-      type: 'text',
-    },
-    { name: 'savings', label: 'Savings', value: '$', type: 'text' },
-    {
-      name: 'outstandingdebt',
-      label: 'Outstanding Debt',
-      value: '$',
-      type: 'text',
-    },
-  ];
+  const { bankAccounts, loading, error } = useBank();
+
+  // Format fields for the form
+  const [fields, setFields] = useState([]);
+
+  useEffect(() => {
+    if (bankAccounts.length > 0) {
+      const account = bankAccounts[0];
+      setFields([
+        { name: 'currentbalance', label: 'Current Balance', value: account.current_account, type: 'number' },
+        { name: 'savings', label: 'Savings', value: account.savings_account, type: 'number' },
+        { name: 'outstandingdebt', label: 'Outstanding Debt', value: account.debt, type: 'number' },
+      ]);
+    }
+  }, [bankAccounts]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <FormComp
@@ -62,6 +72,7 @@ export function Invert() {
     <>
       <LineChart />
       <FormComp
+        statusForm
         title="Invert Money"
         description="Be careful, once you have invested there is no turning back"
         fields={fields}
@@ -106,6 +117,7 @@ export function Save() {
   return (
     <>
       <FormComp
+        statusForm
         title="Transfer Money"
         description="Transfer money to you savings account or current account"
         fields={fields}

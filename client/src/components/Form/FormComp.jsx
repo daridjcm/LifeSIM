@@ -1,10 +1,11 @@
 import React from 'react';
-import { Form, Input, Button, Select, SelectItem } from '@heroui/react';
+import { Form, Input, Button, Select, SelectItem, user } from '@heroui/react';
 import SpinnerComp from '../Spinner.jsx';
 import PropTypes from 'prop-types';
 import { Have, NotHave, HaveCustomers } from './HaveOrNot.jsx';
 import { useNavigate } from 'react-router';
 import { useAlert } from '../../context/AlertContext.jsx';
+import { useUser } from '../../context/UserContext.jsx';
 
 // Conditional wrapper component
 const ConditionalWrapper = ({ condition, children }) => {
@@ -19,7 +20,7 @@ export default function FormComp({
   btnText,
   isRequired,
 }) {
-  // Define props types
+  // Define prop types
   FormComp.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -39,6 +40,7 @@ export default function FormComp({
   };
 
   const { showAlert } = useAlert();
+  const { user } = useUser();
 
   // Handle user data fetching
   const getUserData = async (token) => {
@@ -72,72 +74,105 @@ export default function FormComp({
   const [gender, setGender] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
-  // Handle navigation to button click
+  // Handle navigation on button click
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
-
-    let data = Object.fromEntries(new FormData(e.currentTarget));
-
-    // Conditional URL based on statusForm
-    const url =
-      statusForm === 'login'
-        ? 'http://localhost:3000/api/login'
-        : statusForm === 'signup'
-          ? 'http://localhost:3000/api/signup'
-          : 'http://localhost:3000/api/customers/new';
-
-    // If submission is successful, so send data to server
+    setLoading(true);
+  
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+  
+    const token = localStorage.getItem('token');
+  
+    const urlMap = {
+      login: 'http://localhost:3000/api/login',
+      signup: 'http://localhost:3000/api/signup',
+      customers: 'http://localhost:3000/api/customers/new',
+      bank: 'http://localhost:3000/api/bank',
+    };
+  
+    const url = urlMap[statusForm];
+  
+    if (!url) {
+      showAlert('Error', 'Invalid form.');
+      setLoading(false);
+      return;
+    }
+  
     try {
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
         body: JSON.stringify(data),
       });
-
+  
       const result = await response.json();
-
-      if (response.ok) {
-        const token = result.token;
-        if (token) {
-          localStorage.setItem('token', token);
-        }
-
-        // Show success message
-        showAlert(
-          'Success',
-          `${
-            statusForm === 'login'
-              ? 'Login successful'
-              : statusForm === 'signup'
-                ? 'Registration successful'
-                : 'Customer added successfully'
-          }`,
-        );
-
-        // Handle route change after successful submission
-        setTimeout(() => {
-          if (statusForm === 'login') navigate('/game');
-          else if (statusForm === 'signup') navigate('/');
-        }, 2000);
-      } else {
+  
+      if (!response.ok) {
         showAlert(
           'Error',
-          `${result.message + '.' || 'Something went wrong.'} Please check your data.`,
+          `${result.message || 'Something went wrong. Check your data.'}`,
         );
+        return;
       }
+  
+      // Save token if applicable
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+      }
+  
+      // Automatically create bank account if login or signup
+      if ((statusForm === 'login' || statusForm === 'signup') && result.token) {
+        try {
+          await fetch('http://localhost:3000/api/bank', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${result.token}`,
+            },
+            body: JSON.stringify({
+              user_id: user?.id,
+              current_account: 0,
+              savings_account: 0,
+              money_inverted: 0,
+              debt: 0,
+            }),
+          });
+          console.log(result.token);
+        } catch (bankError) {
+          console.warn('Could not create bank account automatically:', bankError);
+        }
+      }
+  
+      // Show success message
+      const successMessages = {
+        login: 'Login successful',
+        signup: 'Registration successful',
+        customers: 'Customer added successfully',
+        bank: 'Bank account created successfully',
+      };
+  
+      showAlert('Success', successMessages[statusForm] || 'Operation completed');
+  
+      // Navigation after success
+      setTimeout(() => {
+        if (statusForm === 'login') navigate('/game');
+        else if (statusForm === 'signup') navigate('/');
+      }, 2000);
+  
     } catch (error) {
       console.error('Error submitting form:', error);
-      showAlert(
-        'Error',
-        'An unexpected error occurred. Please try again later.',
-      );
+      showAlert('Error', 'An unexpected error occurred. Try again later.');
     } finally {
       setLoading(false);
     }
   };
-
+  
   // Render form component
   return (
     <Form
@@ -251,7 +286,6 @@ export default function FormComp({
             ) : null}
           </Button>
         </div>
-        {/* Help links */}
       </ConditionalWrapper>
       {statusForm === 'login' ? (
         <NotHave />

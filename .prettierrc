@@ -7,7 +7,7 @@
   "experimentalOperatorPosition": "end",
   "experimentalTernaries": false,
   "singleQuote": true,
-  "jsxSingleQuote": false,
+  "jsxSingleQuote": true,
   "quoteProps": "as-needed",
   "trailingComma": "all",
   "singleAttributePerLine": false,

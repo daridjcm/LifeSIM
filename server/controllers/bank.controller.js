@@ -5,9 +5,10 @@ const { BankAccount, Transaction } = db;
 // #region BANK
 export const createBankAccount = async (req, res) => {
   try {
-    const { user_id, current_account, savings_account, money_inverted, debt } = req.body;
+    const user_id = req.userID;
+    const { current_account, savings_account, money_inverted, debt } = req.body;
 
-    if (!user_id || !current_account || !savings_account || !money_inverted || !debt) {
+    if (!user_id) {
       return res.status(400).json({ message: 'Missing data required.' });
     }
 
@@ -32,8 +33,9 @@ export const createBankAccount = async (req, res) => {
 };
 
 export const getBankAccounts = async (req, res) => {
+  const user_id  = req.userID;
   try {
-    const bankAccounts = await BankAccount.findAll();
+    const bankAccounts = await BankAccount.findAll({ where: { user_id } });
     res.status(200).json({ bankAccounts });
   } catch (error) {
     res
@@ -44,7 +46,7 @@ export const getBankAccounts = async (req, res) => {
 
 export const updateBankAccount = async (req, res) => {
   try {
-    const { user_id } = req.params;
+    const user_id = req.userID;
     const { current_account, savings_account, money_inverted, debt } = req.body;
 
     if (!current_account || !savings_account || !money_inverted || !debt) {
