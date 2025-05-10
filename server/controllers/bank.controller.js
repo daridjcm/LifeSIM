@@ -1,8 +1,7 @@
 import db from '../models/index.js';
 
-const { BankAccount, Transaction } = db;
+const { BankAccount } = db;
 
-// #region BANK
 export const createBankAccount = async (req, res) => {
   try {
     const user_id = req.userID;
@@ -80,38 +79,5 @@ export const updateBankAccount = async (req, res) => {
     res
       .status(500)
       .json({ error: 'Error updating bank account', details: error.message });
-  }
-};
-
-// #region CARDS
-
-// #region TRANSACTIONS
-export const createTransaction = async (req, res) => {
-  try {
-    const { user_id, type, amount, date } = req.body;
-
-    if (!user_id || !type || !amount || !date) {
-      return res.status(400).json({ message: 'Missing data required.' });
-    }
-
-    const newTransaction = await Transaction.create({
-      user_id,
-      type,
-      amount,
-      date,
-    });
-
-    console.log('Transaction created:', newTransaction);
-    res
-      .status(201)
-      .json({
-        message: 'Transaction created successfully',
-        transaction: newTransaction,
-      });
-  } catch (error) {
-    console.error('Error creating transaction:', error);
-    res
-      .status(500)
-      .json({ error: 'Error creating transaction', details: error.message });
   }
 };

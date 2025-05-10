@@ -20,6 +20,7 @@ export const createInvoice = async (req, res) => {
     }
 
     const newInvoice = await Invoice.create({
+      id,
       user_id,
       invoice_number,
       items,
