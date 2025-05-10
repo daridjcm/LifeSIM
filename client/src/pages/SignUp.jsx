@@ -34,13 +34,13 @@ export default function SignUp() {
   ];
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className='flex justify-center items-center h-screen'>
       <FormComp
-        action="/signup"
-        title="Create your"
+        action='/signup'
+        title='Create your'
         fields={fields}
-        statusForm="signup" // Indicating this is a signup form
-        btnText="Register"
+        statusForm='signup' // Indicating this is a signup form
+        btnText='Register'
         isRequired={true}
       />
     </div>

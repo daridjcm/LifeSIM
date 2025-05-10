@@ -45,7 +45,10 @@ export default function AtmTab({
   const { user } = useUser();
 
   useEffect(() => {
-    const total = products.reduce((sum, item) => sum + parseFloat(item.price), 0);
+    const total = products.reduce(
+      (sum, item) => sum + parseFloat(item.price),
+      0,
+    );
     return setTotalAmount(total.toFixed(2));
   }, [products]);
 
@@ -74,7 +77,7 @@ export default function AtmTab({
   const handlePayment = () => {
     if (products.length === 0) {
       return showAlert('Error', 'Cart is empty!');
-    } 
+    }
     setShowPaymentModal(true);
   };
 
@@ -90,7 +93,7 @@ export default function AtmTab({
         quantity: item.quantity,
         price: item.price,
       }));
-      
+
       const requestData = {
         userID: userData.id,
         invoiceNumber: Date.now(),
@@ -100,7 +103,6 @@ export default function AtmTab({
       };
       console.log(requestData);
       console.log(products);
-
 
       const token = localStorage.getItem('token');
       const res = await fetch('http://localhost:3000/api/invoices', {
@@ -134,14 +136,12 @@ export default function AtmTab({
 
   return (
     <>
-      <p className="text-2xl font-bold">Summary Purchase</p>
-      <p className="font-bold text-xl">Total: ${total_amount}</p>
+      <p className='text-2xl font-bold'>Summary Purchase</p>
+      <p className='font-bold text-xl'>Total: ${total_amount}</p>
       <p className='font-bold text-xl'>Products selected: {products.length}</p>
-      <Card type="Shopping Card" holder={user?.username} id={user?.id} />
+      <Card type='Shopping Card' holder={user?.username} id={user?.id} />
 
-
-
-      <div className="flex gap-3">
+      <div className='flex gap-3'>
         <CustomButton
           label={paymentProcessing ? paymentStatus : 'Make Payment'}
           onPress={handlePayment}
@@ -149,7 +149,7 @@ export default function AtmTab({
         />
         {invoice && (
           <CustomButton
-            label="Download Report 🧾"
+            label='Download Report 🧾'
             onPress={() => handleDownload('Invoice', invoice, userData)}
           />
         )}
@@ -157,14 +157,20 @@ export default function AtmTab({
 
       {showPaymentModal && (
         <ModalComponent
-          title="Choose Payment Method"
-          description="Select how you want to pay"
+          title='Choose Payment Method'
+          description='Select how you want to pay'
           isOpen={showPaymentModal}
           onOpenChange={setShowPaymentModal}
         >
-          <div className="flex flex-col gap-3">
-            <CustomButton label="Cash 💵" onPress={() => processPayment('Cash')} />
-            <CustomButton label="Card 💳" onPress={() => processPayment('Card')} />
+          <div className='flex flex-col gap-3'>
+            <CustomButton
+              label='Cash 💵'
+              onPress={() => processPayment('Cash')}
+            />
+            <CustomButton
+              label='Card 💳'
+              onPress={() => processPayment('Card')}
+            />
           </div>
         </ModalComponent>
       )}

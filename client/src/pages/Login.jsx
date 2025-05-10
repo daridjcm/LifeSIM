@@ -24,13 +24,13 @@ export default function Login() {
   ];
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className='flex justify-center items-center h-screen'>
       <FormComp
-        action="/"
-        title="Welcome again to"
+        action='/'
+        title='Welcome again to'
         fields={fields}
-        statusForm="login" // Indicating this is a login form
-        btnText="Enter"
+        statusForm='login' // Indicating this is a login form
+        btnText='Enter'
         isRequired={true}
       />
     </div>

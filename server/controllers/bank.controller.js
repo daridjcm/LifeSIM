@@ -23,7 +23,10 @@ export const createBankAccount = async (req, res) => {
     console.log('Bank account created:', newBankAccount);
     res
       .status(201)
-      .json({ message: 'Bank account created successfully', bank: newBankAccount });
+      .json({
+        message: 'Bank account created successfully',
+        bank: newBankAccount,
+      });
   } catch (error) {
     console.error('Error creating bank account:', error);
     res
@@ -33,7 +36,7 @@ export const createBankAccount = async (req, res) => {
 };
 
 export const getBankAccounts = async (req, res) => {
-  const user_id  = req.userID;
+  const user_id = req.userID;
   try {
     const bankAccounts = await BankAccount.findAll({ where: { user_id } });
     res.status(200).json({ bankAccounts });
@@ -64,11 +67,14 @@ export const updateBankAccount = async (req, res) => {
     bankAccount.money_inverted = money_inverted;
     bankAccount.debt = debt;
     await bankAccount.save();
-  
+
     console.log('Bank account updated:', bankAccount);
     res
       .status(200)
-      .json({ message: 'Bank account updated successfully', bank: bankAccount });
+      .json({
+        message: 'Bank account updated successfully',
+        bank: bankAccount,
+      });
   } catch (error) {
     console.error('Error updating bank account:', error);
     res
@@ -98,7 +104,10 @@ export const createTransaction = async (req, res) => {
     console.log('Transaction created:', newTransaction);
     res
       .status(201)
-      .json({ message: 'Transaction created successfully', transaction: newTransaction });
+      .json({
+        message: 'Transaction created successfully',
+        transaction: newTransaction,
+      });
   } catch (error) {
     console.error('Error creating transaction:', error);
     res

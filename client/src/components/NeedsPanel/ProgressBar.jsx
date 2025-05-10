@@ -20,8 +20,8 @@ const ProgressBar = ({ value, need }) => {
       value={value}
       max={100}
       color={color}
-      size="lg"
-      className="m-auto"
+      size='lg'
+      className='m-auto'
       showValueLabel={true}
       aria-labelledby={`${need}-progress`}
     />

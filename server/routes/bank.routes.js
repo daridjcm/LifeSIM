@@ -1,5 +1,9 @@
 import express from 'express';
-import { createBankAccount, getBankAccounts, updateBankAccount } from '../controllers/bank.controller.js';
+import {
+  createBankAccount,
+  getBankAccounts,
+  updateBankAccount,
+} from '../controllers/bank.controller.js';
 import { verifyToken } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 

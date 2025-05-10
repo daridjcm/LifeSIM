@@ -44,53 +44,57 @@ export default function Pills() {
       }
     };
 
-
     fetchPills();
     fetchPills2();
   }, []);
 
-  const filteredPills = pills.filter(pill =>
-    pill.pill_name.toLowerCase().includes(searchTermComercial.toLowerCase())
+  const filteredPills = pills.filter((pill) =>
+    pill.pill_name.toLowerCase().includes(searchTermComercial.toLowerCase()),
   );
-  
-  const filteredPills2 = pills2.filter(pill =>
-    pill.pill_name.toLowerCase().includes(searchTermReceted.toLowerCase())
+
+  const filteredPills2 = pills2.filter((pill) =>
+    pill.pill_name.toLowerCase().includes(searchTermReceted.toLowerCase()),
   );
-  
+
   const pillsToRender = searchTermComercial ? filteredPills : pills;
   const pillsToRender2 = searchTermReceted ? filteredPills2 : pills2;
-  
+
   if (loading) {
     return <p>Loading pills...</p>;
   }
 
   return (
-    <div className="flex sm:flex-col md:flex-row lg:flex-row justify-between w-full h-full gap-5">
+    <div className='flex sm:flex-col md:flex-row lg:flex-row justify-between w-full h-full gap-5'>
       {/* Comercial Pills Section */}
-      <div className="bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2">
-        <p className="font-semibold">Pills Comercial</p>
-        {<SearchBox placeholder={`Search Pills Comercial (${pills.length})`} onChange={(e) => setSearchTermComercial(e.target.value)} />}
-        <div className="flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg">
+      <div className='bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2'>
+        <p className='font-semibold'>Pills Comercial</p>
+        {
+          <SearchBox
+            placeholder={`Search Pills Comercial (${pills.length})`}
+            onChange={(e) => setSearchTermComercial(e.target.value)}
+          />
+        }
+        <div className='flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg'>
           <ScrollShadow
             hideScrollBar
-            className="sm:h-[550px] md:h-[400px] lg:h-[500px]"
+            className='sm:h-[550px] md:h-[400px] lg:h-[500px]'
           >
             {pillsToRender.map((pill, index) => (
-              <div className="mb-4" key={index}>
-                <p className="text-xl text-blue-500">{pill.pill_name}</p>
+              <div className='mb-4' key={index}>
+                <p className='text-xl text-blue-500'>{pill.pill_name}</p>
                 <Chip
-                  className="capitalize"
-                  color="primary"
-                  size="sm"
-                  variant="flat"
+                  className='capitalize'
+                  color='primary'
+                  size='sm'
+                  variant='flat'
                 >
                   {pill.pill_tablets} tablets
                 </Chip>
-                <p className="text-sm">{pill.pill_description}</p>
+                <p className='text-sm'>{pill.pill_description}</p>
                 <CustomButton
                   label={`Buy it ($${pill.pill_price})`}
-                  variant="solid"
-                  size="sm"
+                  variant='solid'
+                  size='sm'
                   onPress={() =>
                     handleBuy(
                       pill.pill_name,
@@ -106,30 +110,35 @@ export default function Pills() {
       </div>
 
       {/* Receted Pills Section */}
-      <div className="bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2">
-        <p className="font-semibold">Pills Receted</p>
-        {<SearchBox placeholder={`Search Pills Receted (${pills2.length})`} onChange={(e) => setSearchTermReceted(e.target.value)} />}
-        <div className="flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg">
+      <div className='bg-zinc-100 sm:w-full md:w-[50%] lg:w-[50%] p-2'>
+        <p className='font-semibold'>Pills Receted</p>
+        {
+          <SearchBox
+            placeholder={`Search Pills Receted (${pills2.length})`}
+            onChange={(e) => setSearchTermReceted(e.target.value)}
+          />
+        }
+        <div className='flex justify-between bg-zinc-200 p-4 mt-4 rounded-lg'>
           <ScrollShadow
             hideScrollBar
-            className="sm:h-[550px] md:h-[400px] lg:h-[500px]"
+            className='sm:h-[550px] md:h-[400px] lg:h-[500px]'
           >
             {pillsToRender2.map((pill, index) => (
-              <div className="mb-4" key={index}>
-                <p className="text-xl text-blue-500">{pill.pill_name}</p>
+              <div className='mb-4' key={index}>
+                <p className='text-xl text-blue-500'>{pill.pill_name}</p>
                 <Chip
-                  className="capitalize"
-                  color="primary"
-                  size="sm"
-                  variant="flat"
+                  className='capitalize'
+                  color='primary'
+                  size='sm'
+                  variant='flat'
                 >
                   {pill.pill_tablets} tablets
                 </Chip>
-                <p className="text-sm">{pill.pill_description}</p>
+                <p className='text-sm'>{pill.pill_description}</p>
                 <CustomButton
                   label={`Collect it ($${pill.pill_price})`}
-                  variant="solid"
-                  size="sm"
+                  variant='solid'
+                  size='sm'
                 />
               </div>
             ))}

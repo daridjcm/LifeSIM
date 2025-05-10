@@ -14,9 +14,24 @@ export function Overview() {
     if (bankAccounts.length > 0) {
       const account = bankAccounts[0];
       setFields([
-        { name: 'currentbalance', label: 'Current Balance', value: account.current_account, type: 'number' },
-        { name: 'savings', label: 'Savings', value: account.savings_account, type: 'number' },
-        { name: 'outstandingdebt', label: 'Outstanding Debt', value: account.debt, type: 'number' },
+        {
+          name: 'currentbalance',
+          label: 'Current Balance',
+          value: account.current_account,
+          type: 'number',
+        },
+        {
+          name: 'savings',
+          label: 'Savings',
+          value: account.savings_account,
+          type: 'number',
+        },
+        {
+          name: 'outstandingdebt',
+          label: 'Outstanding Debt',
+          value: account.debt,
+          type: 'number',
+        },
       ]);
     }
   }, [bankAccounts]);
@@ -31,10 +46,10 @@ export function Overview() {
 
   return (
     <FormComp
-      title="Financial Overview"
-      description="Your current financial status"
+      title='Financial Overview'
+      description='Your current financial status'
       fields={fields}
-      statusForm=""
+      statusForm=''
       isRequired={false}
     />
   );
@@ -48,11 +63,11 @@ export function Withdraw() {
 
   return (
     <FormComp
-      title="Withdraw Money"
-      description="Can receive salary of your job."
+      title='Withdraw Money'
+      description='Can receive salary of your job.'
       fields={fields}
       isRequired={false}
-      btnText="Withdraw All"
+      btnText='Withdraw All'
     />
   );
 }
@@ -73,11 +88,11 @@ export function Invert() {
       <LineChart />
       <FormComp
         statusForm
-        title="Invert Money"
-        description="Be careful, once you have invested there is no turning back"
+        title='Invert Money'
+        description='Be careful, once you have invested there is no turning back'
         fields={fields}
         isRequired={false}
-        btnText="Invert Money"
+        btnText='Invert Money'
       />
     </>
   );
@@ -118,16 +133,16 @@ export function Save() {
     <>
       <FormComp
         statusForm
-        title="Transfer Money"
-        description="Transfer money to you savings account or current account"
+        title='Transfer Money'
+        description='Transfer money to you savings account or current account'
         fields={fields}
         isRequired={false}
-        btnText="Transfer Money"
+        btnText='Transfer Money'
       />
 
-      <div className="content-end justify-stretch text-wrap">
-        <p className="text-green-500">Savings Account:</p>
-        <p className="text-amber-500">Current Account: </p>
+      <div className='content-end justify-stretch text-wrap'>
+        <p className='text-green-500'>Savings Account:</p>
+        <p className='text-amber-500'>Current Account: </p>
       </div>
     </>
   );
@@ -146,11 +161,11 @@ export function PayDebt() {
 
   return (
     <FormComp
-      title="Pay Debt"
-      description="Make a payment towards your outstanding debt"
+      title='Pay Debt'
+      description='Make a payment towards your outstanding debt'
       fields={fields}
       isRequired={false}
-      btnText="Pay Debt"
+      btnText='Pay Debt'
     />
   );
 }
@@ -183,11 +198,11 @@ export function Loans() {
   ];
   return (
     <FormComp
-      title="Apply for a Loan"
-      description="Choose a loan type and amount"
+      title='Apply for a Loan'
+      description='Choose a loan type and amount'
       fields={fields}
       isRequired={false}
-      btnText="Apply for Loan"
+      btnText='Apply for Loan'
     />
   );
 }

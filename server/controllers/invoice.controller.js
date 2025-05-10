@@ -9,7 +9,13 @@ export const createInvoice = async (req, res) => {
     const invoiceCount = await Invoice.count({ where: { user_id } });
     const invoice_number = invoiceCount + 1;
 
-    if (!user_id || !invoice_number || !items || !total_amount || !payment_method) {
+    if (
+      !user_id ||
+      !invoice_number ||
+      !items ||
+      !total_amount ||
+      !payment_method
+    ) {
       return res.status(400).json({ message: 'Missing data required.' });
     }
 

@@ -14,9 +14,9 @@ const needs = [
 const objects = ['pills', 'products', 'documents', 'cash'];
 
 const Content1 = () => (
-  <ul className="flex flex-col m-auto justify-center gap-10">
+  <ul className='flex flex-col m-auto justify-center gap-10'>
     {needs.map(({ name, value }) => (
-      <div className="flex flex-col items-center" key={name}>
+      <div className='flex flex-col items-center' key={name}>
         {getIconColor(name, value)}
         <li>
           {name} <ProgressBar value={value} need={name} />

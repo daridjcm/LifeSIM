@@ -19,17 +19,17 @@ const ContentGrocery = React.memo(
 
     return (
       <Tabs
-        aria-label="Options"
-        variant="solid"
-        color="primary"
-        size="lg"
+        aria-label='Options'
+        variant='solid'
+        color='primary'
+        size='lg'
         fullWidth
       >
         <Tab
-          key="products"
+          key='products'
           title={
-            <div className="flex items-center space-x-2">
-              <ShoppingCartIcon className="size-6" />
+            <div className='flex items-center space-x-2'>
+              <ShoppingCartIcon className='size-6' />
               <span>Products</span>
             </div>
           }
@@ -45,10 +45,10 @@ const ContentGrocery = React.memo(
         </Tab>
 
         <Tab
-          key="shoppinglist"
+          key='shoppinglist'
           title={
-            <div className="flex items-center space-x-2">
-              <ListBulletIcon className="size-6" />
+            <div className='flex items-center space-x-2'>
+              <ListBulletIcon className='size-6' />
               <span>Shopping List</span>
             </div>
           }
@@ -57,10 +57,10 @@ const ContentGrocery = React.memo(
         </Tab>
 
         <Tab
-          key="atm"
+          key='atm'
           title={
-            <div className="flex items-center space-x-2">
-              <CreditCardIcon className="size-6" />
+            <div className='flex items-center space-x-2'>
+              <CreditCardIcon className='size-6' />
               <span>ATM (Cashier)</span>
             </div>
           }

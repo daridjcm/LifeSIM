@@ -33,12 +33,12 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
   }, [groupSelected, onProgressChange, onSymptomsChange]);
 
   return (
-    <div className="flex flex-col gap-6 w-full mx-auto">
-      <p className="text-xl font-semibold">Describe your symptoms</p>
+    <div className='flex flex-col gap-6 w-full mx-auto'>
+      <p className='text-xl font-semibold'>Describe your symptoms</p>
 
       <Select
-        label="Select body system"
-        placeholder="Choose a system"
+        label='Select body system'
+        placeholder='Choose a system'
         selectedKeys={selectedSystem ? [selectedSystem] : []}
         onSelectionChange={(keys) => {
           const system = Array.from(keys)[0];
@@ -52,12 +52,12 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
       </Select>
 
       {selectedSystem && (
-        <div className="border p-4 rounded-xl shadow">
-          <h2 className="text-lg font-medium mb-2">{selectedSystem}</h2>
+        <div className='border p-4 rounded-xl shadow'>
+          <h2 className='text-lg font-medium mb-2'>{selectedSystem}</h2>
           <CheckboxGroup
-            className="flex flex-wrap gap-2"
+            className='flex flex-wrap gap-2'
             label={`Select symptoms for ${selectedSystem}`}
-            orientation="horizontal"
+            orientation='horizontal'
             value={groupSelected}
             onChange={(newValues) => {
               if (newValues.length <= 7) {
@@ -77,7 +77,7 @@ const Symptoms = ({ onProgressChange, onSymptomsChange }) => {
               </CustomCheckbox>
             ))}
           </CheckboxGroup>
-          <p className="mt-4 ml-1 text-default-500">
+          <p className='mt-4 ml-1 text-default-500'>
             Symptoms: {groupSelected.join(', ')}
           </p>
         </div>
@@ -156,8 +156,8 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
 
   return (
     <CustomButton
-      label="Download and send Report 🖨️"
-      className="mt-5"
+      label='Download and send Report 🖨️'
+      className='mt-5'
       onPress={handleSendReport}
     />
   );
@@ -185,13 +185,13 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
 
   if (loading) {
     return (
-      <div className="flex sm:flex-col md:flex-col lg:flex-row items-center text-center">
-        {handleDoctor() && <img src={handleDoctor()} alt="Doctor" />}
-        <div className="flex flex-col text-4xl">
+      <div className='flex sm:flex-col md:flex-col lg:flex-row items-center text-center'>
+        {handleDoctor() && <img src={handleDoctor()} alt='Doctor' />}
+        <div className='flex flex-col text-4xl'>
           Evaluating your health and the diagnosis
           <Spinner
             classNames={{ label: 'text-foreground mt-4' }}
-            variant="wave"
+            variant='wave'
           />
         </div>
       </div>
@@ -199,28 +199,28 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   }
 
   return (
-    <div className="p-5">
-      <h2 className="text-3xl font-semibold mb-4">Diagnosis of Disease</h2>
+    <div className='p-5'>
+      <h2 className='text-3xl font-semibold mb-4'>Diagnosis of Disease</h2>
       {matchedDiseases.length > 0 ? (
-        <ul className="space-y-4">
+        <ul className='space-y-4'>
           {matchedDiseases.map((disease) => (
             <div
               key={disease.id}
-              className="bg-primary rounded-md p-4 text-white shadow-md"
+              className='bg-primary rounded-md p-4 text-white shadow-md'
             >
-              <li className="text-2xl font-bold">{disease.system}</li>
-              <li className="text-xl">Disease: {disease.name}</li>
+              <li className='text-2xl font-bold'>{disease.system}</li>
+              <li className='text-xl'>Disease: {disease.name}</li>
               <li
                 className={`text-lg ${disease.severity === 'severe' ? 'text-red-500' : 'text-amber-500'}`}
               >
                 Severity: {disease.severity}
               </li>
               {disease.symptoms && disease.symptoms.length > 0 && (
-                <div className="mt-2">
-                  <p className="text-lg font-semibold">Symptoms:</p>
-                  <ul className="list-disc list-inside">
+                <div className='mt-2'>
+                  <p className='text-lg font-semibold'>Symptoms:</p>
+                  <ul className='list-disc list-inside'>
                     {disease.symptoms.map((symptom, index) => (
-                      <li key={index} className="text-white">
+                      <li key={index} className='text-white'>
                         {symptom}
                       </li>
                     ))}
@@ -235,7 +235,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
           />
         </ul>
       ) : (
-        <p className="text-lg">
+        <p className='text-lg'>
           No diseases matched your symptoms. Please check your symptoms and add
           it.
         </p>
@@ -270,9 +270,9 @@ export default function Content() {
         <Slider
           value={progress}
           getValue={(p) => `${p} of 100%`}
-          label="Progress Appointment"
+          label='Progress Appointment'
           maxValue={100}
-          size="sm"
+          size='sm'
         />
 
         {!showDiagnosis ? (
@@ -290,8 +290,8 @@ export default function Content() {
 
         {progress > 0 && !showDiagnosis && (
           <CustomButton
-            label="Next Step"
-            className="mt-5"
+            label='Next Step'
+            className='mt-5'
             onPress={handleNextStep}
           />
         )}

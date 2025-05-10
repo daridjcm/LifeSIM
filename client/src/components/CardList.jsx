@@ -96,18 +96,18 @@ const CardList = React.memo(
 
     return (
       <>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 mb-5">
+        <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 mb-5'>
           {displayItems.length === 0 ? (
             <p>Not have items to show.</p>
           ) : (
             displayItems.map((item, index) => (
               <Card
                 key={index}
-                shadow="md"
-                className="w-full"
+                shadow='md'
+                className='w-full'
                 aria-label={item.name}
               >
-                <CardBody className="overflow-hidden p-0">
+                <CardBody className='overflow-hidden p-0'>
                   <Image
                     classNames={{ img: 'w-full h-[200px] object-cover' }}
                     src={item.img}
@@ -117,16 +117,16 @@ const CardList = React.memo(
                   />
 
                   {!iconShow && (
-                    <div className="flex justify-end mx-4">
+                    <div className='flex justify-end mx-4'>
                       <Tooltip
                         color={getColor2(item).color}
                         content={getColor2(item).content}
                         delay={1000}
                       >
                         <Chip
-                          className="cn base closeButton cursor-pointer"
+                          className='cn base closeButton cursor-pointer'
                           color={getColor2(item).color}
-                          variant="bordered"
+                          variant='bordered'
                         >
                           {item.category}
                         </Chip>
@@ -134,11 +134,11 @@ const CardList = React.memo(
                     </div>
                   )}
                 </CardBody>
-                <CardFooter className="text-small justify-between">
-                  <p className="text-default-500 text-xl">{item.desc}</p>
-                  <div className="flex gap-2 w-full">
+                <CardFooter className='text-small justify-between'>
+                  <p className='text-default-500 text-xl'>{item.desc}</p>
+                  <div className='flex gap-2 w-full'>
                     <Button
-                      size="md"
+                      size='md'
                       isPressible
                       onPress={() =>
                         iconShow ? handleActions(item) : handleProducts(item)
@@ -148,17 +148,17 @@ const CardList = React.memo(
                       {iconShow ? (
                         <>
                           {item.name}
-                          <ArrowLeftEndOnRectangleIcon className="size-7 text-zinc-100 opacity-60" />
+                          <ArrowLeftEndOnRectangleIcon className='size-7 text-zinc-100 opacity-60' />
                         </>
                       ) : selectedProducts.includes(item) ? (
                         <>
                           {item.name} added
-                          <CheckCircleIcon className="size-5 text-green-500 ml-1" />
+                          <CheckCircleIcon className='size-5 text-green-500 ml-1' />
                         </>
                       ) : (
                         <>
                           Buy {item.name} for {item.price}
-                          <ShoppingCartIcon className="size-5 text-white ml-1" />
+                          <ShoppingCartIcon className='size-5 text-white ml-1' />
                         </>
                       )}
                     </Button>

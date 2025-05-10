@@ -8,7 +8,13 @@ import {
   Chip,
 } from '@heroui/react';
 
-const ReusableTable = ({ type, data = [], columns = [], renderCell, status }) => {
+const ReusableTable = ({
+  type,
+  data = [],
+  columns = [],
+  renderCell,
+  status,
+}) => {
   const isStatusColumn = (key) => key === 'status' && status;
 
   return (
@@ -18,7 +24,6 @@ const ReusableTable = ({ type, data = [], columns = [], renderCell, status }) =>
       color='primary'
       defaultSelectedKeys={[data[0]?.id]}
       selectionMode='single'
-
     >
       <TableHeader columns={columns}>
         {(column) => (
@@ -36,16 +41,15 @@ const ReusableTable = ({ type, data = [], columns = [], renderCell, status }) =>
           <TableRow key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {type === 'appointments' && renderCell
-                  ? renderCell(item, columnKey)
-                  : isStatusColumn(columnKey)
-                  ? (
-                    <Chip color={status.color[item.status - 1]}>
-                      {status.label[item.status - 1]}
-                    </Chip>
-                  ) : (
-                    item[columnKey]
-                  )}
+                {type === 'appointments' && renderCell ? (
+                  renderCell(item, columnKey)
+                ) : isStatusColumn(columnKey) ? (
+                  <Chip color={status.color[item.status - 1]}>
+                    {status.label[item.status - 1]}
+                  </Chip>
+                ) : (
+                  item[columnKey]
+                )}
               </TableCell>
             )}
           </TableRow>

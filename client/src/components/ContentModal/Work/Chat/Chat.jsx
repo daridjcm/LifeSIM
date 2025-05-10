@@ -64,16 +64,16 @@ export default function Chat({ people }) {
 
   // Render buttons to the chat
   return (
-    <div className="flex w-auto m-auto h-screen bg-zinc-800 overflow-hidden">
-      <div className="w-full mx-auto p-4 flex flex-col">
-        <div className="rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
-          <div className="bg-zinc-900 text-white p-4 flex items-center">
-            <ChatBubbleLeftEllipsisIcon className="size-12 mr-4" />
-            <h1 className="text-xl font-bold">
+    <div className='flex w-auto m-auto h-screen bg-zinc-800 overflow-hidden'>
+      <div className='w-full mx-auto p-4 flex flex-col'>
+        <div className='rounded-lg shadow-lg overflow-hidden flex flex-col h-full'>
+          <div className='bg-zinc-900 text-white p-4 flex items-center'>
+            <ChatBubbleLeftEllipsisIcon className='size-12 mr-4' />
+            <h1 className='text-xl font-bold'>
               Chat with {people === 'boss' ? 'Boss' : 'Analia'}
             </h1>
           </div>
-          <div className="flex flex-col gap-2 overflow-y-auto mb-4 space-y-4 p-4 bg-zinc-950 rounded-b-lg h-full">
+          <div className='flex flex-col gap-2 overflow-y-auto mb-4 space-y-4 p-4 bg-zinc-950 rounded-b-lg h-full'>
             {messages.map((message) => (
               <MessageBox
                 key={message.id}
@@ -85,7 +85,7 @@ export default function Chat({ people }) {
           </div>
         </div>
         {/* Preset Responses */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 p-4 bg-zinc-950 rounded-lg">
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 p-4 bg-zinc-950 rounded-lg'>
           {presetResponses.map((response) => (
             <PresetButton
               key={response.id}
@@ -93,23 +93,23 @@ export default function Chat({ people }) {
               onClick={handlePresetResponse}
             />
           ))}
-          <div className="flex gap-2 sm:justify-center md:justify-between lg:justify-start">
+          <div className='flex gap-2 sm:justify-center md:justify-between lg:justify-start'>
             <Button
-              variant="shadow"
-              size="lg"
-              color="danger"
+              variant='shadow'
+              size='lg'
+              color='danger'
               onPress={handleClearChat}
             >
-              <TrashIcon className="size-12 text-white" />
+              <TrashIcon className='size-12 text-white' />
               Delete Chat
             </Button>
             <Button
-              variant="shadow"
-              color="primary"
-              size="lg"
+              variant='shadow'
+              color='primary'
+              size='lg'
               onPress={() => (window.location.href = '/')}
             >
-              <ArrowLeftStartOnRectangleIcon className="size-12 text-white" />
+              <ArrowLeftStartOnRectangleIcon className='size-12 text-white' />
               Back to Home
             </Button>
           </div>

@@ -21,9 +21,9 @@ export default function ModalComponent({
 }) {
   return (
     <Modal
-      backdrop="opaque"
+      backdrop='opaque'
       isOpen={isOpen}
-      className="min-w-fit max-w-fit"
+      className='min-w-fit max-w-fit'
       motionProps={{
         variants: {
           enter: {
@@ -43,15 +43,15 @@ export default function ModalComponent({
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1">
+            <ModalHeader className='flex flex-col gap-1'>
               {title}
               <hr />
-              <p className="text-sm mt-4 text-default-500">{description}</p>
+              <p className='text-sm mt-4 text-default-500'>{description}</p>
             </ModalHeader>
-            <ModalBody className="text-wrap">{children}</ModalBody>
+            <ModalBody className='text-wrap'>{children}</ModalBody>
             <ModalFooter>
               {buttonText1 && (
-                <Button color={btnColor1} variant="light" onPress={onClose}>
+                <Button color={btnColor1} variant='light' onPress={onClose}>
                   {buttonText1}
                 </Button>
               )}
@@ -74,8 +74,8 @@ ModalComponent.propTypes = {
   children: PropTypes.node,
   isOpen: PropTypes.bool.isRequired,
   onOpenChange: PropTypes.func.isRequired,
-  btnColor1: PropTypes.string,       // opcional
-  btnColor2: PropTypes.string,       // opcional
-  buttonText1: PropTypes.string,     // opcional
-  buttonText2: PropTypes.string,     // opcional
+  btnColor1: PropTypes.string, // opcional
+  btnColor2: PropTypes.string, // opcional
+  buttonText1: PropTypes.string, // opcional
+  buttonText2: PropTypes.string, // opcional
 };

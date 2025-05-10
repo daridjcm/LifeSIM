@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Chip,
-} from '@heroui/react';
+import { Chip } from '@heroui/react';
 import CustomButton from '../../CustomButton.jsx';
 import { TrashIcon } from '@heroicons/react/24/solid';
 import { useAlert } from '../../../context/AlertContext.jsx';
@@ -81,7 +79,7 @@ export default function HealthRecord() {
         return <p>{appointment.doctor}</p>;
       case 'speciality':
         return (
-          <div className="flex flex-col">
+          <div className='flex flex-col'>
             <p>{cellValue}</p>
             <p>{appointment.specialist}</p>
           </div>
@@ -89,10 +87,10 @@ export default function HealthRecord() {
       case 'status':
         return (
           <Chip
-            className="capitalize"
+            className='capitalize'
             color={statusColorMap[cellValue]}
-            size="sm"
-            variant="flat"
+            size='sm'
+            variant='flat'
           >
             {cellValue}
           </Chip>
@@ -101,7 +99,7 @@ export default function HealthRecord() {
         return (
           <CustomButton
             key={appointment.id}
-            icon={<TrashIcon className="size-6" />}
+            icon={<TrashIcon className='size-6' />}
             onPress={() => handleCancel(appointment.id)}
           />
         );
@@ -113,7 +111,7 @@ export default function HealthRecord() {
   // Render table
   return (
     <ReusableTable
-      type="appointments"
+      type='appointments'
       data={appointments}
       columns={columns}
       renderCell={renderCell}

@@ -38,11 +38,11 @@ const CustomCheckbox = ({ children, ...props }) => {
       </VisuallyHidden>
       <Chip
         classNames={{ base: styles.base(), content: styles.content() }}
-        color="primary"
+        color='primary'
         startContent={
-          isSelected ? <CheckCircleIcon className="size-5 text-white" /> : null
+          isSelected ? <CheckCircleIcon className='size-5 text-white' /> : null
         }
-        variant="faded"
+        variant='faded'
         {...getLabelProps()}
       >
         {children || (isSelected ? 'Enabled' : 'Disabled')}

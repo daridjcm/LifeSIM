@@ -80,27 +80,27 @@ export default function FormComp({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-  
+
     const token = localStorage.getItem('token');
-  
+
     const urlMap = {
       login: 'http://localhost:3000/api/login',
       signup: 'http://localhost:3000/api/signup',
       customers: 'http://localhost:3000/api/customers/new',
       bank: 'http://localhost:3000/api/bank',
     };
-  
+
     const url = urlMap[statusForm];
-  
+
     if (!url) {
       showAlert('Error', 'Invalid form.');
       setLoading(false);
       return;
     }
-  
+
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -110,9 +110,9 @@ export default function FormComp({
         },
         body: JSON.stringify(data),
       });
-  
+
       const result = await response.json();
-  
+
       if (!response.ok) {
         showAlert(
           'Error',
@@ -120,12 +120,12 @@ export default function FormComp({
         );
         return;
       }
-  
+
       // Save token if applicable
       if (result.token) {
         localStorage.setItem('token', result.token);
       }
-  
+
       // Automatically create bank account if login or signup
       if ((statusForm === 'login' || statusForm === 'signup') && result.token) {
         try {
@@ -145,10 +145,13 @@ export default function FormComp({
           });
           console.log(result.token);
         } catch (bankError) {
-          console.warn('Could not create bank account automatically:', bankError);
+          console.warn(
+            'Could not create bank account automatically:',
+            bankError,
+          );
         }
       }
-  
+
       // Show success message
       const successMessages = {
         login: 'Login successful',
@@ -156,15 +159,17 @@ export default function FormComp({
         customers: 'Customer added successfully',
         bank: 'Bank account created successfully',
       };
-  
-      showAlert('Success', successMessages[statusForm] || 'Operation completed');
-  
+
+      showAlert(
+        'Success',
+        successMessages[statusForm] || 'Operation completed',
+      );
+
       // Navigation after success
       setTimeout(() => {
         if (statusForm === 'login') navigate('/game');
         else if (statusForm === 'signup') navigate('/');
       }, 2000);
-  
     } catch (error) {
       console.error('Error submitting form:', error);
       showAlert('Error', 'An unexpected error occurred. Try again later.');
@@ -172,7 +177,7 @@ export default function FormComp({
       setLoading(false);
     }
   };
-  
+
   // Render form component
   return (
     <Form
@@ -182,25 +187,25 @@ export default function FormComp({
           ? 'w-full m-auto max-w-xs flex flex-col gap-4'
           : 'flex gap-2 mb-5'
       }
-      validationBehavior="native"
+      validationBehavior='native'
       onReset={() => setAction('reset')}
       onSubmit={handleSubmit}
     >
       <ConditionalWrapper
         condition={title === 'Welcome again to' || title === 'Create your'}
       >
-        <div className="bg-green-200 w-full max-w-xs p-2 text-center rounded-md">
-          <h1 className="text-xl">
+        <div className='bg-green-200 w-full max-w-xs p-2 text-center rounded-md'>
+          <h1 className='text-xl'>
             {title}{' '}
-            <span className="text-green-600 font-bold text-2xl">LifeSIM</span>
+            <span className='text-green-600 font-bold text-2xl'>LifeSIM</span>
           </h1>
         </div>
       </ConditionalWrapper>
       <ConditionalWrapper
         condition={!(title === 'Welcome again to' || title === 'Create your')}
       >
-        <div className="flex flex-col gap-2 mb-4">
-          <p className="text-xl font-bold">{title}</p>
+        <div className='flex flex-col gap-2 mb-4'>
+          <p className='text-xl font-bold'>{title}</p>
           <p>{description}</p>
         </div>
       </ConditionalWrapper>
@@ -212,7 +217,7 @@ export default function FormComp({
             errorMessage={`Please select a valid ${field.name}`}
             name={field.name}
             label={field.label}
-            labelPlacement="outside"
+            labelPlacement='outside'
             items={field.options}
             placeholder={field.placeholder}
             selectedKey={gender}
@@ -230,7 +235,7 @@ export default function FormComp({
                     textValue={option.label}
                   >
                     {option.label}
-                    <p className="text-gray-500 text-opacity-80">
+                    <p className='text-gray-500 text-opacity-80'>
                       {option.description}
                     </p>
                   </SelectItem>
@@ -247,7 +252,7 @@ export default function FormComp({
                 : `Please enter a valid ${field.name}`
             }
             label={field.label}
-            labelPlacement="outside"
+            labelPlacement='outside'
             name={field.name}
             placeholder={field.placeholder}
             value={field.value}
@@ -258,15 +263,15 @@ export default function FormComp({
         ),
       )}
       <ConditionalWrapper condition={statusForm !== ''}>
-        <div className="flex gap-2 mt-2 mb-4">
+        <div className='flex gap-2 mt-2 mb-4'>
           <Button
             color={
               statusForm === 'login' || statusForm === 'signup'
                 ? 'success'
                 : 'primary'
             }
-            variant="flat"
-            type="submit"
+            variant='flat'
+            type='submit'
           >
             {statusForm === 'login'
               ? 'Enter'

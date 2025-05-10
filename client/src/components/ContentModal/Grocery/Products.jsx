@@ -13,7 +13,7 @@ export default function ProductsTab({
   return (
     <>
       <CardList
-        statusCard="itemsGrocery"
+        statusCard='itemsGrocery'
         iconShow={false}
         itemsToDisplay={itemsToDisplay}
         selectedProducts={selectedProducts}
@@ -24,13 +24,13 @@ export default function ProductsTab({
         showControls
         page={page}
         total={total}
-        size="lg"
+        size='lg'
         onChange={onChange}
         siblings={1}
         boundaries={1}
-        className="flex justify-center"
+        className='flex justify-center'
         showShadow
-        radius="full"
+        radius='full'
       />
     </>
   );

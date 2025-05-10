@@ -18,22 +18,22 @@ const NeedsPanel = () => {
   return (
     <>
       <Button
-        className="p-1 text-white"
-        size="lg"
-        color="primary"
+        className='p-1 text-white'
+        size='lg'
+        color='primary'
         onPress={onOpen}
         isIconOnly
       >
         <FaceSmileIcon />
       </Button>
-      <Drawer isOpen={isOpen} size="xs" onOpenChange={onClose}>
+      <Drawer isOpen={isOpen} size='xs' onOpenChange={onClose}>
         <DrawerContent>
           <DrawerHeader>Needs Panel</DrawerHeader>
           <DrawerBody>
             <Content1 />
           </DrawerBody>
           <DrawerFooter>
-            <Button color="primary" onPress={onClose}>
+            <Button color='primary' onPress={onClose}>
               Close
             </Button>
           </DrawerFooter>

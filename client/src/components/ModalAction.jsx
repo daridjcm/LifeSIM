@@ -81,28 +81,28 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
         className={`h-full w-full lg:max-h-screen lg:max-w-full p-2 transform transition-transform duration-300 ${
           isClosing ? 'scale-95' : 'scale-100'
         }`}
-        radius="md"
-        shadow="md"
+        radius='md'
+        shadow='md'
       >
-        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
-          <div className="w-fit">
+        <CardHeader className='pb-0 pt-2 px-4 flex-row items-center justify-between'>
+          <div className='w-fit'>
             <Image
               alt={item.name}
-              className="object-cover rounded-xl"
+              className='object-cover rounded-xl'
               src={item.img}
               width={150}
               height={50}
             />
-            <div className="flex flex-row text-xl">
-              <p className="text-default-500 mr-2">Inside the</p>
-              <h4 id="itemTitle" className="font-bold text-large">
+            <div className='flex flex-row text-xl'>
+              <p className='text-default-500 mr-2'>Inside the</p>
+              <h4 id='itemTitle' className='font-bold text-large'>
                 {item.name}
               </h4>
             </div>
           </div>
-          <ul className="flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2">
+          <ul className='flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2'>
             {dynamicHeader.map((element, index) => (
-              <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">
+              <li key={index} className='bg-blue-200 w-fit px-3 rounded-full'>
                 {element}:
               </li>
             ))}
@@ -127,11 +127,11 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
             <ContentGrocery />
           )}
         </CardBody>
-        <CardFooter className="flex justify-end">
+        <CardFooter className='flex justify-end'>
           <Button
-            color="danger"
-            variant="flat"
-            size="sm"
+            color='danger'
+            variant='flat'
+            size='sm'
             isPressible
             onPress={handleClose}
           >

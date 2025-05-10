@@ -1,7 +1,4 @@
-import {
-  Button,
-  Chip,
-} from '@heroui/react';
+import { Button, Chip } from '@heroui/react';
 import ReusableTable from '../../Table.jsx';
 
 const status = {
@@ -69,29 +66,29 @@ const columns = [
 // Render the table
 export default function TableCustomers() {
   return (
-    <div className="flex sm:flex-col md:flex-row lg:flex-row gap-4">
+    <div className='flex sm:flex-col md:flex-row lg:flex-row gap-4'>
       <div>
         <ReusableTable
           columns={columns}
           data={customers}
           status={status}
-          title="Customers"
-          description="List of customers"
+          title='Customers'
+          description='List of customers'
         />
         <Button
-          className="mt-4 w-full"
-          color="primary"
-          variant="ghost"
-          size="md"
+          className='mt-4 w-full'
+          color='primary'
+          variant='ghost'
+          size='md'
           onPress={() => window.open('/customers/new', '_blank')} // Open a new window to create a new customer
         >
           Add a new customer
         </Button>
       </div>
 
-      <div className="text-amber-600 bg-yellow-100 p-2 rounded-md">
-        <p className="font-semibold">Note about Call Status</p>
-        <ul className="flex flex-col gap-2 mt-3 list-decimal list-inside text-sm text-zinc-900">
+      <div className='text-amber-600 bg-yellow-100 p-2 rounded-md'>
+        <p className='font-semibold'>Note about Call Status</p>
+        <ul className='flex flex-col gap-2 mt-3 list-decimal list-inside text-sm text-zinc-900'>
           {status.label.map((label, index) => (
             <li key={status.key[index]}>
               <Chip color={status.color[index]}>{label}</Chip> -{' '}

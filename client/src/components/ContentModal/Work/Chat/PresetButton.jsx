@@ -21,11 +21,11 @@ export function PresetButton({ response, onClick }) {
 
   return (
     <Button
-      variant="solid"
-      size="lg"
+      variant='solid'
+      size='lg'
       onPress={handleClick}
-      color="default"
-      className="w-full m-auto text-wrap"
+      color='default'
+      className='w-full m-auto text-wrap'
       isDisabled={isDisabled}
     >
       {response.content}
