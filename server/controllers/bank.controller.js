@@ -18,7 +18,7 @@ export const createBankAccount = async (req, res) => {
     if (existingBankAccount) {
       return res
         .status(409)
-        .json({ message: `Bank account already exists for the User ID: ${user_id}` });
+        .json({ message: `Bank account already exists for the User ID: ${user_id}.` });
     }
 
     const newBankAccount = await BankAccount.create({
@@ -32,13 +32,13 @@ export const createBankAccount = async (req, res) => {
     res
       .status(201)
       .json({
-        message: 'Bank account created successfully',
+        message: 'Bank account created successfully.',
         bank: newBankAccount,
       });
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Error creating bank account', details: error.message });
+      .json({ error: 'Error creating bank account.', details: error.message });
   }
 };
 
@@ -50,7 +50,7 @@ export const getBankAccounts = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Error fetching bank accounts', details: error.message });
+      .json({ error: 'Error fetching bank accounts.', details: error.message });
   }
 };
 
@@ -78,12 +78,12 @@ export const updateBankAccount = async (req, res) => {
     res
       .status(200)
       .json({
-        message: 'Bank account updated successfully',
+        message: 'Bank account updated successfully.',
         bank: bankAccount,
       });
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Error updating bank account', details: error.message });
+      .json({ error: 'Error updating bank account.', details: error.message });
   }
 };

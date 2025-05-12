@@ -1,4 +1,4 @@
-import { DataTypes, INTEGER } from "sequelize";
+import { DataTypes } from "sequelize";
 
 export default (sequelize) => {
   const HealthInsurance = sequelize.define(

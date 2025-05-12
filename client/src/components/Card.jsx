@@ -22,30 +22,28 @@ export default function Card({ type, holder, id, expiry, number_card }) {
         </p>
         <div className='text-right'>
           <p className={`text-xs ${typeClass} opacity-80`}>VALID UNTIL</p>
-          <p className='font-medium'>{expiry || 'MM/YY'}</p>
+          <p className='font-medium'>{expiry || null}</p>
         </div>
       </div>
 
-      {number_card && (
         <p className={`${typeClass} opacity-70 text-lg tracking-wider my-2`}>
-          {number_card || 0}
+          {number_card || null}
         </p>
-      )}
 
       <div className='mt-2'>
         <p className={`text-xs ${typeClass} opacity-80`}>HOLDER</p>
-        <p className='font-medium text-lg'>{holder || 'Unknown'}</p>
+        <p className='font-medium text-lg'>{holder || null}</p>
       </div>
 
       <div className='mt-2 text-right'>
         <p className={`text-xs ${typeClass} opacity-80`}>ID:</p>
-        <p className='font-medium'>{id || 'null'}</p>
+        <p className='font-medium'>{id || null}</p>
       </div>
       <p className='text-center opacity-40 text-xs'>
         This card is signatured and validated by the ceo{' '}
         <a
           className='text-amber-400'
-          href='https://instagram.com/Daridjcm'
+          href='https://github.com/Daridjcm'
           target='_blank'
         >
           @daridjcm.
