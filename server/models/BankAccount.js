@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const BankAccount = sequelize.define(
     'BankAccount',
     {
-      user_id: { type: DataTypes.INTEGER, allowNull: false },
+      user_id: { type: DataTypes.INTEGER, allowNull: false, primaryKey: true },
       current_account: {
         type: DataTypes.DECIMAL(15, 2),
         defaultValue: 0,

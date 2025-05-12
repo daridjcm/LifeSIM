@@ -14,7 +14,7 @@ export default function Patient() {
       if (!user?.id) return;
       try {
         const data = await fetchAppointments(user.id);
-        console.log(data);
+        return data;
       } catch (err) {
         console.error('Failed to fetch appointments:', err);
       }

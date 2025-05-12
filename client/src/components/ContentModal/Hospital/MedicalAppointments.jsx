@@ -32,7 +32,7 @@ export default function MedicalAppointments() {
     '17:00',
     '18:00',
     '19:00',
-    '21:20',
+    '23:40',
   ];
 
   const handleTimeClick = (time) => {
@@ -109,7 +109,11 @@ export default function MedicalAppointments() {
     try {
       const result = await response.json();
       if (response.ok) {
-        showAlert('Appointment Scheduled', result.message);
+        showAlert('Warning', 'You must assist before 5 minutes of the appointment time or the appointment will be canceled.');
+        setTimeout(() => {
+          showAlert('Appointment Scheduled', result.message);
+        }, 5000);
+
       } else {
         console.error(result.error);
         showAlert('Error', result.error);

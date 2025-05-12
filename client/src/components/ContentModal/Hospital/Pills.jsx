@@ -7,7 +7,6 @@ import SearchBox from '../../SearchBox.jsx';
 export default function Pills() {
   const [pills, setPills] = useState([]); // Pills Comercial
   const [pills2, setPills2] = useState([]); // Pills Receted
-  const [loading, setLoading] = useState(true);
   const [searchTermReceted, setSearchTermReceted] = useState('');
   const [searchTermComercial, setSearchTermComercial] = useState('');
 
@@ -20,9 +19,7 @@ export default function Pills() {
     const fetchPills = async () => {
       const allTreatments = diseases.flatMap((disease) => disease.treatments);
       setPills(allTreatments);
-      setLoading(false);
     };
-    console.log(pills2);
 
     const fetchPills2 = async () => {
       try {
@@ -37,10 +34,8 @@ export default function Pills() {
         const data = await response.json();
         const treatments = data.reports.flatMap((report) => report.treatments);
         setPills2(treatments);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching pills:', error);
-        setLoading(false);
       }
     };
 
@@ -58,10 +53,6 @@ export default function Pills() {
 
   const pillsToRender = searchTermComercial ? filteredPills : pills;
   const pillsToRender2 = searchTermReceted ? filteredPills2 : pills2;
-
-  if (loading) {
-    return <p>Loading pills...</p>;
-  }
 
   return (
     <div className='flex sm:flex-col md:flex-row lg:flex-row justify-between w-full h-full gap-5'>

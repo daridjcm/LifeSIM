@@ -1,16 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
-import {
-  parse,
-  isAfter,
-  isBefore,
-  startOfMinute,
-  isValid,
-} from 'date-fns';
+import { parse, isAfter, isBefore, startOfMinute, isValid } from 'date-fns';
+import { useAlert } from '../context/AlertContext'
 
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
   const [nextAppointment, setNextAppointment] = useState(null);
+  const { showAlert } = useAlert()
 
   const fetchAppointments = async (userID) => {
     try {
@@ -20,24 +16,33 @@ export const AppointmentProvider = ({ children }) => {
       const { appointments } = await response.json();
 
       const userAppointments = appointments.filter(
-        (appt) => appt.user_id === userID
+        (appt) => appt.user_id === userID,
       );
 
       const now = startOfMinute(new Date());
-      console.log('🕒 Current time:', now);
+      const updatedAppointments = userAppointments
+        .map((appt) => {
+          const cleanedTime = appt.time
+            .replace(/\s*p\.?\s*m\.?/i, 'PM')
+            .replace(/\s*a\.?\s*m\.?/i, 'AM')
+            .replace(/(AM|PM)$/, ' $1');
 
-      const updatedAppointments = userAppointments.map((appt) => {
-        const dateTimeStr = `${appt.date} ${appt.time}`;
-        const parsedDate = parse(dateTimeStr, 'yyyy-MM-dd h:mm a', new Date());
+          const dateTimeStr = `${appt.date} ${cleanedTime}`;
 
-        if (!isValid(parsedDate)) {
-          console.warn('❌ Invalid date:', dateTimeStr);
-          return null;
-        }
+          const parsedDate = parse(
+            dateTimeStr,
+            'yyyy-MM-dd h:mm a',
+            new Date(),
+          );
 
-        const dateObj = startOfMinute(parsedDate);
-        return { ...appt, dateObj };
-      }).filter(Boolean);
+          if (!isValid(parsedDate)) {
+            return null;
+          }
+
+          const dateObj = startOfMinute(parsedDate);
+          return { ...appt, dateObj };
+        })
+        .filter(Boolean);
 
       updatedAppointments.forEach(async (appt) => {
         if (
@@ -45,12 +50,10 @@ export const AppointmentProvider = ({ children }) => {
           appt.status !== 'completed' &&
           appt.status !== 'canceled'
         ) {
-          console.log(`🚫 Canceling appointment: ${appt.id}`);
+          showAlert('Atenttion', `🚫 Canceling appointment: ${appt.id}`);
           await fetch(`http://localhost:3000/api/appointments/${appt.id}`, {
             method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: 'canceled' }),
           });
         }
@@ -61,7 +64,7 @@ export const AppointmentProvider = ({ children }) => {
           (appt) =>
             isAfter(appt.dateObj, now) &&
             appt.status !== 'completed' &&
-            appt.status !== 'canceled'
+            appt.status !== 'canceled',
         )
         .sort((a, b) => a.dateObj - b.dateObj);
 
@@ -69,7 +72,7 @@ export const AppointmentProvider = ({ children }) => {
 
       return updatedAppointments;
     } catch (error) {
-      console.error('Error fetching appointments:', error);
+      showAlert('Error ❌', 'Error fetching appointments.');
       return [];
     }
   };

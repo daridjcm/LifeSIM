@@ -11,6 +11,16 @@ export const createBankAccount = async (req, res) => {
       return res.status(400).json({ message: 'Missing data required.' });
     }
 
+    const existingBankAccount = await BankAccount.findOne({
+      where: { user_id },
+    });
+
+    if (existingBankAccount) {
+      return res
+        .status(409)
+        .json({ message: `Bank account already exists for the User ID: ${user_id}` });
+    }
+
     const newBankAccount = await BankAccount.create({
       user_id,
       current_account,
@@ -19,7 +29,6 @@ export const createBankAccount = async (req, res) => {
       debt,
     });
 
-    console.log('Bank account created:', newBankAccount);
     res
       .status(201)
       .json({
@@ -27,7 +36,6 @@ export const createBankAccount = async (req, res) => {
         bank: newBankAccount,
       });
   } catch (error) {
-    console.error('Error creating bank account:', error);
     res
       .status(500)
       .json({ error: 'Error creating bank account', details: error.message });
@@ -67,7 +75,6 @@ export const updateBankAccount = async (req, res) => {
     bankAccount.debt = debt;
     await bankAccount.save();
 
-    console.log('Bank account updated:', bankAccount);
     res
       .status(200)
       .json({
@@ -75,7 +82,6 @@ export const updateBankAccount = async (req, res) => {
         bank: bankAccount,
       });
   } catch (error) {
-    console.error('Error updating bank account:', error);
     res
       .status(500)
       .json({ error: 'Error updating bank account', details: error.message });

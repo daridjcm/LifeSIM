@@ -36,7 +36,6 @@ export default function HealthRecord() {
       try {
         const data = await fetchAppointments(user?.id);
         setAppointments(Array.isArray(data) ? data : []);
-        showAlert('Warning', 'You must assist before 5 minutes of the appointment time or the appointment will be canceled.');
       } catch (err) {
         console.error('Failed to fetch appointments:', err);
         setAppointments([]);

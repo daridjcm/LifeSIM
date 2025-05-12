@@ -98,7 +98,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       fetchAppointments(user?.id);
       console.log(nextAppointment);
     }
-  }, [nextAppointment]);
+  }, [user?.id]);
 
   const handleSendReport = async () => {
     setDiseaseDetected(diseaseDetected);
@@ -250,8 +250,10 @@ export default function Content() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
   const [matchedDiseases, setMatchedDiseases] = useState([]);
-  const { nextAppointment, fetchAppointments } = useAppointment();
-  const { user } = useUser();
+  const { nextAppointment } = useAppointment();
+  const [isWithinTimeWindow, setIsWithinTimeWindow] = useState(false);
+
+  const { showAlert } = useAlert()
 
   const handleNextStep = () => {
     const diseasesMatched = diseases.filter((disease) => {
@@ -265,14 +267,45 @@ export default function Content() {
   };
 
   useEffect(() => {
-    if (user?.id) {
-      fetchAppointments(user?.id);
-      console.log(nextAppointment);
-      console.log(fetchAppointments(user?.id));
+    if (nextAppointment?.dateObj) {
+  
+      const appointmentTime = new Date(nextAppointment.dateObj).getTime();
+      const currentTime = new Date().getTime();
+      const timeDifference = appointmentTime - currentTime;
+    
+      if (isNaN(timeDifference)) {
+        showAlert('Error ❌', 'Invalid appointment time.');
+        return;
+      }
+  
+      if (timeDifference <= 0) {
+        showAlert('Warning ⚠️', 'The appointment time has already passed.');
+        return;
+      }
+  
+      // Check if the appointment is within 30 minutes
+      if (timeDifference <= 30 * 60 * 1000 && timeDifference > 0) {
+        showAlert('Warning ⚠️', 'Appointment is activated 30 minutes before.');
+        setIsWithinTimeWindow(true);
+      } 
+      else if (timeDifference > 30 * 60 * 1000) {
+        const timer = setTimeout(() => {
+          showAlert('Warning ⚠️', 'Appointment is activated 30 minutes before.');
+          setIsWithinTimeWindow(true);
+        }, timeDifference - 30 * 60 * 1000);
+  
+        return () => {
+          showAlert('Atenttion', '⏳ Clearing timer');
+          clearTimeout(timer);
+        };
+      }
+    } else {
+      showAlert('Warning ⚠️', 'No appointment found.');
+      setIsWithinTimeWindow(false);
     }
-  }, [user?.id]);
-  // convert nextAppointment to variable useState global.
-  if (nextAppointment) {
+  }, [nextAppointment]);
+
+  if (nextAppointment && isWithinTimeWindow) {
     return (
       <>
         <Slider

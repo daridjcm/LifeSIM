@@ -79,7 +79,7 @@ export const saveAppointment = async (req, res) => {
     res
       .status(201)
       .json({
-        message: 'Appointment saved successfully',
+        message: 'Appointment saved successfully.',
         appointment: newAppointment,
       });
   } catch (error) {
@@ -122,12 +122,12 @@ export const updateAppointmentStatus = async (req, res) => {
     console.log('Appointment updated:', appointment);
     res
       .status(200)
-      .json({ message: 'Appointment status updated', appointment });
+      .json({ message: 'Appointment status updated.', appointment });
   } catch (error) {
     console.error('Error updating appointment:', error);
     res
       .status(500)
-      .json({ error: 'Error updating appointment', details: error.message });
+      .json({ error: 'Error updating appointment.', details: error.message });
   }
 };
 
@@ -194,12 +194,12 @@ export const reportAppointment = async (req, res) => {
     console.log('Appointment reported:', report);
     return res
       .status(201)
-      .json({ message: 'Appointment reported successfully', report });
+      .json({ message: 'Appointment reported successfully.', report });
   } catch (error) {
     console.error('Error reporting appointment:', error);
     return res
       .status(500)
-      .json({ error: 'Error reporting appointment', details: error.message });
+      .json({ error: 'Error reporting appointment.', details: error.message });
   }
 };
 
@@ -210,11 +210,11 @@ export const getReports = async (req, res) => {
     console.log('Reports retrieved:', reports);
     res
       .status(200)
-      .json({ message: 'Reports retrieved successfully', reports });
+      .json({ message: 'Reports retrieved successfully.', reports });
   } catch (error) {
     console.error('Error retrieving reports:', error);
     res
       .status(500)
-      .json({ error: 'Error retrieving reports', details: error.message });
+      .json({ error: 'Error retrieving reports.', details: error.message });
   }
 };
