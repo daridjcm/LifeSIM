@@ -34,8 +34,9 @@ export default function HealthRecord() {
     const loadAppointments = async () => {
       if (!user?.id) return;
       try {
-        const data = await fetchAppointments(user.id);
+        const data = await fetchAppointments(user?.id);
         setAppointments(Array.isArray(data) ? data : []);
+        showAlert('Warning', 'You must assist before 5 minutes of the appointment time or the appointment will be canceled.');
       } catch (err) {
         console.error('Failed to fetch appointments:', err);
         setAppointments([]);
@@ -62,7 +63,7 @@ export default function HealthRecord() {
             appt.id === id ? { ...appt, status: 'canceled' } : appt,
           ),
         );
-      }, '1000');
+      }, 1000);
       showAlert('The appointment was canceled sucessfully.');
     } catch (err) {
       console.error('Error canceling appointment:', err);

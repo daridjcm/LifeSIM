@@ -96,15 +96,12 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
   useEffect(() => {
     if (user?.id) {
       fetchAppointments(user?.id);
+      console.log(nextAppointment);
     }
-  }, [fetchAppointments]);
+  }, [nextAppointment]);
 
   const handleSendReport = async () => {
-    if (!nextAppointment) {
-      showAlert('Error', 'No upcoming appointment found.');
-      return;
-    }
-
+    setDiseaseDetected(diseaseDetected);
     const reportData = {
       appointment_id: nextAppointment.id,
       user_id: nextAppointment.user_id,
@@ -142,7 +139,10 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       const statusResult = await statusResponse.json();
 
       if (reportResponse.ok && statusResponse.ok) {
-        showAlert('Success', reportResult.message);
+        showAlert(
+          'Downloading Report',
+          'Please wait while the report is being downloaded.',
+        );
         handleDownload('HealthReport', reportData, user);
       } else {
         console.error(reportResult.error || statusResult.error);
@@ -186,7 +186,7 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   if (loading) {
     return (
       <div className='flex sm:flex-col md:flex-col lg:flex-row items-center text-center'>
-        {handleDoctor() && <img src={handleDoctor()} alt='Doctor' />}
+        {handleDoctor && <img src={handleDoctor} alt='Doctor' />}
         <div className='flex flex-col text-4xl'>
           Evaluating your health and the diagnosis
           <Spinner
@@ -250,7 +250,8 @@ export default function Content() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
   const [matchedDiseases, setMatchedDiseases] = useState([]);
-  const { nextAppointment } = useAppointment();
+  const { nextAppointment, fetchAppointments } = useAppointment();
+  const { user } = useUser();
 
   const handleNextStep = () => {
     const diseasesMatched = diseases.filter((disease) => {
@@ -263,6 +264,13 @@ export default function Content() {
     setShowDiagnosis(true);
   };
 
+  useEffect(() => {
+    if (user?.id) {
+      fetchAppointments(user?.id);
+      console.log(nextAppointment);
+      console.log(fetchAppointments(user?.id));
+    }
+  }, [user?.id]);
   // convert nextAppointment to variable useState global.
   if (nextAppointment) {
     return (

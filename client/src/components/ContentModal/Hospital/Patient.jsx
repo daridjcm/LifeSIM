@@ -2,7 +2,7 @@ import { Image } from '@heroui/react';
 import Card from '../../Card.jsx';
 import { ClockIcon } from '@heroicons/react/24/solid';
 import { useUser } from '../../../context/UserContext.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppointment } from '../../../context/AppointmentContext.jsx';
 
 export default function Patient() {
@@ -10,9 +10,17 @@ export default function Patient() {
   const { nextAppointment, fetchAppointments } = useAppointment();
 
   useEffect(() => {
-    if (user?.id) {
-      fetchAppointments(user?.id);
-    }
+    const loadAppointments = async () => {
+      if (!user?.id) return;
+      try {
+        const data = await fetchAppointments(user.id);
+        console.log(data);
+      } catch (err) {
+        console.error('Failed to fetch appointments:', err);
+      }
+    };
+
+    loadAppointments();
   }, [user?.id]);
 
   // Render view information of patient
