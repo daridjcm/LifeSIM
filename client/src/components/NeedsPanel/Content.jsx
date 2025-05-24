@@ -1,4 +1,3 @@
-import React from 'react';
 import getIconColor from './IconColor.jsx';
 import ProgressBar from './ProgressBar.jsx';
 
@@ -29,4 +28,4 @@ const Content1 = () => (
 // TODO: Create logic for the second content
 const Content2 = () => <div></div>;
 
-export default { Content1 };
+export { Content1, Content2 };

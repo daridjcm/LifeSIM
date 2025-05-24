@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Drawer,
   DrawerContent,
@@ -10,9 +9,9 @@ import {
   Button,
 } from '@heroui/react';
 import { FaceSmileIcon } from '@heroicons/react/20/solid';
-import Content1 from './Content.jsx';
+import {Content1} from './Content.jsx';
 
-const NeedsPanel = () => {
+export default function NeedsPanel () {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -43,5 +42,3 @@ const NeedsPanel = () => {
     </>
   );
 };
-
-export default NeedsPanel;
