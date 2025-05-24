@@ -31,12 +31,12 @@ export default function NewCustomer() {
   ];
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className='flex justify-center items-center h-screen'>
       <FormComp
-        title="Add Customer in the table"
+        title='Add Customer in the table'
         fields={fields}
-        statusForm="customers" // Indicating this is for adding a customer
-        btnText="Add Customer"
+        statusForm='customers' // Indicating this is for adding a customer
+        btnText='Add Customer'
         isRequired={true}
       />
     </div>

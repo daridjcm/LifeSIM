@@ -53,6 +53,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             ...product,
             quantity,
             price: (product.basePrice * quantity).toFixed(2),
+            basePrice: product.basePrice,
           }
         : product,
     );
@@ -62,15 +63,6 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
 
   const handleProductChange = (title) => {
     setSelectedProduct(title);
-  };
-
-  // Handle clear all products
-  const handleClear = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    showAlert(
-      'Note',
-      'If you want to delete all products, click the button Clear All. If you want to delete one product or more, touch the product to cross it out.',
-    );
   };
 
   // Handle send products to the server
@@ -107,6 +99,15 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     }
   };
 
+  // Handle clear all products
+  const handleClear = () => {
+    setSelectedItems([]);
+    showAlert(
+      'Note ⚠️',
+      "Tap a product to cross it out or tap 'Clear all' to delete all products.",
+    );
+  };
+
   // Render view to display selected products
   return (
     <>
@@ -114,8 +115,8 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
       {selectedItems.length > 0 ? (
         <>
           <CheckboxGroup
-            orientation="vertical"
-            color="primary"
+            orientation='vertical'
+            color='primary'
             onChange={(checkedItems) => {
               const updatedItems = selectedItems.filter(
                 (product) => !checkedItems.includes(product.name),
@@ -125,11 +126,11 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             }}
           >
             <ScrollShadow
-              className="xl:h-[250px] lg:h-[200px]"
+              className='xl:h-[250px] lg:h-[200px]'
               hideScrollBar
               size={70}
             >
-              <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3">
+              <div className='grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1 justify-start gap-3 m-3'>
                 {selectedItems.map((product) => (
                   <Checkbox key={product.name} value={product.name} lineThrough>
                     <Image
@@ -137,27 +138,27 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                       src={product.img}
                       width={52}
                       height={50}
-                      shadow="sm"
-                      radius="full"
-                      className="object-cover"
+                      shadow='sm'
+                      radius='full'
+                      className='object-cover'
                     />
-                    <p className="ml-2">{product.name}</p>
-                    <p className="ml-2 font-bold">${product.price}</p>
+                    <p className='ml-2'>{product.name}</p>
+                    <p className='ml-2 font-bold'>${product.price}</p>
                   </Checkbox>
                 ))}
               </div>
             </ScrollShadow>
           </CheckboxGroup>
-          <div className="flex items-start justify-around sm:flex-col lg:flex-row mb-3 mt-5">
-            <label className="mr-2" htmlFor="productSelect">
+          <div className='flex items-start justify-around sm:flex-col lg:flex-row mb-3 mt-5'>
+            <label className='mr-2' htmlFor='productSelect'>
               Select product
             </label>
             <Select
-              id="productSelect"
+              id='productSelect'
               value={selectedProduct}
               onChange={(e) => handleProductChange(e.target.value)}
-              className="border border-gray-300 rounded-md text-center"
-              aria-label="Select product"
+              className='border border-gray-300 rounded-md text-center'
+              aria-label='Select product'
             >
               {selectedItems.map((product) => (
                 <SelectItem key={product.name} value={product.name}>
@@ -165,13 +166,13 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                 </SelectItem>
               ))}
             </Select>
-            <label className="mr-2 ml-3" htmlFor="quantityInput">
+            <label className='mr-2 ml-3' htmlFor='quantityInput'>
               Quantity
             </label>
             <Input
-              id="quantityInput"
-              variant="bordered"
-              type="number"
+              id='quantityInput'
+              variant='bordered'
+              type='number'
               value={
                 selectedItems.find(
                   (product) => product.name === selectedProduct,
@@ -180,7 +181,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
               onChange={(e) =>
                 handleQuantityChange(parseInt(e.target.value, 10))
               }
-              className="border border-gray-300 rounded-md text-center"
+              className='border border-gray-300 rounded-md text-center'
               min={1}
               max={50}
             />
@@ -189,16 +190,16 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             label={'Save changes'}
             onPress={handleSend}
             isLoading={sendObject}
-            loadingText="Saving changes..."
+            loadingText='Saving changes...'
           />
           <CustomButton
             label={'Clear all'}
             onPress={handleClear}
-            loadingText="Cleaning all..."
+            loadingText='Cleaning all...'
           />
         </>
       ) : (
-        <p className="text-gray-500">Not have products selected.</p>
+        <p className='text-gray-500'>Not have products selected.</p>
       )}
     </>
   );
@@ -228,14 +229,14 @@ export default function ShoppingListTab({ selectedProducts = [] }) {
 
   return (
     <>
-      <p className="text-2xl font-bold">Summary to Shopping List</p>
+      <p className='text-2xl font-bold'>Summary to Shopping List</p>
       {selectedItems.length > 0 ? (
         <ShoppingList
           selectedItems={selectedItems}
           setSelectedItems={setSelectedItems}
         />
       ) : (
-        <p className="text-gray-500">No products selected.</p>
+        <p className='text-gray-500'>No products selected.</p>
       )}
     </>
   );

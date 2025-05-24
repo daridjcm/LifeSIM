@@ -1,8 +1,8 @@
 export function Have() {
   return (
     <a
-      className="text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500"
-      href="/"
+      className='text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500'
+      href='/'
     >
       Do you have an account?
     </a>
@@ -12,8 +12,8 @@ export function Have() {
 export function NotHave() {
   return (
     <a
-      className="text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500"
-      href="/signup"
+      className='text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500'
+      href='/signup'
     >
       Do you not have an account?
     </a>
@@ -23,8 +23,8 @@ export function NotHave() {
 export function HaveCustomers() {
   return (
     <a
-      className="text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500"
-      href="/boss"
+      className='text-xs m-auto underline cursor-pointer transition-all hover:text-blue-500'
+      href='/boss'
     >
       Do you need help? Call the boss
     </a>

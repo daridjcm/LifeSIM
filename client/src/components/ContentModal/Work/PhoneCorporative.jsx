@@ -37,33 +37,37 @@ export default function PhoneCorporative() {
     /* Render content Phone Corporative */
   }
   return (
-    <div className="flex flex-col gap-3 mt-4">
+    <div className='flex flex-col gap-3 mt-4'>
       <CustomButton
         label={
           chatBoss ? 'Entering to chat with Boss...' : 'Chat with the Boss 📱'
         }
         onPress={ChatBoss}
-        id="chatBoss"
+        id='chatBoss'
       />
       <CustomButton
         label={`Table of Calls ☎`}
         onPress={TableCalls}
         isLoading={false}
-        id="tableCalls"
+        id='tableCalls'
       />
       <CustomButton
         label={
           chatAnalia ? 'Entering to chat Analia...' : 'Chat with Analia 📱'
         }
         onPress={ChatAnalia}
-        id="chatAnalia"
+        id='chatAnalia'
       />
 
       <ModalComponent
-        title="Table of Calls"
-        description="Here is a table, where you can add a new customer for the call."
+        title='Table of Calls'
+        description='Here is a table, where you can add a new customer for the call.'
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        btnColor1='danger'
+        btnColor2='primary'
+        buttonText1='Close'
+        buttonText2='Save changes'
       >
         <TableCustomers />
       </ModalComponent>

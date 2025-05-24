@@ -1,9 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import { parse, isAfter, isBefore, startOfMinute, isValid } from 'date-fns';
+import { useAlert } from '../context/AlertContext'
 
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
   const [nextAppointment, setNextAppointment] = useState(null);
+  const { showAlert } = useAlert()
 
   const fetchAppointments = async (userID) => {
     try {
@@ -16,25 +19,60 @@ export const AppointmentProvider = ({ children }) => {
         (appt) => appt.user_id === userID,
       );
 
-      const now = new Date();
-      const upcoming = userAppointments
-        .map((appt) => ({
-          ...appt,
-          dateObj: new Date(`${appt.date}T${appt.time}Z`),
-        }))
+      const now = startOfMinute(new Date());
+      const updatedAppointments = userAppointments
+        .map((appt) => {
+          const cleanedTime = appt.time
+            .replace(/\s*p\.?\s*m\.?/i, 'PM')
+            .replace(/\s*a\.?\s*m\.?/i, 'AM')
+            .replace(/(AM|PM)$/, ' $1');
+
+          const dateTimeStr = `${appt.date} ${cleanedTime}`;
+
+          const parsedDate = parse(
+            dateTimeStr,
+            'yyyy-MM-dd h:mm a',
+            new Date(),
+          );
+
+          if (!isValid(parsedDate)) {
+            return null;
+          }
+
+          const dateObj = startOfMinute(parsedDate);
+          return { ...appt, dateObj };
+        })
+        .filter(Boolean);
+
+      updatedAppointments.forEach(async (appt) => {
+        if (
+          isBefore(appt.dateObj, now) &&
+          appt.status !== 'completed' &&
+          appt.status !== 'canceled'
+        ) {
+          showAlert('Atenttion', `🚫 Canceling appointment: ${appt.id}`);
+          await fetch(`http://localhost:3000/api/appointments/${appt.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'canceled' }),
+          });
+        }
+      });
+
+      const upcoming = updatedAppointments
         .filter(
           (appt) =>
-            new Date(appt.dateObj) > now &&
+            isAfter(appt.dateObj, now) &&
             appt.status !== 'completed' &&
             appt.status !== 'canceled',
         )
-        .sort((a, b) => new Date(a.dateObj) - new Date(b.dateObj));
+        .sort((a, b) => a.dateObj - b.dateObj);
 
       setNextAppointment(upcoming[0] || null);
 
-      return userAppointments;
+      return updatedAppointments;
     } catch (error) {
-      console.error('Error fetching appointments:', error);
+      showAlert('Error ❌', 'Error fetching appointments.');
       return [];
     }
   };

@@ -14,15 +14,14 @@ const getBloodType = (id) => {
   return `${randomLetter}${rh}`;
 };
 
-// SignUp
+// #region SignUp
 export const createUser = async (req, res) => {
-  console.log('SignUp endpoint reached');
   const { username, email, password, gender } = req.body;
 
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -41,7 +40,7 @@ export const createUser = async (req, res) => {
     res
       .status(201)
       .json({
-        message: 'User created successfully',
+        message: 'User created successfully.',
         token,
         user: {
           id: newUser.id,
@@ -51,12 +50,11 @@ export const createUser = async (req, res) => {
         },
       });
   } catch (error) {
-    console.error('Error during signup:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Error during signup.' });
   }
 };
 
-// Login
+// #region Login
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -64,7 +62,7 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(400).json({ message: 'User not found' });
+      return res.status(400).json({ message: 'User not found.' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -78,34 +76,32 @@ export const loginUser = async (req, res) => {
     res
       .status(200)
       .json({
-        message: 'Login successful',
+        message: 'Login successful.',
         token,
         user: { id: user.id, username: user.username, email: user.email },
       });
-    console.log(token, user);
   } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Error during login.' });
   }
 };
 
-// Get Current User
+// #region Get Current User
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.userID); // Fetch user data based on decoded user ID from token
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found.' });
     }
 
     res.status(200).json({ user });
   } catch (error) {
     console.error('Error fetching user:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Error fetching user.' });
   }
 };
 
-// Update User
+// #region Update User
 export const updateUser = async (req, res) => {
   const { id } = req.params;
   const { blood_type } = req.body;
@@ -113,15 +109,12 @@ export const updateUser = async (req, res) => {
   try {
     const user = await User.findByPk(id);
 
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ error: 'User not found.' });
 
     user.blood_type = blood_type;
     await user.save();
-
-    console.log(`Blood type saved for user ${id}:`, blood_type);
     res.json(user);
   } catch (err) {
-    console.error('Error saving blood type:', err);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Error updating user blood type.' });
   }
 };

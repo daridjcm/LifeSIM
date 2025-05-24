@@ -22,5 +22,9 @@
     "jspdf-autotable": "^5.0.2",
     "mariadb": "^3.4.0",
     "recharts": "^2.15.1"
-  }
+  },
+  "trustedDependencies": [
+    "@heroui/shared-utils",
+    "core-js"
+  ]
 }

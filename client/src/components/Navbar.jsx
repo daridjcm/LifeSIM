@@ -13,22 +13,22 @@ export default function Nav() {
 
   return (
     <Navbar
-      isBlurred="true"
-      isBordered="true"
-      className="bg-zinc-50 mb-5"
-      maxWidth="full"
+      isBlurred='true'
+      isBordered='true'
+      className='bg-zinc-50 mb-5'
+      maxWidth='full'
     >
       <NavbarBrand>
-        <p className="font-bold text-2xl text-inherit">LifeSIM</p>
+        <p className='font-bold text-2xl text-inherit'>LifeSIM</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         <NavbarItem isActive>
-          <Link className="text-3xl" aria-current="page" color="success">
+          <Link className='text-3xl' aria-current='page' color='success'>
             @{user.username}
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent as="div" justify="end">
+      <NavbarContent as='div' justify='end'>
         <Clock />
       </NavbarContent>
     </Navbar>

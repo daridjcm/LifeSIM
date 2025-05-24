@@ -5,7 +5,7 @@ export default function SpinnerComp({ color, label, size }) {
   return (
     <Spinner
       color={color || 'primary'}
-      variant="waves"
+      variant='waves'
       size={size || 'md'}
       label={label}
     />

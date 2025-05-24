@@ -5,7 +5,7 @@ export const saveGrocery = async (req, res) => {
     const { selectedItems } = req.body;
 
     if (!Array.isArray(selectedItems)) {
-      return res.status(400).json({ error: 'selectedItems must be an array' });
+      return res.status(400).json({ error: 'selectedItems must be an array.' });
     }
 
     // Clear existing items and save new ones in memory
@@ -21,14 +21,14 @@ export const saveGrocery = async (req, res) => {
     res
       .status(201)
       .json({
-        message: 'Groceries saved successfully',
+        message: 'Groceries saved successfully.',
         groceries: groceryItems,
       });
   } catch (error) {
     console.error('Error saving groceries:', error);
     res
       .status(500)
-      .json({ error: 'Error saving groceries', details: error.message });
+      .json({ error: 'Error saving groceries.', details: error.message });
   }
 };
 
@@ -38,6 +38,6 @@ export const getGroceries = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Error fetching groceries', details: error.message });
+      .json({ error: 'Error fetching groceries.', details: error.message });
   }
 };

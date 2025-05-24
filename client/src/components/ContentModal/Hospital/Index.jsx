@@ -10,7 +10,7 @@ import {
 import MedicalAppointments from './MedicalAppointments.jsx';
 import Patient from './Patient.jsx';
 import HealthRecord from './HealthRecord.jsx';
-import PillsReceted from './PillsReceted.jsx';
+import Pills from './Pills.jsx';
 import Consult from './Consult.jsx';
 
 // Tabs content
@@ -19,18 +19,18 @@ export default function ContentHospital() {
 
   return (
     <Tabs
-      aria-label="Options"
+      aria-label='Options'
       selectedKey={selected}
       onSelectionChange={setSelected}
-      size="lg"
-      color="primary"
+      size='lg'
+      color='primary'
       fullWidth
     >
       <Tab
-        key="medicalappointments"
+        key='medicalappointments'
         title={
-          <div className="flex items-center space-x-2">
-            <CalendarDateRangeIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <CalendarDateRangeIcon className='size-6' />
             <span>Medical Appointments</span>
           </div>
         }
@@ -38,10 +38,10 @@ export default function ContentHospital() {
         <MedicalAppointments />
       </Tab>
       <Tab
-        key="healthrecord"
+        key='healthrecord'
         title={
-          <div className="flex items-center space-x-2">
-            <ClockIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <ClockIcon className='size-6' />
             <span>Health Record</span>
           </div>
         }
@@ -49,10 +49,10 @@ export default function ContentHospital() {
         <HealthRecord />
       </Tab>
       <Tab
-        key="consult"
+        key='consult'
         title={
-          <div className="flex items-center space-x-2">
-            <ClipboardDocumentListIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <ClipboardDocumentListIcon className='size-6' />
             <span>Consult</span>
           </div>
         }
@@ -60,10 +60,10 @@ export default function ContentHospital() {
         <Consult />
       </Tab>
       <Tab
-        key="patient"
+        key='patient'
         title={
-          <div className="flex items-center space-x-2">
-            <UserIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <UserIcon className='size-6' />
             <span>Patient</span>
           </div>
         }
@@ -71,15 +71,15 @@ export default function ContentHospital() {
         <Patient />
       </Tab>
       <Tab
-        key="pillsreceted"
+        key='Pills'
         title={
-          <div className="flex items-center space-x-2">
-            <ClipboardDocumentCheckIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <ClipboardDocumentCheckIcon className='size-6' />
             <span>Pills Receted</span>
           </div>
         }
       >
-        <PillsReceted />
+        <Pills />
       </Tab>
     </Tabs>
   );

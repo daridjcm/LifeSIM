@@ -7,19 +7,19 @@ import {
   Image,
   CardFooter,
   Button,
-  ScrollShadow,
 } from '@heroui/react';
 
-// Content Modal
 import ContentWork from './ContentModal/Work/Index.jsx';
 import ContentBank from './ContentModal/Bank/Index.jsx';
 import ContentGrocery from './ContentModal/Grocery/Index.jsx';
 import ContentHospital from './ContentModal/Hospital/Index.jsx';
+import { useUser } from '../context/UserContext.jsx';
 
 export default function ModalAction({ item, onClose, listHeader = [] }) {
   const [isClosing, setIsClosing] = useState(false);
+  const [data, setData] = useState(null);
+  const { user } = useUser();
 
-  // Handle close for the modal
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -28,7 +28,6 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
     }, 1000);
   };
 
-  // If the user clicks Escape key
   useEffect(() => {
     const closeOnEscape = (e) => {
       if (e.key === 'Escape') {
@@ -39,27 +38,46 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
     return () => document.removeEventListener('keydown', closeOnEscape);
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user?.id || !item?.name) return;
+
+      try {
+        let endpoint = '';
+        switch (item.name) {
+          case 'Bank':
+            endpoint = `http://localhost:3000/api/bank/${user?.id}`;
+            break;
+          case 'Work':
+            endpoint = `http://localhost:3000/api/work/${user?.id}`;
+            break;
+          case 'Hospital':
+            endpoint = `http://localhost:3000/api/health/${user?.id}`;
+            break;
+          default:
+            return;
+        }
+
+        const response = await fetch(endpoint);
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('❌ Error fetching data for modal:', err);
+      }
+    };
+
+    fetchData();
+  }, [item, user]);
+
   if (!item) return null;
 
   let dynamicHeader = [];
-
-  // Define dynamic header based on item name
   switch (item.name) {
     case 'Work':
-      dynamicHeader = [
-        'Profession',
-        'Work Experience',
-        'Company',
-        'Money earn per day',
-      ];
+      dynamicHeader = ['Profession', 'Work Experience', 'Company', 'Income'];
       break;
     case 'Bank':
-      dynamicHeader = [
-        'Savings Account',
-        'Current Account',
-        'Money Inverted',
-        'Debt',
-      ];
+      dynamicHeader = ['Savings', 'Current', 'Inverted', 'Debt'];
       break;
     case 'Hospital':
       dynamicHeader = ['Health'];
@@ -68,9 +86,6 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
       dynamicHeader = [];
   }
 
-  {
-    /* Render view based on item name */
-  }
   return ReactDOM.createPortal(
     <div
       className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-3 transition-opacity duration-300 ${
@@ -81,56 +96,49 @@ export default function ModalAction({ item, onClose, listHeader = [] }) {
         className={`h-full w-full lg:max-h-screen lg:max-w-full p-2 transform transition-transform duration-300 ${
           isClosing ? 'scale-95' : 'scale-100'
         }`}
-        radius="md"
-        shadow="md"
+        radius='md'
+        shadow='md'
       >
-        <CardHeader className="pb-0 pt-2 px-4 flex-row items-center justify-between">
-          <div className="w-fit">
+        <CardHeader className='pb-0 pt-2 px-4 flex-row items-center justify-between'>
+          <div className='w-fit'>
             <Image
               alt={item.name}
-              className="object-cover rounded-xl"
+              className='object-cover rounded-xl'
               src={item.img}
               width={150}
               height={50}
             />
-            <div className="flex flex-row text-xl">
-              <p className="text-default-500 mr-2">Inside the</p>
-              <h4 id="itemTitle" className="font-bold text-large">
+            <div className='flex flex-row text-xl'>
+              <p className='text-default-500 mr-2'>Inside the</p>
+              <h4 id='itemTitle' className='font-bold text-large'>
                 {item.name}
               </h4>
             </div>
           </div>
-          <ul className="flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2">
+          <ul className='flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2'>
             {dynamicHeader.map((element, index) => (
-              <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">
+              <li key={index} className='bg-blue-200 w-fit px-3 rounded-full'>
                 {element}:
               </li>
             ))}
           </ul>
         </CardHeader>
-        <CardBody
-          className={
-            item.name === 'Work'
-              ? 'py-2 max-h-[60vh] min-h-full'
-              : 'max-h-full overflow-auto'
-          }
-        >
-          {/* Render content based on item name */}
+        <CardBody className='max-h-full overflow-auto'>
           {item.name === 'Work' ? (
-            <ContentWork />
+            <ContentWork data={data} />
           ) : item.name === 'Bank' ? (
-            <ContentBank />
+            <ContentBank data={data} />
           ) : item.name === 'Hospital' ? (
-            <ContentHospital />
+            <ContentHospital data={data} />
           ) : (
-            <ContentGrocery />
+            <ContentGrocery data={data} />
           )}
         </CardBody>
-        <CardFooter className="flex justify-end">
+        <CardFooter className='flex justify-end'>
           <Button
-            color="danger"
-            variant="flat"
-            size="sm"
+            color='danger'
+            variant='flat'
+            size='sm'
             isPressible
             onPress={handleClose}
           >

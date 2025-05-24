@@ -1,30 +1,55 @@
 import LineChart from './Chart';
 import FormComp from '../../Form/';
+import { useEffect, useState } from 'react';
+import { useBank } from '../../../context/BankContext.jsx';
 
 // Overview of your financial status
 export function Overview() {
-  const fields = [
-    {
-      name: 'currentbalance',
-      label: 'Current Balance',
-      value: '$',
-      type: 'text',
-    },
-    { name: 'savings', label: 'Savings', value: '$', type: 'text' },
-    {
-      name: 'outstandingdebt',
-      label: 'Outstanding Debt',
-      value: '$',
-      type: 'text',
-    },
-  ];
+  const { bankAccounts, loading, error } = useBank();
+
+  // Format fields for the form
+  const [fields, setFields] = useState([]);
+
+  useEffect(() => {
+    if (bankAccounts.length > 0) {
+      const account = bankAccounts[0];
+      setFields([
+        {
+          name: 'currentbalance',
+          label: 'Current Balance',
+          value: account.current_account,
+          type: 'number',
+        },
+        {
+          name: 'savings',
+          label: 'Savings',
+          value: account.savings_account,
+          type: 'number',
+        },
+        {
+          name: 'outstandingdebt',
+          label: 'Outstanding Debt',
+          value: account.debt,
+          type: 'number',
+        },
+      ]);
+    }
+  }, [bankAccounts]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <FormComp
-      title="Financial Overview"
-      description="Your current financial status"
+      title='Financial Overview'
+      description='Your current financial status'
       fields={fields}
-      statusForm=""
+      statusForm=''
       isRequired={false}
     />
   );
@@ -38,11 +63,11 @@ export function Withdraw() {
 
   return (
     <FormComp
-      title="Withdraw Money"
-      description="Can receive salary of your job."
+      title='Withdraw Money'
+      description='Can receive salary of your job.'
       fields={fields}
       isRequired={false}
-      btnText="Withdraw All"
+      btnText='Withdraw All'
     />
   );
 }
@@ -62,11 +87,12 @@ export function Invert() {
     <>
       <LineChart />
       <FormComp
-        title="Invert Money"
-        description="Be careful, once you have invested there is no turning back"
+        statusForm
+        title='Invert Money'
+        description='Be careful, once you have invested there is no turning back'
         fields={fields}
         isRequired={false}
-        btnText="Invert Money"
+        btnText='Invert Money'
       />
     </>
   );
@@ -106,16 +132,17 @@ export function Save() {
   return (
     <>
       <FormComp
-        title="Transfer Money"
-        description="Transfer money to you savings account or current account"
+        statusForm
+        title='Transfer Money'
+        description='Transfer money to you savings account or current account'
         fields={fields}
         isRequired={false}
-        btnText="Transfer Money"
+        btnText='Transfer Money'
       />
 
-      <div className="content-end justify-stretch text-wrap">
-        <p className="text-green-500">Savings Account:</p>
-        <p className="text-amber-500">Current Account: </p>
+      <div className='content-end justify-stretch text-wrap'>
+        <p className='text-green-500'>Savings Account:</p>
+        <p className='text-amber-500'>Current Account: </p>
       </div>
     </>
   );
@@ -134,11 +161,11 @@ export function PayDebt() {
 
   return (
     <FormComp
-      title="Pay Debt"
-      description="Make a payment towards your outstanding debt"
+      title='Pay Debt'
+      description='Make a payment towards your outstanding debt'
       fields={fields}
       isRequired={false}
-      btnText="Pay Debt"
+      btnText='Pay Debt'
     />
   );
 }
@@ -171,11 +198,11 @@ export function Loans() {
   ];
   return (
     <FormComp
-      title="Apply for a Loan"
-      description="Choose a loan type and amount"
+      title='Apply for a Loan'
+      description='Choose a loan type and amount'
       fields={fields}
       isRequired={false}
-      btnText="Apply for Loan"
+      btnText='Apply for Loan'
     />
   );
 }

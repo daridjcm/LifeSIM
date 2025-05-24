@@ -20,10 +20,10 @@ export default function Index() {
   // Render the dashboard to Work
   return (
     <>
-      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
-        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
-          <p className="text-xl font-bold">How start your job daily</p>
-          <ul className="list-decimal list-inside flex flex-col gap-4">
+      <div className='flex flex-col gap-4 lg:grid lg:grid-cols-3'>
+        <div className='w-full bg-slate-100 rounded p-4 lg:col-span-1'>
+          <p className='text-xl font-bold'>How start your job daily</p>
+          <ul className='list-decimal list-inside flex flex-col gap-4'>
             <li>Chat with the Boss to talk her about the tasks today 📞 </li>
             <li>
               Add customers in the table of calls according to the CSV file that
@@ -40,57 +40,57 @@ export default function Index() {
           </ul>
         </div>
 
-        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
-          <p className="text-xl font-bold">Tasks Today</p>
+        <div className='w-full bg-slate-100 rounded p-4 lg:col-span-1'>
+          <p className='text-xl font-bold'>Tasks Today</p>
           <hr />
           <CheckboxGroup
-            className="flex flex-col gap-2"
-            size="md"
-            color="success"
+            className='flex flex-col gap-2'
+            size='md'
+            color='success'
             defaultValue={values}
             onChange={(newValues) => {
               setValues(newValues);
               console.log(values);
             }}
-            label="Complete the tasks today"
-            orientation="horizontal"
+            label='Complete the tasks today'
+            orientation='horizontal'
             isDisabled={true}
-            id="tasksList"
+            id='tasksList'
           >
-            <Checkbox value="task1">
+            <Checkbox value='task1'>
               Type with the Boss in your phone corporative 📞
             </Checkbox>
-            <Checkbox value="task2">
+            <Checkbox value='task2'>
               Check the file that the boss gave you today 📄
             </Checkbox>
-            <Checkbox value="task3">
+            <Checkbox value='task3'>
               Add new customers according to the CSV file and enter it in the
               table of calls 💁
             </Checkbox>
-            <Checkbox value="task4">
+            <Checkbox value='task4'>
               Make inform in computer (signature) 💻
             </Checkbox>
-            <Checkbox value="task5">
+            <Checkbox value='task5'>
               Please signature to confirm that you have completed your tasks
               before writing to Analia
             </Checkbox>
-            <Checkbox value="task6">
+            <Checkbox value='task6'>
               Type to Analia when you have finished the tasks ✅
             </Checkbox>
           </CheckboxGroup>
           {/* </div> */}
         </div>
 
-        <div className="w-full bg-slate-100 rounded p-4 lg:col-span-1">
-          <p className="text-xl font-bold">Phone Corporative</p>
+        <div className='w-full bg-slate-100 rounded p-4 lg:col-span-1'>
+          <p className='text-xl font-bold'>Phone Corporative</p>
           <hr />
           <PhoneCorporative />
         </div>
       </div>
 
-      <div className="w-full bg-slate-100 rounded p-4 mt-4">
-        <p className="text-xl font-bold">Report Day</p>
-        <div className="flex flex-row gap-2">
+      <div className='w-full bg-slate-100 rounded p-4 mt-4'>
+        <p className='text-xl font-bold'>Report Day</p>
+        <div className='flex flex-row gap-2'>
           <p>Signature here to confirm your job today.</p>
           <PorcentageTasks value={35} />
         </div>
@@ -120,21 +120,21 @@ function SignatureForm({ username }) {
   };
 
   return (
-    <div className="mt-4">
+    <div className='mt-4'>
       <input
-        type="text"
+        type='text'
         value={signatureInput}
         onChange={(e) => setSignatureInput(e.target.value)}
-        placeholder="Type your username"
-        className="border-2 w-full px-2 py-1 rounded transition-all duration-200 hover:border-green-500 focus:border-green-500 border-slate-300 focus:outline-none focus:ring-1 focus:ring-green-500"
+        placeholder='Type your username'
+        className='border-2 w-full px-2 py-1 rounded transition-all duration-200 hover:border-green-500 focus:border-green-500 border-slate-300 focus:outline-none focus:ring-1 focus:ring-green-500'
       />
-      <div className="mt-2">
+      <div className='mt-2'>
         <CustomButton
-          label="Submit"
+          label='Submit'
           onPress={handleSubmit}
           isLoading={false}
           loadingText={'Submitting signature to boss...'}
-          id="submitSignature"
+          id='submitSignature'
         />
       </div>
     </div>

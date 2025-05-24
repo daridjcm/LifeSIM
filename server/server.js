@@ -9,6 +9,7 @@ import userRoutes from './routes/user.routes.js';
 import invoiceRoutes from './routes/invoices.routes.js';
 import groceryRoutes from './routes/grocery.routes.js';
 import appointmentsRoutes from './routes/appointments.routes.js';
+import bankRoutes from './routes/bank.routes.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -25,6 +26,7 @@ app.use('/api', userRoutes);
 app.use('/api', groceryRoutes);
 app.use('/api', invoiceRoutes);
 app.use('/api', appointmentsRoutes);
+app.use('/api', bankRoutes);
 
 app.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'robots.txt'));

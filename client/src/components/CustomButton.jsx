@@ -14,7 +14,7 @@ const CustomButton = ({
 }) => {
   return (
     <Button
-      color="primary"
+      color='primary'
       variant={variant || 'flat'}
       size={size || 'md'}
       onPress={onPress}

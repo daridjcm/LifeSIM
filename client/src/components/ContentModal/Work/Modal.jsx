@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Modal,
   ModalContent,
@@ -13,12 +14,16 @@ export default function ModalComponent({
   children,
   isOpen,
   onOpenChange,
+  btnColor1,
+  btnColor2,
+  buttonText1,
+  buttonText2,
 }) {
   return (
     <Modal
-      backdrop="opaque"
+      backdrop='opaque'
       isOpen={isOpen}
-      className="min-w-fit max-w-fit"
+      className='min-w-fit max-w-fit'
       motionProps={{
         variants: {
           enter: {
@@ -33,24 +38,28 @@ export default function ModalComponent({
           },
         },
       }}
-      onOpenChange={onOpenChange} // Pass onOpenChange to Modal to control state
+      onOpenChange={onOpenChange}
     >
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1">
+            <ModalHeader className='flex flex-col gap-1'>
               {title}
               <hr />
-              <p className="text-sm mt-4 text-default-500">{description}</p>
+              <p className='text-sm mt-4 text-default-500'>{description}</p>
             </ModalHeader>
-            <ModalBody className="text-wrap">{children}</ModalBody>
+            <ModalBody className='text-wrap'>{children}</ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button color="primary" onPress={onClose}>
-                Save changes
-              </Button>
+              {buttonText1 && (
+                <Button color={btnColor1} variant='light' onPress={onClose}>
+                  {buttonText1}
+                </Button>
+              )}
+              {buttonText2 && (
+                <Button color={btnColor2} onPress={onClose}>
+                  {buttonText2}
+                </Button>
+              )}
             </ModalFooter>
           </>
         )}
@@ -58,3 +67,15 @@ export default function ModalComponent({
     </Modal>
   );
 }
+
+ModalComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  children: PropTypes.node,
+  isOpen: PropTypes.bool.isRequired,
+  onOpenChange: PropTypes.func.isRequired,
+  btnColor1: PropTypes.string, // opcional
+  btnColor2: PropTypes.string, // opcional
+  buttonText1: PropTypes.string, // opcional
+  buttonText2: PropTypes.string, // opcional
+};

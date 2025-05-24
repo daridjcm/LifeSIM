@@ -18,7 +18,7 @@ export const AlertProvider = ({ children }) => {
   return (
     <AlertContext.Provider value={{ alert, showAlert }}>
       {alert.visible && (
-        <div className="fixed top-5 z-[9999] w-full flex justify-center pointer-events-none">
+        <div className='fixed top-5 z-[9999] w-full flex justify-center pointer-events-none'>
           <AlertComp title={alert.title} description={alert.description} />
         </div>
       )}

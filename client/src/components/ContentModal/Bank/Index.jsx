@@ -9,36 +9,48 @@ import {
   CreditCardIcon,
   GlobeAltIcon,
 } from '@heroicons/react/24/solid';
+import ReusableTable from '../../Table.jsx';
 
 // Render Tabs for the content Bank
 export default function ContentBank() {
   const [selected, setSelected] = React.useState('overview');
 
+  const columns = [
+    { key: 'id', label: 'ID' },
+    { key: 'date', label: 'DATE' },
+    { key: 'from', label: 'FROM' },
+    { key: 'amount', label: 'AMOUNT' },
+    { key: 'to', label: 'TO' },
+  ];
+
   return (
     <Tabs
-      aria-label="Options"
+      aria-label='Options'
       selectedKey={selected}
       onSelectionChange={setSelected}
-      size="lg"
-      color="primary"
+      size='lg'
+      color='primary'
       fullWidth
     >
       <Tab
-        key="overview"
+        key='overview'
         title={
-          <div className="flex items-center space-x-2">
-            <DocumentTextIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <DocumentTextIcon className='size-6' />
             <span>Overview</span>
           </div>
         }
       >
-        <Overview />
+        <>
+          <Overview />
+          <ReusableTable type='bank' data={[]} columns={columns} />
+        </>
       </Tab>
       <Tab
-        key="withdraw"
+        key='withdraw'
         title={
-          <div className="flex items-center space-x-2">
-            <CurrencyDollarIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <CurrencyDollarIcon className='size-6' />
             <span>Withdraw</span>
           </div>
         }
@@ -46,10 +58,10 @@ export default function ContentBank() {
         <Withdraw />
       </Tab>
       <Tab
-        key="invert"
+        key='invert'
         title={
-          <div className="flex items-center space-x-2">
-            <ChartBarIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <ChartBarIcon className='size-6' />
             <span>Invert</span>
           </div>
         }
@@ -57,10 +69,10 @@ export default function ContentBank() {
         <Invert />
       </Tab>
       <Tab
-        key="transfer"
+        key='transfer'
         title={
-          <div className="flex items-center space-x-2">
-            <GlobeAltIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <GlobeAltIcon className='size-6' />
             <span>Transfer</span>
           </div>
         }
@@ -68,10 +80,10 @@ export default function ContentBank() {
         <Save />
       </Tab>
       <Tab
-        key="paydebt"
+        key='paydebt'
         title={
-          <div className="flex items-center space-x-2">
-            <BanknotesIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <BanknotesIcon className='size-6' />
             <span>Pay Debt</span>
           </div>
         }
@@ -79,10 +91,10 @@ export default function ContentBank() {
         <PayDebt />
       </Tab>
       <Tab
-        key="loans"
+        key='loans'
         title={
-          <div className="flex items-center space-x-2">
-            <CreditCardIcon className="size-6" />
+          <div className='flex items-center space-x-2'>
+            <CreditCardIcon className='size-6' />
             <span>Loans</span>
           </div>
         }
