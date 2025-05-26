@@ -16,7 +16,7 @@ import ContentHospital from './ContentModal/Hospital/Index.jsx';
 import { useUser } from '../context/UserContext.jsx';
 
 const HEADER_MAPPING = {
-  Work: ['Profession', 'Work Experience', 'Company', 'Income'],
+  Work: ['Job', 'Work Experience', 'Company', 'Salary'],
   Bank: ['Savings', 'Current', 'Inverted', 'Debt'],
   Hospital: ['Health', 'Blood Type'],
 };
@@ -28,10 +28,10 @@ const DATA_KEY_MAPPING = {
   Debt: 'debt',
   Health: 'health',
   BloodType: 'blood_type',
-  Profession: 'profession',
-  'Work Experience': 'work_experience',
+  Job: 'job',
+  WorkExperience: 'work_experience',
   Company: 'company',
-  Income: 'income',
+  Salary: 'salary',
 };
 
 export default function ModalAction({ item, onClose }) {
@@ -69,25 +69,24 @@ export default function ModalAction({ item, onClose }) {
       if (!user?.id || !item?.name) return;
 
       const ENDPOINTS = {
-        Bank: 'http://localhost:3000/api/bank/',
-        Work: 'http://localhost:3000/api/work/',
-        Hospital: 'http://localhost:3000/api/me/',
+        Bank: 'http://localhost:3000/api/bank',
+        Work: 'http://localhost:3000/api/work',
+        Hospital: 'http://localhost:3000/api/me',
       };
 
       try {
         const response = await fetch(ENDPOINTS[item.name], options);
-
         const result = await response.json();
         setData(result);
         console.log('Data fetched:', result);
       } catch (err) {
-        console.error('❌ Error fetching data:', err);
+        console.error(`❌ Fetch error for ${item.name}:`, err);
       }
     };
-
+    
     fetchData();
   }, [item, user]);
-
+  
   if (!item) return null;
 
   return ReactDOM.createPortal(
@@ -104,14 +103,15 @@ export default function ModalAction({ item, onClose }) {
 
           <ul className="flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2">
             {HEADER_MAPPING[item.name]?.map((element, index) => {
-              const dataKey = DATA_KEY_MAPPING[element] || element.toLowerCase().replace(/\s/g, '_');
-
+              const dataKey = DATA_KEY_MAPPING[element] ?? element.toLowerCase().replace(/\s/g, '_');
+              
               // Dynamically check if the data exists in bankAccounts, user, or another source
               const value =
                 data?.bankAccounts?.[0]?.[dataKey] ??
                 data?.user?.[dataKey] ??
-                data?.[dataKey] ??
+                data?.work?.[dataKey] ??
                 'N/A';
+
 
               return (
                 <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">

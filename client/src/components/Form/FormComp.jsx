@@ -91,6 +91,7 @@ export default function FormComp({
       signup: 'http://localhost:3000/api/signup',
       customers: 'http://localhost:3000/api/customers/new',
       bank: 'http://localhost:3000/api/bank',
+      work: 'http://localhost:3000/api/work',
     };
 
     const url = urlMap[statusForm];
@@ -128,8 +129,13 @@ export default function FormComp({
 
       // Automatically create bank account if login or signup
       if ((statusForm === 'login' || statusForm === 'signup') && result.token) {
+        const urls = [
+          'http://localhost:3000/api/bank',
+          'http://localhost:3000/api/work',
+        ];
+
         try {
-          await fetch('http://localhost:3000/api/bank', {
+          await fetch(urls[0], {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -137,13 +143,19 @@ export default function FormComp({
             },
             body: JSON.stringify({
               user_id: user?.id,
-              current_account: 0,
-              savings_account: 0,
-              money_inverted: 0,
-              debt: 0,
             }),
           });
-          console.log(result.token);
+
+          await fetch(urls[1], {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${result.token}`,
+            },
+            body: JSON.stringify({
+              user_id: user?.id,
+            }),
+          });
         } catch (bankError) {
           console.warn(
             'Could not create bank account automatically:',
@@ -160,10 +172,7 @@ export default function FormComp({
         bank: 'Bank account created successfully',
       };
 
-      showAlert(
-        'Success',
-        successMessages[statusForm] || 'Operation completed',
-      );
+      showAlert('Success', successMessages[statusForm] || 'Operation completed');
 
       // Navigation after success
       setTimeout(() => {
@@ -222,24 +231,23 @@ export default function FormComp({
             placeholder={field.placeholder}
             selectedKey={gender}
             onSelectionChange={(value) => {
-              console.log('Selected Value:', value);
               setGender(value);
             }}
             aria-label={`Select ${field.name}`}
           >
             {Array.isArray(field.options) && field.options.length > 0
               ? field.options.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    textValue={option.label}
-                  >
-                    {option.label}
-                    <p className='text-gray-500 text-opacity-80'>
-                      {option.description}
-                    </p>
-                  </SelectItem>
-                ))
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  textValue={option.label}
+                >
+                  {option.label}
+                  <p className='text-gray-500 text-opacity-80'>
+                    {option.description}
+                  </p>
+                </SelectItem>
+              ))
               : null}
           </Select>
         ) : (
