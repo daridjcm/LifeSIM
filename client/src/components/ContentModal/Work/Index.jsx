@@ -5,19 +5,17 @@ import PhoneCorporative from './PhoneCorporative.jsx';
 import CustomButton from '../../CustomButton.jsx';
 import { useUser } from '../../../context/UserContext.jsx';
 import { useAlert } from '../../../context/AlertContext.jsx';
+import { useEffect } from 'react';
 
 export default function Index() {
-  const { user } = useUser();
   const [values, setValues] = useState([]);
+  const { user } = useUser();
 
-  const signatureHabilitated = () => {
-    if (values.length >= 6) {
-      return true;
-    } else {
-      return false;
+  useEffect(() => {
+    if (values.length >= 6 && !values.includes("task6")) {
+      setValues((prevValues) => [...prevValues, "task6"]);
     }
-  };
-  // Render the dashboard to Work
+  }, [values]);  // Render the dashboard to Work
   return (
     <>
       <div className='flex flex-col gap-4 lg:grid lg:grid-cols-3'>
@@ -47,11 +45,11 @@ export default function Index() {
             className='flex flex-col gap-2'
             size='md'
             color='success'
-            defaultValue={values}
-            onChange={(newValues) => {
-              setValues(newValues);
-              console.log(values);
+            value={values}
+            onChange={(e) => {
+              setValues(e);
             }}
+
             label='Complete the tasks today'
             orientation='horizontal'
             isDisabled={true}
@@ -68,14 +66,13 @@ export default function Index() {
               table of calls 💁
             </Checkbox>
             <Checkbox value='task4'>
-              Make inform in computer (signature) 💻
+              Type to the boss when you have finished the tasks ✅
             </Checkbox>
             <Checkbox value='task5'>
-              Please signature to confirm that you have completed your tasks
-              before writing to Analia
+              Type to Analia when you have finished the tasks ✅
             </Checkbox>
             <Checkbox value='task6'>
-              Type to Analia when you have finished the tasks ✅
+              Make inform in computer (signature) 💻
             </Checkbox>
           </CheckboxGroup>
           {/* </div> */}
@@ -84,7 +81,7 @@ export default function Index() {
         <div className='w-full bg-slate-100 rounded p-4 lg:col-span-1'>
           <p className='text-xl font-bold'>Phone Corporative</p>
           <hr />
-          <PhoneCorporative />
+          <PhoneCorporative tasks={values} setTasks={setValues} />
         </div>
       </div>
 
@@ -94,8 +91,8 @@ export default function Index() {
           <p>Signature here to confirm your job today.</p>
           <PorcentageTasks value={35} />
         </div>
-        {values.length >= 6 ? (
-          <SignatureForm username={user.username} />
+        {values.length >= 5 ? (
+          <SignatureForm username={user.username} value={values} setValues={setValues}/>
         ) : (
           '(You need to complete all the tasks to signature your job today) ✅'
         )}
@@ -104,7 +101,7 @@ export default function Index() {
   );
 }
 
-function SignatureForm({ username }) {
+function SignatureForm({ username, value, setValues }) {
   const { showAlert } = useAlert();
   const [signatureInput, setSignatureInput] = useState('');
   const [submitSignature, setSubmitSignature] = useState(false);
@@ -114,6 +111,7 @@ function SignatureForm({ username }) {
     setSubmitSignature(isMatch);
     if (isMatch) {
       showAlert('Signature submitted successfully!');
+      setValues((prevValues) => [...prevValues, 'task6']);
     } else {
       showAlert('Signature does not match your username.');
     }
