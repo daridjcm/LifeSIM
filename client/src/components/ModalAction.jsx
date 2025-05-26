@@ -18,7 +18,7 @@ import { useUser } from '../context/UserContext.jsx';
 const HEADER_MAPPING = {
   Work: ['Profession', 'Work Experience', 'Company', 'Income'],
   Bank: ['Savings', 'Current', 'Inverted', 'Debt'],
-  Hospital: ['Health'],
+  Hospital: ['Health', 'Blood Type'],
 };
 
 const DATA_KEY_MAPPING = {
@@ -27,6 +27,7 @@ const DATA_KEY_MAPPING = {
   Inverted: 'money_inverted',
   Debt: 'debt',
   Health: 'health',
+  BloodType: 'blood_type',
   Profession: 'profession',
   'Work Experience': 'work_experience',
   Company: 'company',
@@ -54,6 +55,15 @@ export default function ModalAction({ item, onClose }) {
     return () => document.removeEventListener('keydown', closeOnEscape);
   }, []);
 
+  const token = localStorage.getItem('token');
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!user?.id || !item?.name) return;
@@ -61,17 +71,11 @@ export default function ModalAction({ item, onClose }) {
       const ENDPOINTS = {
         Bank: 'http://localhost:3000/api/bank/',
         Work: 'http://localhost:3000/api/work/',
-        Hospital: 'http://localhost:3000/api/health/',
+        Hospital: 'http://localhost:3000/api/me/',
       };
 
       try {
-        const response = await fetch(ENDPOINTS[item.name], {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
+        const response = await fetch(ENDPOINTS[item.name], options);
 
         const result = await response.json();
         setData(result);
@@ -101,7 +105,13 @@ export default function ModalAction({ item, onClose }) {
           <ul className="flex sm:flex-col md:flex-col lg:flex-row gap-x-28 gap-y-2">
             {HEADER_MAPPING[item.name]?.map((element, index) => {
               const dataKey = DATA_KEY_MAPPING[element] || element.toLowerCase().replace(/\s/g, '_');
-              const value = data?.bankAccounts?.[0]?.[dataKey] ?? 'N/A';
+
+              // Dynamically check if the data exists in bankAccounts, user, or another source
+              const value =
+                data?.bankAccounts?.[0]?.[dataKey] ??
+                data?.user?.[dataKey] ??
+                data?.[dataKey] ??
+                'N/A';
 
               return (
                 <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">
@@ -114,9 +124,9 @@ export default function ModalAction({ item, onClose }) {
 
         <CardBody className="max-h-full overflow-auto">
           {item.name === 'Work' ? <ContentWork data={data} /> :
-           item.name === 'Bank' ? <ContentBank data={data} /> :
-           item.name === 'Hospital' ? <ContentHospital data={data} /> :
-           <ContentGrocery data={data} />}
+            item.name === 'Bank' ? <ContentBank data={data} /> :
+              item.name === 'Hospital' ? <ContentHospital data={data} /> :
+                <ContentGrocery data={data} />}
         </CardBody>
 
         <CardFooter className="flex justify-end">
