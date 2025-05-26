@@ -38,8 +38,9 @@ export const createWork = async (req, res) => {
 };
 
 export const getCurrentWork = async (req, res) => {
+  const user_id = req.userID;
   try {
-    const work = await Work.findByPk(req.userID); // Fetch user data based on decoded user ID from token
+    const work = await Work.findAll({ where: {user_id}}); // Fetch user data based on decoded user ID from token
 
     if (!work) {
       return res.status(404).json({ message: 'Work not found.' });

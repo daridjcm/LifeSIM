@@ -109,10 +109,9 @@ export default function ModalAction({ item, onClose }) {
               const value =
                 data?.bankAccounts?.[0]?.[dataKey] ??
                 data?.user?.[dataKey] ??
-                data?.work?.[dataKey] ??
+                data?.work?.[0]?.[dataKey] ??
                 'N/A';
-
-
+                
               return (
                 <li key={index} className="bg-blue-200 w-fit px-3 rounded-full">
                   {element}: {value}
