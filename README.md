@@ -4,10 +4,10 @@ An interactive life simulation web game where users manage their daily routine a
 
 - **Work:** 💼 Earn money to cover your needs and achieve your goals.
 - **Bank:** 🏦 Manage your finances, save, pay debts or apply for loans.
-- **Home:** 🏠 Manage your personal well-being with options such as eating 🍽️, cooking 🍳, sleeping 🛌, bathing 🚿, dressing 👗, playing 🎮 or cleaning 🧹.
+- **Home:** 🏠 Manage your personal well-being with options such as eating 🍽️, cooking 🍳, sleeping 🛌, bathing 🚿, playing 🎮 or cleaning 🧹.
 - **Grocery:** 🛒 Buy food and other essentials, make payments 💳 and organize your resources in the fridge 🧊.
-- **Hospital:** 🏥 Visit the doctor (pay), pick up medications, download medical history documents, medical orders and prescription medications, schedule an appointment.
-- **Phone:** 📱 Manage your contacts, chats, calendar, schedules and more activities.
+- **Hospital:** 🏥 Visit the doctor (pay), pick up medications, Download your medical records, get health insurance, and schedule an appointment with your preferred doctor. 
+- **Phone:** 📱 Manage your contacts, chats, calendar and more activities. 
 
 # Technologies used
 
@@ -43,7 +43,7 @@ npm install && npm start # Click or type get URL (Vite and/or Server)
 
 ```bash
 # For Excel (only read and organized)
-https://docs.google.com/spreadsheets/d/1_-o_6pyXByXr1yzdKn9mIDyN2herqXiW18dPMZJd2YY/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1E6aQg3iHK8itzw7qzZfeb-iKJb3FuVXD/edit?usp=drivesdk&ouid=106620760397870700889&rtpof=true&sd=true
 
 # For CSV Data
 cd ./client/src/utils && node summaryProject.js # Add files to folder CSV.
