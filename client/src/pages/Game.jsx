@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import CardList from '../components/CardList.jsx';
-import NeedsPanel from '../components/NeedsPanel';
+import NeedsPanel from '../components/Panel';
 import { TimeProvider } from '../context/TimeContext.jsx';
 import { activitiesUser } from '../utils/data.js';
 import { useUser } from '../context/UserContext.jsx';
