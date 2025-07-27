@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/solid';
 import ReusableTable from '../../Table.jsx';
 
+
 // Render Tabs for the content Bank
 export default function ContentBank() {
   const [selected, setSelected] = React.useState('overview');

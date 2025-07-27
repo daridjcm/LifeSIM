@@ -1,7 +1,7 @@
-import LineChart from './Chart';
 import FormComp from '../../Form/';
 import { useEffect, useState } from 'react';
 import { useBank } from '../../../context/BankContext.jsx';
+import TradingChart from './Chart.jsx'
 
 // Overview of your financial status
 export function Overview() {
@@ -85,7 +85,7 @@ export function Invert() {
 
   return (
     <>
-      <LineChart />
+      <TradingChart />
       <FormComp
         statusForm
         title='Invert Money'
@@ -206,4 +206,3 @@ export function Loans() {
     />
   );
 }
-export default { Overview, Save, PayDebt, Loans };
