@@ -1,11 +1,12 @@
 import db from '../models/index.js';
 const { Invoice } = db;
 
+// add handle payment and check if the user has enough money
 export const createInvoice = async (req, res) => {
   try {
+    const user_id = req.user_id;
     const { items, total_amount, payment_method } = req.body;
 
-    const user_id = req.userID;
     const invoiceCount = await Invoice.count({ where: { user_id } });
     const invoice_number = invoiceCount + 1;
 
@@ -20,7 +21,6 @@ export const createInvoice = async (req, res) => {
     }
 
     const newInvoice = await Invoice.create({
-      id,
       user_id,
       invoice_number,
       items,
@@ -41,7 +41,7 @@ export const createInvoice = async (req, res) => {
 };
 
 export const getInvoices = async (req, res) => {
-  const { user_id } = req.userID;
+  const { user_id } = req.user_id;
   try {
     const invoices = await Invoice.findAll({ where: { user_id } });
     res.status(200).json({ invoices });

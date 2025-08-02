@@ -102,16 +102,13 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
   // Handle clear all products
   const handleClear = () => {
     setSelectedItems([]);
-    showAlert(
-      'Note ⚠️',
-      "Tap a product to cross it out or tap 'Clear all' to delete all products.",
-    );
   };
 
   // Render view to display selected products
   return (
     <>
       <p>Products selected to buy.</p>
+      <p>Products Selected: {selectedItems.length}</p>  
       {selectedItems.length > 0 ? (
         <>
           <CheckboxGroup
@@ -143,7 +140,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                       className='object-cover'
                     />
                     <p className='ml-2'>{product.name}</p>
-                    <p className='ml-2 font-bold'>${product.price}</p>
+                    <p className='ml-2 font-bold'>{product.quantity} x ${product.price}</p>
                   </Checkbox>
                 ))}
               </div>
@@ -197,6 +194,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             onPress={handleClear}
             loadingText='Cleaning all...'
           />
+          <p className='text-blue-500 mt-5 font-semibold'>
+          You can <span className='text-red-500 font-bold'>deleting products by simply clicking on them</span> or <span className='text-green-500 font-bold'>you can change the quantity</span> of each product.
+          </p>
         </>
       ) : (
         <p className='text-gray-500'>Not have products selected.</p>

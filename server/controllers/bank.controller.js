@@ -4,7 +4,7 @@ const { BankAccount } = db;
 
 export const createBankAccount = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
     const { current_account, savings_account, money_inverted, debt } = req.body;
 
     if (!user_id) {
@@ -43,7 +43,7 @@ export const createBankAccount = async (req, res) => {
 };
 
 export const getBankAccounts = async (req, res) => {
-  const user_id = req.userID;
+  const user_id = req.user_id;
   try {
     const bankAccounts = await BankAccount.findAll({ where: { user_id } });
     res.status(200).json({ bankAccounts });
@@ -56,7 +56,7 @@ export const getBankAccounts = async (req, res) => {
 
 export const updateBankAccount = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
     const { current_account, savings_account, money_inverted, debt } = req.body;
 
     if (!current_account || !savings_account || !money_inverted || !debt) {

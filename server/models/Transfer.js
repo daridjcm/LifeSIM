@@ -54,11 +54,11 @@ export default (sequelize) => {
     return /^\d+$/.test(this.to);
   };
   
-  Transfer.prototype.getFromUserId = function() {
+  Transfer.prototype.getFromuser_id = function() {
     return this.isFromUser() ? parseInt(this.from, 10) : null;
   };
   
-  Transfer.prototype.getToUserId = function() {
+  Transfer.prototype.getTouser_id = function() {
     return this.isToUser() ? parseInt(this.to, 10) : null;
   };
   

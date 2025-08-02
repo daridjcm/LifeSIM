@@ -8,7 +8,7 @@ export const AppointmentProvider = ({ children }) => {
   const [nextAppointment, setNextAppointment] = useState(null);
   const { showAlert } = useAlert()
 
-  const fetchAppointments = async (userID) => {
+  const fetchAppointments = async (user_id) => {
     try {
       const response = await fetch('http://localhost:3000/api/appointments');
       if (!response.ok) throw new Error('Network response was not ok');
@@ -16,7 +16,7 @@ export const AppointmentProvider = ({ children }) => {
       const { appointments } = await response.json();
 
       const userAppointments = appointments.filter(
-        (appt) => appt.user_id === userID,
+        (appt) => appt.user_id === user_id,
       );
 
       const now = startOfMinute(new Date());

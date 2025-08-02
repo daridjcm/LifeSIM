@@ -24,16 +24,16 @@ const HEADER_MAPPING = {
 };
 
 const DATA_KEY_MAPPING = {
+  Job: 'job',
+  WorkExperience: 'work_experience',
+  Company: 'company',
+  Salary: 'salary',
   Savings: 'savings_account',
   Current: 'current_account',
   Inverted: 'money_inverted',
   Debt: 'debt',
   Health: 'health',
   BloodType: 'blood_type',
-  Job: 'job',
-  WorkExperience: 'work_experience',
-  Company: 'company',
-  Salary: 'salary',
 };
 
 export default function ModalAction({ item, onClose }) {
@@ -76,7 +76,7 @@ export default function ModalAction({ item, onClose }) {
         Hospital: 'http://localhost:3000/api/me',
         Home: 'http://localhost:3000/api/home',
       };
-
+      
       try {
         const response = await fetch(ENDPOINTS[item.name], options);
         const result = await response.json();

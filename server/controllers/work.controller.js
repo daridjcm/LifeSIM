@@ -4,7 +4,7 @@ const { Work } = db;
 
 export const createWork = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
 
     if (!user_id) {
       return res.status(400).json({ message: 'Missing data required.' });
@@ -38,7 +38,7 @@ export const createWork = async (req, res) => {
 };
 
 export const getCurrentWork = async (req, res) => {
-  const user_id = req.userID;
+  const user_id = req.user_id;
   try {
     const work = await Work.findAll({ where: {user_id}}); // Fetch user data based on decoded user ID from token
 
@@ -55,7 +55,7 @@ export const getCurrentWork = async (req, res) => {
 
 export const deleteWork = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
 
     if (!user_id) {
       return res.status(400).json({ message: 'Missing data required.' });
@@ -83,7 +83,7 @@ export const deleteWork = async (req, res) => {
 
 export const updateWork = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
     const {job, company, salary, start_date, end_date } = req.body;
     if (!user_id) {
       return res.status(400).json({ message: 'Missing data required.' });
