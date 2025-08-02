@@ -30,7 +30,7 @@ export const createBankAccount = async (req, res) => {
     });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Bank account created successfully.',
         bank: newBankAccount,

@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
     await newUser.update({ blood_type });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'User created successfully.',
         token,

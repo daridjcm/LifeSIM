@@ -25,7 +25,7 @@ export const createWork = async (req, res) => {
     });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Work record created successfully.',
         work: newWork,

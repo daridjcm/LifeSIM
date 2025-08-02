@@ -77,7 +77,7 @@ export const saveAppointment = async (req, res) => {
 
     console.log('Appointment scheduled:', newAppointment);
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Appointment saved successfully.',
         appointment: newAppointment,
@@ -193,7 +193,7 @@ export const reportAppointment = async (req, res) => {
 
     console.log('Appointment reported:', report);
     return res
-      .status(201)
+      .status(200)
       .json({ message: 'Appointment reported successfully.', report });
   } catch (error) {
     console.error('Error reporting appointment:', error);

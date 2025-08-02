@@ -13,12 +13,14 @@ import ContentWork from './ContentModal/Work/Index.jsx';
 import ContentBank from './ContentModal/Bank/Index.jsx';
 import ContentGrocery from './ContentModal/Grocery/Index.jsx';
 import ContentHospital from './ContentModal/Hospital/Index.jsx';
+import ContentHome from './ContentModal/Home/Index.jsx';
 import { useUser } from '../context/UserContext.jsx';
 
 const HEADER_MAPPING = {
   Work: ['Job', 'Work Experience', 'Company', 'Salary'],
   Bank: ['Savings', 'Current', 'Inverted', 'Debt'],
   Hospital: ['Health', 'Blood Type'],
+  Home: ['Public Services Payment Date', 'Public Services Total Cost'],
 };
 
 const DATA_KEY_MAPPING = {
@@ -72,6 +74,7 @@ export default function ModalAction({ item, onClose }) {
         Bank: 'http://localhost:3000/api/bank',
         Work: 'http://localhost:3000/api/work',
         Hospital: 'http://localhost:3000/api/me',
+        Home: 'http://localhost:3000/api/home',
       };
 
       try {
@@ -110,6 +113,7 @@ export default function ModalAction({ item, onClose }) {
                 data?.bankAccounts?.[0]?.[dataKey] ??
                 data?.user?.[dataKey] ??
                 data?.work?.[0]?.[dataKey] ??
+                data?.home?.[0]?.[dataKey] ??
                 'N/A';
                 
               return (
@@ -122,10 +126,13 @@ export default function ModalAction({ item, onClose }) {
         </CardHeader>
 
         <CardBody className="max-h-full overflow-auto">
-          {item.name === 'Work' ? <ContentWork data={data} /> :
-            item.name === 'Bank' ? <ContentBank data={data} /> :
-              item.name === 'Hospital' ? <ContentHospital data={data} /> :
-                <ContentGrocery data={data} />}
+          {
+            item.name === 'Work' ? <ContentWork data={data} /> :
+              item.name === 'Bank' ? <ContentBank data={data} /> :
+                item.name === 'Hospital' ? <ContentHospital data={data} /> :
+                  item.name === 'Home' ? <ContentHome data={data} /> :
+                    <ContentGrocery data={data} />
+          }
         </CardBody>
 
         <CardFooter className="flex justify-end">

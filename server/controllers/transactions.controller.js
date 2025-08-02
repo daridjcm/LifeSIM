@@ -23,7 +23,7 @@ export const createTransaction = async (req, res) => {
     });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Transaction created successfully.',
         transaction: newTransaction,

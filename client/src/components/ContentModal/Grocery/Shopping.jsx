@@ -52,8 +52,8 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
         ? {
             ...product,
             quantity,
-            price: (product.basePrice * quantity).toFixed(2),
-            basePrice: product.basePrice,
+            price: (product.base_price * quantity).toFixed(2),
+            base_price: product.base_price,
           }
         : product,
     );
@@ -70,7 +70,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     const updatedItems = selectedItems.map((item) => ({
       ...item,
       price: parseFloat(item.price),
-      basePrice: parseFloat(item.basePrice),
+      base_price: parseFloat(item.base_price),
     }));
     showAlert(
       'Products Saved ✅',
@@ -216,7 +216,7 @@ export default function ShoppingListTab({ selectedProducts = [] }) {
       setSelectedItems(
         selectedProducts.map((product) => ({
           ...product,
-          basePrice: product.price,
+          base_price: product.price,
           quantity: 1,
         })),
       );

@@ -30,7 +30,7 @@ export const createInvoice = async (req, res) => {
 
     console.log('Invoice created:', newInvoice);
     res
-      .status(201)
+      .status(200)
       .json({ message: 'Invoice created successfully', invoice: newInvoice });
   } catch (error) {
     console.error('Error creating invoice:', error);
