@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "Coffee",
+    "category": "Drinks",
+    "price": 1.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 2,
+    "name": "Tea",
+    "category": "Drinks",
+    "price": 1.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 3,
+    "name": "Chocolate Hot",
+    "category": "Drinks",
+    "price": 3.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 4,
+    "name": "Chocolate Hot With Marshmallow",
+    "category": "Drinks",
+    "price": 4.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 5,
+    "name": "Iced Latte",
+    "category": "Drinks",
+    "price": 5.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 6,
+    "name": "Lemonade",
+    "category": "Drinks",
+    "price": 1.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 7,
+    "name": "Strawberry Milkshake",
+    "category": "Drinks",
+    "price": 8.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 8,
+    "name": "Vanilla Milkshake",
+    "category": "Drinks",
+    "price": 8.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 9,
+    "name": "Chocolate Milkshake",
+    "category": "Drinks",
+    "price": 8.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 10,
+    "name": "Croissant",
+    "category": "Breads and Bakery",
+    "price": 2.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 11,
+    "name": "Muffin",
+    "category": "Breads and Bakery",
+    "price": 2.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 12,
+    "name": "Pancakes",
+    "category": "Breads and Bakery",
+    "price": 2.99,
+    "quantity": 1,
+    "img": ""
+  },
+  {
+    "id": 13,
+    "name": "Baguette",
+    "category": "Breads and Bakery",
+    "price": 2.99,
+    "quantity": 1,
+    "img": ""
+  }
+  
+]

@@ -12,6 +12,7 @@ import {
 import ContentWork from './ContentModal/Work/Index.jsx';
 import ContentBank from './ContentModal/Bank/Index.jsx';
 import ContentGrocery from './ContentModal/Grocery/Index.jsx';
+import ContentCafeteria from './ContentModal/Cafeteria/Index.jsx';
 import ContentHospital from './ContentModal/Hospital/Index.jsx';
 import ContentHome from './ContentModal/Home/Index.jsx';
 import { useUser } from '../context/UserContext.jsx';
@@ -75,6 +76,8 @@ export default function ModalAction({ item, onClose }) {
         Work: 'http://localhost:3000/api/work',
         Hospital: 'http://localhost:3000/api/me',
         Home: 'http://localhost:3000/api/home',
+        Grocery: 'http://localhost:3000/api/grocery',
+        Cafeteria: 'http://localhost:3000/api/cafeteria',
       };
       
       try {
@@ -131,7 +134,8 @@ export default function ModalAction({ item, onClose }) {
               item.name === 'Bank' ? <ContentBank data={data} /> :
                 item.name === 'Hospital' ? <ContentHospital data={data} /> :
                   item.name === 'Home' ? <ContentHome data={data} /> :
-                    <ContentGrocery data={data} />
+                    item.name === 'Grocery' ? <ContentGrocery data={data} /> :
+                    <ContentCafeteria data={data} />
           }
         </CardBody>
 

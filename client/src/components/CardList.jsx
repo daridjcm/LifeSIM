@@ -65,11 +65,10 @@ const CardList = React.memo(
 
     function getColor2(item) {
       switch (item.category) {
-        case 'Fast Food':
+        case 'Protein':
           return {
             color: 'primary',
-            content: 'Consumed quickly, less filling.',
-          };
+            content: 'Combines well with others, serves satiety.',};
         case 'Fruit':
           return {
             color: 'secondary',
@@ -80,10 +79,10 @@ const CardList = React.memo(
             color: 'success',
             content: 'Combines well with others, serves satiety.',
           };
-        case 'Drink':
+        case 'Carbohydrate':
           return {
-            color: 'danger',
-            content: 'Excessive consumption shortens longevity.',
+            color: 'warning',
+            content: 'Combines well with others, serves satiety.',
           };
         default:
           return { color: 'default', content: 'Others.' };
@@ -108,16 +107,20 @@ const CardList = React.memo(
                 aria-label={item.name}
               >
                 <CardBody className='overflow-hidden p-0'>
-                  <Image
-                    classNames={{ img: 'w-full h-[200px] object-cover' }}
-                    src={item.img}
-                    alt={item.name}
-                    isBlurred
-                    isZoomed
-                  />
+                  <div className="flex justify-center items-center m-2 w-full h-[250px]">
+                    <Image
+                      src={item.img}
+                      alt={item.name}
+                      isBlurred
+                      classNames={{
+                        img: "object-contain max-h-[230px] w-auto"
+                      }}
+                    />
+                  </div>
+
 
                   {!iconShow && (
-                    <div className='flex justify-end mx-4'>
+                    <div className='flex gap-2 justify-end mx-4'>
                       <Tooltip
                         color={getColor2(item).color}
                         content={getColor2(item).content}
@@ -129,6 +132,19 @@ const CardList = React.memo(
                           variant='bordered'
                         >
                           {item.category}
+                        </Chip>
+                      </Tooltip>
+                                            
+                      <Tooltip
+                        color={'default'}
+                        delay={1000}
+                      >
+                        <Chip
+                          className='cn base closeButton cursor-pointer'
+                          color={'default'}
+                          variant='bordered'
+                        >
+                          {item.price} LSD
                         </Chip>
                       </Tooltip>
                     </div>
@@ -157,7 +173,7 @@ const CardList = React.memo(
                         </>
                       ) : (
                         <>
-                          Buy {item.name} for {item.price}
+                          Buy {item.name} for {item.quantity} unit
                           <ShoppingCartIcon className='size-5 text-white ml-1' />
                         </>
                       )}

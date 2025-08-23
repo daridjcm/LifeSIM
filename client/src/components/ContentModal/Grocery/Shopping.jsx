@@ -133,10 +133,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                     <Image
                       alt={product.name}
                       src={product.img}
-                      width={52}
-                      height={50}
+                      width={100}
+                      height={80}
                       shadow='sm'
-                      radius='full'
                       className='object-cover'
                     />
                     <p className='ml-2'>{product.name}</p>
