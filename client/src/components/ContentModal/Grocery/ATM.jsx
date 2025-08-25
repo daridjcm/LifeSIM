@@ -137,7 +137,7 @@ export default function AtmTab({
   return (
     <>
       <p className='text-2xl font-bold'>Summary Purchase</p>
-      <p className='font-bold text-xl'>Total: ${total_amount}</p>
+      <p className='font-bold text-xl'>Total: ${total_amount} LSD</p>
       <p className='font-bold text-xl'>Products Selected: {products.length}</p>
       <Card type='Shopping Card' holder={user?.username} id={user?.id} />
 

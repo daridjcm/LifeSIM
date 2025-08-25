@@ -13,6 +13,7 @@ import {
   ShoppingCartIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/solid';
+import { useEffect } from 'react';
 import ModalAction from './ModalAction.jsx';
 
 // Component used to display a list of activities user or products
@@ -68,22 +69,37 @@ const CardList = React.memo(
         case 'Protein':
           return {
             color: 'primary',
-            content: 'Combines well with others, serves satiety.',};
+          };
         case 'Fruit':
           return {
             color: 'secondary',
-            content: 'Combines well with others, serves satiety.',
           };
         case 'Vegetable':
           return {
             color: 'success',
-            content: 'Combines well with others, serves satiety.',
           };
         case 'Carbohydrate':
           return {
             color: 'warning',
-            content: 'Combines well with others, serves satiety.',
           };
+        case 'Coffees':
+          return {
+            color: 'default',
+          };
+        case 'Bakery':
+          return {
+            color: 'secondary',
+          };
+          case 'Desserts':
+          return {
+            color: 'primary',
+          };
+        case 'Drinks':
+          return {
+            color: 'warning',
+          };
+        case 'Combo':
+          return { color: 'danger', content: 'With two products included and discount %!' };
         default:
           return { color: 'default', content: 'Others.' };
       }
@@ -92,6 +108,15 @@ const CardList = React.memo(
     const displayItems = Array.isArray(itemsToDisplay)
       ? itemsToDisplay
       : (itemsToDisplay?.activitiesUser ?? itemsToDisplay?.products ?? []);
+      const [menu, setMenu] = useState([]);
+
+    // Fetch menu data from folder public (this is a easier way without backend)
+    useEffect(() => {
+      fetch("/Menu.json")
+        .then((res) => res.json())
+        .then((data) => setMenu(data))
+        .catch((err) => console.error("Error loading menu:", err));
+    }, []);
 
     return (
       <>
@@ -107,20 +132,43 @@ const CardList = React.memo(
                 aria-label={item.name}
               >
                 <CardBody className='overflow-hidden p-0'>
-                  <div className="flex justify-center items-center m-2 w-full h-[250px]">
-                    <Image
-                      src={item.img}
-                      alt={item.name}
-                      isBlurred
-                      classNames={{
-                        img: "object-contain max-h-[230px] w-auto"
-                      }}
-                    />
+                  <div className='flex justify-center items-center m-2 w-full h-[250px]'>
+                    {/* If is NOT combo → single image */}
+                    {item.category !== 'Combo' ? (
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        isBlurred
+                        classNames={{
+                          img: 'object-contain max-h-[230px] w-auto',
+                        }}
+                      />
+                    ) : (
+                      // If is combo → multiple images of products
+                      <div className='flex flex-col md:flex-row justify-center items-center gap-2'>
+                        {item.products.map((prodId) => {
+                          const product = menu.find((p) => p.id === prodId); // Find product in menu
+                          return (
+                            <Image
+                              key={prodId}
+                              src={product?.img}
+                              alt={product?.name}
+                              isBlurred
+                              classNames={{
+                                img: 'object-contain max-h-[100px] w-auto',
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-
 
                   {!iconShow && (
                     <div className='flex gap-2 justify-end mx-4'>
+                      <div className='flex justify-start items-start w-full'>
+                        <p className='font-bold h'>{item.name}</p>
+                      </div>
                       <Tooltip
                         color={getColor2(item).color}
                         content={getColor2(item).content}
@@ -134,14 +182,11 @@ const CardList = React.memo(
                           {item.category}
                         </Chip>
                       </Tooltip>
-                                            
-                      <Tooltip
-                        color={'default'}
-                        delay={1000}
-                      >
+
+                      <Tooltip color={'success'} delay={1000}>
                         <Chip
                           className='cn base closeButton cursor-pointer'
-                          color={'default'}
+                          color={'success'}
                           variant='bordered'
                         >
                           {item.price} LSD
@@ -173,7 +218,7 @@ const CardList = React.memo(
                         </>
                       ) : (
                         <>
-                          Buy {item.name} for {item.quantity} unit
+                          Buy for {item.price} LSD - {item.quantity} unit
                           <ShoppingCartIcon className='size-5 text-white ml-1' />
                         </>
                       )}
