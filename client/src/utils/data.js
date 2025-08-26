@@ -3,7 +3,7 @@ import productsData from './Products.json';
 import doctorsData from './Doctors.json';
 import diseasesData from './Diseases.json';
 import symptomsData from './Symptoms.json';
-import menuData from '../../../client/public/Menu.json';
+import menuData from './Menu.json';
 
 export const activitiesUser = activities;
 export const products = productsData;

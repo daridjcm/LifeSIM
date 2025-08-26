@@ -295,7 +295,6 @@ export default function Content() {
         }, timeDifference - 30 * 60 * 1000);
   
         return () => {
-          showAlert('Atenttion', '⏳ Clearing timer');
           clearTimeout(timer);
         };
       }

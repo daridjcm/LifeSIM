@@ -16,7 +16,6 @@ const deleteOldCanceledAppointments = async () => {
         },
       },
     });
-    console.log('Old canceled appointments deleted successfully.');
   } catch (error) {
     console.error('Error deleting old canceled appointments:', error);
   }

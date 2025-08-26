@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 import { parse, isAfter, isBefore, startOfMinute, isValid } from 'date-fns';
-import { useAlert } from '../context/AlertContext'
+import { useAlert } from '../context/AlertContext';
 
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
   const [nextAppointment, setNextAppointment] = useState(null);
-  const { showAlert } = useAlert()
+  const { showAlert } = useAlert();
 
   const fetchAppointments = async (user_id) => {
     try {
@@ -27,13 +27,9 @@ export const AppointmentProvider = ({ children }) => {
             .replace(/\s*a\.?\s*m\.?/i, 'AM')
             .replace(/(AM|PM)$/, ' $1');
 
-          const dateTimeStr = `${appt.date} ${cleanedTime}`;
+            const dateTimeStr = `${appt.date} ${appt.time}`;
+            const parsedDate = parse(dateTimeStr, 'yyyy-MM-dd HH:mm', new Date());
 
-          const parsedDate = parse(
-            dateTimeStr,
-            'yyyy-MM-dd h:mm a',
-            new Date(),
-          );
 
           if (!isValid(parsedDate)) {
             return null;

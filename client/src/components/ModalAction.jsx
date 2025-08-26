@@ -77,7 +77,7 @@ export default function ModalAction({ item, onClose }) {
         Hospital: 'http://localhost:3000/api/me',
         Home: 'http://localhost:3000/api/home',
         Grocery: 'http://localhost:3000/api/grocery',
-        Cafeteria: 'http://localhost:3000/api/cafeteria',
+        Cafeteria: 'http://localhost:3000/Menu.json', // This is a static JSON file but when combine two images it breaks
       };
       
       try {
@@ -131,11 +131,11 @@ export default function ModalAction({ item, onClose }) {
         <CardBody className="max-h-full overflow-auto">
           {
             item.name === 'Work' ? <ContentWork data={data} /> :
-              item.name === 'Bank' ? <ContentBank data={data} /> :
-                item.name === 'Hospital' ? <ContentHospital data={data} /> :
-                  item.name === 'Home' ? <ContentHome data={data} /> :
-                    item.name === 'Grocery' ? <ContentGrocery data={data} /> :
-                    <ContentCafeteria data={data} />
+            item.name === 'Bank' ? <ContentBank data={data} /> :
+            item.name === 'Hospital' ? <ContentHospital data={data} /> :
+            item.name === 'Grocery' ? <ContentGrocery data={data} /> :
+            item.name === 'Cafeteria' ? <ContentCafeteria data={data} /> :
+            <ContentHome data={data} />
           }
         </CardBody>
 

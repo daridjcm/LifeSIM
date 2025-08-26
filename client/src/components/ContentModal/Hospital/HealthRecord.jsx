@@ -34,8 +34,8 @@ export default function HealthRecord() {
     const loadAppointments = async () => {
       if (!user?.id) return;
       try {
-        const data = await fetchAppointments(user?.id);
-        setAppointments(Array.isArray(data) ? data : []);
+        const data = await fetchAppointments(user.id);
+        setAppointments(data);
       } catch (err) {
         console.error('Failed to fetch appointments:', err);
         setAppointments([]);
@@ -44,6 +44,7 @@ export default function HealthRecord() {
 
     loadAppointments();
   }, [user?.id]);
+
 
   // Handle appointment cancellation
   const handleCancel = async (id) => {
