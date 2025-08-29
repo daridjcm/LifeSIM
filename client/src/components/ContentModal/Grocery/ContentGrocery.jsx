@@ -11,7 +11,7 @@ import {
 
 // Render Tabs for the grocery content
 const ContentGrocery = React.memo(
-  ({ itemsToDisplay, page, total, onChange }) => {
+  ({ itemsToDisplay }) => {
     // State Management
     const [paymentStatus, setPaymentStatus] = useState('Make Payment');
     const [paymentProcessing, setPaymentProcessing] = useState(true);
@@ -36,9 +36,6 @@ const ContentGrocery = React.memo(
         >
           <ProductsTab
             itemsToDisplay={itemsToDisplay}
-            page={page}
-            total={total}
-            onChange={onChange}
             selectedProducts={selectedProducts}
             setSelectedProducts={setSelectedProducts}
           />

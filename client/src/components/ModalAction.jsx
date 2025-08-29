@@ -77,7 +77,7 @@ export default function ModalAction({ item, onClose }) {
         Hospital: 'http://localhost:3000/api/me',
         Home: 'http://localhost:3000/api/home',
         Grocery: 'http://localhost:3000/api/grocery',
-        Cafeteria: 'http://localhost:3000/Menu.json', // This is a static JSON file but when combine two images it breaks
+        Cafeteria: 'http://localhost:3000/api/cafeteria', // This is a static JSON file but when combine two images it breaks
       };
       
       try {

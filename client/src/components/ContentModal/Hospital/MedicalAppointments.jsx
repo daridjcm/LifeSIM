@@ -28,6 +28,7 @@ export default function MedicalAppointments() {
     '12:00',
     '14:00',
     '15:00',
+    '15:30',
     '16:00',
     '17:00',
     '18:00',

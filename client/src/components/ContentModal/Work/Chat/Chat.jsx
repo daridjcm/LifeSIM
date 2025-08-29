@@ -107,7 +107,7 @@ export default function Chat({ people }) {
               variant='shadow'
               color='primary'
               size='lg'
-              onPress={() => (window.location.href = '/')}
+              onPress={() => (window.location.href = '/game')}
             >
               <ArrowLeftStartOnRectangleIcon className='size-12 text-white' />
               Back to Home

@@ -14,14 +14,14 @@ export default function Game() {
     if (!user) {
       const timer = setTimeout(() => {
         window.location.reload();
-      }, 5000);
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
   }, [user]);
 
   if (!user) {
-    return <div>Loading game...</div>;
+    return <div className='flex flex-col items-center justify-center h-screen'>Loading Game...</div>;
   }
 
   return (

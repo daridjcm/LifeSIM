@@ -10,4 +10,4 @@ export const products = productsData;
 export const doctors = doctorsData;
 export const diseases = diseasesData;
 export const symptoms = symptomsData;
-export const menu = menuData
+export const menu = menuData;
