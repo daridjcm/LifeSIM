@@ -12,16 +12,18 @@ export default function Game() {
 
   useEffect(() => {
     if (!user) {
-      const timer = setTimeout(() => {
-        window.location.reload();
+      setTimeout(() => {
+        window.location.href = '/';
       }, 4000);
-
-      return () => clearTimeout(timer);
     }
   }, [user]);
 
   if (!user) {
-    return <div className='flex flex-col items-center justify-center h-screen'>Loading Game...</div>;
+    return (
+      <div className='flex flex-col items-center justify-center h-screen'>
+        Loading Game...
+      </div>
+    );
   }
 
   return (
