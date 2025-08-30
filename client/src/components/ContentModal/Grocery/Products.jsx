@@ -7,16 +7,15 @@ export default function ProductsTab({
   selectedProducts = [],
   setSelectedProducts = () => {},
 }) {
-  // Estado: categoría activa
   const [activeCategory, setActiveCategory] = useState('All');
 
-  // Sacar categorías únicas
+  // Get categories uniques
   const categories = useMemo(() => {
     if (!Array.isArray(itemsToDisplay)) return [];
     return ['All', ...new Set(itemsToDisplay.map(item => item.category))];
   }, [itemsToDisplay]);
 
-  // Filtrar productos según categoría
+  // Filter products by active category
   const filteredItems = useMemo(() => {
     if (activeCategory === 'All') return itemsToDisplay;
     return itemsToDisplay.filter(item => item.category === activeCategory);
@@ -37,7 +36,6 @@ export default function ProductsTab({
         ))}
       </div>
 
-      {/* Lista de productos filtrados */}
       <CardList
         statusCard="itemsGrocery"
         iconShow={false}

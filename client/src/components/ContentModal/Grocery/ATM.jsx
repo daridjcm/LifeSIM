@@ -124,7 +124,7 @@ export default function AtmTab({
         setInvoice(latestInvoice);
         saveInvoiceToLocalStorage(latestInvoice);
       }
-
+      setPaymentStatus('Products paid successfully');
       showAlert('Products paid successfully', 'Payment completed ✅');
     } catch (error) {
       showAlert('Error to pay products', 'Payment failed ❌');
@@ -147,7 +147,7 @@ export default function AtmTab({
           onPress={handlePayment}
           disabled={paymentProcessing}
         />
-        {invoice && (
+        {paymentStatus == 'Products paid successfully' && (
           <CustomButton
             label='Download Report 🧾'
             onPress={() => handleDownload('Invoice', invoice, userData)}
