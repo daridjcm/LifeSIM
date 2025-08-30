@@ -33,7 +33,7 @@ export default function MedicalAppointments() {
     '17:00',
     '18:00',
     '19:00',
-    '23:40',
+    '23:59'
   ];
 
   const handleTimeClick = (time) => {

@@ -5,6 +5,7 @@ import { useAlert } from '../context/AlertContext';
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
+  const [isInConsultation, setIsInConsultation] = useState(false);
   const [nextAppointment, setNextAppointment] = useState(null);
   const { showAlert } = useAlert();
 
@@ -34,7 +35,7 @@ export const AppointmentProvider = ({ children }) => {
           if (!isValid(parsedDate)) {
             return null;
           }
-
+          
           const dateObj = startOfMinute(parsedDate);
           return { ...appt, dateObj };
         })
@@ -46,7 +47,6 @@ export const AppointmentProvider = ({ children }) => {
           appt.status !== 'completed' &&
           appt.status !== 'canceled'
         ) {
-          showAlert('Atenttion', `🚫 Canceling appointment: ${appt.id}`);
           await fetch(`http://localhost:3000/api/appointments/${appt.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ export const AppointmentProvider = ({ children }) => {
 
   return (
     <AppointmentContext.Provider
-      value={{ nextAppointment, setNextAppointment, fetchAppointments }}
+      value={{isInConsultation, setIsInConsultation, nextAppointment, setNextAppointment, fetchAppointments }}
     >
       {children}
     </AppointmentContext.Provider>
