@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
     await newUser.update({ blood_type });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'User created successfully.',
         token,
@@ -88,7 +88,7 @@ export const loginUser = async (req, res) => {
 // #region Get Current User
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.userID); // Fetch user data based on decoded user ID from token
+    const user = await User.findByPk(req.user_id); // Fetch user data based on decoded user ID from token
 
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });

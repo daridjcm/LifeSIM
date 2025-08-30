@@ -1,402 +1,466 @@
 [
   {
     "id": 1,
-    "name": "Burger",
-    "category": "Fast Food",
-    "price": 5.99,
+    "name": "Red Cabbage",
+    "category": "Vegetable",
+    "price": 2.50,
     "quantity": 1,
-    "img": "/images/products-grocery/burger.avif"
+    "img": "/images/products-grocery/redcabbage.png"
   },
   {
     "id": 2,
-    "name": "Pizza",
-    "category": "Fast Food",
-    "price": 8.99,
+    "name": "Red Bell Pepper",
+    "category": "Vegetable",
+    "price": 1.20,
     "quantity": 1,
-    "img": "/images/products-grocery/pizza.avif"
+    "img": "/images/products-grocery/redpepper.png"
   },
   {
     "id": 3,
-    "name": "Hot Dog",
-    "category": "Fast Food",
-    "price": 4.99,
+    "name": "Tomato",
+    "category": "Vegetable",
+    "price": 1.80,
     "quantity": 1,
-    "img": "/images/products-grocery/hotdog.avif"
+    "img": "/images/products-grocery/tomato.png"
   },
   {
     "id": 4,
-    "name": "French Fries",
-    "category": "Fast Food",
-    "price": 3.99,
+    "name": "Carrot",
+    "category": "Vegetable",
+    "price": 1.00,
     "quantity": 1,
-    "img": "/images/products-grocery/frenchfries.avif"
+    "img": "/images/products-grocery/carrot.png"
   },
   {
     "id": 5,
-    "name": "Chicken Nuggets",
-    "category": "Fast Food",
-    "price": 6.99,
+    "name": "Cauliflower",
+    "category": "Vegetable",
+    "price": 3.00,
     "quantity": 1,
-    "img": "/images/products-grocery/chickennuggets.avif"
+    "img": "/images/products-grocery/cauliflower.png"
   },
   {
     "id": 6,
-    "name": "Cheese Burger",
-    "category": "Fast Food",
-    "price": 6.49,
+    "name": "Green Onion",
+    "category": "Vegetable",
+    "price": 1.50,
     "quantity": 1,
-    "img": "/images/products-grocery/cheeseburger.avif"
+    "img": "/images/products-grocery/greenonion.png"
   },
   {
     "id": 7,
-    "name": "Chicken Roll",
-    "category": "Fast Food",
-    "price": 7.49,
+    "name": "Lettuce",
+    "category": "Vegetable",
+    "price": 1.80,
     "quantity": 1,
-    "img": "/images/products-grocery/chickensandwich.avif"
+    "img": "/images/products-grocery/lettuce.png"
   },
   {
     "id": 8,
-    "name": "Fish Roll",
-    "category": "Fast Food",
-    "price": 7.99,
+    "name": "Potato",
+    "category": "Vegetable",
+    "price": 0.90,
     "quantity": 1,
-    "img": "/images/products-grocery/fishsandwich.avif"
+    "img": "/images/products-grocery/potato.png"
   },
   {
     "id": 9,
-    "name": "Taco",
-    "category": "Fast Food",
-    "price": 3.49,
+    "name": "Asparagus",
+    "category": "Vegetable",
+    "price": 3.50,
     "quantity": 1,
-    "img": "/images/products-grocery/taco.avif"
+    "img": "/images/products-grocery/asparagus.png"
   },
   {
     "id": 10,
-    "name": "Burrito",
-    "category": "Fast Food",
-    "price": 6.99,
+    "name": "Eggplant",
+    "category": "Vegetable",
+    "price": 2.20,
     "quantity": 1,
-    "img": "/images/products-grocery/burrito.avif"
+    "img": "/images/products-grocery/aubergine.png"
   },
   {
     "id": 11,
-    "name": "Pineapple",
-    "category": "Fruit",
-    "price": 3.99,
+    "name": "Broccoli",
+    "category": "Vegetable",
+    "price": 2.80,
     "quantity": 1,
-    "img": "/images/products-grocery/pineapple.avif"
+    "img": "/images/products-grocery/brocoli.png"
   },
   {
     "id": 12,
-    "name": "Apple",
-    "category": "Fruit",
-    "price": 1.49,
+    "name": "Zucchini",
+    "category": "Vegetable",
+    "price": 2.00,
     "quantity": 1,
-    "img": "/images/products-grocery/apple.avif"
+    "img": "/images/products-grocery/zucchini.png"
   },
   {
     "id": 13,
-    "name": "Banana",
-    "category": "Fruit",
-    "price": 0.99,
+    "name": "Artichoke",
+    "category": "Vegetable",
+    "price": 3.20,
     "quantity": 1,
-    "img": "/images/products-grocery/banana.avif"
+    "img": "/images/products-grocery/artichoke.png"
   },
   {
     "id": 14,
-    "name": "Orange",
-    "category": "Fruit",
-    "price": 1.29,
+    "name": "Beetroot",
+    "category": "Vegetable",
+    "price": 1.60,
     "quantity": 1,
-    "img": "/images/products-grocery/orange.avif"
+    "img": "/images/products-grocery/beetroot.png"
   },
   {
     "id": 15,
-    "name": "Strawberry",
-    "category": "Fruit",
-    "price": 2.99,
+    "name": "Celery",
+    "category": "Vegetable",
+    "price": 1.90,
     "quantity": 1,
-    "img": "/images/products-grocery/strawberry.avif"
+    "img": "/images/products-grocery/celery.png"
   },
   {
     "id": 16,
-    "name": "Grapes",
-    "category": "Fruit",
-    "price": 2.49,
+    "name": "Corn",
+    "category": "Vegetable",
+    "price": 1.50,
     "quantity": 1,
-    "img": "/images/products-grocery/grapes.avif"
+    "img": "/images/products-grocery/corn.png"
   },
   {
     "id": 17,
-    "name": "Mango",
-    "category": "Fruit",
-    "price": 2.99,
+    "name": "Cucumber",
+    "category": "Vegetable",
+    "price": 1.20,
     "quantity": 1,
-    "img": "/images/products-grocery/mango.avif"
+    "img": "/images/products-grocery/cucumber.png"
   },
   {
     "id": 18,
-    "name": "Pear",
-    "category": "Fruit",
-    "price": 1.79,
+    "name": "Garlic",
+    "category": "Vegetable",
+    "price": 0.80,
     "quantity": 1,
-    "img": "/images/products-grocery/pear.avif"
+    "img": "/images/products-grocery/garlic.png"
   },
   {
     "id": 19,
-    "name": "Blueberry",
-    "category": "Fruit",
-    "price": 3.49,
+    "name": "Mushroom",
+    "category": "Vegetable",
+    "price": 2.70,
     "quantity": 1,
-    "img": "/images/products-grocery/blueberry.avif"
+    "img": "/images/products-grocery/mushroom.png"
   },
   {
     "id": 20,
-    "name": "Raspberry",
-    "category": "Fruit",
-    "price": 3.99,
+    "name": "Onion",
+    "category": "Vegetable",
+    "price": 1.10,
     "quantity": 1,
-    "img": "/images/products-grocery/raspberry.avif"
+    "img": "/images/products-grocery/onion.png"
   },
   {
     "id": 21,
-    "name": "Lime",
-    "category": "Fruit",
-    "price": 0.89,
+    "name": "Pumpkin",
+    "category": "Vegetable",
+    "price": 3.50,
     "quantity": 1,
-    "img": "/images/products-grocery/lime.avif"
+    "img": "/images/products-grocery/pumpkin.png"
   },
   {
     "id": 22,
-    "name": "Avocado",
-    "category": "Fruit",
-    "price": 2.99,
+    "name": "Farfalle Pasta",
+    "category": "Carbohydrate",
+    "price": 2.50,
     "quantity": 1,
-    "img": "/images/products-grocery/avocado.avif"
+    "img": "/images/products-grocery/farfalle.png"
   },
   {
     "id": 23,
-    "name": "Coconut",
-    "category": "Fruit",
-    "price": 4.49,
+    "name": "Oats",
+    "category": "Carbohydrate",
+    "price": 3.00,
     "quantity": 1,
-    "img": "/images/products-grocery/coconut.avif"
+    "img": "/images/products-grocery/oats.png"
   },
   {
     "id": 24,
-    "name": "Carrot",
-    "category": "Vegetable",
-    "price": 1.19,
+    "name": "Penne Pasta",
+    "category": "Carbohydrate",
+    "price": 2.40,
     "quantity": 1,
-    "img": "/images/products-grocery/carrot.avif"
+    "img": "/images/products-grocery/penne.png"
   },
   {
     "id": 25,
-    "name": "Tomato",
-    "category": "Vegetable",
-    "price": 1.39,
+    "name": "Spaghetti",
+    "category": "Carbohydrate",
+    "price": 2.20,
     "quantity": 1,
-    "img": "/images/products-grocery/tomato.avif"
+    "img": "/images/products-grocery/spaghetti.png"
   },
   {
     "id": 26,
-    "name": "Lettuce",
-    "category": "Vegetable",
-    "price": 1.79,
+    "name": "Bread",
+    "category": "Carbohydrate",
+    "price": 1.80,
     "quantity": 1,
-    "img": "/images/products-grocery/lettuce.avif"
+    "img": "/images/products-grocery/bread.png"
   },
   {
     "id": 27,
-    "name": "Cucumber",
-    "category": "Vegetable",
-    "price": 1.59,
+    "name": "Rice",
+    "category": "Carbohydrate",
+    "price": 2.00,
     "quantity": 1,
-    "img": "/images/products-grocery/cucumber.avif"
+    "img": "/images/products-grocery/rice.png"
   },
   {
     "id": 28,
-    "name": "Potato",
-    "category": "Vegetable",
-    "price": 0.99,
+    "name": "Beef Steak",
+    "category": "Protein",
+    "price": 6.50,
     "quantity": 1,
-    "img": "/images/products-grocery/potato.avif"
+    "img": "/images/products-grocery/steak.png"
   },
   {
     "id": 29,
-    "name": "Onion",
-    "category": "Vegetable",
-    "price": 1.29,
+    "name": "Walnut",
+    "category": "Protein",
+    "price": 4.00,
     "quantity": 1,
-    "img": "/images/products-grocery/onion.avif"
+    "img": "/images/products-grocery/walnut.png"
   },
   {
     "id": 30,
-    "name": "Garlic",
-    "category": "Vegetable",
-    "price": 1.99,
+    "name": "Bean",
+    "category": "Protein",
+    "price": 2.20,
     "quantity": 1,
-    "img": "/images/products-grocery/garlic.avif"
+    "img": "/images/products-grocery/bean.png"
   },
   {
     "id": 31,
-    "name": "Spinach",
-    "category": "Vegetable",
-    "price": 2.29,
+    "name": "Salmon Steak",
+    "category": "Protein",
+    "price": 7.50,
     "quantity": 1,
-    "img": "/images/products-grocery/spinach.avif"
+    "img": "/images/products-grocery/salmonsteak.png"
   },
   {
     "id": 32,
-    "name": "Broccoli",
-    "category": "Vegetable",
-    "price": 2.99,
+    "name": "Almond",
+    "category": "Protein",
+    "price": 5.00,
     "quantity": 1,
-    "img": "/images/products-grocery/broccoli.avif"
+    "img": "/images/products-grocery/almond.png"
   },
   {
     "id": 33,
-    "name": "Bell Pepper",
-    "category": "Vegetable",
-    "price": 2.49,
+    "name": "Soybean",
+    "category": "Protein",
+    "price": 2.00,
     "quantity": 1,
-    "img": "/images/products-grocery/bellpepper.avif"
+    "img": "/images/products-grocery/soybean.png"
   },
   {
     "id": 34,
-    "name": "Eggplant",
-    "category": "Vegetable",
-    "price": 2.19,
+    "name": "Pea",
+    "category": "Protein",
+    "price": 1.80,
     "quantity": 1,
-    "img": "/images/products-grocery/eggplant.avif"
+    "img": "/images/products-grocery/pea.png"
   },
   {
     "id": 35,
-    "name": "Zucchini",
-    "category": "Vegetable",
-    "price": 1.89,
+    "name": "Black Bean",
+    "category": "Protein",
+    "price": 2.40,
     "quantity": 1,
-    "img": "/images/products-grocery/zucchini.avif"
+    "img": "/images/products-grocery/blackbean.png"
   },
   {
     "id": 36,
-    "name": "Corn",
-    "category": "Vegetable",
-    "price": 1.59,
+    "name": "Cheese",
+    "category": "Protein",
+    "price": 4.50,
     "quantity": 1,
-    "img": "/images/products-grocery/corn.avif"
+    "img": "/images/products-grocery/cheese.png"
   },
   {
     "id": 37,
-    "name": "Celery",
-    "category": "Vegetable",
-    "price": 1.99,
+    "name": "Pork Chop",
+    "category": "Protein",
+    "price": 5.20,
     "quantity": 1,
-    "img": "/images/products-grocery/celery.avif"
+    "img": "/images/products-grocery/porkchop.png"
   },
   {
     "id": 38,
-    "name": "Radish",
-    "category": "Vegetable",
-    "price": 1.49,
+    "name": "Chicken Drumstick",
+    "category": "Protein",
+    "price": 3.50,
     "quantity": 1,
-    "img": "/images/products-grocery/radish.avif"
+    "img": "/images/products-grocery/chickendrumstick.png"
   },
   {
     "id": 39,
-    "name": "Coca Cola",
-    "category": "Drink",
-    "price": 1.99,
+    "name": "Milk",
+    "category": "Protein",
+    "price": 1.60,
     "quantity": 1,
-    "img": "/images/products-grocery/cocacola.avif"
+    "img": "/images/products-grocery/milk.png"
   },
   {
     "id": 40,
-    "name": "Pepsi",
-    "category": "Drink",
-    "price": 1.89,
+    "name": "Egg",
+    "category": "Protein",
+    "price": 2.00,
     "quantity": 1,
-    "img": "/images/products-grocery/pepsi.avif"
+    "img": "/images/products-grocery/egg.png"
   },
   {
     "id": 41,
-    "name": "Orange Juice",
-    "category": "Drink",
-    "price": 2.49,
+    "name": "Orange",
+    "category": "Fruit",
+    "price": 1.2,
     "quantity": 1,
-    "img": "/images/products-grocery/orangejuice.avif"
+    "img": "/images/products-grocery/orange.png"
   },
   {
     "id": 42,
-    "name": "Lemonade",
-    "category": "Drink",
-    "price": 2.29,
+    "name": "Peach",
+    "category": "Fruit",
+    "price": 1.5,
     "quantity": 1,
-    "img": "/images/products-grocery/lemonade.avif"
+    "img": "/images/products-grocery/peach.png"
   },
   {
     "id": 43,
-    "name": "Water",
-    "category": "Drink",
-    "price": 0.99,
+    "name": "Pear",
+    "category": "Fruit",
+    "price": 1.3,
     "quantity": 1,
-    "img": "/images/products-grocery/water.avif"
+    "img": "/images/products-grocery/pear.png"
   },
   {
     "id": 44,
-    "name": "Sprite",
-    "category": "Drink",
-    "price": 1.89,
+    "name": "Pineapple",
+    "category": "Fruit",
+    "price": 2.5,
     "quantity": 1,
-    "img": "/images/products-grocery/sprite.avif"
+    "img": "/images/products-grocery/pineapple.png"
   },
   {
     "id": 45,
-    "name": "Fanta",
-    "category": "Drink",
-    "price": 1.79,
+    "name": "Pomegranate",
+    "category": "Fruit",
+    "price": 2.0,
     "quantity": 1,
-    "img": "/images/products-grocery/fanta.avif"
+    "img": "/images/products-grocery/pomegranate.png"
   },
   {
     "id": 46,
-    "name": "Iced Tea",
-    "category": "Drink",
-    "price": 2.19,
+    "name": "Raspberry",
+    "category": "Fruit",
+    "price": 3.0,
     "quantity": 1,
-    "img": "/images/products-grocery/icedtea.avif"
+    "img": "/images/products-grocery/rapsberry.png"
   },
   {
     "id": 47,
-    "name": "Milk",
-    "category": "Drink",
-    "price": 1.59,
+    "name": "Strawberry",
+    "category": "Fruit",
+    "price": 2.8,
     "quantity": 1,
-    "img": "/images/products-grocery/milk.avif"
+    "img": "/images/products-grocery/strawberry.png"
   },
   {
     "id": 48,
-    "name": "Coffee",
-    "category": "Drink",
-    "price": 2.99,
+    "name": "Watermelon",
+    "category": "Fruit",
+    "price": 4.5,
     "quantity": 1,
-    "img": "/images/products-grocery/coffee.avif"
+    "img": "/images/products-grocery/watermelon.png"
   },
   {
     "id": 49,
-    "name": "Energy Drink",
-    "category": "Drink",
-    "price": 3.49,
+    "name": "Banana",
+    "category": "Fruit",
+    "price": 1.1,
     "quantity": 1,
-    "img": "/images/products-grocery/energydrink.avif"
+    "img": "/images/products-grocery/banana.png"
   },
   {
     "id": 50,
-    "name": "Ginger Ale",
-    "category": "Drink",
-    "price": 1.69,
+    "name": "Blackberry",
+    "category": "Fruit",
+    "price": 3.2,
     "quantity": 1,
-    "img": "/images/products-grocery/gingerale.avif"
+    "img": "/images/products-grocery/blackberry.png"
+  },
+  {
+    "id": 51,
+    "name": "Blueberry",
+    "category": "Fruit",
+    "price": 3.5,
+    "quantity": 1,
+    "img": "/images/products-grocery/blueberry.png"
+  },
+  {
+    "id": 52,
+    "name": "Cherry",
+    "category": "Fruit",
+    "price": 2.7,
+    "quantity": 1,
+    "img": "/images/products-grocery/cherry.png"
+  },
+  {
+    "id": 53,
+    "name": "Cranberry",
+    "category": "Fruit",
+    "price": 3.0,
+    "quantity": 1,
+    "img": "/images/products-grocery/cranberrie.png"
+  },
+  {
+    "id": 54,
+    "name": "Green Apple",
+    "category": "Fruit",
+    "price": 1.4,
+    "quantity": 1,
+    "img": "/images/products-grocery/greenapple.png"
+  },
+  {
+    "id": 55,
+    "name": "Green Grape",
+    "category": "Fruit",
+    "price": 2.2,
+    "quantity": 1,
+    "img": "/images/products-grocery/greengrape.png"
+  },
+  {
+    "id": 56,
+    "name": "Kiwi",
+    "category": "Fruit",
+    "price": 1.8,
+    "quantity": 1,
+    "img": "/images/products-grocery/kiwi.png"
+  },
+  {
+    "id": 57,
+    "name": "Lemon",
+    "category": "Fruit",
+    "price": 1.0,
+    "quantity": 1,
+    "img": "/images/products-grocery/lemon.png"
+  },
+  {
+    "id": 58,
+    "name": "Mango",
+    "category": "Fruit",
+    "price": 2.3,
+    "quantity": 1,
+    "img": "/images/products-grocery/mango.png"
   }
 ]

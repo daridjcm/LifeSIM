@@ -4,11 +4,19 @@ import ModalComponent from './Modal.jsx';
 import TableCustomers, { customersCount } from './TableCustomers.jsx';
 import CustomButton from '../../CustomButton.jsx';
 
-export default function PhoneCorporative() {
+export default function PhoneCorporative({ tasks, setTasks }) {
+  const [chatBossClickCount, setChatBossClickCount] = useState(0);
   const [customerCountHandler, setCustomerCount] = useState(customersCount);
   const [chatBoss, setChatBoss] = useState(false);
   const [chatAnalia, setChatAnalia] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const handleTaskCompletion = (task) => {
+    setTasks((prevTasks) =>
+      prevTasks.includes(task) ? prevTasks : [...prevTasks, task]
+    );
+  };
+
 
   // Redirect to chat with boss
   const ChatBoss = () => {
@@ -18,7 +26,7 @@ export default function PhoneCorporative() {
       setChatBoss(false);
     }, 2000);
   };
-
+  
   // Redirect form to add customer
   const TableCalls = () => {
     onOpen();
@@ -33,30 +41,52 @@ export default function PhoneCorporative() {
     }, 2000);
   };
 
-  {
-    /* Render content Phone Corporative */
-  }
+
+  const handleChatBossClick = () => {
+    setChatBossClickCount((prevCount) => prevCount + 1);
+
+    if (chatBossClickCount === 0 && !tasks.includes("task1")) {
+      handleTaskCompletion("task1");
+    } else if (chatBossClickCount === 1 && !tasks.includes("task4")) {
+      handleTaskCompletion("task4");
+    }
+    ChatBoss();
+  };
+
   return (
     <div className='flex flex-col gap-3 mt-4'>
       <CustomButton
-        label={
-          chatBoss ? 'Entering to chat with Boss...' : 'Chat with the Boss 📱'
-        }
-        onPress={ChatBoss}
-        id='chatBoss'
+        label={chatBoss ? "Entering to chat with the Boss..." : "Chat with the Boss 📱"}
+        onPress={handleChatBossClick}
+        id="chatBoss"
       />
       <CustomButton
-        label={`Table of Calls ☎`}
-        onPress={TableCalls}
+        label="Check the file of customers 📂"
+        onPress={() => {
+          handleTaskCompletion('task2');
+          setCustomerCount(customersCount);
+
+          // Redirect to the file of customers
+        }}
+      />
+
+      <CustomButton
+        label="Table of Calls ☎"
+        onPress={() => {
+          handleTaskCompletion("task3");
+          TableCalls(); // Fix: Call function separately
+        }}
         isLoading={false}
-        id='tableCalls'
+        id="tableCalls"
       />
+
       <CustomButton
-        label={
-          chatAnalia ? 'Entering to chat Analia...' : 'Chat with Analia 📱'
-        }
-        onPress={ChatAnalia}
-        id='chatAnalia'
+        label={chatAnalia ? "Entering to chat Analia..." : "Chat with Analia 📱"}
+        onPress={() => {
+          handleTaskCompletion("task5");
+          ChatAnalia(); // Fix: Call function separately
+        }}
+        id="chatAnalia"
       />
 
       <ModalComponent

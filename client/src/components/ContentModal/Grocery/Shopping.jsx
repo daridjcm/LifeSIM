@@ -52,8 +52,8 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
         ? {
             ...product,
             quantity,
-            price: (product.basePrice * quantity).toFixed(2),
-            basePrice: product.basePrice,
+            price: (product.base_price * quantity).toFixed(2),
+            base_price: product.base_price,
           }
         : product,
     );
@@ -70,7 +70,7 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
     const updatedItems = selectedItems.map((item) => ({
       ...item,
       price: parseFloat(item.price),
-      basePrice: parseFloat(item.basePrice),
+      base_price: parseFloat(item.base_price),
     }));
     showAlert(
       'Products Saved ✅',
@@ -102,16 +102,13 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
   // Handle clear all products
   const handleClear = () => {
     setSelectedItems([]);
-    showAlert(
-      'Note ⚠️',
-      "Tap a product to cross it out or tap 'Clear all' to delete all products.",
-    );
   };
 
   // Render view to display selected products
   return (
     <>
       <p>Products selected to buy.</p>
+      <p>Products Selected: {selectedItems.length}</p>  
       {selectedItems.length > 0 ? (
         <>
           <CheckboxGroup
@@ -136,14 +133,13 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
                     <Image
                       alt={product.name}
                       src={product.img}
-                      width={52}
-                      height={50}
+                      width={100}
+                      height={80}
                       shadow='sm'
-                      radius='full'
                       className='object-cover'
                     />
                     <p className='ml-2'>{product.name}</p>
-                    <p className='ml-2 font-bold'>${product.price}</p>
+                    <p className='ml-2 font-bold'>{product.quantity} x ${product.price}</p>
                   </Checkbox>
                 ))}
               </div>
@@ -197,6 +193,9 @@ function ShoppingList({ selectedItems, setSelectedItems }) {
             onPress={handleClear}
             loadingText='Cleaning all...'
           />
+          <p className='text-blue-500 mt-5 font-semibold'>
+          You can <span className='text-red-500 font-bold'>deleting products by simply clicking on them</span> or <span className='text-green-500 font-bold'>you can change the quantity</span> of each product.
+          </p>
         </>
       ) : (
         <p className='text-gray-500'>Not have products selected.</p>
@@ -216,7 +215,7 @@ export default function ShoppingListTab({ selectedProducts = [] }) {
       setSelectedItems(
         selectedProducts.map((product) => ({
           ...product,
-          basePrice: product.price,
+          base_price: product.price,
           quantity: 1,
         })),
       );

@@ -1,96 +1,21 @@
-import { useState, useEffect } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
+import { useRef, useEffect } from 'react';
+import { createChart, BaselineSeries } from 'lightweight-charts';
 
-// Handle data generation random
-// TODO: changes months for hours today.
-const generateRandomData = () => {
-  const currentMonth = new Date().getMonth();
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+export default function TradingChart() {
+    const chartContainerRef = useRef(null);
 
-  return months.slice(0, currentMonth + 1).map((month) => {
-    const low = Math.floor(Math.random() * 5000);
-    const line = Math.floor(Math.random() * 10000);
-    return {
-      name: month,
-      low,
-      line,
-      color: line > 5000 ? '#00FF00' : '#FF0000',
-    };
-  });
-};
+    useEffect(() => {
+        if (!chartContainerRef.current) return;
+        const chart = createChart(chartContainerRef.current, { width: 1000, height: 400 });
+        const data = [{ value: 1, time: 1642425322 }, { value: 8, time: 1642511722 }, { value: 10, time: 1642598122 }, { value: 20, time: 1642684522 }, { value: 3, time: 1642770922 }, { value: 43, time: 1642857322 }, { value: 41, time: 1642943722 }, { value: 43, time: 1643030122 }, { value: 56, time: 1643116522 }, { value: 46, time: 1643202922 }];
 
-// Render view to chart
-export default function FakeBankInvestment() {
-  const [data, setData] = useState(generateRandomData());
+        const baselineSeries = chart.addSeries(BaselineSeries, { baseValue: { type: 'price', price: 25 }, topLineColor: 'rgba( 38, 166, 154, 1)', topFillColor1: 'rgba( 38, 166, 154, 0.28)', topFillColor2: 'rgba( 38, 166, 154, 0.05)', bottomLineColor: 'rgba( 239, 83, 80, 1)', bottomFillColor1: 'rgba( 239, 83, 80, 0.05)', bottomFillColor2: 'rgba( 239, 83, 80, 0.28)' });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setData(generateRandomData());
-    }, 30000);
+        baselineSeries.setData(data);
+        return () => chart.remove();
+    }, []);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className='p-4'>
-      <h2 className='text-xl font-bold mb-4 flex items-center gap-4 ml-8'>
-        Chart Investment
-        <div className='text-xs font-semibold'>
-          <ArrowUpIcon className='text-green-500 size-5' />
-          High value
-        </div>
-        <div className='text-xs font-semibold'>
-          <ArrowDownIcon className='text-red-500 size-5' />
-          Down value
-        </div>
-      </h2>
-      <ResponsiveContainer width='100%' height={300}>
-        <LineChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis
-            dataKey='name'
-            label={{ value: 'Month', position: 'insideBottom', offset: -5 }}
-          />
-          <YAxis
-            domain={[100, 1000]}
-            label={{ value: 'Value', angle: -90, position: 'insideLeft' }}
-          />
-          <Tooltip />
-          <Legend />
-          <Line
-            type='monotone'
-            dataKey='line'
-            stroke={data.length > 0 ? data[data.length - 1].color : '#000000'}
-            strokeDasharray='3 4 5 2'
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
+    return (
+        <div ref={chartContainerRef} id="chart-container" className='flex flex-col justify-center items-center' />
+    );
 }

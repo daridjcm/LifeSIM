@@ -168,6 +168,17 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
   const [loading, setLoading] = useState(true);
   const { nextAppointment } = useAppointment();
 
+  const enrichedAppointment = nextAppointment
+    ? {
+        ...nextAppointment,
+        doctorData: doctors.find(
+          (doc) =>
+            doc.name === nextAppointment.doctor &&
+            doc.title === nextAppointment.title,
+        ),
+      }
+    : null;
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -177,23 +188,22 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
     return () => clearTimeout(timer);
   }, [onProgressChange]);
 
-  const handleDoctor = () => {
-    if (!nextAppointment) return '/images/default-doctor.svg';
-    const doctor = doctors.find((doc) => doc.name === nextAppointment.doctor);
-    return doctor ? doctor.img[0] : '/images/default-doctor.svg';
-  };
-
   if (loading) {
     return (
       <div className='flex sm:flex-col md:flex-col lg:flex-row items-center text-center'>
-        {handleDoctor && <img src={handleDoctor} alt='Doctor' />}
-        <div className='flex flex-col text-4xl'>
-          Evaluating your health and the diagnosis
-          <Spinner
-            classNames={{ label: 'text-foreground mt-4' }}
-            variant='wave'
-          />
-        </div>
+        {enrichedAppointment && enrichedAppointment.doctorData && (
+          <div className='flex items-center gap-4'>
+            <img
+              src={enrichedAppointment.doctorData.img[0]}
+              alt={enrichedAppointment.doctorData.name}
+            />
+          </div>
+        )}
+        Evaluating your health and the diagnosis 🤔
+        <Spinner
+          classNames={{ label: 'text-foreground mt-4' }}
+          variant='wave'
+        />
       </div>
     );
   }
@@ -252,8 +262,9 @@ export default function Content() {
   const [matchedDiseases, setMatchedDiseases] = useState([]);
   const { nextAppointment } = useAppointment();
   const [isWithinTimeWindow, setIsWithinTimeWindow] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null); // ⏳ countdown state
 
-  const { showAlert } = useAlert()
+  const { showAlert } = useAlert();
 
   const handleNextStep = () => {
     const diseasesMatched = diseases.filter((disease) => {
@@ -268,37 +279,85 @@ export default function Content() {
 
   useEffect(() => {
     if (nextAppointment?.dateObj) {
-  
       const appointmentTime = new Date(nextAppointment.dateObj).getTime();
       const currentTime = new Date().getTime();
       const timeDifference = appointmentTime - currentTime;
-    
+
       if (isNaN(timeDifference)) {
         showAlert('Error ❌', 'Invalid appointment time.');
         return;
       }
-  
-      if (timeDifference <= 0) {
-        showAlert('Warning ⚠️', 'The appointment time has already passed.');
-        return;
-      }
-  
-      // Check if the appointment is within 30 minutes
-      if (timeDifference <= 30 * 60 * 1000 && timeDifference > 0) {
-        showAlert('Warning ⚠️', 'Appointment is activated 30 minutes before.');
-        setIsWithinTimeWindow(true);
-      } 
-      else if (timeDifference > 30 * 60 * 1000) {
-        const timer = setTimeout(() => {
-          showAlert('Warning ⚠️', 'Appointment is activated 30 minutes before.');
+
+      let countdownInterval;
+      let openTimer;
+      let cancelTimer;
+
+      if (timeDifference > 0) {
+        countdownInterval = setInterval(() => {
+          const now = new Date().getTime();
+          const diff = appointmentTime - now;
+
+          if (diff <= 0) {
+            clearInterval(countdownInterval);
+            setTimeLeft('The appointment is starting...');
+          } else {
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+          }
+        }, 1000);
+
+        const openTime = timeDifference - 5 * 60 * 1000;
+        if (openTime > 0) {
+          openTimer = setTimeout(() => {
+            showAlert('✅', 'The appointment room is now open. You may enter.');
+            setIsWithinTimeWindow(true);
+          }, openTime);
+        } else {
           setIsWithinTimeWindow(true);
-        }, timeDifference - 30 * 60 * 1000);
-  
-        return () => {
-          showAlert('Atenttion', '⏳ Clearing timer');
-          clearTimeout(timer);
-        };
+        }
+
+        cancelTimer = setTimeout(
+          async () => {
+            if (!isInConsultation) {
+              showAlert(
+                '🚫',
+                'The appointment was canceled because you entered too late (more than 1 min after the start).',
+              );
+
+              await fetch(
+                `http://localhost:3000/api/appointments/${nextAppointment.id}`,
+                {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ status: 'canceled' }),
+                },
+              );
+
+              setIsWithinTimeWindow(false);
+            }
+          },
+          timeDifference + 1 * 60 * 1000,
+        );
+      } else {
+        if (currentTime - appointmentTime <= 1 * 60 * 1000) {
+          showAlert('✅', 'The appointment has started. You may enter now.');
+          setIsWithinTimeWindow(true);
+        } else {
+          showAlert(
+            '🚫',
+            'The appointment was canceled because the time limit expired.',
+          );
+          setIsWithinTimeWindow(false);
+        }
       }
+
+      return () => {
+        clearInterval(countdownInterval);
+        clearTimeout(openTimer);
+        clearTimeout(cancelTimer);
+      };
     } else {
       showAlert('Warning ⚠️', 'No appointment found.');
       setIsWithinTimeWindow(false);
@@ -340,9 +399,25 @@ export default function Content() {
     );
   } else {
     return (
-      <div>
-        Your health cannot be taken care of because it is not yet time. Please
-        check the health record or schedule an appointment.
+      <div className='text-center mt-10'>
+        {nextAppointment ? (
+          // ✅ Appointment is starting → show countdown
+          timeLeft && (
+            <p className='text-lg font-bold mt-4 text-blue-600'>
+              ⏳ Next appointment starts in:{' '}
+              <span className='font-bold bg-blue-600 text-white rounded-md px-2 py-1'>
+                {timeLeft}
+              </span>
+            </p>
+          )
+        ) : (
+          // ❌ No appointment → show message
+          <p>
+            Do you have an appointment scheduled? Please check the health record
+            or schedule an appointment. You must assist before 5 minutes of the
+            time scheduled or the appointment will be canceled.
+          </p>
+        )}
       </div>
     );
   }

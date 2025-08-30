@@ -4,7 +4,7 @@ const { Transaction } = db;
 
 export const createTransaction = async (req, res) => {
   try {
-    const user_id = req.userID;
+    const user_id = req.user_id;
     const { type, amount, date } = req.body;
 
     if (!user_id || !type || !amount || !date) {
@@ -23,7 +23,7 @@ export const createTransaction = async (req, res) => {
     });
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Transaction created successfully.',
         transaction: newTransaction,

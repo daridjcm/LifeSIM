@@ -13,13 +13,13 @@ export const saveGrocery = async (req, res) => {
       name: item.name,
       category: item.category,
       price: parseFloat(item.price),
-      basePrice: parseFloat(item.basePrice),
+      base_price: parseFloat(item.base_price),
       quantity: parseInt(item.quantity),
       img: item.img,
     }));
 
     res
-      .status(201)
+      .status(200)
       .json({
         message: 'Groceries saved successfully.',
         groceries: groceryItems,

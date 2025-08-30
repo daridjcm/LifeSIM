@@ -5,7 +5,6 @@ import Card from '../../Card';
 import handleDownload from '../../SavePDF.jsx';
 import ModalComponent from '../../ContentModal/Work/Modal.jsx';
 import { useUser } from '../../../context/UserContext.jsx';
-import { select } from '@heroui/react';
 
 const STORAGE_KEY = 'atmInvoice';
 
@@ -80,6 +79,7 @@ export default function AtmTab({
     }
     setShowPaymentModal(true);
   };
+  console.log('User Data:', userData);
 
   const processPayment = async (method) => {
     setPaymentProcessing(true);
@@ -95,7 +95,7 @@ export default function AtmTab({
       }));
 
       const requestData = {
-        userID: userData.id,
+        user_id: userData.id,
         invoiceNumber: Date.now(),
         items: items,
         total_amount,
@@ -124,7 +124,7 @@ export default function AtmTab({
         setInvoice(latestInvoice);
         saveInvoiceToLocalStorage(latestInvoice);
       }
-
+      setPaymentStatus('Products paid successfully');
       showAlert('Products paid successfully', 'Payment completed ✅');
     } catch (error) {
       showAlert('Error to pay products', 'Payment failed ❌');
@@ -137,8 +137,8 @@ export default function AtmTab({
   return (
     <>
       <p className='text-2xl font-bold'>Summary Purchase</p>
-      <p className='font-bold text-xl'>Total: ${total_amount}</p>
-      <p className='font-bold text-xl'>Products selected: {products.length}</p>
+      <p className='font-bold text-xl'>Total: ${total_amount} LSD</p>
+      <p className='font-bold text-xl'>Products Selected: {products.length}</p>
       <Card type='Shopping Card' holder={user?.username} id={user?.id} />
 
       <div className='flex gap-3'>
@@ -147,7 +147,7 @@ export default function AtmTab({
           onPress={handlePayment}
           disabled={paymentProcessing}
         />
-        {invoice && (
+        {paymentStatus == 'Products paid successfully' && (
           <CustomButton
             label='Download Report 🧾'
             onPress={() => handleDownload('Invoice', invoice, userData)}

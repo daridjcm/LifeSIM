@@ -3,13 +3,15 @@ export default (sequelize, DataTypes) => {
     'Work',
     {
       user_id: { type: DataTypes.INTEGER, allowNull: false },
-      job: { type: DataTypes.STRING, allowNull: false },
-      company: { type: DataTypes.STRING, allowNull: false },
-      salary: { type: DataTypes.DECIMAL(15, 2), allowNull: false },
-      work_experience: { type: DataTypes.TINYINT, allowNull: false },
-      status: { type: DataTypes.BOOLEAN, allowNull: false }, // true = employed, false = unemployed
+      job: { type: DataTypes.STRING, allowNull: false, defaultValue: 'Administrative Assistant' },
+      company: { type: DataTypes.STRING, allowNull: false, defaultValue: 'LifeSIM Inc.' },
+      salary: { type: DataTypes.DECIMAL(15, 2), allowNull: false, defaultValue: 500.00 },
+      work_experience: { type: DataTypes.TINYINT, allowNull: false, defaultValue: 1 },
+      status: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }, // true = employed (1), false = unemployed (0)
+      start_date: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
+      end_date: { type: DataTypes.DATE, allowNull: true }, // Nullable for current employment
     },
-    { timestamp: true, tableName: 'works' },
+    { tableName: 'works' },
   );
 
   Work.associate = (models) => {

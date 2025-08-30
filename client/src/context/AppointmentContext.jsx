@@ -1,14 +1,15 @@
 import React, { createContext, useContext, useState } from 'react';
 import { parse, isAfter, isBefore, startOfMinute, isValid } from 'date-fns';
-import { useAlert } from '../context/AlertContext'
+import { useAlert } from '../context/AlertContext';
 
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
+  const [isInConsultation, setIsInConsultation] = useState(false);
   const [nextAppointment, setNextAppointment] = useState(null);
-  const { showAlert } = useAlert()
+  const { showAlert } = useAlert();
 
-  const fetchAppointments = async (userID) => {
+  const fetchAppointments = async (user_id) => {
     try {
       const response = await fetch('http://localhost:3000/api/appointments');
       if (!response.ok) throw new Error('Network response was not ok');
@@ -16,7 +17,7 @@ export const AppointmentProvider = ({ children }) => {
       const { appointments } = await response.json();
 
       const userAppointments = appointments.filter(
-        (appt) => appt.user_id === userID,
+        (appt) => appt.user_id === user_id,
       );
 
       const now = startOfMinute(new Date());
@@ -27,18 +28,14 @@ export const AppointmentProvider = ({ children }) => {
             .replace(/\s*a\.?\s*m\.?/i, 'AM')
             .replace(/(AM|PM)$/, ' $1');
 
-          const dateTimeStr = `${appt.date} ${cleanedTime}`;
+            const dateTimeStr = `${appt.date} ${appt.time}`;
+            const parsedDate = parse(dateTimeStr, 'yyyy-MM-dd HH:mm', new Date());
 
-          const parsedDate = parse(
-            dateTimeStr,
-            'yyyy-MM-dd h:mm a',
-            new Date(),
-          );
 
           if (!isValid(parsedDate)) {
             return null;
           }
-
+          
           const dateObj = startOfMinute(parsedDate);
           return { ...appt, dateObj };
         })
@@ -50,7 +47,6 @@ export const AppointmentProvider = ({ children }) => {
           appt.status !== 'completed' &&
           appt.status !== 'canceled'
         ) {
-          showAlert('Atenttion', `🚫 Canceling appointment: ${appt.id}`);
           await fetch(`http://localhost:3000/api/appointments/${appt.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -79,7 +75,7 @@ export const AppointmentProvider = ({ children }) => {
 
   return (
     <AppointmentContext.Provider
-      value={{ nextAppointment, setNextAppointment, fetchAppointments }}
+      value={{isInConsultation, setIsInConsultation, nextAppointment, setNextAppointment, fetchAppointments }}
     >
       {children}
     </AppointmentContext.Provider>

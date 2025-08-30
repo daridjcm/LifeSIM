@@ -1,51 +1,59 @@
 ID,Name,Category,Price
-1,"Burger","Fast Food",5.99
-2,"Pizza","Fast Food",8.99
-3,"Hot Dog","Fast Food",4.99
-4,"French Fries","Fast Food",3.99
-5,"Chicken Nuggets","Fast Food",6.99
-6,"Cheese Burger","Fast Food",6.49
-7,"Chicken Roll","Fast Food",7.49
-8,"Fish Roll","Fast Food",7.99
-9,"Taco","Fast Food",3.49
-10,"Burrito","Fast Food",6.99
-11,"Pineapple","Fruit",3.99
-12,"Apple","Fruit",1.49
-13,"Banana","Fruit",0.99
-14,"Orange","Fruit",1.29
-15,"Strawberry","Fruit",2.99
-16,"Grapes","Fruit",2.49
-17,"Mango","Fruit",2.99
-18,"Pear","Fruit",1.79
-19,"Blueberry","Fruit",3.49
-20,"Raspberry","Fruit",3.99
-21,"Lime","Fruit",0.89
-22,"Avocado","Fruit",2.99
-23,"Coconut","Fruit",4.49
-24,"Carrot","Vegetable",1.19
-25,"Tomato","Vegetable",1.39
-26,"Lettuce","Vegetable",1.79
-27,"Cucumber","Vegetable",1.59
-28,"Potato","Vegetable",0.99
-29,"Onion","Vegetable",1.29
-30,"Garlic","Vegetable",1.99
-31,"Spinach","Vegetable",2.29
-32,"Broccoli","Vegetable",2.99
-33,"Bell Pepper","Vegetable",2.49
-34,"Eggplant","Vegetable",2.19
-35,"Zucchini","Vegetable",1.89
-36,"Corn","Vegetable",1.59
-37,"Celery","Vegetable",1.99
-38,"Radish","Vegetable",1.49
-39,"Coca Cola","Drink",1.99
-40,"Pepsi","Drink",1.89
-41,"Orange Juice","Drink",2.49
-42,"Lemonade","Drink",2.29
-43,"Water","Drink",0.99
-44,"Sprite","Drink",1.89
-45,"Fanta","Drink",1.79
-46,"Iced Tea","Drink",2.19
-47,"Milk","Drink",1.59
-48,"Coffee","Drink",2.99
-49,"Energy Drink","Drink",3.49
-50,"Ginger Ale","Drink",1.69
+1,"Red Cabbage","Vegetable",2.5
+2,"Red Bell Pepper","Vegetable",1.2
+3,"Tomato","Vegetable",1.8
+4,"Carrot","Vegetable",1
+5,"Cauliflower","Vegetable",3
+6,"Green Onion","Vegetable",1.5
+7,"Lettuce","Vegetable",1.8
+8,"Potato","Vegetable",0.9
+9,"Asparagus","Vegetable",3.5
+10,"Eggplant","Vegetable",2.2
+11,"Broccoli","Vegetable",2.8
+12,"Zucchini","Vegetable",2
+13,"Artichoke","Vegetable",3.2
+14,"Beetroot","Vegetable",1.6
+15,"Celery","Vegetable",1.9
+16,"Corn","Vegetable",1.5
+17,"Cucumber","Vegetable",1.2
+18,"Garlic","Vegetable",0.8
+19,"Mushroom","Vegetable",2.7
+20,"Onion","Vegetable",1.1
+21,"Pumpkin","Vegetable",3.5
+22,"Farfalle Pasta","Carbohydrate",2.5
+23,"Oats","Carbohydrate",3
+24,"Penne Pasta","Carbohydrate",2.4
+25,"Spaghetti","Carbohydrate",2.2
+26,"Bread","Carbohydrate",1.8
+27,"Rice","Carbohydrate",2
+28,"Beef Steak","Protein",6.5
+29,"Walnut","Protein",4
+30,"Bean","Protein",2.2
+31,"Salmon Steak","Protein",7.5
+32,"Almond","Protein",5
+33,"Soybean","Protein",2
+34,"Pea","Protein",1.8
+35,"Black Bean","Protein",2.4
+36,"Cheese","Protein",4.5
+37,"Pork Chop","Protein",5.2
+38,"Chicken Drumstick","Protein",3.5
+39,"Milk","Protein",1.6
+40,"Egg","Protein",2
+41,"Orange","Fruit",1.2
+42,"Peach","Fruit",1.5
+43,"Pear","Fruit",1.3
+44,"Pineapple","Fruit",2.5
+45,"Pomegranate","Fruit",2
+46,"Raspberry","Fruit",3
+47,"Strawberry","Fruit",2.8
+48,"Watermelon","Fruit",4.5
+49,"Banana","Fruit",1.1
+50,"Blackberry","Fruit",3.2
+51,"Blueberry","Fruit",3.5
+52,"Cherry","Fruit",2.7
+53,"Cranberry","Fruit",3
+54,"Green Apple","Fruit",1.4
+55,"Green Grape","Fruit",2.2
+56,"Kiwi","Fruit",1.8
+57,"Lemon","Fruit",1
+58,"Mango","Fruit",2.3

@@ -1,0 +1,349 @@
+[
+  {
+    "id": 1,
+    "name": "Espresso",
+    "category": "Coffees",
+    "price": 2.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/espresso.png"
+  },
+  {
+    "id": 2,
+    "name": "Americano",
+    "category": "Coffees",
+    "price": 3.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/americano.png"
+  },
+  {
+    "id": 3,
+    "name": "Cappuccino",
+    "category": "Coffees",
+    "price": 3.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/capuchino.png"
+  },
+  {
+    "id": 4,
+    "name": "Latte",
+    "category": "Coffees",
+    "price": 4.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/latte.png"
+  },
+  {
+    "id": 5,
+    "name": "Mocha",
+    "category": "Coffees",
+    "price": 4.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/mocha.png"
+  },
+  {
+    "id": 6,
+    "name": "Dalgona Coffee",
+    "category": "Coffees",
+    "price": 4.20,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/dalgona.png"
+  },
+  {
+    "id": 7,
+    "name": "Glace Coffee",
+    "category": "Coffees",
+    "price": 4.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/glace.png"
+  },
+
+  {
+    "id": 8,
+    "name": "Te Green",
+    "category": "Drinks",
+    "price": 2.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/tegreen.png"
+  },
+  {
+    "id": 9,
+    "name": "Hot Chocolate",
+    "category": "Drinks",
+    "price": 3.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/hotchocolate.png"
+  },
+  {
+    "id": 10,
+    "name": "Lemonade",
+    "category": "Drinks",
+    "price": 2.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/lemonade.png"
+  },
+  {
+    "id": 11,
+    "name": "Milkshake Strawberry",
+    "category": "Drinks",
+    "price": 4.20,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/milshakestrawberry.png"
+  },
+  {
+    "id": 12,
+    "name": "Frappe",
+    "category": "Drinks",
+    "price": 4.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/frappe.png"
+  },
+
+  {
+    "id": 13,
+    "name": "Croissant",
+    "category": "Bakery",
+    "price": 2.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/croissant.png"
+  },
+  {
+    "id": 14,
+    "name": "Bread Chocolate",
+    "category": "Bakery",
+    "price": 2.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/breadchocolate.png"
+  },
+  {
+    "id": 15,
+    "name": "Muffin of Blueberries",
+    "category": "Bakery",
+    "price": 2.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/muffinblueberries.png"
+  },
+  {
+    "id": 16,
+    "name": "Muffin of Chocolate",
+    "category": "Bakery",
+    "price": 3.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/muffinchocolate.png"
+  },
+  {
+    "id": 17,
+    "name": "Bagel with Cream Cheese",
+    "category": "Bakery",
+    "price": 3.20,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/bagelcreamcheese.png"
+  },
+  {
+    "id": 18,
+    "name": "Roll of Cinnamon",
+    "category": "Bakery",
+    "price": 3.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/rollcinnamon.png"
+  },
+  {
+    "id": 19,
+    "name": "Biscotti",
+    "category": "Bakery",
+    "price": 1.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/biscotti.png"
+  },
+
+  {
+    "id": 20,
+    "name": "Brownie of Chocolate",
+    "category": "Desserts",
+    "price": 3.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/browniechocolate.png"
+  },
+  {
+    "id": 21,
+    "name": "Cheesecake of Red Fruits",
+    "category": "Desserts",
+    "price": 4.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/cheesecakeredfruits.png"
+  },
+  {
+    "id": 22,
+    "name": "Tiramisu",
+    "category": "Desserts",
+    "price": 5.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/tiramisu.png"
+  },
+  {
+    "id": 23,
+    "name": "Crème Caramel",
+    "category": "Desserts",
+    "price": 3.80,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/cremecaramel.png"
+  },
+  {
+    "id": 24,
+    "name": "Mousse of Chocolate",
+    "category": "Desserts",
+    "price": 4.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/moussechocolate.png"
+  },
+  {
+    "id": 25,
+    "name": "Pancakes",
+    "category": "Desserts",
+    "price": 4.00,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/pancakes.png"
+  },
+  {
+    "id": 26,
+    "name": "Bundt Cake",
+    "category": "Desserts",
+    "price": 4.20,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/bundtcake.png"
+  },
+  {
+    "id": 27,
+    "name": "Cupcake",
+    "category": "Desserts",
+    "price": 3.20,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/cupcake.png"
+  },
+  {
+    "id": 28,
+    "name": "Cookies of Chocolate",
+    "category": "Desserts",
+    "price": 2.50,
+    "quantity": 1,
+    "img": "/images/products-cafeteria/cookieschocolate.png"
+  },
+  {
+    "id": 29,
+    "name": "Espresso + Croissant",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 4.20,
+    "products": [1, 13]
+  },
+  {
+    "id": 30,
+    "name": "Americano + Muffin of Blueberries",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 5.20,
+    "products": [2, 15]
+  },
+  {
+    "id": 31,
+    "name": "Cappuccino + Roll of Cinnamon",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 6.30,
+    "products": [3, 18]
+  },
+  {
+    "id": 32,
+    "name": "Latte + Bread Chocolate",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 6.00,
+    "products": [4, 14]
+  },
+  {
+    "id": 33,
+    "name": "Mocha + Bagel with Cream Cheese",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 7.20,
+    "products": [5, 17]
+  },
+  {
+    "id": 34,
+    "name": "Espresso + Brownie",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 5.50,
+    "products": [1, 20]
+  },
+  {
+    "id": 35,
+    "name": "Cappuccino + Cheesecake of Red Fruits",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 8.00,
+    "products": [3, 21]
+  },
+  {
+    "id": 36,
+    "name": "Latte + Tiramisu",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 8.50,
+    "products": [4, 22]
+  },
+  {
+    "id": 37,
+    "name": "Mocha + Crème Caramel",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 7.80,
+    "products": [5, 23]
+  },
+  {
+    "id": 38,
+    "name": "Glace Coffee + Pancakes",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 8.50,
+    "products": [7, 25]
+  },
+  {
+    "id": 39,
+    "name": "Dalgona Coffee + Bundt Cake",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 8.20,
+    "products": [6, 26]
+  },
+  {
+    "id": 40,
+    "name": "Frappe Coffee + Cupcake",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 7.00,
+    "products": [12, 27]
+  },
+  {
+    "id": 41,
+    "name": "Hot Chocolate + Cookies",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 5.80,
+    "products": [9, 28]
+  },
+  {
+    "id": 42,
+    "name": "Milkshake Strawberry + Brownie",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 7.20,
+    "products": [11, 20]
+  },
+  {
+    "id": 43,
+    "name": "Te Green + Biscotti",
+    "category": "Combo",
+    "quantity": 1,
+    "price": 4.00,
+    "products": [8, 19]
+  }
+]

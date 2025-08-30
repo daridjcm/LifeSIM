@@ -1,37 +1,48 @@
-import { Pagination } from '@heroui/react';
+import { useMemo, useState } from 'react';
 import CardList from '../../CardList.jsx';
+import CustomButton from '../../CustomButton.jsx';
 
-// Render pagination component and list of products
 export default function ProductsTab({
   itemsToDisplay = [],
-  page = 1,
-  total = 1,
-  onChange = () => {},
   selectedProducts = [],
   setSelectedProducts = () => {},
 }) {
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  // Get categories uniques
+  const categories = useMemo(() => {
+    if (!Array.isArray(itemsToDisplay)) return [];
+    return ['All', ...new Set(itemsToDisplay.map(item => item.category))];
+  }, [itemsToDisplay]);
+
+  // Filter products by active category
+  const filteredItems = useMemo(() => {
+    if (activeCategory === 'All') return itemsToDisplay;
+    return itemsToDisplay.filter(item => item.category === activeCategory);
+  }, [itemsToDisplay, activeCategory]);
+
   return (
-    <>
+    <div className="h-[calc(100vh-200px)] overflow-y-auto p-2">
+      {/* Botones de categorías debajo del tab */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {categories.map((category, index) => (
+          <CustomButton
+            key={index}
+            label={category}
+            onPress={() => setActiveCategory(category)}
+            variant={activeCategory === category ? 'solid' : 'bordered'}
+            size="sm"
+          />
+        ))}
+      </div>
+
       <CardList
-        statusCard='itemsGrocery'
+        statusCard="itemsGrocery"
         iconShow={false}
-        itemsToDisplay={itemsToDisplay}
+        itemsToDisplay={filteredItems}
         selectedProducts={selectedProducts}
         setSelectedProducts={setSelectedProducts}
       />
-
-      <Pagination
-        showControls
-        page={page}
-        total={total}
-        size='lg'
-        onChange={onChange}
-        siblings={1}
-        boundaries={1}
-        className='flex justify-center'
-        showShadow
-        radius='full'
-      />
-    </>
+    </div>
   );
 }

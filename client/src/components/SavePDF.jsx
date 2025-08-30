@@ -45,7 +45,7 @@ function createInvoicePDF(doc, invoice, userData) {
       item.name || 'N/A',
       item.quantity || 'N/A',
       `$${item.price || 0}`,
-      `$${item.basePrice || 0}`,
+      `$${item.base_price || 0}`,
     ]);
 
     autoTable(doc, {

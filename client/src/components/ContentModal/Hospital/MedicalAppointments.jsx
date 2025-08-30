@@ -22,17 +22,29 @@ export default function MedicalAppointments() {
 
   const schedules = [
     '08:00',
+    '08:30',
     '09:00',
+    '09:30',
     '10:00',
+    '10:30',
     '11:00',
+    '11:30',
     '12:00',
+    '12:30',
+    '13:00',
     '14:00',
+    '14:30',
     '15:00',
+    '15:30',
     '16:00',
+    '16:30',
     '17:00',
+    '17:30',
     '18:00',
+    '18:30',
     '19:00',
-    '23:40',
+    '19:30',
+    '20:00',
   ];
 
   const handleTimeClick = (time) => {
@@ -137,11 +149,12 @@ export default function MedicalAppointments() {
       </div>
       <div className='flex flex-col sm:w-full lg:w-8/12 gap-3'>
         <p className='text-2xl font-semibold'>Available Schedules</p>
-        <div className='grid w-full grid-rows-3 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2'>
+        <div className='grid w-full grid-rows-3 max-sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-8 gap-2'>
           {schedules.map((time) => (
             <CustomButton
               key={time}
               label={time}
+              className={'w-10'}
               variant={selectedTime === time ? 'solid' : 'bordered'}
               onPress={() => handleTimeClick(time)}
               isDisabled={!date}

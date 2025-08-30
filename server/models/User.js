@@ -7,6 +7,7 @@ export default (sequelize, DataTypes) => {
       password: { type: DataTypes.STRING, allowNull: false },
       gender: { type: DataTypes.STRING, allowNull: false },
       blood_type: { type: DataTypes.STRING, allowNull: true },
+      health: { type: DataTypes.TINYINT, allowNull: false, defaultValue: 100 },
     },
     { tableName: 'users' },
   );
