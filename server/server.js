@@ -40,7 +40,7 @@ app.get('/robots.txt', (req, res) => {
 app.get('/', (req, res) => res.send('API is running...'));
 
 sequelize
-  .sync({ force: false, alter: true })
+  .sync({ force: true })
   .then(() => {
     console.log('Tables synchronized');
   })
