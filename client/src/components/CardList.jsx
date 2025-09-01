@@ -13,6 +13,7 @@ import {
   ShoppingCartIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/solid';
+import { useShoppingCart } from '../context/ShoppingContext.jsx';
 import ModalAction from './ModalAction.jsx';
 import { menu } from '../utils/data.js';
 
@@ -21,23 +22,33 @@ const CardList = React.memo(
     statusCard,
     iconShow,
     itemsToDisplay,
-    selectedProducts,
-    setSelectedProducts,
   }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    
+    // Only use shopping cart context if we're in grocery mode
+    const shoppingCart = statusCard === 'itemsGrocery' ? useShoppingCart() : null;
+    
     function handleActions(item) {
       setSelectedItem(item);
       setIsModalOpen(true);
     }
 
-    const handleProducts = (itemProduct) => {
-      setSelectedProducts((prev) =>
-        prev.includes(itemProduct)
-          ? prev.filter((i) => i !== itemProduct)
-          : [...prev, itemProduct],
-      );
+    const handleProducts = (item) => {
+      if (!shoppingCart) return;
+      
+      const { selectedProducts, addProduct, removeProduct } = shoppingCart;
+      const isSelected = selectedProducts.find(p => p.id === item.id);
+      
+      if (isSelected) {
+        removeProduct(item.id);
+      } else {
+        addProduct({
+          ...item,
+          quantity: 1,
+          base_price: item.price
+        });
+      }
     };
 
     const closeModal = () => setIsModalOpen(false);
@@ -72,24 +83,14 @@ const CardList = React.memo(
                 aria-label={item.name}
               >
                 <CardBody className="overflow-hidden p-0">
-                  <div
-                    className={`flex justify-center items-center m-2 w-full ${
-                      isProducts ? 'h-[150px]' : 'h-[250px]'
-                    }`}
-                  >
+                  <div className='flex justify-center items-center m-2 w-full h-[250px]'>
                     {/* If is NOT combo → single image */}
                     {item.category !== 'Combo' ? (
                       <Image
                         src={item.img}
                         alt={item.name}
                         isBlurred
-                        classNames={{
-                          img: `object-contain ${
-                            isProducts
-                              ? 'max-h-[140px]'
-                              : 'max-h-[230px]'
-                          } w-auto`,
-                        }}
+                        classNames={{ img: 'object-contain max-h-[230px] w-auto' }}
                       />
                     ) : (
                       // If is combo → multiple images of products
@@ -151,20 +152,16 @@ const CardList = React.memo(
                 </CardBody>
 
                 <CardFooter className="text-small justify-between">
-                  <p
-                    className={`text-default-500 ${
-                      isProducts ? 'text-sm' : 'text-xl'
-                    }`}
-                  >
+                  <p className={`text-default-500 ${
+                    isProducts ? 'text-sm' : 'text-xl'
+                  }`}>
                     {item.desc}
                   </p>
                   <div className="flex gap-2 w-full">
                     <Button
                       size={isProducts ? 'sm' : 'md'}
                       isPressible
-                      onPress={() =>
-                        iconShow ? handleActions(item) : handleProducts(item)
-                      }
+                      onPress={() => iconShow ? handleActions(item) : handleProducts(item)}
                       className={`${getColor(item)} w-full`}
                     >
                       {iconShow ? (
@@ -172,7 +169,7 @@ const CardList = React.memo(
                           {item.name}
                           <ArrowLeftEndOnRectangleIcon className="size-5 text-zinc-100 opacity-60" />
                         </>
-                      ) : selectedProducts.includes(item) ? (
+                      ) : shoppingCart?.selectedProducts.find(p => p.id === item.id) ? (
                         <>
                           {item.name} added
                           <CheckCircleIcon className="size-5 text-green-500 ml-1" />

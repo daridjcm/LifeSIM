@@ -26,9 +26,8 @@ function createInvoicePDF(doc, invoice, userData) {
     { year: 'numeric', month: 'long', day: 'numeric' },
   );
 
-  const storedData = JSON.parse(localStorage.getItem('selectedItems') || '{}');
-  const items = storedData.items || [];
-  console.log(items);
+  // Use items from invoice instead of localStorage
+  const items = invoice.items || [];
 
   doc.setFontSize(11);
   doc.text('Invoice by LifeSIM', 20, 20);
@@ -44,8 +43,8 @@ function createInvoicePDF(doc, invoice, userData) {
     const rows = items.map((item) => [
       item.name || 'N/A',
       item.quantity || 'N/A',
-      `$${item.price || 0}`,
-      `$${item.base_price || 0}`,
+      `$${item.base_price || 0}`, // Base price per unit
+      `$${item.price || 0}`,      // Total price with quantity
     ]);
 
     autoTable(doc, {
@@ -53,7 +52,7 @@ function createInvoicePDF(doc, invoice, userData) {
       margin: { top: 10, left: 20, right: 20 },
       headStyles: { fontSize: 11.5 },
       bodyStyles: { fontSize: 11 },
-      head: [['Product', 'Quantity', 'Price', 'Base Price']],
+      head: [['Product', 'Quantity', 'Base Price (unit)', 'Total Price']], // Updated headers
       body: rows,
       theme: 'plain',
       pageBreak: 'auto',

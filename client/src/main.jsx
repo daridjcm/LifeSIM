@@ -5,6 +5,7 @@ import { UserProvider } from './context/UserContext.jsx';
 import { AlertProvider } from './context/AlertContext.jsx';
 import { AppointmentProvider } from './context/AppointmentContext.jsx';
 import { BankProvider } from './context/BankContext.jsx';
+import { ShoppingProvider } from './context/ShoppingContext.jsx';
 
 // Use provider for the Alert and User contexts for the wrapping of the App component
 createRoot(document.getElementById('root')).render(
@@ -13,7 +14,10 @@ createRoot(document.getElementById('root')).render(
       <AlertProvider>
         <BankProvider>
           <AppointmentProvider>
-            <App />
+            <ShoppingProvider>
+              <App />
+            </ShoppingProvider>
+            \{' '}
           </AppointmentProvider>
         </BankProvider>
       </AlertProvider>

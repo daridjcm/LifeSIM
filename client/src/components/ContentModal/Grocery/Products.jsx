@@ -2,11 +2,7 @@ import { useMemo, useState } from 'react';
 import CardList from '../../CardList.jsx';
 import CustomButton from '../../CustomButton.jsx';
 
-export default function ProductsTab({
-  itemsToDisplay = [],
-  selectedProducts = [],
-  setSelectedProducts = () => {},
-}) {
+export default function ProductsTab({ itemsToDisplay = [] }) {
   const [activeCategory, setActiveCategory] = useState('All');
 
   // Get categories uniques
@@ -25,9 +21,9 @@ export default function ProductsTab({
     <div className="h-[calc(100vh-200px)] overflow-y-auto p-2">
       {/* Botones de categorías debajo del tab */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <CustomButton
-            key={index}
+            key={category}
             label={category}
             onPress={() => setActiveCategory(category)}
             variant={activeCategory === category ? 'solid' : 'bordered'}
@@ -40,8 +36,6 @@ export default function ProductsTab({
         statusCard="itemsGrocery"
         iconShow={false}
         itemsToDisplay={filteredItems}
-        selectedProducts={selectedProducts}
-        setSelectedProducts={setSelectedProducts}
       />
     </div>
   );

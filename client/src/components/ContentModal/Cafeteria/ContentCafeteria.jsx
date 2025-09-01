@@ -15,7 +15,6 @@ const ContentCafeteria = React.memo(
     // State Management
     const [paymentStatus, setPaymentStatus] = useState('Make Payment');
     const [paymentProcessing, setPaymentProcessing] = useState(true);
-    const [selectedProducts, setSelectedProducts] = useState([]);
 
     return (
       <Tabs
@@ -36,8 +35,6 @@ const ContentCafeteria = React.memo(
         >
           <ProductsTab
             itemsToDisplay={itemsToDisplay}
-            selectedProducts={selectedProducts}
-            setSelectedProducts={setSelectedProducts}
           />
         </Tab>
 
@@ -50,7 +47,7 @@ const ContentCafeteria = React.memo(
             </div>
           }
         >
-          <ShoppingListTab selectedProducts={selectedProducts} />
+          <ShoppingListTab />
         </Tab>
 
         <Tab
@@ -63,7 +60,6 @@ const ContentCafeteria = React.memo(
           }
         >
           <AtmTab
-            products={selectedProducts}
             paymentStatus={paymentStatus}
             setPaymentStatus={setPaymentStatus}
             paymentProcessing={paymentProcessing}

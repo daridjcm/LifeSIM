@@ -8,14 +8,15 @@ import {
   ListBulletIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/24/solid';
+import { useShoppingCart } from '../../../context/ShoppingContext.jsx';
 
 // Render Tabs for the grocery content
 const ContentGrocery = React.memo(
   ({ itemsToDisplay }) => {
     // State Management
     const [paymentStatus, setPaymentStatus] = useState('Make Payment');
-    const [paymentProcessing, setPaymentProcessing] = useState(true);
-    const [selectedProducts, setSelectedProducts] = useState([]);
+    const [paymentProcessing, setPaymentProcessing] = useState(false);
+    const { selectedProducts } = useShoppingCart();
 
     return (
       <Tabs
@@ -34,11 +35,7 @@ const ContentGrocery = React.memo(
             </div>
           }
         >
-          <ProductsTab
-            itemsToDisplay={itemsToDisplay}
-            selectedProducts={selectedProducts}
-            setSelectedProducts={setSelectedProducts}
-          />
+          <ProductsTab itemsToDisplay={itemsToDisplay} />
         </Tab>
 
         <Tab
@@ -50,7 +47,7 @@ const ContentGrocery = React.memo(
             </div>
           }
         >
-          <ShoppingListTab selectedProducts={selectedProducts} />
+          <ShoppingListTab />
         </Tab>
 
         <Tab
@@ -63,7 +60,6 @@ const ContentGrocery = React.memo(
           }
         >
           <AtmTab
-            products={selectedProducts}
             paymentStatus={paymentStatus}
             setPaymentStatus={setPaymentStatus}
             paymentProcessing={paymentProcessing}

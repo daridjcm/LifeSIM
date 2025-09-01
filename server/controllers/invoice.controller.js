@@ -41,11 +41,25 @@ export const createInvoice = async (req, res) => {
 };
 
 export const getInvoices = async (req, res) => {
-  const { user_id } = req.user_id;
   try {
-    const invoices = await Invoice.findAll({ where: { user_id } });
+    // Get user_id directly from req.user_id (set by verifyToken middleware)
+    const user_id = req.user_id;
+    
+    if (!user_id) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+
+    const invoices = await Invoice.findAll({ 
+      where: { user_id },
+      order: [['createdAt', 'DESC']] // Optional: get newest first
+    });
+    
     res.status(200).json({ invoices });
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching invoices', details: error });
+    console.error('Error fetching invoices:', error);
+    res.status(500).json({ 
+      error: 'Error fetching invoices', 
+      details: error.message 
+    });
   }
 };

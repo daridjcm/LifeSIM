@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { activitiesUser, products } from '../../../utils/data.js';
 import ContentGrocery from './ContentGrocery.jsx';
 
@@ -8,8 +8,6 @@ export default function Index({ statusCard }) {
     return statusCard === 'activitiesUser' ? activitiesUser : products;
   }, [statusCard]);
 
-  const [selectedProducts, setSelectedProducts] = useState([]);
-
   if (!Array.isArray(displayedItems)) {
     console.error('Error: displayedItems is not an array', displayedItems);
     return <p>No products available to display.</p>;
@@ -17,11 +15,7 @@ export default function Index({ statusCard }) {
 
   return (
     <div className="h-[calc(100vh-150px)] overflow-y-auto p-2">
-      <ContentGrocery
-        itemsToDisplay={displayedItems} 
-        selectedProducts={selectedProducts}
-        setSelectedProducts={setSelectedProducts}
-      />
+      <ContentGrocery itemsToDisplay={displayedItems} />
     </div>
   );
 }

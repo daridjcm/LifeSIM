@@ -1,179 +1,156 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useShoppingCart } from '../../../context/ShoppingContext.jsx';
 import { useAlert } from '../../../context/AlertContext.jsx';
-import CustomButton from '../../CustomButton.jsx';
-import Card from '../../Card';
-import handleDownload from '../../SavePDF.jsx';
-import ModalComponent from '../../ContentModal/Work/Modal.jsx';
 import { useUser } from '../../../context/UserContext.jsx';
-
-const STORAGE_KEY = 'atmInvoice';
-
-const saveInvoiceToLocalStorage = (invoice) => {
-  const invoiceWithTimestamp = { ...invoice, timestamp: Date.now() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(invoiceWithTimestamp));
-};
-
-const loadInvoiceFromLocalStorage = () => {
-  const storedInvoice = localStorage.getItem(STORAGE_KEY);
-  if (!storedInvoice) return null;
-
-  const parsedInvoice = JSON.parse(storedInvoice);
-  const { timestamp } = parsedInvoice;
-
-  const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
-  if (Date.now() - timestamp > EXPIRATION_TIME) {
-    localStorage.removeItem(STORAGE_KEY);
-    return null;
-  }
-
-  return parsedInvoice;
-};
+import CustomButton from '../../CustomButton';
+import Card from '../../Card.jsx';
+import handleDownload from '../../SavePDF.jsx';
 
 export default function AtmTab({
-  products,
   paymentStatus,
   setPaymentStatus,
   paymentProcessing,
   setPaymentProcessing,
 }) {
+  const { selectedProducts, clearCart } = useShoppingCart();
   const [total_amount, setTotalAmount] = useState(0);
-  const [invoice, setInvoice] = useState(loadInvoiceFromLocalStorage());
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [method, setMethod] = useState(null);
+  const [invoice, setInvoice] = useState(null);
   const { showAlert } = useAlert();
   const { user } = useUser();
+  const [showProcessingCard, setShowProcessingCard] = useState(false);
 
   useEffect(() => {
-    const total = products.reduce(
-      (sum, item) => sum + parseFloat(item.price),
-      0,
+    const total = selectedProducts.reduce(
+      (sum, item) => {
+        const basePrice = parseFloat(item.base_price || item.price);
+        return sum + (basePrice * item.quantity);
+      },
+      0
     );
-    return setTotalAmount(total.toFixed(2));
-  }, [products]);
+    setTotalAmount(total.toFixed(2));
+  }, [selectedProducts]);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) return;
-
-        const res = await fetch('http://localhost:3000/api/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          setUserData(data.user);
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  const handlePayment = () => {
-    if (products.length === 0) {
-      return showAlert('Error', 'Cart is empty!');
+  const handlePayment = async (paymentMethod) => {
+    if (selectedProducts.length === 0) {
+      showAlert('Your cart is empty!', 'Please, add some products to proceed');
+      return;
     }
-    setShowPaymentModal(true);
-  };
-  console.log('User Data:', userData);
-
-  const processPayment = async (method) => {
+    setMethod(paymentMethod);
     setPaymentProcessing(true);
-    setPaymentStatus('Processing Payment...');
-    setShowPaymentModal(false);
-    method = method.toLowerCase();
+    setPaymentStatus('processing');
+    setShowProcessingCard(true);
 
     try {
-      const items = products.map((item) => ({
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      const products = selectedProducts.map((item) => ({
         name: item.name,
         quantity: item.quantity,
-        price: item.price,
+        base_price: item.base_price || item.price, // Static base price (price per unit)
+        price: (parseFloat(item.base_price || item.price) * item.quantity).toFixed(2), // Dynamic total price
       }));
 
-      const requestData = {
-        user_id: userData.id,
-        invoiceNumber: Date.now(),
-        items: items,
-        total_amount,
-        payment_method: method,
-      };
-      console.log(requestData);
-      console.log(products);
-
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:3000/api/invoices', {
+      const response = await fetch('http://localhost:3000/api/invoices', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+        headers: { 'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestData),
+         },
+        body: JSON.stringify({
+          user_id: user?.id,
+          invoiceNumber: Date.now(),
+          items: products,
+          total_amount,
+          payment_method: paymentMethod,
+        }),
       });
 
-      if (!res.ok) {
-        const errorDetails = await res.json();
-        console.error('Error details:', errorDetails);
-        throw new Error('Failed to create invoice');
+      const data = await response.json();
+      if (response.ok) {
+        setInvoice(data.invoice);
+        setPaymentStatus(true);
+        showAlert('Payment processed successfully!', 'Payment completed ✅');
       } else {
-        const invoiceData = await res.json();
-        const latestInvoice = invoiceData.invoice;
-        setInvoice(latestInvoice);
-        saveInvoiceToLocalStorage(latestInvoice);
+        throw new Error(data.message || 'Payment failed');
       }
-      setPaymentStatus('Products paid successfully');
-      showAlert('Products paid successfully', 'Payment completed ✅');
     } catch (error) {
+      setPaymentStatus('Payment Failed');
       showAlert('Error to pay products', 'Payment failed ❌');
-      console.error('Payment error:', error);
     } finally {
       setPaymentProcessing(false);
+      setShowProcessingCard(false);
+      clearCart();
     }
   };
 
   return (
-    <>
-      <p className='text-2xl font-bold'>Summary Purchase</p>
-      <p className='font-bold text-xl'>Total: ${total_amount} LSD</p>
-      <p className='font-bold text-xl'>Products Selected: {products.length}</p>
-      <Card type='Shopping Card' holder={user?.username} id={user?.id} />
+    <div className='space-y-4'>
+      <div className='bg-white rounded-lg shadow p-4'>
+        <div className='flex justify-between items-center mb-4'>
+          <h3 className='text-xl font-bold'>Payment Summary</h3>
+          {invoice && (
+            <CustomButton
+              label='Download Invoice'
+              onPress={() => handleDownload('Invoice', invoice, user)}
+              color='success'
+              size='sm'
+            />
+          )}
+        </div>
 
-      <div className='flex gap-3'>
-        <CustomButton
-          label={paymentProcessing ? paymentStatus : 'Make Payment'}
-          onPress={handlePayment}
-          disabled={paymentProcessing}
-        />
-        {paymentStatus == 'Products paid successfully' && (
+        <div className='space-y-2'>
+          {selectedProducts.map((product) => (
+            <div key={product.id} className='flex justify-between items-center'>
+              <div className='flex-1'>
+                <span className='font-medium'>{product.name}</span>
+                <span className='text-gray-500 ml-2'>x{product.quantity}</span>
+              </div>
+              <div className='flex flex-col items-end gap-1'>
+                <div className='text-sm text-gray-500'>
+                  ${product.base_price || product.price}
+                </div>
+                <div className='font-medium'>
+                  ${(parseFloat(product.base_price || product.price) * product.quantity)}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div className='border-t pt-2 mt-4'>
+            <div className='flex justify-between font-bold text-lg'>
+              <span>Total:</span>
+              <span>${total_amount}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className='mt-6 space-x-4'>
           <CustomButton
-            label='Download Report 🧾'
-            onPress={() => handleDownload('Invoice', invoice, userData)}
+            label='Pay with Cash'
+            onPress={() => handlePayment('cash')}
+            disabled={paymentProcessing}
+            loading={paymentProcessing}
           />
-        )}
+          <CustomButton
+            label='Pay with Card'
+            onPress={() => handlePayment('card')}
+            disabled={paymentProcessing}
+            loading={paymentProcessing}
+          />
+        </div>
       </div>
 
-      {showPaymentModal && (
-        <ModalComponent
-          title='Choose Payment Method'
-          description='Select how you want to pay'
-          isOpen={showPaymentModal}
-          onOpenChange={setShowPaymentModal}
-        >
-          <div className='flex flex-col gap-3'>
-            <CustomButton
-              label='Cash 💵'
-              onPress={() => processPayment('Cash')}
-            />
-            <CustomButton
-              label='Card 💳'
-              onPress={() => processPayment('Card')}
-            />
-          </div>
-        </ModalComponent>
+      {/* Show payment method card during processing */}
+      {showProcessingCard && (
+        <Card
+          type={method === 'cash' ? 'Cash' : 'Credit Card'}
+          holder={user?.name || 'Card Holder'}
+          id={user?.id || '000000'}
+          expiry='12/25'
+          number_card={method === 'cash' ? 'CASH PAYMENT' : '**** **** **** 1234'}
+        />
       )}
-    </>
+    </div>
   );
 }
