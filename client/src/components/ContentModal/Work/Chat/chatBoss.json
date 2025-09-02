@@ -14,7 +14,7 @@
   "responses": {
     "boss": {
       "1": "I has assigned the tasks to you. You can check when you leave the chat. Let me know when you have finished them.",
-      "2": "Oh, yes. I give you the CSV file with the customers.",
+      "2": "Oh, yes. You can check the CSV file with the customers in the Home Page > Work > Phone Corporative > Check the file of customers 📂. You can add them to the table.",
       "3": "Great work! I'll review it shortly",
       "4": "Dont worry, i will notify with Analia about it."
     }
