@@ -6,4 +6,9 @@ import tailwind from 'tailwindcss';
 export default defineConfig({
   plugins: [react(), tailwind()],
   json: { namedExports: true },
+  server: {
+    proxy: {
+      '/ia': 'http://localhost:3000',
+    },
+  },
 });

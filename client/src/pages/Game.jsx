@@ -16,7 +16,7 @@ export default function Game() {
         window.location.href = '/';
       }, 4000);
     }
-  }, [user]);
+  }, [!user]);
 
   if (!user) {
     return (

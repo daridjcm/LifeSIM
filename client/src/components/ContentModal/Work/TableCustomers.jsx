@@ -3,11 +3,11 @@ import ReusableTable from '../../Table.jsx';
 
 const status = {
   label: [
-    'Make call',
-    'Call rejected',
-    'Call accepted',
-    'Call completed',
-    'No call',
+    'Make Call',
+    'Call Rejected',
+    'Call Accepted',
+    'Call Completed',
+    'No Call',
   ],
   key: [
     'You need to call the customer',
@@ -19,9 +19,8 @@ const status = {
   color: ['primary', 'danger', 'success', 'warning', 'secondary'],
 };
 
-// TODO: Create a server route to customers.
-// Customers presets
-export const customers = [
+// Customers presets (fallback data)
+export const customersPreset = [
   {
     id: 1,
     name: 'John Doe',
@@ -52,7 +51,7 @@ export const customers = [
   },
 ];
 
-export const customersCount = customers.length + 1;
+export const customersCount = customersPreset.length + 1;
 
 // Define columns to display in the table
 const columns = [
@@ -64,13 +63,15 @@ const columns = [
 ];
 
 // Render the table
-export default function TableCustomers() {
+export default function TableCustomers({ customers }) {
+  const data = customers && customers.length > 0 ? customers : customersPreset;
+
   return (
     <div className='flex sm:flex-col md:flex-row lg:flex-row gap-4'>
       <div>
         <ReusableTable
           columns={columns}
-          data={customers}
+          data={data}
           status={status}
           title='Customers'
           description='List of customers'
@@ -91,7 +92,7 @@ export default function TableCustomers() {
         <ul className='flex flex-col gap-2 mt-3 list-decimal list-inside text-sm text-zinc-900'>
           {status.label.map((label, index) => (
             <li key={status.key[index]}>
-              <Chip color={status.color[index]}>{label}</Chip> -{' '}
+              <Chip color={status.color[index]}>{label}</Chip> {' '}
               {status.key[index]}
             </li>
           ))}

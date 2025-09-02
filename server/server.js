@@ -12,6 +12,7 @@ import appointmentsRoutes from './routes/appointments.routes.js';
 import bankRoutes from './routes/bank.routes.js';
 import workRoutes from './routes/work.routes.js';
 import cafeteriaRoutes from './routes/cafeteria.routes.js';
+import iaRoutes from './IA/ia.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ app.use('/api', appointmentsRoutes);
 app.use('/api', bankRoutes);
 app.use('/api', workRoutes)
 app.use('/api', cafeteriaRoutes);
+app.use('/ia', iaRoutes);
 
 app.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'robots.txt'));
