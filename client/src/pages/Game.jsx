@@ -12,11 +12,13 @@ export default function Game() {
 
   useEffect(() => {
     if (!user) {
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 4000);
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+
+      return () => clearTimeout(timer);
     }
-  }, [!user]);
+  }, [user]);
 
   if (!user) {
     return (

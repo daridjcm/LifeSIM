@@ -67,27 +67,29 @@ function createHealthReportPDF(doc, healthReport, userData) {
 
   doc.setFontSize(11);
   doc.text('Health Report', 20, 20);
-  doc.text(`User: ${userData?.username || 'N/A'}`, 20, 30);
-  doc.text(`Appointment ID: ${healthReport.appointment_id || 'N/A'}`, 20, 35);
-  doc.text(`Appointment Status: ${healthReport.status || 'N/A'}`, 20, 40);
-  doc.text(`Doctor: ${healthReport.doctor || 'N/A'}`, 20, 45);
-  doc.text(`Diagnosis: ${healthReport.disease || 'N/A'}`, 20, 50);
+  doc.text(`Date Entered: ${healthReport.dateEntered || 'N/A'}`, 20, 30);
+  doc.text(`Appointment Date: ${healthReport.date + ', ' + healthReport.time || 'N/A'}`, 20, 35);
+  doc.text(`User: ${userData?.username || 'N/A'}`, 20, 40);
+  doc.text(`Appointment ID: ${healthReport.appointment_id || 'N/A'}`, 20, 45);
+  doc.text(`Appointment Status: ${healthReport.status || 'N/A'}`, 20, 50);
+  doc.text(`Doctor: ${healthReport.doctor || 'N/A'}`, 20, 55);
+  doc.text(`Diagnosis: ${healthReport.disease || 'N/A'}`, 20, 60);
 
   // Symptoms Section
-  doc.text('Symptoms:', 20, 60);
+  doc.text('Symptoms:', 20, 70);
   const symptoms = healthReport.symptoms
     ? healthReport.symptoms.split(', ')
     : [];
   if (symptoms.length > 0) {
     symptoms.forEach((symptom, index) => {
-      doc.text(`- ${symptom}`, 20, 65 + index * 5);
+      doc.text(`- ${symptom}`, 20, 75 + index * 5);
     });
   } else {
-    doc.text('No symptoms reported', 20, 65);
+    doc.text('No symptoms reported', 20, 75);
   }
 
   // Treatments Section
-  doc.text('Treatments:', 20, 70 + symptoms.length * 5);
+  doc.text('Treatments:', 20, 80 + symptoms.length * 5);
   let treatments = Array.isArray(healthReport.treatments)
     ? healthReport.treatments
     : [];
@@ -96,24 +98,24 @@ function createHealthReportPDF(doc, healthReport, userData) {
     treatments.forEach((treatment, index) => {
       if (typeof treatment === 'object') {
         const treatmentDetails = `- ${treatment.pill_name || 'N/A'}: ${treatment.pill_description || 'No description'} (${treatment.pill_tablets || 'N/A'} tablets - ${treatment.pill_weight || 'N/A'})`;
-        doc.text(treatmentDetails, 20, 75 + symptoms.length * 5 + index * 5);
+        doc.text(treatmentDetails, 20, 85 + symptoms.length * 5 + index * 5);
       } else {
-        doc.text(`- ${treatment}`, 20, 75 + symptoms.length * 5 + index * 5);
+        doc.text(`- ${treatment}`, 20, 85 + symptoms.length * 5 + index * 5);
       }
     });
   } else {
-    doc.text('No treatments reported', 20, 75 + symptoms.length * 5);
+    doc.text('No treatments reported', 20, 85 + symptoms.length * 5);
   }
 
   // Doctor's Notes Section
   doc.text(
     "Doctor's Notes:",
     20,
-    85 + symptoms.length * 5 + treatments.length * 5,
+    90 + symptoms.length * 5 + treatments.length * 5,
   );
   doc.text(
     healthReport.notes || 'No notes available',
     20,
-    90 + symptoms.length * 5 + treatments.length * 5,
+    95 + symptoms.length * 5 + treatments.length * 5,
   );
 }

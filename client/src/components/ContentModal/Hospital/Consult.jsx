@@ -100,9 +100,21 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
     }
   }, [user?.id]);
 
+  const date = new Date();
+  const dateFormat = date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
   const handleSendReport = async () => {
     setDiseaseDetected(diseaseDetected);
     const reportData = {
+      dateEntered: dateFormat,
+      date: nextAppointment.date,
+      time: nextAppointment.time,
       appointment_id: nextAppointment.id,
       user_id: nextAppointment.user_id,
       doctor: nextAppointment.doctor,
@@ -112,6 +124,7 @@ const SendReport = ({ diseaseDetected, selectedSymptoms }) => {
       status: 'completed',
       treatments: diseases.treatments.map((treatment) => treatment),
       symptoms: diseases.symptoms.map((symptom) => symptom).join(', '),
+      notes: diseases.notes || 'N/A',
     };
 
     try {
@@ -201,8 +214,10 @@ const Diagnosis = ({ onProgressChange, symptoms, matchedDiseases }) => {
         )}
         Evaluating your health and the diagnosis 🤔
         <Spinner
-          classNames={{ label: 'text-foreground mt-4' }}
-          variant='wave'
+          classNames={{ label: 'flex items-center gap-2 text-foreground' }}
+          color='primary'
+          variant='simple'
+          size='lg'
         />
       </div>
     );
